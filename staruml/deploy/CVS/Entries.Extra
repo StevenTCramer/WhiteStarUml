@@ -1,0 +1,16 @@
+/.cvsignore////*///
+/AttrExpr.gmr////*///
+/License.txt////*///
+/MsgExpr.gmr////*///
+/NameExpr.gmr////*///
+/ObjExpr.gmr////*///
+/OperExpr.gmr////*///
+/Pgmr101.ocx////*///
+/RoleExpr.gmr////*///
+/WinGraphviz.dll////*///
+/pns.gmr////*///
+D/Samples///////
+/OptMgr.dll////*///
+/Contributors.xml////*///
+/Readme.txt////*///
+/StarUML.exe////*///

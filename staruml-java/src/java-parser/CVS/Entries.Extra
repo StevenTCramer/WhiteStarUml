@@ -1,0 +1,12 @@
+/.cvsignore////*///
+/JavaElements.pas////*///
+/JavaElementsAuto.pas////*///
+/JavaParser.cfg////*///
+/JavaParser.dof////*///
+/JavaParser.dpr////*///
+/JavaParser.res////*///
+/JavaParser.tlb////*///
+/JavaParserObj.pas////*///
+/JavaParserObjAuto.pas////*///
+/JavaParser_TLB.pas////*///
+/RevCore.pas////*///

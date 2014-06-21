@@ -1,0 +1,12 @@
+/.cvsignore////*///
+/Symbols.pas////*///
+/TextTranslator.cfg////*///
+/TextTranslator.dof////*///
+/TextTranslator.dpr////*///
+/TextTranslator.js////*///
+/TextTranslator.res////*///
+/TextTranslator.tlb////*///
+/TextTranslatorEngine.pas////*///
+/TextTranslatorObj.pas////*///
+/TextTranslator_TLB.pas////*///
+/Utilities.pas////*///

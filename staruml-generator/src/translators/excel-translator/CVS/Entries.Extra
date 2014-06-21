@@ -1,0 +1,12 @@
+/.cvsignore////*///
+/ExcelTranslator.cfg////*///
+/ExcelTranslator.dof////*///
+/ExcelTranslator.dpr////*///
+/ExcelTranslator.js////*///
+/ExcelTranslator.res////*///
+/ExcelTranslator.tlb////*///
+/ExcelTranslatorEngine.pas////*///
+/ExcelTranslatorObj.pas////*///
+/ExcelTranslator_TLB.pas////*///
+/Symbols.pas////*///
+/Utilities.pas////*///

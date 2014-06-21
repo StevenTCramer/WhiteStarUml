@@ -1,0 +1,13 @@
+/.cvsignore////*///
+/Symbols.pas////*///
+/Utilities.pas////*///
+/WordTranslator.cfg////*///
+/WordTranslator.dof////*///
+/WordTranslator.dpr////*///
+/WordTranslator.js////*///
+/WordTranslator.res////*///
+/WordTranslator.tlb////*///
+/WordTranslatorEngine.pas////*///
+/WordTranslatorObj.pas////*///
+/WordTranslator_TLB.pas////*///
+/empty.keepme////*///
