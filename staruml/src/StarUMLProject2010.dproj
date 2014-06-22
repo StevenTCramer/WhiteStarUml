@@ -1,0 +1,269 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{DDD9EB98-8B2B-409E-B41D-1D2B8761D94F}</ProjectGuid>
+			<MainSource>StarUMLProject2010.dpr</MainSource>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+			<ProjectVersion>12.0</ProjectVersion>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UsePackage>vclx;vcl;vclimg;dbrtl;Rave77VCL;bdertl;rtl;vclactnband;xmlrtl;vcldb;vcldbx;vcltouch;dsnap;dsnapcon;TeeUI;TeeDB;Tee;vclib;ibxpress;adortl;IndyCore;IndySystem;IndyProtocols;inet;intrawebdb_100_140;Intraweb_100_140;VclSmp;vclie;websnap;webdsnap;inetdb;inetdbbde;inetdbxpress;soaprtl;vclribbon;dbexpress;DbxCommonDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;DbxClientDriver;DataSnapServer;DBXInterBaseDriver;DBXMySQLDriver;dbxcds;DBXFirebirdDriver;DBXSybaseASEDriver;DBXSybaseASADriver;DBXOracleDriver;DBXMSSQLDriver;DBXInformixDriver;DBXDb2Driver;clinetsuited2010;dxCoreD14;cxLibraryD14;dxDockingD14;dxNavBarD14;cxPageControlD14;cxEditorsD14;cxExtEditorsD14;cxVerticalGridD14;dxBarD14;dxBarExtItemsD14;cxBarEditItemD14;dxRibbonD14;dxBarDBNavD14;dxBarExtDBItemsD14;dxComnD14;dxsbD14;cxGridD14;cxSchedulerD14;cxSchedulerGridD14;dxLayoutControlD14;dxSkinXmas2008BlueD14;dxSkinsCoreD14;dcldxSkinsCoreD14;dxSkinscxPCPainterD14;dxSkinscxScheduler3PainterD14;dxSkinscxSchedulerPainterD14;dxSkinsdxDLPainterD14;dxSkinsdxRibbonPainterD14;dxSkinsdxBarPainterD14;dxSkinsdxNavBar2PainterD14;dxSkinBlackD14;dxSkinBlueD14;dxSkinCaramelD14;dxSkinCoffeeD14;dxSkinDarkRoomD14;dxSkinDarkSideD14;dxSkinFoggyD14;dxSkinGlassOceansD14;dxSkiniMaginaryD14;dxSkinLilianD14;dxSkinLiquidSkyD14;dxSkinLondonLiquidSkyD14;dxSkinMcSkinD14;dxSkinMoneyTwinsD14;dxSkinOffice2007BlackD14;dxSkinOffice2007BlueD14;dxSkinOffice2007GreenD14;dxSkinOffice2007PinkD14;dxSkinOffice2007SilverD14;dxSkinPumpkinD14;dxSkinSevenD14;dxSkinSharpD14;dxSkinSilverD14;dxSkinSpringTimeD14;dxSkinStardustD14;dxSkinSummer2008D14;dxSkinValentineD14;VirtualTreesD13;madBasic_;madDisAsm_;madExcept_;PlasticComponents</DCC_UsePackage>
+			<UsePackages>true</UsePackages>
+			<DCC_DcuOutput>$(TWEDCU)</DCC_DcuOutput>
+			<DCC_UnitSearchPath>C:\TimeWarp\Common\JCL\jcl-2.1.1.3536\lib\d14\debug;C:\TimeWarp\Common\jvcl\jvcl 338\lib\d14\debug;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_E>false</DCC_E>
+			<DCC_DependencyCheckOutputName>StarUMLProject2010.dll</DCC_DependencyCheckOutputName>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;$(DCC_UnitAlias)</DCC_UnitAlias>
+			<DCC_Platform>x86</DCC_Platform>
+			<DCC_S>false</DCC_S>
+			<GenDll>true</GenDll>
+			<DCC_N>false</DCC_N>
+			<DCC_F>false</DCC_F>
+			<DCC_K>false</DCC_K>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="StarUMLProject2010.dpr">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="AboutFrm.pas">
+				<Form>AboutForm</Form>
+			</DCCReference>
+			<DCCReference Include="AddInMgr.pas"/>
+			<DCCReference Include="AddInMgrFrm.pas">
+				<Form>AddInMgrForm</Form>
+			</DCCReference>
+			<DCCReference Include="ApprMgr.pas"/>
+			<DCCReference Include="AttachEdt.pas">
+				<Form>AttachmentEditor</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="AttachItemEdtFrm.pas">
+				<Form>AttachmentItemEditForm</Form>
+			</DCCReference>
+			<DCCReference Include="BasicClasses.pas"/>
+			<DCCReference Include="ClipboardMgr.pas"/>
+			<DCCReference Include="CmdExec.pas"/>
+			<DCCReference Include="ColEdtFrm.pas">
+				<Form>CollectionEditorForm</Form>
+			</DCCReference>
+			<DCCReference Include="ConstEdtFrm.pas">
+				<Form>ConstraintEditorForm</Form>
+			</DCCReference>
+			<DCCReference Include="ConstItemEdtFrm.pas">
+				<Form>ConstraintItemEditForm</Form>
+			</DCCReference>
+			<DCCReference Include="ContributorMgr.pas"/>
+			<DCCReference Include="Core.pas"/>
+			<DCCReference Include="CoreAuto.pas"/>
+			<DCCReference Include="DiagramEditors.pas"/>
+			<DCCReference Include="DiagramExplorerFrame.pas">
+				<Form>DiagramExplorerPanel</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="DiagramMapFrm.pas">
+				<Form>DiagramMapForm</Form>
+			</DCCReference>
+			<DCCReference Include="DocuEdt.pas">
+				<Form>DocumentationEditor</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="ElemLstFrm.pas">
+				<Form>ElementListForm</Form>
+			</DCCReference>
+			<DCCReference Include="ElemSelFrm.pas">
+				<Form>ElementSelectorForm</Form>
+			</DCCReference>
+			<DCCReference Include="EventPub.pas"/>
+			<DCCReference Include="ExprParsers.pas"/>
+			<DCCReference Include="ExtCore.pas"/>
+			<DCCReference Include="ExtCoreAuto.pas"/>
+			<DCCReference Include="FindFrm.pas">
+				<Form>FindForm</Form>
+			</DCCReference>
+			<DCCReference Include="FrwMgr.pas"/>
+			<DCCReference Include="GraphicClasses.pas"/>
+			<DCCReference Include="Handlers.pas"/>
+			<DCCReference Include="HtmlHlp.pas"/>
+			<DCCReference Include="ImportFrameworkFrm.pas">
+				<Form>ImportFrameworkForm</Form>
+			</DCCReference>
+			<DCCReference Include="InspectorFrm.pas">
+				<Form>InspectorFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="InteractionMgr.pas"/>
+			<DCCReference Include="LayoutDgm.pas"/>
+			<DCCReference Include="LogMgr.pas"/>
+			<DCCReference Include="Main.pas"/>
+			<DCCReference Include="MainFrm.pas">
+				<Form>MainForm</Form>
+			</DCCReference>
+			<DCCReference Include="MessageFrame.pas">
+				<Form>MessagePanel</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="ModelExpFilterFrm.pas">
+				<Form>ModelExplorerFilterForm</Form>
+			</DCCReference>
+			<DCCReference Include="ModelExplorerFrame.pas">
+				<Form>ModelExplorerPanel</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="ModelVerifierFrm.pas">
+				<Form>ModelVerifierForm</Form>
+			</DCCReference>
+			<DCCReference Include="NewProjFrm.pas">
+				<Form>NewProjFrm</Form>
+			</DCCReference>
+			<DCCReference Include="NLS.pas"/>
+			<DCCReference Include="NLS_StarUML.pas"/>
+			<DCCReference Include="NXMgr.pas"/>
+			<DCCReference Include="OptionDeps.pas"/>
+			<DCCReference Include="OptMgr_TLB.pas"/>
+			<DCCReference Include="OutputFrame.pas">
+				<Form>OutputPanel</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="PageSetupFrm.pas">
+				<Form>PageSetupForm</Form>
+			</DCCReference>
+			<DCCReference Include="PGMR101Lib_TLB.pas"/>
+			<DCCReference Include="PrintFrm.pas">
+				<Form>PrintForm</Form>
+			</DCCReference>
+			<DCCReference Include="PrintPreviewFrm.pas">
+				<Form>PrintPreviewForm</Form>
+			</DCCReference>
+			<DCCReference Include="ProfileMgrFrm.pas">
+				<Form>ProfileManagerForm</Form>
+			</DCCReference>
+			<DCCReference Include="ProjectMgr.pas"/>
+			<DCCReference Include="PropEdt.pas">
+				<Form>PropertyEditor</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="QuickDialogFrm.pas">
+				<Form>QuickDialogForm</Form>
+			</DCCReference>
+			<DCCReference Include="SelectionMgr.pas"/>
+			<DCCReference Include="ShortenSyntaxMgr.pas"/>
+			<DCCReference Include="SplashFrm.pas">
+				<Form>SplashForm</Form>
+			</DCCReference>
+			<DCCReference Include="StarUMLApp.pas"/>
+			<DCCReference Include="StarUMLAppAuto.pas"/>
+			<DCCReference Include="StereoSelFrm.pas">
+				<Form>StereotypeSelectorForm</Form>
+			</DCCReference>
+			<DCCReference Include="TagColEdtFrm.pas">
+				<Form>TaggedValueCollectionEditorForm</Form>
+			</DCCReference>
+			<DCCReference Include="TagEdtFrm.pas">
+				<Form>TaggedValueEditorForm</Form>
+			</DCCReference>
+			<DCCReference Include="UMLAux.pas"/>
+			<DCCReference Include="UMLAuxAuto.pas"/>
+			<DCCReference Include="UMLFacto.pas"/>
+			<DCCReference Include="UMLModels.pas"/>
+			<DCCReference Include="UMLModelsAuto.pas"/>
+			<DCCReference Include="UMLProps.pas"/>
+			<DCCReference Include="UMLVerify.pas"/>
+			<DCCReference Include="UMLViews.pas"/>
+			<DCCReference Include="UMLViewsAuto.pas"/>
+			<DCCReference Include="ViewCore.pas"/>
+			<DCCReference Include="ViewCoreAuto.pas"/>
+			<DCCReference Include="WINGRAPHVIZLib_TLB.pas"/>
+			<DCCReference Include="WorkingAreaFrm.pas">
+				<Form>WorkingAreaFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="StarUMLDllControlUnit.pas"/>
+			<DCCReference Include="StarUMLConstantsUnit.pas"/>
+			<DCCReference Include="StarUMLProject_TLB.pas"/>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType>VCLApplication</Borland.ProjectType>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Source>
+						<Source Name="MainSource">StarUMLProject2010.dpr</Source>
+					</Source>
+					<Parameters>
+						<Parameters Name="UseLauncher">False</Parameters>
+						<Parameters Name="LoadAllSymbols">True</Parameters>
+						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+					</Parameters>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1033</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\bcboffice2k140.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\bcbofficexp140.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\dcloffice2k140.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\dclofficexp140.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+					</Excluded_Packages>
+				</Delphi.Personality>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

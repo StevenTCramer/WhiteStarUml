@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{FD7B383C-41FD-4C4E-969F-E7461ECA540E}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="..\components\plastic-components\src\PlasticComponentsD2010.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="StarUMLProject2010.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="PlasticComponentsD2010">
+			<MSBuild Projects="..\components\plastic-components\src\PlasticComponentsD2010.dproj"/>
+		</Target>
+		<Target Name="PlasticComponentsD2010:Clean">
+			<MSBuild Targets="Clean" Projects="..\components\plastic-components\src\PlasticComponentsD2010.dproj"/>
+		</Target>
+		<Target Name="PlasticComponentsD2010:Make">
+			<MSBuild Targets="Make" Projects="..\components\plastic-components\src\PlasticComponentsD2010.dproj"/>
+		</Target>
+		<Target Name="StarUMLProject2010">
+			<MSBuild Projects="StarUMLProject2010.dproj"/>
+		</Target>
+		<Target Name="StarUMLProject2010:Clean">
+			<MSBuild Targets="Clean" Projects="StarUMLProject2010.dproj"/>
+		</Target>
+		<Target Name="StarUMLProject2010:Make">
+			<MSBuild Targets="Make" Projects="StarUMLProject2010.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="PlasticComponentsD2010;StarUMLProject2010"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="PlasticComponentsD2010:Clean;StarUMLProject2010:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="PlasticComponentsD2010:Make;StarUMLProject2010:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

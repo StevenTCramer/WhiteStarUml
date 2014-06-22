@@ -1,0 +1,644 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{ad8e6741-44f0-4a84-8cfa-8b8b25306a85}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="..\Common\Developer Express Inc\ExpressBars 6\Packages\cxBarEditItemD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressBars 6\Packages\dclcxBarEditItemD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressBars 6\Packages\dcldxBarD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressBars 6\Packages\dcldxBarExtItemsD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressBars 6\Packages\dcldxRibbonD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressBars 6\Packages\dxBarD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressBars 6\Packages\dxBarExtItemsD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressBars 6\Packages\dxRibbonD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressCommon Library\Packages\dxComnD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressDataController\Packages\cxDataD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressDocking Library\Packages\dcldxDockingD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressDocking Library\Packages\dxDockingD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressEditors Library 5\Packages\cxEditorsD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressEditors Library 5\Packages\cxExtEditorsD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressEditors Library 5\Packages\dclcxEditorsD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressEditors Library 5\Packages\dclcxExtEditorsD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressExport Library\Packages\cxExportD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressGDI+ Library\Packages\dxGDIPlusD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressLibrary\Packages\cxLibraryD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressLibrary\Packages\dclcxLibraryD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressNavBar 2\Packages\dcldxNavBarD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressNavBar 2\Packages\dxNavBarD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressPageControl 2\Packages\cxPageControlD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressPageControl 2\Packages\dclcxPageControlD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressQuantumGrid 6\Packages\cxGridD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressScheduler 3\Packages\cxSchedulerGridD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressScheduler 3\Packages\dclcxSchedulerGridD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressSideBar\Packages\dcldxSBD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressSideBar\Packages\dxSBD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dcldxSkinsCoreD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dcldxSkinsdxNavBar2PainterD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dxSkinsCoreD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dxSkinsdxNavBar2PainterD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dxSkinsdxRibbonPainterD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressVerticalGrid\Packages\cxVerticalGridD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\ExpressVerticalGrid\Packages\dclcxVerticalGridD11.dproj" />
+    <Projects Include="..\Common\Developer Express Inc\XP Theme Manager\Packages\dxThemeD11.dproj" />
+    <Projects Include="..\Common\JCL\packages\d11\Jcl.dproj" />
+    <Projects Include="..\Common\JCL\packages\d11\JclVcl.dproj" />
+    <Projects Include="..\Common\PostgresDAC\Delphi11\PostgresDAC11.dproj" />
+    <Projects Include="..\Common\Virtual Treeview\Delphi\VirtualTreesD11.dproj" />
+    <Projects Include="..\Common\Virtual Treeview\Delphi\VirtualTreesD11D.dproj" />
+    <Projects Include="..\TWE Bold\BuildingScript\BldOwn.dproj" />
+    <Projects Include="..\TWE Bold\SourceEx\Bold.dproj" />
+    <Projects Include="..\TWE Bold\SourceEx\BoldDBExpress.dproj" />
+    <Projects Include="..\TWE Bold\SourceEx\BoldDBExpressDesignPackage.dproj" />
+    <Projects Include="..\TWE Bold\SourceEx\BoldDesignPackage.dproj" />
+    <Projects Include="..\TWE Bold\SourceEx\BoldPostgresDAC.dproj" />
+    <Projects Include="..\TWE Bold\SourceEx\BoldPostgresDACDesignPackage.dproj" />
+    <Projects Include="..\TWE Bold\SourceEx\BoldUml.dproj" />
+    <Projects Include="..\TWE Rose Tools\Rose Add-in\TimeWarpRoseAddinProject.dproj" />
+    <Projects Include="..\TWE StarUML Addin\TWEStarUMLAddinProject.dproj" />
+    <Projects Include="..\TWE Suite\Source\TWEClient\TimeWarp.dproj" />
+    <Projects Include="..\TWE Suite\Source\TWEStarFunctionalityPackage.dproj" />
+    <Projects Include="..\TWE Suite\Source\TWESuitePackage.dproj" />
+    <Projects Include="C:\Documents and Settings\All Users\Documents\RAD Studio\5.0\Demos\DelphiWin32\VCLWin32\ShellControls\dclshlctrls.dproj" />
+    <Projects Include="C:\Documents and Settings\All Users\Documents\RAD Studio\5.0\Demos\DelphiWin32\VCLWin32\ShellControls\vclshlctrls.dproj" />
+    <Projects Include="staruml-rose\src\code\RoseAddIn.dproj" />
+    <Projects Include="staruml\components\plastic-components\src\PlasticComponents.dproj" />
+    <Projects Include="staruml\src\option-manager\OptMgr.dproj" />
+    <Projects Include="staruml\src\StarUML.dproj" />
+    <Projects Include="staruml\src\StarUMLProject.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject xmlns=""><Default.Personality></Default.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="dxThemeD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\XP Theme Manager\Packages\dxThemeD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dxThemeD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\XP Theme Manager\Packages\dxThemeD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dxThemeD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\XP Theme Manager\Packages\dxThemeD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dxGDIPlusD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressGDI+ Library\Packages\dxGDIPlusD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dxGDIPlusD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressGDI+ Library\Packages\dxGDIPlusD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dxGDIPlusD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressGDI+ Library\Packages\dxGDIPlusD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="cxLibraryD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressLibrary\Packages\cxLibraryD11.dproj" Targets="" />
+  </Target>
+  <Target Name="cxLibraryD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressLibrary\Packages\cxLibraryD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="cxLibraryD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressLibrary\Packages\cxLibraryD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclcxLibraryD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressLibrary\Packages\dclcxLibraryD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dclcxLibraryD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressLibrary\Packages\dclcxLibraryD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclcxLibraryD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressLibrary\Packages\dclcxLibraryD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dxDockingD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressDocking Library\Packages\dxDockingD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dxDockingD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressDocking Library\Packages\dxDockingD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dxDockingD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressDocking Library\Packages\dxDockingD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dcldxDockingD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressDocking Library\Packages\dcldxDockingD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dcldxDockingD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressDocking Library\Packages\dcldxDockingD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dcldxDockingD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressDocking Library\Packages\dcldxDockingD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dxNavBarD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressNavBar 2\Packages\dxNavBarD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dxNavBarD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressNavBar 2\Packages\dxNavBarD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dxNavBarD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressNavBar 2\Packages\dxNavBarD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dcldxNavBarD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressNavBar 2\Packages\dcldxNavBarD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dcldxNavBarD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressNavBar 2\Packages\dcldxNavBarD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dcldxNavBarD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressNavBar 2\Packages\dcldxNavBarD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="cxPageControlD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressPageControl 2\Packages\cxPageControlD11.dproj" Targets="" />
+  </Target>
+  <Target Name="cxPageControlD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressPageControl 2\Packages\cxPageControlD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="cxPageControlD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressPageControl 2\Packages\cxPageControlD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclcxPageControlD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressPageControl 2\Packages\dclcxPageControlD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dclcxPageControlD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressPageControl 2\Packages\dclcxPageControlD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclcxPageControlD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressPageControl 2\Packages\dclcxPageControlD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="cxDataD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressDataController\Packages\cxDataD11.dproj" Targets="" />
+  </Target>
+  <Target Name="cxDataD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressDataController\Packages\cxDataD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="cxDataD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressDataController\Packages\cxDataD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="cxEditorsD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressEditors Library 5\Packages\cxEditorsD11.dproj" Targets="" />
+  </Target>
+  <Target Name="cxEditorsD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressEditors Library 5\Packages\cxEditorsD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="cxEditorsD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressEditors Library 5\Packages\cxEditorsD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="cxExtEditorsD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressEditors Library 5\Packages\cxExtEditorsD11.dproj" Targets="" />
+  </Target>
+  <Target Name="cxExtEditorsD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressEditors Library 5\Packages\cxExtEditorsD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="cxExtEditorsD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressEditors Library 5\Packages\cxExtEditorsD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="cxExportD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressExport Library\Packages\cxExportD11.dproj" Targets="" />
+  </Target>
+  <Target Name="cxExportD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressExport Library\Packages\cxExportD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="cxExportD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressExport Library\Packages\cxExportD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="cxVerticalGridD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressVerticalGrid\Packages\cxVerticalGridD11.dproj" Targets="" />
+  </Target>
+  <Target Name="cxVerticalGridD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressVerticalGrid\Packages\cxVerticalGridD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="cxVerticalGridD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressVerticalGrid\Packages\cxVerticalGridD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclcxEditorsD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressEditors Library 5\Packages\dclcxEditorsD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dclcxEditorsD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressEditors Library 5\Packages\dclcxEditorsD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclcxEditorsD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressEditors Library 5\Packages\dclcxEditorsD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclcxVerticalGridD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressVerticalGrid\Packages\dclcxVerticalGridD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dclcxVerticalGridD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressVerticalGrid\Packages\dclcxVerticalGridD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclcxVerticalGridD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressVerticalGrid\Packages\dclcxVerticalGridD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dxComnD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressCommon Library\Packages\dxComnD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dxComnD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressCommon Library\Packages\dxComnD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dxComnD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressCommon Library\Packages\dxComnD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dxBarD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dxBarD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dxBarD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dxBarD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dxBarD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dxBarD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dcldxBarD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dcldxBarD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dcldxBarD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dcldxBarD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dcldxBarD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dcldxBarD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dxRibbonD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dxRibbonD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dxRibbonD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dxRibbonD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dxRibbonD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dxRibbonD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dcldxRibbonD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dcldxRibbonD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dcldxRibbonD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dcldxRibbonD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dcldxRibbonD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dcldxRibbonD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="cxBarEditItemD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\cxBarEditItemD11.dproj" Targets="" />
+  </Target>
+  <Target Name="cxBarEditItemD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\cxBarEditItemD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="cxBarEditItemD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\cxBarEditItemD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclcxExtEditorsD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressEditors Library 5\Packages\dclcxExtEditorsD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dclcxExtEditorsD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressEditors Library 5\Packages\dclcxExtEditorsD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclcxExtEditorsD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressEditors Library 5\Packages\dclcxExtEditorsD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclcxBarEditItemD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dclcxBarEditItemD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dclcxBarEditItemD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dclcxBarEditItemD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclcxBarEditItemD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dclcxBarEditItemD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dxBarExtItemsD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dxBarExtItemsD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dxBarExtItemsD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dxBarExtItemsD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dxBarExtItemsD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dxBarExtItemsD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dcldxBarExtItemsD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dcldxBarExtItemsD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dcldxBarExtItemsD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dcldxBarExtItemsD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dcldxBarExtItemsD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressBars 6\Packages\dcldxBarExtItemsD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dxSBD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSideBar\Packages\dxSBD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dxSBD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSideBar\Packages\dxSBD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dxSBD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSideBar\Packages\dxSBD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dcldxSBD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSideBar\Packages\dcldxSBD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dcldxSBD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSideBar\Packages\dcldxSBD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dcldxSBD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSideBar\Packages\dcldxSBD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="cxGridD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressQuantumGrid 6\Packages\cxGridD11.dproj" Targets="" />
+  </Target>
+  <Target Name="cxGridD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressQuantumGrid 6\Packages\cxGridD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="cxGridD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressQuantumGrid 6\Packages\cxGridD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="cxSchedulerGridD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressScheduler 3\Packages\cxSchedulerGridD11.dproj" Targets="" />
+  </Target>
+  <Target Name="cxSchedulerGridD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressScheduler 3\Packages\cxSchedulerGridD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="cxSchedulerGridD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressScheduler 3\Packages\cxSchedulerGridD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclcxSchedulerGridD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressScheduler 3\Packages\dclcxSchedulerGridD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dclcxSchedulerGridD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressScheduler 3\Packages\dclcxSchedulerGridD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclcxSchedulerGridD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressScheduler 3\Packages\dclcxSchedulerGridD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dxSkinsdxNavBar2PainterD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dxSkinsdxNavBar2PainterD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dxSkinsdxNavBar2PainterD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dxSkinsdxNavBar2PainterD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dxSkinsdxNavBar2PainterD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dxSkinsdxNavBar2PainterD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dcldxSkinsdxNavBar2PainterD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dcldxSkinsdxNavBar2PainterD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dcldxSkinsdxNavBar2PainterD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dcldxSkinsdxNavBar2PainterD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dcldxSkinsdxNavBar2PainterD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dcldxSkinsdxNavBar2PainterD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dcldxSkinsCoreD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dcldxSkinsCoreD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dcldxSkinsCoreD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dcldxSkinsCoreD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dcldxSkinsCoreD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dcldxSkinsCoreD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dxSkinsdxRibbonPainterD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dxSkinsdxRibbonPainterD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dxSkinsdxRibbonPainterD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dxSkinsdxRibbonPainterD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dxSkinsdxRibbonPainterD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dxSkinsdxRibbonPainterD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="VirtualTreesD11">
+    <MSBuild Projects="..\Common\Virtual Treeview\Delphi\VirtualTreesD11.dproj" Targets="" />
+  </Target>
+  <Target Name="VirtualTreesD11:Clean">
+    <MSBuild Projects="..\Common\Virtual Treeview\Delphi\VirtualTreesD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="VirtualTreesD11:Make">
+    <MSBuild Projects="..\Common\Virtual Treeview\Delphi\VirtualTreesD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="VirtualTreesD11D">
+    <MSBuild Projects="..\Common\Virtual Treeview\Delphi\VirtualTreesD11D.dproj" Targets="" />
+  </Target>
+  <Target Name="VirtualTreesD11D:Clean">
+    <MSBuild Projects="..\Common\Virtual Treeview\Delphi\VirtualTreesD11D.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="VirtualTreesD11D:Make">
+    <MSBuild Projects="..\Common\Virtual Treeview\Delphi\VirtualTreesD11D.dproj" Targets="Make" />
+  </Target>
+  <Target Name="PlasticComponents">
+    <MSBuild Projects="staruml\components\plastic-components\src\PlasticComponents.dproj" Targets="" />
+  </Target>
+  <Target Name="PlasticComponents:Clean">
+    <MSBuild Projects="staruml\components\plastic-components\src\PlasticComponents.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="PlasticComponents:Make">
+    <MSBuild Projects="staruml\components\plastic-components\src\PlasticComponents.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Bold">
+    <MSBuild Projects="..\TWE Bold\SourceEx\Bold.dproj" Targets="" />
+  </Target>
+  <Target Name="Bold:Clean">
+    <MSBuild Projects="..\TWE Bold\SourceEx\Bold.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="Bold:Make">
+    <MSBuild Projects="..\TWE Bold\SourceEx\Bold.dproj" Targets="Make" />
+  </Target>
+  <Target Name="BoldUml">
+    <MSBuild Projects="..\TWE Bold\SourceEx\BoldUml.dproj" Targets="" />
+  </Target>
+  <Target Name="BoldUml:Clean">
+    <MSBuild Projects="..\TWE Bold\SourceEx\BoldUml.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="BoldUml:Make">
+    <MSBuild Projects="..\TWE Bold\SourceEx\BoldUml.dproj" Targets="Make" />
+  </Target>
+  <Target Name="PostgresDAC11">
+    <MSBuild Projects="..\Common\PostgresDAC\Delphi11\PostgresDAC11.dproj" Targets="" />
+  </Target>
+  <Target Name="PostgresDAC11:Clean">
+    <MSBuild Projects="..\Common\PostgresDAC\Delphi11\PostgresDAC11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="PostgresDAC11:Make">
+    <MSBuild Projects="..\Common\PostgresDAC\Delphi11\PostgresDAC11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="BoldPostgresDAC">
+    <MSBuild Projects="..\TWE Bold\SourceEx\BoldPostgresDAC.dproj" Targets="" />
+  </Target>
+  <Target Name="BoldPostgresDAC:Clean">
+    <MSBuild Projects="..\TWE Bold\SourceEx\BoldPostgresDAC.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="BoldPostgresDAC:Make">
+    <MSBuild Projects="..\TWE Bold\SourceEx\BoldPostgresDAC.dproj" Targets="Make" />
+  </Target>
+  <Target Name="BoldPostgresDACDesignPackage">
+    <MSBuild Projects="..\TWE Bold\SourceEx\BoldPostgresDACDesignPackage.dproj" Targets="" />
+  </Target>
+  <Target Name="BoldPostgresDACDesignPackage:Clean">
+    <MSBuild Projects="..\TWE Bold\SourceEx\BoldPostgresDACDesignPackage.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="BoldPostgresDACDesignPackage:Make">
+    <MSBuild Projects="..\TWE Bold\SourceEx\BoldPostgresDACDesignPackage.dproj" Targets="Make" />
+  </Target>
+  <Target Name="TWEStarUMLAddinProject">
+    <MSBuild Projects="..\TWE StarUML Addin\TWEStarUMLAddinProject.dproj" Targets="" />
+  </Target>
+  <Target Name="TWEStarUMLAddinProject:Clean">
+    <MSBuild Projects="..\TWE StarUML Addin\TWEStarUMLAddinProject.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="TWEStarUMLAddinProject:Make">
+    <MSBuild Projects="..\TWE StarUML Addin\TWEStarUMLAddinProject.dproj" Targets="Make" />
+  </Target>
+  <Target Name="TWESuitePackage">
+    <MSBuild Projects="..\TWE Suite\Source\TWESuitePackage.dproj" Targets="" />
+  </Target>
+  <Target Name="TWESuitePackage:Clean">
+    <MSBuild Projects="..\TWE Suite\Source\TWESuitePackage.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="TWESuitePackage:Make">
+    <MSBuild Projects="..\TWE Suite\Source\TWESuitePackage.dproj" Targets="Make" />
+  </Target>
+  <Target Name="BldOwn">
+    <MSBuild Projects="..\TWE Bold\BuildingScript\BldOwn.dproj" Targets="" />
+  </Target>
+  <Target Name="BldOwn:Clean">
+    <MSBuild Projects="..\TWE Bold\BuildingScript\BldOwn.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="BldOwn:Make">
+    <MSBuild Projects="..\TWE Bold\BuildingScript\BldOwn.dproj" Targets="Make" />
+  </Target>
+  <Target Name="RoseAddIn">
+    <MSBuild Projects="staruml-rose\src\code\RoseAddIn.dproj" Targets="" />
+  </Target>
+  <Target Name="RoseAddIn:Clean">
+    <MSBuild Projects="staruml-rose\src\code\RoseAddIn.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="RoseAddIn:Make">
+    <MSBuild Projects="staruml-rose\src\code\RoseAddIn.dproj" Targets="Make" />
+  </Target>
+  <Target Name="TimeWarpRoseAddinProject">
+    <MSBuild Projects="..\TWE Rose Tools\Rose Add-in\TimeWarpRoseAddinProject.dproj" Targets="" />
+  </Target>
+  <Target Name="TimeWarpRoseAddinProject:Clean">
+    <MSBuild Projects="..\TWE Rose Tools\Rose Add-in\TimeWarpRoseAddinProject.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="TimeWarpRoseAddinProject:Make">
+    <MSBuild Projects="..\TWE Rose Tools\Rose Add-in\TimeWarpRoseAddinProject.dproj" Targets="Make" />
+  </Target>
+  <Target Name="BoldDesignPackage">
+    <MSBuild Projects="..\TWE Bold\SourceEx\BoldDesignPackage.dproj" Targets="" />
+  </Target>
+  <Target Name="BoldDesignPackage:Clean">
+    <MSBuild Projects="..\TWE Bold\SourceEx\BoldDesignPackage.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="BoldDesignPackage:Make">
+    <MSBuild Projects="..\TWE Bold\SourceEx\BoldDesignPackage.dproj" Targets="Make" />
+  </Target>
+  <Target Name="BoldDBExpress">
+    <MSBuild Projects="..\TWE Bold\SourceEx\BoldDBExpress.dproj" Targets="" />
+  </Target>
+  <Target Name="BoldDBExpress:Clean">
+    <MSBuild Projects="..\TWE Bold\SourceEx\BoldDBExpress.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="BoldDBExpress:Make">
+    <MSBuild Projects="..\TWE Bold\SourceEx\BoldDBExpress.dproj" Targets="Make" />
+  </Target>
+  <Target Name="BoldDBExpressDesignPackage">
+    <MSBuild Projects="..\TWE Bold\SourceEx\BoldDBExpressDesignPackage.dproj" Targets="" />
+  </Target>
+  <Target Name="BoldDBExpressDesignPackage:Clean">
+    <MSBuild Projects="..\TWE Bold\SourceEx\BoldDBExpressDesignPackage.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="BoldDBExpressDesignPackage:Make">
+    <MSBuild Projects="..\TWE Bold\SourceEx\BoldDBExpressDesignPackage.dproj" Targets="Make" />
+  </Target>
+  <Target Name="TimeWarp">
+    <MSBuild Projects="..\TWE Suite\Source\TWEClient\TimeWarp.dproj" Targets="" />
+  </Target>
+  <Target Name="TimeWarp:Clean">
+    <MSBuild Projects="..\TWE Suite\Source\TWEClient\TimeWarp.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="TimeWarp:Make">
+    <MSBuild Projects="..\TWE Suite\Source\TWEClient\TimeWarp.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Jcl">
+    <MSBuild Projects="..\Common\JCL\packages\d11\Jcl.dproj" Targets="" />
+  </Target>
+  <Target Name="Jcl:Clean">
+    <MSBuild Projects="..\Common\JCL\packages\d11\Jcl.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="Jcl:Make">
+    <MSBuild Projects="..\Common\JCL\packages\d11\Jcl.dproj" Targets="Make" />
+  </Target>
+  <Target Name="JclVcl">
+    <MSBuild Projects="..\Common\JCL\packages\d11\JclVcl.dproj" Targets="" />
+  </Target>
+  <Target Name="JclVcl:Clean">
+    <MSBuild Projects="..\Common\JCL\packages\d11\JclVcl.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="JclVcl:Make">
+    <MSBuild Projects="..\Common\JCL\packages\d11\JclVcl.dproj" Targets="Make" />
+  </Target>
+  <Target Name="vclshlctrls">
+    <MSBuild Projects="C:\Documents and Settings\All Users\Documents\RAD Studio\5.0\Demos\DelphiWin32\VCLWin32\ShellControls\vclshlctrls.dproj" Targets="" />
+  </Target>
+  <Target Name="vclshlctrls:Clean">
+    <MSBuild Projects="C:\Documents and Settings\All Users\Documents\RAD Studio\5.0\Demos\DelphiWin32\VCLWin32\ShellControls\vclshlctrls.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="vclshlctrls:Make">
+    <MSBuild Projects="C:\Documents and Settings\All Users\Documents\RAD Studio\5.0\Demos\DelphiWin32\VCLWin32\ShellControls\vclshlctrls.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dclshlctrls">
+    <MSBuild Projects="C:\Documents and Settings\All Users\Documents\RAD Studio\5.0\Demos\DelphiWin32\VCLWin32\ShellControls\dclshlctrls.dproj" Targets="" />
+  </Target>
+  <Target Name="dclshlctrls:Clean">
+    <MSBuild Projects="C:\Documents and Settings\All Users\Documents\RAD Studio\5.0\Demos\DelphiWin32\VCLWin32\ShellControls\dclshlctrls.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dclshlctrls:Make">
+    <MSBuild Projects="C:\Documents and Settings\All Users\Documents\RAD Studio\5.0\Demos\DelphiWin32\VCLWin32\ShellControls\dclshlctrls.dproj" Targets="Make" />
+  </Target>
+  <Target Name="StarUML">
+    <MSBuild Projects="staruml\src\StarUML.dproj" Targets="" />
+  </Target>
+  <Target Name="StarUML:Clean">
+    <MSBuild Projects="staruml\src\StarUML.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="StarUML:Make">
+    <MSBuild Projects="staruml\src\StarUML.dproj" Targets="Make" />
+  </Target>
+  <Target Name="OptMgr">
+    <MSBuild Projects="staruml\src\option-manager\OptMgr.dproj" Targets="" />
+  </Target>
+  <Target Name="OptMgr:Clean">
+    <MSBuild Projects="staruml\src\option-manager\OptMgr.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="OptMgr:Make">
+    <MSBuild Projects="staruml\src\option-manager\OptMgr.dproj" Targets="Make" />
+  </Target>
+  <Target Name="StarUMLProject">
+    <MSBuild Projects="staruml\src\StarUMLProject.dproj" Targets="" />
+  </Target>
+  <Target Name="StarUMLProject:Clean">
+    <MSBuild Projects="staruml\src\StarUMLProject.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="StarUMLProject:Make">
+    <MSBuild Projects="staruml\src\StarUMLProject.dproj" Targets="Make" />
+  </Target>
+  <Target Name="dxSkinsCoreD11">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dxSkinsCoreD11.dproj" Targets="" />
+  </Target>
+  <Target Name="dxSkinsCoreD11:Clean">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dxSkinsCoreD11.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="dxSkinsCoreD11:Make">
+    <MSBuild Projects="..\Common\Developer Express Inc\ExpressSkins Library\Packages\dxSkinsCoreD11.dproj" Targets="Make" />
+  </Target>
+  <Target Name="TWEStarFunctionalityPackage">
+    <MSBuild Projects="..\TWE Suite\Source\TWEStarFunctionalityPackage.dproj" Targets="" />
+  </Target>
+  <Target Name="TWEStarFunctionalityPackage:Clean">
+    <MSBuild Projects="..\TWE Suite\Source\TWEStarFunctionalityPackage.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="TWEStarFunctionalityPackage:Make">
+    <MSBuild Projects="..\TWE Suite\Source\TWEStarFunctionalityPackage.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="dxThemeD11;dxGDIPlusD11;cxLibraryD11;dclcxLibraryD11;dxDockingD11;dcldxDockingD11;dxNavBarD11;dcldxNavBarD11;cxPageControlD11;dclcxPageControlD11;cxDataD11;cxEditorsD11;cxExtEditorsD11;cxExportD11;cxVerticalGridD11;dclcxEditorsD11;dclcxVerticalGridD11;dxComnD11;dxBarD11;dcldxBarD11;dxRibbonD11;dcldxRibbonD11;cxBarEditItemD11;dclcxExtEditorsD11;dclcxBarEditItemD11;dxBarExtItemsD11;dcldxBarExtItemsD11;dxSBD11;dcldxSBD11;cxGridD11;cxSchedulerGridD11;dclcxSchedulerGridD11;dxSkinsdxNavBar2PainterD11;dcldxSkinsdxNavBar2PainterD11;dcldxSkinsCoreD11;dxSkinsdxRibbonPainterD11;VirtualTreesD11;VirtualTreesD11D;PlasticComponents;Bold;BoldUml;PostgresDAC11;BoldPostgresDAC;BoldPostgresDACDesignPackage;TWEStarUMLAddinProject;TWESuitePackage;BldOwn;RoseAddIn;TimeWarpRoseAddinProject;BoldDesignPackage;BoldDBExpress;BoldDBExpressDesignPackage;TimeWarp;Jcl;JclVcl;vclshlctrls;dclshlctrls;StarUML;OptMgr;StarUMLProject;dxSkinsCoreD11;TWEStarFunctionalityPackage" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="dxThemeD11:Clean;dxGDIPlusD11:Clean;cxLibraryD11:Clean;dclcxLibraryD11:Clean;dxDockingD11:Clean;dcldxDockingD11:Clean;dxNavBarD11:Clean;dcldxNavBarD11:Clean;cxPageControlD11:Clean;dclcxPageControlD11:Clean;cxDataD11:Clean;cxEditorsD11:Clean;cxExtEditorsD11:Clean;cxExportD11:Clean;cxVerticalGridD11:Clean;dclcxEditorsD11:Clean;dclcxVerticalGridD11:Clean;dxComnD11:Clean;dxBarD11:Clean;dcldxBarD11:Clean;dxRibbonD11:Clean;dcldxRibbonD11:Clean;cxBarEditItemD11:Clean;dclcxExtEditorsD11:Clean;dclcxBarEditItemD11:Clean;dxBarExtItemsD11:Clean;dcldxBarExtItemsD11:Clean;dxSBD11:Clean;dcldxSBD11:Clean;cxGridD11:Clean;cxSchedulerGridD11:Clean;dclcxSchedulerGridD11:Clean;dxSkinsdxNavBar2PainterD11:Clean;dcldxSkinsdxNavBar2PainterD11:Clean;dcldxSkinsCoreD11:Clean;dxSkinsdxRibbonPainterD11:Clean;VirtualTreesD11:Clean;VirtualTreesD11D:Clean;PlasticComponents:Clean;Bold:Clean;BoldUml:Clean;PostgresDAC11:Clean;BoldPostgresDAC:Clean;BoldPostgresDACDesignPackage:Clean;TWEStarUMLAddinProject:Clean;TWESuitePackage:Clean;BldOwn:Clean;RoseAddIn:Clean;TimeWarpRoseAddinProject:Clean;BoldDesignPackage:Clean;BoldDBExpress:Clean;BoldDBExpressDesignPackage:Clean;TimeWarp:Clean;Jcl:Clean;JclVcl:Clean;vclshlctrls:Clean;dclshlctrls:Clean;StarUML:Clean;OptMgr:Clean;StarUMLProject:Clean;dxSkinsCoreD11:Clean;TWEStarFunctionalityPackage:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="dxThemeD11:Make;dxGDIPlusD11:Make;cxLibraryD11:Make;dclcxLibraryD11:Make;dxDockingD11:Make;dcldxDockingD11:Make;dxNavBarD11:Make;dcldxNavBarD11:Make;cxPageControlD11:Make;dclcxPageControlD11:Make;cxDataD11:Make;cxEditorsD11:Make;cxExtEditorsD11:Make;cxExportD11:Make;cxVerticalGridD11:Make;dclcxEditorsD11:Make;dclcxVerticalGridD11:Make;dxComnD11:Make;dxBarD11:Make;dcldxBarD11:Make;dxRibbonD11:Make;dcldxRibbonD11:Make;cxBarEditItemD11:Make;dclcxExtEditorsD11:Make;dclcxBarEditItemD11:Make;dxBarExtItemsD11:Make;dcldxBarExtItemsD11:Make;dxSBD11:Make;dcldxSBD11:Make;cxGridD11:Make;cxSchedulerGridD11:Make;dclcxSchedulerGridD11:Make;dxSkinsdxNavBar2PainterD11:Make;dcldxSkinsdxNavBar2PainterD11:Make;dcldxSkinsCoreD11:Make;dxSkinsdxRibbonPainterD11:Make;VirtualTreesD11:Make;VirtualTreesD11D:Make;PlasticComponents:Make;Bold:Make;BoldUml:Make;PostgresDAC11:Make;BoldPostgresDAC:Make;BoldPostgresDACDesignPackage:Make;TWEStarUMLAddinProject:Make;TWESuitePackage:Make;BldOwn:Make;RoseAddIn:Make;TimeWarpRoseAddinProject:Make;BoldDesignPackage:Make;BoldDBExpress:Make;BoldDBExpressDesignPackage:Make;TimeWarp:Make;Jcl:Make;JclVcl:Make;vclshlctrls:Make;dclshlctrls:Make;StarUML:Make;OptMgr:Make;StarUMLProject:Make;dxSkinsCoreD11:Make;TWEStarFunctionalityPackage:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

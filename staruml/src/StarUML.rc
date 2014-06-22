@@ -1,0 +1,27 @@
+MAINICON ICON "C:\TimeWarp\staruml-src\staruml\src\mainicon.ico"
+1 VERSIONINFO
+FILEVERSION 5,0,1,1565
+PRODUCTVERSION 5,0,1,1565
+FILEFLAGSMASK 0x3FL
+FILEFLAGS 0x00L
+FILEOS 0x40004L
+FILETYPE 0x1L
+FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+         BLOCK "040904E4"
+         BEGIN
+              VALUE "CompanyName", "Plastic Software, Inc.\0"
+              VALUE "FileVersion", "5.0.1.1565\0"
+              VALUE "LegalCopyright", "Copyright(c)1998-2005 Plastic Software, Inc. All rights reserved.\0"
+              VALUE "ProductName", "StarUML\0"
+              VALUE "ProductVersion", "5.0.1.1565\0"
+              VALUE "CompileDate", "Wednesday, August 27, 2008 8:10 PM\0"
+         END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+         VALUE "Translation", 0x0409, 1252
+    END
+END
