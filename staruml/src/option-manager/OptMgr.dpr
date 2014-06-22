@@ -68,4 +68,5 @@ exports
 {$R *.RES}
 
 begin
+  ReportMemoryLeaksOnShutdown := True;
 end.

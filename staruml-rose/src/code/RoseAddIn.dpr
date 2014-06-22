@@ -58,8 +58,7 @@ uses
   GmrNodes in 'GmrNodes.pas',
   Utilities in 'Utilities.pas',
   NLS in 'NLS.pas',
-  NLS_RoseAddIn in 'NLS_RoseAddIn.pas',
-  PGMR101Lib_TLB in 'C:\Program Files\Borland\Delphi7\Imports\PGMR101Lib_TLB.pas';
+  NLS_RoseAddIn in 'NLS_RoseAddIn.pas';
 
 exports
   DllGetClassObject,

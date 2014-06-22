@@ -48,10 +48,33 @@ unit TagEdtFrm;
 interface
 
 uses
-  ExtCore, UMLModels, TagColEdtFrm,
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, dxExEdtr, StdCtrls, dxCntner, dxInspct, dxInspRw, ExtCtrls, ComCtrls,
-  ImgList;
+  ExtCore,
+  UMLModels,
+  TagColEdtFrm,
+  Windows,
+  Messages,
+  SysUtils,
+  Variants,
+  Classes,
+  Graphics,
+  Controls,
+  Forms,
+  Dialogs,
+  StdCtrls,
+  ExtCtrls,
+  ComCtrls,
+  ImgList,
+  cxStyles,
+  cxGraphics,
+  cxEdit,
+  cxControls,
+  cxInplaceContainer,
+  cxVGrid,
+  cxMemo,
+  cxTextEdit,
+  cxCheckBox,                            
+  cxDropDownEdit,
+  cxButtonEdit;
 
 type
   // Events
@@ -64,8 +87,9 @@ type
 
   PTagDefinitionSetInspector = class
   private
-    Inspector: TdxInspector;
-    TextMemo: TMemo;
+    Inspector: TcxVerticalGrid;
+    DefaultValuecxStyle: TcxStyle;
+    HighlightcxStyle: TcxStyle;
     FOwner: TComponent;
     FModel: PExtensibleModel;
     FTagDefinitionSet: PTagDefinitionSet;
@@ -80,17 +104,17 @@ type
   private
     procedure SetReadOnly(Value: Boolean);
     function GetProfile: PProfile;
-    function GetTagDefinition(Row: TdxInspectorRow): PTagDefinition;
+    function GetTagDefinition(acxEditorRow: TcxEditorRow): PTagDefinition;
     function GetFocusedTagDefinition: PTagDefinition;
     procedure ClearRows;
     procedure SetupRows;
-    procedure SetTextPopupRowText(Row: TdxInspectorTextPopupRow);
+//    procedure SetTextPopupRowText(Row: TcxCustomRow);
     function IsDefaultValue(ATagDefinition: PTagDefinition): Boolean;
 
-    procedure ChangeDataTaggedValue(Row: TdxInspectorRow; AsDefault: Boolean = False); overload;
-    procedure ChangeDataTaggedValue(Row: TdxInspectorRow; Value: string; AsDefault: Boolean = False); overload;
-    procedure ChangeReferenceTaggedValue(Row: TdxInspectorRow; Value: PExtensibleModel; AsDefault: Boolean = False);
-    procedure SetTaggedValueAsDefault(Row: TdxInspectorRow);
+    procedure ChangeDataTaggedValue(ARowProperties: TcxCustomEditorRowProperties; AsDefault: Boolean = False); overload;
+    procedure ChangeDataTaggedValue(ARowProperties: TcxCustomEditorRowProperties; Value: string; AsDefault: Boolean = False); overload;
+    procedure ChangeReferenceTaggedValue(Row: TcxCustomRow; Value: PExtensibleModel; AsDefault: Boolean = False);
+    procedure SetTaggedValueAsDefault(Row: TcxCustomRow);
 
     // event handlers
     procedure HandleAddCollectionTaggedValue(Sender: TObject; AModel: PExtensibleModel; AProfileName: string;
@@ -99,23 +123,21 @@ type
       ATagDefinitionSetName: string; AName: string; Value: PExtensibleModel);
     procedure HandleChangeCollectionTaggedValueIndex(Sender: TObject; AModel: PExtensibleModel; AProfileName: string;
       ATagDefinitionSetName: string; AName: string; Value: PExtensibleModel; NewIdx: Integer);
-
-    procedure PickRowCloseUp(Sender: TObject; var Value: Variant; var Accept: Boolean);
-    procedure CheckRowToggleClick(Sender: TObject; const Text: string; State: TdxCheckBoxState);
+//    procedure PickRowCloseUp(Sender: TObject; var Value: Variant; var Accept: Boolean);
+//    procedure CheckRowToggleClick(Sender: TObject; const Text: string; State: TdxCheckBoxState);
     procedure ButtonRowButtonClick(Sender: TObject; AbsoluteIndex: Integer);
-    procedure PopupRowPopup(Sender: TObject; const EditText: string);
-    procedure PopupRowCloseup(Sender: TObject; var Text: string; var Accept: Boolean);
-    procedure InspectorEdited(Sender: TObject; Node: TdxInspectorNode; Row: TdxInspectorRow);
-    procedure InspectorChangeNode(Sender: TObject; OldNode, Node: TdxInspectorNode);
-    procedure InspectorDrawCaption(Sender: TdxInspectorRow;
-      ACanvas: TCanvas; ARect: TRect; var AText: String; AFont: TFont;
-      var AColor: TColor; var ADone: Boolean);
-    procedure InspectorDrawValue(Sender: TdxInspectorRow; ACanvas: TCanvas;
-      ARect: TRect; var AText: String; AFont: TFont; var AColor: TColor;
-      var ADone: Boolean);
+//    procedure PopupRowPopup(Sender: TObject; const EditText: string);
+//    procedure PopupRowCloseup(Sender: TObject; var Text: string; var Accept: Boolean);
+    procedure InspectorEdited(Sender: TObject; ARowProperties: TcxCustomEditorRowProperties);
+    procedure InspectorItemChanged(Sender: TObject; AOldRow: TcxCustomRow; AOldCellIndex: Integer);
+    procedure InspectorStylesGetContentStyle(Sender: TObject; AEditProp: TcxCustomEditorRowProperties; AFocused: Boolean; ARecordIndex: Integer; var AStyle: TcxStyle);
+    procedure InspectorStylesGetHeaderStyle(Sender: TObject; ARow: TcxCustomRow; var AStyle: TcxStyle);
+//    procedure InspectorDrawCaption(Sender: TcxCustomRow; ACanvas: TCanvas; ARect: TRect; var AText: string; AFont: TFont; var AColor: TColor; var ADone: Boolean);
+//    procedure InspectorDrawValue(Sender: TObject; ACanvas: TcxCanvas; APainter: TcxvgPainter; AValueInfo: TcxRowValueInfo; var Done: Boolean);
+    procedure InspectorChangeNode(Sender: TObject; OldNode, Node: TcxCustomEditorRowProperties);
   public
-    constructor Create(AOwner: TComponent; AInspector: TdxInspector);
-    destructor Destory;
+    constructor Create(AOwner: TComponent; AInspector: TcxVerticalGrid);
+    destructor Destroy; override;
     procedure UpdateTaggedValues;
     procedure Setup;
     procedure SetFocusedTaggedValueAsDefault;
@@ -143,10 +165,10 @@ type
     TagDefinitionSetLabel: TLabel;
     TagDefinitionSetComboBox: TComboBox;
     TaggedValueLabel: TLabel;
-    Inspector: TdxInspector;
     DefaultButton: TButton;
     RowImageList: TImageList;
     HelpButton: TButton;
+    Inspector: TcxVerticalGrid;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure TaggedValueTabControlChange(Sender: TObject);
@@ -154,6 +176,7 @@ type
     procedure DefaultButtonClick(Sender: TObject);
     procedure CloseButtonClick(Sender: TObject);
     procedure HelpButtonClick(Sender: TObject);
+
   private
     TagDefinitionSetInspector: PTagDefinitionSetInspector;
     FModel: PExtensibleModel;
@@ -203,14 +226,15 @@ type
     property OnSetTaggedValueAsDefault: PTaggedValueEvent read FOnSetTaggedValueAsDefault write FOnSetTaggedValueAsDefault;
   end;
 
-
 var
   TaggedValueEditorForm: TTaggedValueEditorForm;
 
 implementation
 
 uses
-  ElemLstFrm, NLS, NLS_StarUML,
+  ElemLstFrm,
+  NLS,
+  NLS_StarUML,
   HtmlHlp;
 
 {$R *.dfm}
@@ -223,25 +247,29 @@ const
 ////////////////////////////////////////////////////////////////////////////////
 // PTagDefinitionSetInspector
 
-constructor PTagDefinitionSetInspector.Create(AOwner: TComponent; AInspector: TdxInspector);
+constructor PTagDefinitionSetInspector.Create(AOwner: TComponent; AInspector: TcxVerticalGrid);
 begin
   FOwner := AOwner;
   Inspector := AInspector;
-  TextMemo := TMemo.Create(FOwner);
-  TextMemo.WantReturns := True;
-  TextMemo.WantTabs := True;
   Inspector.OnEdited := InspectorEdited;
-  Inspector.OnChangeNode := InspectorChangeNode;
-  Inspector.OnDrawCaption := InspectorDrawCaption;
-  Inspector.OnDrawValue := InspectorDrawValue;
+  Inspector.OnItemChanged := InspectorItemChanged;
+//  Inspector.OnDrawValue := InspectorDrawValue;
+  Inspector.Styles.OnGetHeaderStyle := InspectorStylesGetHeaderStyle;
+  Inspector.Styles.OnGetContentStyle := InspectorStylesGetContentStyle;
   TaggedValueCollectionEditorForm.OnAddCollectionTaggedValue := HandleAddCollectionTaggedValue;
   TaggedValueCollectionEditorForm.OnRemoveCollectionTaggedValue := HandleRemoveCollectionTaggedValue;
   TaggedValueCollectionEditorForm.OnChangeCollectionTaggedValueOrder := HandleChangeCollectionTaggedValueIndex;
+
+  DefaultValuecxStyle := TcxStyle.Create(nil);
+  DefaultValuecxStyle.TextColor := clGrayText;
+  HighlightcxStyle := TcxStyle.Create(nil);
+  HighlightcxStyle.TextColor:= clHotLight;
 end;
 
-destructor PTagDefinitionSetInspector.Destory;
+destructor PTagDefinitionSetInspector.Destroy;
 begin
-  TextMemo.Free;
+  HighlightcxStyle.Free;
+  DefaultValuecxStyle.Free;
   inherited;
 end;
 
@@ -259,23 +287,29 @@ begin
     Result := FTagDefinitionSet.Profile;
 end;
 
-function PTagDefinitionSetInspector.GetTagDefinition(Row: TdxInspectorRow): PTagDefinition;
+function PTagDefinitionSetInspector.GetTagDefinition(acxEditorRow: TcxEditorRow): PTagDefinition;
 var
-  ParentRow: TdxInspectorRow;
+  lcxCategoryRow: TcxCategoryRow;
 begin
   Result := nil;
-  if FModel = nil then Exit;
-  if Row.Node.Level = TAGGEDVALUEITEM_LEVEL then begin
-    ParentRow := (Row.Node.Parent as TdxInspectorRowNode).Row;
-    Result := ExtensionManager.FindTagDefinition(GetProfile.Name, ParentRow.Caption, Row.Caption);
+  if FModel <> nil then
+  begin
+    if acxEditorRow.Level = TAGGEDVALUEITEM_LEVEL then
+    begin
+      lcxCategoryRow := acxEditorRow.Parent as TcxCategoryRow;
+      Result := ExtensionManager.FindTagDefinition(GetProfile.Name, lcxCategoryRow.Properties.Caption, acxEditorRow.Properties.Caption);
+    end;
   end;
 end;
 
 function PTagDefinitionSetInspector.GetFocusedTagDefinition: PTagDefinition;
 begin
   Result := nil;
-  if (Inspector.FocusedNode <> nil) then
-    Result := GetTagDefinition((Inspector.FocusedNode as TdxInspectorRowNode).Row);
+  if (Inspector.FocusedRow <> nil) and
+    (Inspector.FocusedRow is TcxEditorRow) then
+  begin
+    Result := GetTagDefinition(TcxEditorRow(Inspector.FocusedRow));
+  end;
 end;
 
 function PTagDefinitionSetInspector.IsDefaultValue(ATagDefinition: PTagDefinition): Boolean;
@@ -298,163 +332,144 @@ procedure PTagDefinitionSetInspector.SetupRows;
       Result := TS.Stereotype.Parent.TagDefinitionSet;
   end;
 
-  procedure SetupTagDefintionSetCategory(ATagDefinitionSet: PTagDefinitionSet);
+  procedure SetupTagDefintionSetCategory(aTagDefinitionSet: PTagDefinitionSet);
   var
     TD: PTagDefinition;
-    C: TdxInspectorRowNode;
-    N: TdxInspectorRowNode;
+    C: TcxCategoryRow;
+    N: TcxEditorRow;
     I, J: Integer;
+    lIndexLiterals: Integer;
+    lcxComboBoxProperties: TcxComboBoxProperties;
+    lcxButtonEditProperties: TcxButtonEditProperties;
   begin
-    C := Inspector.AddEx(TdxInspectorTextRow);
-    C.Row.IsCategory := True;
-    C.Row.Caption := ATagDefinitionSet.Name;
-    for I := 0 to ATagDefinitionSet.TagDefinitionCount - 1 do begin
+    C := Inspector.Add(TcxCategoryRow) as TcxCategoryRow;
+    C.Properties.Caption := ATagDefinitionSet.Name;
+    for I := 0 to aTagDefinitionSet.TagDefinitionCount - 1 do
+    begin
       TD := ATagDefinitionSet.TagDefinitions[I];
+      N := Inspector.AddChild(c, TcxEditorRow) as TcxEditorRow;
       case TD.TagType of
         tkInteger, tkReal:
           begin
-            N := C.AddChildEx(TdxInspectorTextRow);
-            (N.Row as TdxInspectorTextRow).Text := TD.DefaultValue;
-            N.Row.ReadOnly := TD.Lock or FReadOnly;
-            N.Row.ImageIndex := 0;
+            N.Properties.EditPropertiesClass := TcxTextEditProperties;
+            N.Properties.EditProperties.ReadOnly := TD.Lock or FReadOnly;
+            N.Properties.Value := TD.DefaultValue;
+            N.Properties.ImageIndex := 0;
           end;
         tkBoolean:
           begin
-            N := C.AddChildEx(TdxInspectorTextCheckRow);
-            (N.Row as TdxInspectorTextCheckRow).Text := TD.DefaultValue;
-            if not (TD.Lock or FReadOnly) then
-              (N.Row as TdxInspectorTextCheckRow).OnToggleClick := CheckRowToggleClick;
-            N.Row.ReadOnly := TD.Lock or FReadOnly;
-            N.Row.ImageIndex := 0;
+            N.Properties.EditPropertiesClass := TcxCheckBoxProperties;
+            N.Properties.EditProperties.ReadOnly := TD.Lock or FReadOnly;
+            N.Properties.ImageIndex := 0;
           end;
         tkString:
           begin
-            N := C.AddChildEx(TdxInspectorTextPopupRow);
-            with (N.Row as TdxInspectorTextPopupRow) do begin
-              Text := TD.DefaultValue;
-              PopupControl := TextMemo;
-              PopupFormBorderStyle := pbsDialog;
-              PopupAutoSize := False;
-              OnPopup := PopupRowPopup;
-              if not (TD.Lock or FReadOnly) then
-                OnCloseUp := PopupRowCloseUp;
-              ReadOnly := TD.Lock or FReadOnly;
-              ImageIndex := 0;
-            end;
-            TextMemo.ReadOnly := TD.Lock or FReadOnly;
+            N.Properties.EditPropertiesClass := TcxMemoProperties;
+            N.Properties.EditProperties.ReadOnly := TD.Lock or FReadOnly;
+            N.Properties.ImageIndex := 0;
           end;
         tkEnumeration:
           begin
-            N := C.AddChildEx(TdxInspectorTextPickRow);
-            with N.Row as TdxInspectorTextPickRow do begin
-              for J := 0 to TD.LiteralCount - 1 do
-                Items.Add(TD.Literals[J]);
-              Text := TD.DefaultValue;
-              DropDownListStyle := True;
-              ReadOnly := True;
-              if not (TD.Lock or FReadOnly) then
-                OnCloseUp := PickRowCloseUp;
-              ImageIndex := 2;
+            N.Properties.EditPropertiesClass := TcxComboBoxProperties;
+            N.Properties.EditProperties.ReadOnly := TD.Lock or FReadOnly;
+            N.Properties.ImageIndex := 2;
+            lcxComboBoxProperties := N.Properties.EditProperties as TcxComboBoxProperties;
+            for lIndexLiterals := 0 to TD.LiteralCount - 1 do
+            begin
+              lcxComboBoxProperties.Items.Add(TD.Literals[lIndexLiterals]);
             end;
+            lcxComboBoxProperties.DropDownListStyle := lsFixedList;
           end;
         tkReference:
           begin
-            N := C.AddChildEx(TdxInspectorTextButtonRow);
-            N.Row.ReadOnly := True;
-            N.Row.ImageIndex := 0;
+            N.Properties.EditPropertiesClass := TcxButtonEditProperties;
+            N.Properties.EditProperties.ReadOnly := TD.Lock or FReadOnly;
+            N.Properties.ImageIndex := 0;
+
+            lcxButtonEditProperties := N.Properties.EditProperties as TcxButtonEditProperties;
+            lcxButtonEditProperties.ReadOnly := True;
             if not (TD.Lock or FReadOnly) then
-              (N.Row as TdxInspectorTextButtonRow).OnButtonClick := ButtonRowButtonClick;
+            begin
+              lcxButtonEditProperties.OnButtonClick := ButtonRowButtonClick;
+            end;
           end;
         tkCollection:
           begin
-            N := C.AddChildEx(TdxInspectorTextButtonRow);
-            N.Row.ReadOnly := True;
-            N.Row.ImageIndex := 3;
-            (N.Row as TdxInspectorTextButtonRow).OnButtonClick := ButtonRowButtonClick;
+            N.Properties.EditPropertiesClass := TcxButtonEditProperties;
+            N.Properties.ImageIndex := 3;
+
+            lcxButtonEditProperties := N.Properties.EditProperties as TcxButtonEditProperties;
+            lcxButtonEditProperties.ReadOnly := True;
+
+            if not (TD.Lock or FReadOnly) then
+            begin
+              lcxButtonEditProperties.OnButtonClick := ButtonRowButtonClick;
+            end;
           end;
       end;
-      N.Row.Caption := TD.Name;
-      N.Row.Hint := TagTypeToStr(TD.TagType);
+      N.Properties.Value := TD.DefaultValue;
+      N.Properties.Caption := TD.Name;
+      N.Properties.Hint := TagTypeToStr(TD.TagType);
       if TD.Lock then
-        N.Row.ImageIndex := 1;
+      begin
+        N.Properties.ImageIndex := 1;
+      end;
     end;
     C.Expand(True);
     if GetParentTagDefinitionSet(ATagDefinitionSet) <> nil then
+    begin
       SetupTagDefintionSetCategory(GetParentTagDefinitionSet(ATagDefinitionSet));
+    end;
   end;
 
 begin
   Inspector.BeginUpdate;
   ClearRows;
   if (FModel <> nil) and (FTagDefinitionSet <> nil) then
+  begin
     SetupTagDefintionSetCategory(FTagDefinitionSet);
+  end;
   Inspector.EndUpdate;
 end;
 
-procedure PTagDefinitionSetInspector.SetTextPopupRowText(Row: TdxInspectorTextPopupRow);
-var
-  T: PTagDefinition;
-  V: string;
-begin
-  if Row <> nil then begin
-    T := GetTagDefinition(Row);
-    V := FModel.QueryDataTaggedValue(Profile.Name, T.TagDefinitionSet.Name, T.Name);
-    if Pos(#10, V) > 0 then begin
-      Row.Text := TXT_TAGGEDVALUE_TEXT;
-      Row.ReadOnly := True;
-    end
-    else begin
-      Row.Text := V;
-      Row.ReadOnly := T.Lock or FReadOnly;
-    end;
-  end;
-end;
-
-procedure PTagDefinitionSetInspector.ChangeDataTaggedValue(Row: TdxInspectorRow; AsDefault: Boolean = False);
+procedure PTagDefinitionSetInspector.ChangeDataTaggedValue(aRowProperties: TcxCustomEditorRowProperties; AsDefault: Boolean = False);
 var
   T: PTagDefinition;
   Value: string;
 begin
-  T := GetTagDefinition(Row);
-  case T.TagType of
-    tkInteger, tkReal:
-      Value := (Row as TdxInspectorTextRow).Text;
-    tkBoolean:
-      Value := (Row as TdxInspectorTextCheckRow).Text;
-    tkString:
-      Value := (Row as TdxInspectorTextPopupRow).Text;
-    tkEnumeration:
-      Value := (Row as TdxInspectorTextPickRow).Text;
-  end;
+  T := GetTagDefinition(aRowProperties.Row as TcxEditorRow);
+  Value := ARowProperties.Values[0];
   if Assigned(FOnDataTaggedValueChange) then
+  begin
     FOnDataTaggedValueChange(Self, FModel, Profile.Name, T.TagDefinitionSet.Name, T.Name, Value);
+  end;
 end;
 
-procedure PTagDefinitionSetInspector.ChangeDataTaggedValue(Row: TdxInspectorRow; Value: string; AsDefault: Boolean = False);
+procedure PTagDefinitionSetInspector.ChangeDataTaggedValue(aRowProperties: TcxCustomEditorRowProperties; Value: string; AsDefault: Boolean = False);
 var
   T: PTagDefinition;
 begin
-  T := GetTagDefinition(Row);
+  T := GetTagDefinition(aRowProperties.Row as TcxEditorRow);
   if IsDataTagType(T.TagType) and Assigned(FOnDataTaggedValueChange) then
     FOnDataTaggedValueChange(Self, FModel, Profile.Name, T.TagDefinitionSet.Name, T.Name, Value);
 end;
 
-procedure PTagDefinitionSetInspector.ChangeReferenceTaggedValue(Row: TdxInspectorRow; Value: PExtensibleModel; AsDefault: Boolean = False);
+procedure PTagDefinitionSetInspector.ChangeReferenceTaggedValue(Row: TcxCustomRow; Value: PExtensibleModel; AsDefault: Boolean = False);
 var
   T: PTagDefinition;
 begin
-  T := GetTagDefinition(Row);
+  T := GetTagDefinition(Row as TcxEditorRow);
   if (T.TagType = tkReference) and Assigned(FOnReferenceTaggedValueChange) then
     FOnReferenceTaggedValueChange(Self, FModel, Profile.Name, T.TagDefinitionSet.Name, T.Name, Value);
 end;
 
-procedure PTagDefinitionSetInspector.SetTaggedValueAsDefault(Row: TdxInspectorRow);
+procedure PTagDefinitionSetInspector.SetTaggedValueAsDefault(Row: TcxCustomRow);
 var
   T: PTagDefinition;
 begin
-  T := GetTagDefinition(Row);
+  T := GetTagDefinition(Row as TcxEditorRow);
   if (T <> nil) and Assigned(FOnSetTaggedValueAsDefault) then
-    FOnSetTaggedValueAsDefault(Self,FModel, Profile.Name, T.TagDefinitionSet.Name, T.Name);
+    FOnSetTaggedValueAsDefault(Self, FModel, Profile.Name, T.TagDefinitionSet.Name, T.Name);
 end;
 
 procedure PTagDefinitionSetInspector.HandleAddCollectionTaggedValue(Sender: TObject; AModel: PExtensibleModel; AProfileName: string;
@@ -478,30 +493,69 @@ begin
     FOnChangeCollectionTaggedValueOrder(Self, AModel, AProfileName, ATagDefinitionSetName, AName, Value, NewIdx);
 end;
 
-procedure PTagDefinitionSetInspector.InspectorEdited(Sender: TObject; Node: TdxInspectorNode; Row: TdxInspectorRow);
+procedure PTagDefinitionSetInspector.InspectorItemChanged(Sender: TObject;
+  AOldRow: TcxCustomRow; AOldCellIndex: Integer);
 begin
-  ChangeDataTaggedValue(Row);
+  if Assigned(FOnInspectorChange) then
+    FOnInspectorChange(Self);
 end;
 
-procedure PTagDefinitionSetInspector.PickRowCloseUp(Sender: TObject; var Value: Variant; var Accept: Boolean);
+procedure PTagDefinitionSetInspector.InspectorStylesGetContentStyle(
+  Sender: TObject; AEditProp: TcxCustomEditorRowProperties; AFocused: Boolean;
+  ARecordIndex: Integer; var AStyle: TcxStyle);
+var
+  T: PTagDefinition;
+  lcxEditorRow: TcxEditorRow;
 begin
-  if (Sender as TdxInspectorTextPickRow).Text <> Value then begin
-    (Sender as TdxInspectorTextPickRow).Text := Value;
-    ChangeDataTaggedValue(Sender as TdxInspectorRow);
+  if AEditProp.Row is TcxEditorRow then
+  begin
+    T := GetTagDefinition(AEditProp.Row as TcxEditorRow);
+    if Assigned(T) and IsDefaultValue(T) then
+    begin
+      AStyle := DefaultValuecxStyle;
+    end else
+    begin
+      if AFocused then
+      begin
+        AStyle := HighlightcxStyle;
+      end else
+      begin
+        AStyle := nil;
+      end;
+    end;
   end;
 end;
 
-procedure PTagDefinitionSetInspector.CheckRowToggleClick(Sender: TObject; const Text: string; State: TdxCheckBoxState);
+procedure PTagDefinitionSetInspector.InspectorStylesGetHeaderStyle(
+  Sender: TObject; ARow: TcxCustomRow; var AStyle: TcxStyle);
+var
+  T: PTagDefinition;
+  lcxEditorRow: TcxEditorRow;  
 begin
-  (Sender as TdxInspectorTextCheckRow).Text := Text;
-  ChangeDataTaggedValue(Sender as TdxInspectorRow);
+  if ARow is TcxEditorRow then
+  begin
+    T := GetTagDefinition(ARow as TcxEditorRow);
+    if Assigned(T) and IsDefaultValue(T) then
+    begin
+      AStyle := DefaultValuecxStyle;
+    end else
+    begin
+      if ARow.Focused then
+      begin
+        AStyle := HighlightcxStyle;
+      end else
+      begin
+        AStyle := nil;
+      end;
+    end;
+  end;
 end;
 
 procedure PTagDefinitionSetInspector.ButtonRowButtonClick(Sender: TObject; AbsoluteIndex: Integer);
 var
   T: PTagDefinition;
 begin
-  T := GetTagDefinition(Sender as TdxInspectorRow);
+  T := GetTagDefinition(Sender as TcxEditorRow);
   case T.TagType of
     tkReference:
       begin
@@ -511,124 +565,59 @@ begin
         else
           ElementListForm.AddListElementsByClass(T.ReferenceType, True);
         ElementListForm.AllowNull := True;
-        if ElementListForm.Execute(TXT_TAGGED_VALUE) then begin
-          ChangeReferenceTaggedValue(Sender as TdxInspectorRow, ElementListForm.SelectedModel as PExtensibleModel);
+        if ElementListForm.Execute(TXT_TAGGED_VALUE) then
+        begin
+          ChangeReferenceTaggedValue(Sender as TcxCustomRow, ElementListForm.SelectedModel as PExtensibleModel);
         end;
       end;
     tkCollection:
-      TaggedValueCollectionEditorForm.ShowTaggedValueCollection(FModel, GetTagDefinition(Sender as TdxInspectorRow));
+      TaggedValueCollectionEditorForm.ShowTaggedValueCollection(FModel, GetTagDefinition(Sender as TcxEditorRow));
   end;
 end;
 
-procedure PTagDefinitionSetInspector.PopupRowPopup(Sender: TObject; const EditText: string);
-var
-  T: PTagDefinition;
-begin
-  T := GetTagDefinition(Sender as TdxInspectorRow);
-  TextMemo.Lines.Text := FModel.QueryDataTaggedValue(Profile.Name, T.TagDefinitionSet.Name, T.Name);
-  SetWindowPos((Inspector.InplaceEditor as TdxInspectorPopupEdit).PopupForm.Handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE or
-     SWP_NOSIZE or SWP_NOACTIVATE);
-end;
-
-procedure PTagDefinitionSetInspector.PopupRowCloseup(Sender: TObject; var Text: string; var Accept: Boolean);
-begin
-  if (Sender as TdxInspectorTextPopupRow).Text <> TextMemo.Text then
-    ChangeDataTaggedValue(Sender as TdxInspectorRow, TextMemo.Text);
-  Inspector.SetFocus;
-end;
-
-procedure PTagDefinitionSetInspector.InspectorChangeNode(Sender: TObject; OldNode, Node: TdxInspectorNode);
+procedure PTagDefinitionSetInspector.InspectorChangeNode(Sender: TObject; OldNode, Node: TcxCustomEditorRowProperties);
 begin
   if Assigned(FOnInspectorChange) then
     FOnInspectorChange(Self);
 end;
 
-procedure PTagDefinitionSetInspector.InspectorDrawCaption(
-  Sender: TdxInspectorRow; ACanvas: TCanvas; ARect: TRect;
-  var AText: String; AFont: TFont; var AColor: TColor; var ADone: Boolean);
-var
-  T: PTagDefinition;
+procedure PTagDefinitionSetInspector.InspectorEdited(Sender: TObject;
+  ARowProperties: TcxCustomEditorRowProperties);
 begin
-  if Sender.IsCategory then Exit;
-  T := GetTagDefinition(Sender);
-  if Sender.Node.Focused then begin
-    if IsDefaultValue(T) then
-      AFont.Color := clGrayText
-    else
-      AFont.Color := clHighlightText;
-  end
-  else begin
-    if IsDefaultValue(T) then
-      AFont.Color := clGrayText
-    else
-      AFont.Color := clWindowText;
-  end;
-end;
-
-procedure PTagDefinitionSetInspector.InspectorDrawValue(
-  Sender: TdxInspectorRow; ACanvas: TCanvas; ARect: TRect;
-  var AText: String; AFont: TFont; var AColor: TColor; var ADone: Boolean);
-var
-  T: PTagDefinition;
-  V: string;
-begin
-  if Sender.IsCategory then Exit;
-  T := GetTagDefinition(Sender);
-  if Sender.Node.Focused and Inspector.Focused then begin
-    if IsDefaultValue(T) then
-      AFont.Color := clGrayText
-    else
-      AFont.Color := clHighlightText;
-  end
-  else begin
-    if IsDefaultValue(T) then
-      AFont.Color := clGrayText
-    else
-      AFont.Color := clWindowText;
-  end;
-  if Sender is TdxInspectorTextPopupRow then begin
-    V := FModel.QueryDataTaggedValue(Profile.Name, T.TagDefinitionSet.Name, T.Name);
-    if Pos(#10, V) > 0 then
-      AText := TXT_TAGGEDVALUE_TEXT
-    else
-      AText := V;
-  end;
+  ChangeDataTaggedValue(ARowProperties);
 end;
 
 procedure PTagDefinitionSetInspector.UpdateTaggedValues;
 var
   T: PTagDefinition;
   TV: PTaggedValue;
-  CateRow, Row: TdxInspectorRow;
   I, J: Integer;
+  lIndexRows: Integer;
+  lcxCustomRow: TcxCustomRow;
+  lcxEditorRow: TcxEditorRow;
+  lcxCategoryRow: TcxCategoryRow;
 begin
   if FModel <> nil then
   begin
-    for I := 0 to Inspector.Count - 1 do begin
-      CateRow := (Inspector.Items[I] as TdxInspectorRowNode).Row;
-      for J := 0 to CateRow.Node.Count - 1 do begin
-        Row := (CateRow.Node.Items[J] as TdxInspectorRowNode).Row;
-        // Assertion
-        Assert(not Row.IsCategory);
-        // Assertion
-        T := GetTagDefinition(Row);
+    for lIndexRows := 0 to Inspector.Rows.Count - 1 do
+    begin
+      lcxCustomRow := Inspector.Rows[lIndexRows];
+      if lcxCustomRow is TcxEditorRow then
+      begin
+        lcxEditorRow := lcxCustomRow as TcxEditorRow;
+        T := GetTagDefinition(lcxEditorRow);
         TV := FModel.FindTaggedValue(Profile.Name, T.TagDefinitionSet.Name, T.Name);
         case T.TagType of
-          tkInteger, tkReal:
-            (Row as TdxInspectorTextRow).Text := FModel.QueryDataTaggedValue(Profile.Name, T.TagDefinitionSet.Name, T.Name);
-          tkBoolean:
-            (Row as TdxInspectorTextCheckRow).Text := FModel.QueryDataTaggedValue(Profile.Name, T.TagDefinitionSet.Name, T.Name);
-          tkEnumeration:
-            (Row as TdxInspectorTextPickRow).Text := FModel.QueryDataTaggedValue(Profile.Name, T.TagDefinitionSet.Name, T.Name);
-          tkString:
-            SetTextPopupRowText(Row as TdxInspectorTextPopupRow);
+          tkInteger, tkReal, tkBoolean, tkEnumeration, tkString:
+            lcxEditorRow.Properties.Value :=
+              FModel.QueryDataTaggedValue(Profile.Name, T.TagDefinitionSet.Name, T.Name);
           tkReference:
             if (TV <> nil) and (TV.ReferenceValueCount > 0) then
-              (Row as TdxInspectorTextButtonRow).Text := TV.ReferenceValues[0].Name
+              lcxEditorRow.Properties.Value := TV.ReferenceValues[0].Name
             else
-              (Row as TdxInspectorTextButtonRow).Text := '';
+              lcxEditorRow.Properties.Value := '';
           tkCollection:
-            (Row as TdxInspectorTextButtonRow).Text := TXT_TAGGEDVALUE_COLLECTION;
+            lcxEditorRow.Properties.Value := TXT_TAGGEDVALUE_COLLECTION;
         end;
       end;
     end;
@@ -648,7 +637,7 @@ end;
 
 procedure PTagDefinitionSetInspector.SetFocusedTaggedValueAsDefault;
 begin
-  SetTaggedValueAsDefault((Inspector.FocusedNode as TdxInspectorRowNode).Row);
+  SetTaggedValueAsDefault(Inspector.FocusedRow);
 end;
 
 // PTagDefinitionSetInspector
@@ -712,14 +701,17 @@ begin
     if AProfile.TagDefinitionSets[I].CanApplyTo(FModel.MetaClass.Name) then
       TagDefinitionSetComboBox.Items.AddObject(AProfile.TagDefinitionSets[I].Name,
         AProfile.TagDefinitionSets[I]);
-  if TagDefinitionSetComboBox.Items.Count > 0 then begin
+  if TagDefinitionSetComboBox.Items.Count > 0 then
+  begin
     Idx := TagDefinitionSetComboBox.Items.IndexOf(DefaultTagDefinitionSetName);
-    if (DefaultTagDefinitionSetName <> '') and (Idx <> -1) then begin
+    if (DefaultTagDefinitionSetName <> '') and (Idx <> -1) then
+    begin
       TagDefinitionSetComboBox.ItemIndex := Idx;
       TagDefinitionSetInspector.TagDefinitionSet := TagDefinitionSetComboBox.Items.Objects[Idx] as PTagDefinitionSet;
       TagDefinitionSetInspector.Setup;
     end
-    else begin
+    else
+    begin
       TagDefinitionSetComboBox.ItemIndex := 0;
       TagDefinitionSetInspector.TagDefinitionSet := TagDefinitionSetComboBox.Items.Objects[0] as PTagDefinitionSet;
       TagDefinitionSetInspector.Setup;
@@ -735,7 +727,8 @@ procedure TTaggedValueEditorForm.SetupTaggedTabControl;
   begin
     Result := False;
     for I := 0 to AProfile.TagDefinitionSetCount - 1 do
-      if AProfile.TagDefinitionSets[I].CanApplyTo(FModel.MetaClass.Name) then begin
+      if AProfile.TagDefinitionSets[I].CanApplyTo(FModel.MetaClass.Name) then
+      begin
         Result := True;
         Exit;
       end;
@@ -750,22 +743,27 @@ begin
   TagDefinitionSetComboBox.Items.Clear;
   TagDefinitionSetInspector.ClearRows;
 
-  if FModel <> nil then begin
+  if FModel <> nil then
+  begin
     // append tab sheets for include profiles
-    for I := 0 to ExtensionManager.IncludedProfileCount - 1 do begin
+    for I := 0 to ExtensionManager.IncludedProfileCount - 1 do
+    begin
       if ExistsAvailableTagDefinitionSet(ExtensionManager.IncludedProfiles[I]) then
         TaggedValueTabControl.Tabs.AddObject(ExtensionManager.IncludedProfiles[I].Name,
           ExtensionManager.IncludedProfiles[I]);
     end;
     // set active tab sheet
-    if (TaggedValueTabControl.Tabs.Count > 0){ and (FModel.StereotypeProfile <> '') }then begin
+    if (TaggedValueTabControl.Tabs.Count > 0) { and (FModel.StereotypeProfile <> '') } then
+    begin
       Idx := TaggedValueTabControl.Tabs.IndexOf(FModel.StereotypeProfile);
       S := ExtensionManager.FindStereotype(FModel.StereotypeProfile, FModel.StereotypeName, FModel.MetaClass.Name);
-      if (Idx <> -1) and (S <> nil) and (S.TagDefinitionSet <> nil) then begin
+      if (Idx <> -1) and (S <> nil) and (S.TagDefinitionSet <> nil) then
+      begin
         TaggedValueTabControl.TabIndex := Idx;
         SetupTaggedValueTab(TaggedValueTabControl.Tabs.Objects[Idx] as PProfile, S.TagDefinitionSet.Name);
       end
-      else begin
+      else
+      begin
         TaggedValueTabControl.TabIndex := 0;
         SetupTaggedValueTab(TaggedValueTabControl.Tabs.Objects[0] as PProfile);
       end;
@@ -865,6 +863,7 @@ begin
 end;
 
 // event handlers
+
 procedure TTaggedValueEditorForm.TaggedValueTabControlChange(Sender: TObject);
 begin
   SetupTaggedValueTab(CurrentProfile);
@@ -897,3 +896,4 @@ begin
 end;
 
 end.
+

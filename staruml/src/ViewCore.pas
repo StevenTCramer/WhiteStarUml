@@ -1330,14 +1330,14 @@ procedure PLabelView.DrawObject(Canvas: PCanvas);
   begin
     Args := [];
     case FHorzAlignment of
-      haLeft:   Args := Args + [taAlignLeft];
-      haCenter: Args := Args + [taAlignCenter];
-      haRight:  Args := Args + [taAlignRight];
+      haLeft:   Args := Args + [GraphicClasses.taAlignLeft];
+      haCenter: Args := Args + [GraphicClasses.taAlignCenter];
+      haRight:  Args := Args + [GraphicClasses.taAlignRight];
     end;
     case FVertAlignment of
-      vaTop:    Args := Args + [taAlignTop];
-      vaMiddle: Args := Args + [taAlignMiddle];
-      vaBottom: Args := Args + [taAlignBottom];
+      vaTop:    Args := Args + [GraphicClasses.taAlignTop];
+      vaMiddle: Args := Args + [GraphicClasses.taAlignMiddle];
+      vaBottom: Args := Args + [GraphicClasses.taAlignBottom];
     end;
     if FWordWrap then
       Args := Args + [taWordBreak];

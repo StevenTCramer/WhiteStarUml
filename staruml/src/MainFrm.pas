@@ -52,12 +52,13 @@ uses
   DiagramEditors, QuickDialogFrm,
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls,
   Forms, GraphicClasses, Dialogs, ExtCtrls, StdCtrls, ImgList, dxBar,
-  ComCtrls, ToolWin, dxPageControl, Menus, dxBarExtItems, Registry, ExtDlgs,
+  ComCtrls, ToolWin, cxPC, Menus, dxBarExtItems, Registry, ExtDlgs,
   AreaTitleBar, InspectorFrm, WorkingAreaFrm,
   FlatPanel, CompactFontDlg, SaveDialogEx, DiagramExplorerFrame,
   dxDockControl, dxDockPanel, ModelExplorerFrame, VirtualTrees,
   MessageFrame, OutputFrame, AttachEdt,
-  DocuEdt, PropEdt, XPMan, dxNavBarCollns, dxNavBarBase, dxNavBar;
+  DocuEdt, PropEdt, XPMan, dxNavBarCollns, dxNavBarBase, dxNavBar, cxClasses,
+  cxControls;
 
 const
   FILE_EXT_BMP = '.BMP';
@@ -306,7 +307,6 @@ type
     dxTabContainerDockSite1: TdxTabContainerDockSite;
     ModelExplorerDockPanel: TdxDockPanel;
     DiagramExplorerDockPanel: TdxDockPanel;
-    ModelExplorer: TModelExplorerPanel;
     DiagramExplorer: TDiagramExplorerPanel;
     PropertiesDockPanel: TdxDockPanel;
     WorkingAreaDockPanel: TdxDockPanel;
@@ -448,6 +448,7 @@ type
     ModelAddInteractionOperand: TdxBarButton;
     ModelAddFrame: TdxBarButton;
     DocumentStateImageList: TImageList;
+    ModelExplorer: TModelExplorerPanel;
     // Event Handlers (On Main Form Menu Item Clicked)
     procedure FileMenuClick(Sender: TObject);
     procedure EditMenuClick(Sender: TObject);

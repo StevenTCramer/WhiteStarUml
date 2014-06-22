@@ -66,9 +66,28 @@ unit InspectorFrm;
 interface
 
 uses
-  BasicClasses, Core, ExtCore, UMLModels, PropEdt, UMLProps, ElemSelFrm,
-  Classes, Forms, Controls, dxPageControl, ImgList, dxBar, ExtCtrls, Registry, Windows,
-  StdCtrls, TB2Item, TB2Dock, TB2Toolbar, TBSkinPlus, AreaTitleBar,
+  BasicClasses,
+  Core,
+  ExtCore,
+  UMLModels,
+  PropEdt,
+  UMLProps,
+  ElemSelFrm,
+  Classes,
+  Forms,
+  Controls,
+  cxPC,
+  ImgList,
+  dxBar,
+  ExtCtrls,
+  Registry,
+  Windows,
+  StdCtrls,
+//  TB2Item,
+//  TB2Dock,
+//  TB2Toolbar,
+//  TBSkinPlus,
+  AreaTitleBar,
   FlatPanel;
 
 type
@@ -161,8 +180,15 @@ const
 implementation
 
 uses
-  MainFrm, ColEdtFrm, ElemLstFrm, NLS_StarUML, Graphics,
-  SysUtils, Dialogs, dxInspct, dxInspRw;
+  MainFrm,
+  ColEdtFrm,
+  ElemLstFrm,
+  NLS_StarUML,
+  Graphics,
+  SysUtils,
+  Dialogs;
+//  dxInspct,
+//  dxInspRw;
 
 {$R *.dfm}
 
@@ -177,6 +203,7 @@ end;
 
 destructor TInspectorFrame.Destroy;
 begin
+  UMLPropertyAdaptor.Free;
   inherited;
 end;
 
@@ -322,21 +349,25 @@ procedure TInspectorFrame.SetInspectorStatus(Value: PInspectorStatusKind);
 begin
   FInspectorStatus := Value;
   case FInspectorStatus of
-    isNothingSelected: begin
-      PropertyEditor.Enabled := False;
-    end;
-    isSingleSelected: begin
-      PropertyEditor.Enabled := True;
-    end;
-    isMultiSelected:  begin
-      PropertyEditor.Enabled := True;
-    end;
+    isNothingSelected:
+      begin
+        PropertyEditor.Enabled := False;
+      end;
+    isSingleSelected:
+      begin
+        PropertyEditor.Enabled := True;
+      end;
+    isMultiSelected:
+      begin
+        PropertyEditor.Enabled := True;
+      end;
   end;
 end;
 
 procedure TInspectorFrame.SetReadOnly(Value: Boolean);
 begin
-  if FReadOnly <> Value then begin
+  if FReadOnly <> Value then
+  begin
     FReadOnly := Value;
     PropertyEditor.ReadOnly := FReadOnly;
   end;
@@ -358,7 +389,8 @@ begin
     D := InspectingElements[0].GetContainingDocument;
     if D <> nil then ReadOnly := D.ReadOnly;
   end
-  else begin
+  else
+  begin
     InspectorStatus := isMultiSelected;
     ReadOnly := False;
     for I := 0 to InspectingElementCount - 1 do
@@ -400,8 +432,8 @@ begin
         M := InspectingElements[0] as PModel;
         SelectionText.Caption := ' (' + Copy(M.ClassName, 2, Length(M.ClassName) - 1) + ') ' + M.Name;
       end;
-    else
-      SelectionText.Caption := ' ' + TXT_ELEM_SEL_MULTIPLE;
+  else
+    SelectionText.Caption := ' ' + TXT_ELEM_SEL_MULTIPLE;
   end;
   // if want to wordwrap model name with TStaticText, use the following function.
   // AutoSizeSelectionText;
@@ -434,11 +466,13 @@ end;
 procedure TInspectorFrame.AddInspectingElement(Elem: PModel);
 begin
   PropertyEditor.AddInspectingElement(Elem);
-  if PropertyEditor.InspectingElementCount = 1 then begin
+  if PropertyEditor.InspectingElementCount = 1 then
+  begin
     // AttachmentEditor.TargetModel := Elem;
     // DocumentationEditor.InspectingElement := Elem;
   end
-  else begin
+  else
+  begin
     // AttachmentEditor.TargetModel := nil;
     // DocumentationEditor.InspectingElement := nil;
   end;

@@ -48,7 +48,7 @@ unit RoseToStarUML;
 interface
 
 uses
-  PetalDoc, PetalElements, StarUML_TLB,
+  PetalDoc, PetalElements, StarUMLProject_TLB,
   SysUtils;
 
 type
@@ -285,8 +285,10 @@ type
 implementation
 
 uses
-  Symbols, NLS_RoseAddIn, 
-  Types, ComObj;
+  Symbols,
+  NLS_RoseAddIn, 
+  Types,
+  ComObj;
 
 ////////////////////////////////////////////////////////////////////////////////
 // RoseStarUMLAdapter

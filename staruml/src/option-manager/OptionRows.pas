@@ -49,7 +49,14 @@ interface
 
 uses
   OptionNodes,
-  Classes, Controls, Types, Graphics, StdCtrls, dxInspct, dxInspRw, dxExEdtr;
+  Classes,
+  Controls,
+  Types,
+  Graphics,
+  StdCtrls,
+  cxVGrid,
+  cxDropDownEdit,
+  cxGraphics;
 
 const
   COLOR_CUSTOM = 'Custom';
@@ -65,22 +72,17 @@ type
   POptionItemRow = class
   protected
     InspectorExited: Boolean;
-    FInspector: TdxInspector;
+    FInspector: TcxVerticalGrid;
     FOptionItem: POptionItem;
-    FInspectorRow: TdxInspectorRow;
-    FParentRow: TdxInspectorRow;
+    FInspectorRow: TcxEditorRow;
+    FParentRow: TcxCategoryRow;
     FOnOptionItemRowChange: POptionItemRowChangeEvent;
-    // override this procedure to create TdxInspectorRow and define event handlers of TdxInspectorRow
-    procedure CreateInspectorRow; virtual; abstract;
-    procedure DrawInspector; virtual; abstract;
+    // override this procedure to create TcxEditorRow and define event handlers of TcxEditorRow
+    procedure CreateInspectorRow; virtual;
   public
-    constructor Create(AInspector: TdxInspector; AOptionItem: POptionItem; ParentRow: TdxInspectorRow);
-    procedure Refresh;
-    procedure HandleKeyPress(var Key: Char); virtual;
+    constructor Create(AInspector: TcxVerticalGrid; AOptionItem: POptionItem; ParentRow: TcxCategoryRow);
     procedure HandleValueChange; virtual;
-    procedure HandleDrawCaption(Sender: TdxInspectorRow; ACanvas: TCanvas; ARect: TRect;
-      var AText: string; AFont: TFont; var AColor: TColor; var ADone: Boolean);
-    property InspectorRow: TdxInspectorRow read FInspectorRow;
+    property InspectorRow: TcxEditorRow read FInspectorRow;
     property OptionItem: POptionItem read FOptionItem;
     property OnOptionItemRowChange: POptionItemRowChangeEvent read FOnOptionItemRowChange write FOnOptionItemRowChange;
   end;
@@ -89,158 +91,116 @@ type
   PIntegerOptionItemRow = class(POptionItemRow)
   protected
     procedure CreateInspectorRow; override;
-    procedure DrawInspector; override;
   public
-    procedure HandleKeyPress(var Key: Char); override;
-    procedure HandleValueChange; override;
   end;
 
   // PRealOptionItemRow
   PRealOptionItemRow = class(POptionItemRow)
   protected
     procedure CreateInspectorRow; override;
-    procedure DrawInspector; override;
-  public
-    procedure HandleKeyPress(var Key: Char); override;
-    procedure HandleValueChange; override;
   end;
 
   // PStringOptionItemRow
   PStringOptionItemRow = class(POptionItemRow)
   protected
     procedure CreateInspectorRow; override;
-    procedure DrawInspector; override;
-  public
-    procedure HandleValueChange; override;
   end;
 
   // PBooleanOptionItemRow
   PBooleanOptionItemRow = class(POptionItemRow)
-  private
-    procedure RowToggleClick(Sender: TObject; const Text: string; State: TdxCheckBoxState);
   protected
     procedure CreateInspectorRow; override;
-    procedure DrawInspector; override;
   end;
 
   // PTextOptionItemRow
   PTextOptionItemRow = class(POptionItemRow)
-  private
-    TextMemo: TMemo;
   protected
     procedure CreateInspectorRow; override;
-    procedure DrawInspector; override;
-    procedure RowPopup(Sender: TObject; const EditText: string);
-    procedure RowCloseUp(Sender: TObject; var Text: string; var Accept: Boolean);
-  public
-    destructor Destroy; override;
   end;
 
   // PEnumerationOptionItemRow
   PEnumerationOptionItemRow = class(POptionItemRow)
-  private
-    procedure RowCloseUp(Sender: TObject; var Value: Variant; var Accept: Boolean);
   protected
     procedure CreateInspectorRow; override;
-    procedure DrawInspector; override;
   end;
 
   // PFontNameOptionItemRow
   PFontNameOptionItemRow = class(POptionItemRow)
-  private
-    procedure RowCloseUp(Sender: TObject; var Value: Variant; var Accept: Boolean);
   protected
     procedure CreateInspectorRow; override;
-    procedure DrawInspector; override;
   end;
 
   // PFileNameOptionItemRow
   PFileNameOptionItemRow = class(POptionItemRow)
-  private
-    procedure RowButtonClick(Sender: TObject; AbsoluteIndex: Integer);
   protected
     procedure CreateInspectorRow; override;
-    procedure DrawInspector; override;
-  public
-    procedure HandleValueChange; override;
   end;
 
   // PPathNameOptionItemRow
   PPathNameOptionItemRow = class(POptionItemRow)
-  private
-    procedure RowButtonClick(Sender: TObject; AbsoluteIndex: Integer);
   protected
     procedure CreateInspectorRow; override;
-    procedure DrawInspector; override;
-  public    
-    procedure HandleValueChange; override;
   end;
 
   // PColorOptionItemRow
   PColorOptionItemRow = class(POptionItemRow)
   private
-    ColorImages: TImageList;
-    function GetColorIndex(ColorStr: string): Integer;
-    procedure AddColor(ColorStr: string);
-    procedure RowCloseUp(Sender: TObject; var Value: string; var Accept: Boolean);
   protected
     procedure CreateInspectorRow; override;
-    procedure DrawInspector; override;
   public
-    destructor Destroy; override;
+    procedure HandleValueChange; override;
   end;
 
   // PRangeOptionItemRow
   PRangeOptionItemRow = class(POptionItemRow)
   protected
     procedure CreateInspectorRow; override;
-    procedure DrawInspector; override;
-  public
-    procedure HandleValueChange; override;
   end;
 
 implementation
 
 uses
-  OptionMgrAux, PVariants, NLS_OPTMGR,
-  Forms, Dialogs, SysUtils, dxCntner;
+  OptionMgrAux,
+  PVariants,
+  NLS_OPTMGR,
+  Forms,
+  Dialogs,
+  SysUtils,
+  cxTextEdit,
+  cxCheckBox,
+  cxMemo,
+  cxButtonEdit,
+  cxColorComboBox,
+  cxSpinEdit,
+  cxMaskEdit,
+  cxImageComboBox,
+  cxFontNameComboBox,
+  cxShellComboBox;
 
 ////////////////////////////////////////////////////////////////////////////////
 // POptionItemRow
 
-constructor POptionItemRow.Create(AInspector: TdxInspector; AOptionItem: POptionItem; ParentRow: TdxInspectorRow);
+constructor POptionItemRow.Create(AInspector: TcxVerticalGrid; AOptionItem: POptionItem; ParentRow: TcxCategoryRow);
 begin
   FInspector := AInspector;
   FOptionItem := AOptionItem;
   FParentRow := ParentRow;
   CreateInspectorRow;
-  FInspectorRow.OnDrawCaption := HandleDrawCaption;
-end;
-
-procedure POptionItemRow.Refresh;
-begin
-  DrawInspector;
-end;
-
-procedure POptionItemRow.HandleKeyPress(var Key: Char);
-begin
-  // not implemented.
-  // override this procedure to handle keypress event in inspector
 end;
 
 procedure POptionItemRow.HandleValueChange;
 begin
-  // not implemented.
   // OnEdited, OnExit and OnChangeNode event handler call this procedure
+  OptionItem.Value := InspectorRow.Properties.Value;
+  if Assigned(FOnOptionItemRowChange) then
+    FOnOptionItemRowChange(Self);
 end;
 
-procedure POptionItemRow.HandleDrawCaption(Sender: TdxInspectorRow; ACanvas: TCanvas; ARect: TRect;
-  var AText: string; AFont: TFont; var AColor: TColor; var ADone: Boolean);
+procedure POptionItemRow.CreateInspectorRow;
 begin
-  if FOptionItem.Changed then
-    AFont.Style := [fsBold]
-  else
-    AFont.Style := [];
+  fInspectorRow := fInspector.AddChild(FParentRow, TcxEditorRow) as TcxEditorRow;
+  fInspectorRow.Properties.Caption := OptionItem.Caption;
+  fInspectorRow.Properties.Value := OptionItem.Value;
 end;
 
 // POptionItemRow
@@ -250,44 +210,14 @@ end;
 // PIntegerOptionItemRow
 
 procedure PIntegerOptionItemRow.CreateInspectorRow;
-begin
-  FInspectorRow := FParentRow.Node.AddChildEx(TdxInspectorTextRow).Row;
-  DrawInspector;
-end;
-
-procedure PIntegerOptionItemRow.DrawInspector;
 var
-  TextRow: TdxInspectorTextRow;
+  lcxMaskEditProperties: TcxMaskEditProperties;
 begin
-  FInspectorRow.Caption := FOptionItem.Caption;
-  TextRow := FInspectorRow as TdxInspectorTextRow;
-  TextRow.Text := FOptionItem.Value;
-end;
-
-procedure PIntegerOptionItemRow.HandleKeyPress(var Key: Char);
-begin
-  if (Key < '0') or (Key > '9') then
-    Key := #0;
-end;
-
-procedure PIntegerOptionItemRow.HandleValueChange;
-var
-  CurText: string;
-begin
-  CurText := (FInspectorRow as TdxInspectorTextRow).Text;
-  try
-    if StrToInt(CurText) <> FOptionItem.Value then begin
-      FOptionItem.Value := StrToInt(CurText);
-      Refresh;
-      if Assigned(FOnOptionItemRowChange) then
-        FOnOptionItemRowChange(Self);
-    end;
-  except
-    on EConvertError do begin
-      POptionManagerMessages.InvalidValue(FOptionItem.Caption);
-      (FInspectorRow as TdxInspectorTextRow).Text := IntToStr(FOptionItem.Value);
-    end;
-  end;
+  inherited;
+  InspectorRow.Properties.EditPropertiesClass := TcxMaskEditProperties;
+  lcxMaskEditProperties := InspectorRow.Properties.EditProperties as TcxMaskEditProperties;
+  lcxMaskEditProperties.MaskKind := emkRegExpr;
+  lcxMaskEditProperties.EditMask := '\d+';
 end;
 
 // PIntegerOptionItemRow
@@ -297,44 +227,24 @@ end;
 // PRealOptionItemRow
 
 procedure PRealOptionItemRow.CreateInspectorRow;
-begin
-  FInspectorRow := FParentRow.Node.AddChildEx(TdxInspectorTextRow).Row;
-  DrawInspector;
-end;
-
-procedure PRealOptionItemRow.DrawInspector;
 var
-  TextRow: TdxInspectorTextRow;
+  lcxMaskEditProperties: TcxMaskEditProperties;
 begin
-  FInspectorRow.Caption := FOptionItem.Caption;
-  TextRow := FInspectorRow as TdxInspectorTextRow;
-  TextRow.Text := FOptionItem.Value;
-end;
-
-procedure PRealOptionItemRow.HandleKeyPress(var Key: Char);
-begin
-  if not (((Key >= '0') and (Key <= '9')) or (Key = '.')) then
-    Key := #0;
-end;
-
-procedure PRealOptionItemRow.HandleValueChange;
-var
-  CurText: string;
-begin
-  CurText := (FInspectorRow as TdxInspectorTextRow).Text;
-  try
-    if StrToFloat(CurText) <> FOptionItem.Value then begin
-      FOptionItem.Value := StrToFloat(CurText);
-      Refresh;
-      if Assigned(FOnOptionItemRowChange) then
-        FOnOptionItemRowChange(Self);
-    end;
-  except
-    on EConvertError do begin
-      POptionManagerMessages.InvalidValue(FOptionItem.Caption);
-      (FInspectorRow as TdxInspectorTextRow).Text := FloatToStr(FOptionItem.Value);
-    end;
+  inherited;
+  InspectorRow.Properties.EditPropertiesClass := TcxMaskEditProperties;
+  lcxMaskEditProperties := InspectorRow.Properties.EditProperties as TcxMaskEditProperties;
+  lcxMaskEditProperties.MaskKind := emkRegExpr;
+  if DecimalSeparator = '.' then
+  begin
+    lcxMaskEditProperties.EditMask := '\d*\.?\d{0,10}'; //Allows commas as DecimalSeparator doesn't require a DecimalSeparator
+  end
+  else if DecimalSeparator = ',' then
+  begin
+    lcxMaskEditProperties.EditMask := '\d*,?\d{0,10}'; //Allows commas as DecimalSeparator doesn't require a DecimalSeparator
   end;
+
+//  lcxMaskEditProperties.EditMask := '\d*\.\d{0,10}';
+
 end;
 
 // PRealOptionItemRow
@@ -345,30 +255,8 @@ end;
 
 procedure PStringOptionItemRow.CreateInspectorRow;
 begin
-  FInspectorRow := FParentRow.Node.AddChildEx(TdxInspectorTextRow).Row;
-  DrawInspector;
-end;
-
-procedure PStringOptionItemRow.DrawInspector;
-var
-  TextRow: TdxInspectorTextRow;
-begin
-  FInspectorRow.Caption := FOptionItem.Caption;
-  TextRow := FInspectorRow as TdxInspectorTextRow;
-  TextRow.Text := FOptionItem.Value;
-end;
-
-procedure PStringOptionItemRow.HandleValueChange;
-var
-  CurText: string;
-begin
-  CurText := (FInspectorRow as TdxInspectorTextRow).Text;
-  if CurText <> FOptionItem.Value then begin
-    FOptionItem.Value := CurText;
-    Refresh;
-    if Assigned(FOnOptionItemRowChange) then
-      FOnOptionItemRowChange(Self);
-  end;
+  inherited;
+  InspectorRow.Properties.EditPropertiesClass := TcxTextEditProperties;
 end;
 
 // PStringOptionItemRow
@@ -377,36 +265,10 @@ end;
 ////////////////////////////////////////////////////////////////////////////////
 // PBooleanOptionItemRow
 
-procedure PBooleanOptionItemRow.RowToggleClick(Sender: TObject; const Text: string; State: TdxCheckBoxState);
-begin
-  if State = cbsChecked then
-    FOptionItem.Value := True
-  else if State = cbsUnChecked then
-    FOptionItem.Value := False;
-  Refresh;
-  if Assigned(FOnOptionItemRowChange) then
-    FOnOptionItemRowChange(Self);
-end;
-
 procedure PBooleanOptionItemRow.CreateInspectorRow;
-var
-  CheckRow: TdxInspectorTextCheckRow;
 begin
-  FInspectorRow := FParentRow.Node.AddChildEx(TdxInspectorTextCheckRow).Row;
-  CheckRow := FInspectorRow as TdxInspectorTextCheckRow;
-  CheckRow.ValueChecked := VALUE_TRUE;
-  CheckRow.ValueUnchecked := VALUE_FALSE;
-  DrawInspector;
-end;
-
-procedure PBooleanOptionItemRow.DrawInspector;
-var
-  CheckRow: TdxInspectorTextCheckRow;
-begin
-  FInspectorRow.Caption := FOptionItem.Caption;
-  CheckRow := FInspectorRow as TdxInspectorTextCheckRow;
-  CheckRow.Text := FOptionItem.Value;
-  CheckRow.OnToggleClick := RowToggleClick;
+  inherited;
+  InspectorRow.Properties.EditPropertiesClass := TcxCheckBoxProperties;
 end;
 
 // PBooleanOptionItemRow
@@ -415,55 +277,17 @@ end;
 ////////////////////////////////////////////////////////////////////////////////
 // PTextOptionItemRow
 
-destructor PTextOptionItemRow.Destroy;
-begin
-  TextMemo.Free;
-  inherited;
-end;
-
 procedure PTextOptionItemRow.CreateInspectorRow;
 var
-  PopupRow: TdxInspectorTextPopupRow;
+  lcxMemoProperties: TcxMemoProperties;
 begin
-  FInspectorRow := FParentRow.Node.AddChildEx(TdxInspectorTextPopupRow).Row;
-  TextMemo := TMemo.Create(Application);
-  TextMemo.Width := 300;
-  TextMemo.Height := 200;
-  TextMemo.WantReturns := True;
-  TextMemo.WantTabs := True;
-  TextMemo.Font.Name := 'Tahoma';
-  PopupRow := FInspectorRow as TdxInspectorTextPopupRow;
-  PopupRow.PopupControl := TextMemo;
-  PopupRow.ReadOnly := True;
-  PopupRow.PopupFormCaption := TXT_EDIT_VALUE;
-  PopupRow.OnPopup := RowPopup;
-  PopupRow.OnCloseUp := RowCloseUp;
-  DrawInspector;
-end;
-
-procedure PTextOptionItemRow.DrawInspector;
-var
-  PopupRow: TdxInspectorTextPopupRow;
-begin
-  FInspectorRow.Caption := FOptionItem.Caption;
-  PopupRow := FInspectorRow as TdxInspectorTextPopupRow;
-  if (Pos(#10, FOptionItem.Value) > 0) or (Pos(#13, FOptionItem.Value) > 0) then
-    PopupRow.Text := TXT_TEXT
-  else
-    PopupRow.Text := FOptionItem.Value;
-end;
-
-procedure PTextOptionItemRow.RowPopup(Sender: TObject; const EditText: string);
-begin
-  TextMemo.Lines.Text := FOptionItem.Value;
-end;
-
-procedure PTextOptionItemRow.RowCloseUp(Sender: TObject; var Text: string; var Accept: Boolean);
-begin
-  FOptionItem.Value := TextMemo.Lines.Text;
-  Refresh;
-  if Assigned(FOnOptionItemRowChange) then
-    FOnOptionItemRowChange(Self);
+  inherited;
+  InspectorRow.Properties.EditPropertiesClass := TcxMemoProperties;
+  lcxMemoProperties := InspectorRow.Properties.EditProperties as TcxMemoProperties;
+  lcxMemoProperties.WantReturns := True;
+  lcxMemoProperties.WantTabs := True;
+  lcxMemoProperties.ScrollBars := ssBoth;
+  lcxMemoProperties.VisibleLineCount := 4;
 end;
 
 // PTextOptionItemRow
@@ -472,43 +296,25 @@ end;
 ////////////////////////////////////////////////////////////////////////////////
 // PEnumerationOptionItemRow
 
-procedure PEnumerationOptionItemRow.RowCloseUp(Sender: TObject; var Value: Variant; var Accept: Boolean);
-var
-  Idx: Integer;
-begin
-  Idx := (FOptionItem as PEnumerationOptionItem).IndexOfItem(Value);
-  if Idx <> FOptionItem.Value then begin
-    FOptionItem.Value := Idx;
-    Refresh;
-    if Assigned(FOnOptionItemRowChange) then
-      FOnOptionItemRowChange(Self);
-  end;
-end;
-
 procedure PEnumerationOptionItemRow.CreateInspectorRow;
 var
-  PickRow: TdxInspectorTextPickRow;
-  EOI: PEnumerationOptionItem;
+  lEnumerationOptionItem: PEnumerationOptionItem;
   I: Integer;
+  lcxImageComboBoxProperties: TcxImageComboBoxProperties;
+  lcxImageComboBoxItem: TcxImageComboBoxItem;
 begin
-  FInspectorRow := FParentRow.Node.AddChildEx(TdxInspectorTextPickRow).Row;
-  PickRow := FInspectorRow as TdxInspectorTextPickRow;
-  EOI := FOptionItem as PEnumerationOptionItem;
-  for I := 0 to EOI.EnumerationItemCount - 1 do
-    PickRow.Items.Add(EOI.EnumerationItems[I]);
-  PickRow.DropDownListStyle := True;
-  PickRow.PopupBorder := pbFlat;
-  PickRow.OnCloseUp := RowCloseUp;
-  DrawInspector;
-end;
-
-procedure PEnumerationOptionItemRow.DrawInspector;
-var
-  PickRow: TdxInspectorTextPickRow;
-begin
-  FInspectorRow.Caption := FOptionItem.Caption;
-  PickRow := FInspectorRow as TdxInspectorTextPickRow;
-  PickRow.Text := (FOptionItem as PEnumerationOptionItem).EnumerationItems[FOptionItem.Value];
+  inherited;
+  InspectorRow.Properties.EditPropertiesClass := TcxImageComboBoxProperties;
+  lcxImageComboBoxProperties := InspectorRow.Properties.EditProperties as TcxImageComboBoxProperties;
+  lEnumerationOptionItem := OptionItem as PEnumerationOptionItem;
+  for I := 0 to lEnumerationOptionItem.EnumerationItemCount - 1 do
+  begin
+    lcxImageComboBoxItem := lcxImageComboBoxProperties.Items.Add;
+    lcxImageComboBoxItem.Value := I;
+    lcxImageComboBoxItem.Description := lEnumerationOptionItem.EnumerationItems[I];
+  end;
+  lcxImageComboBoxProperties.DropDownListStyle := lsFixedList;
+  lcxImageComboBoxProperties.ShowDescriptions := True;
 end;
 
 // PEnumerationOptionItemRow
@@ -517,36 +323,18 @@ end;
 ////////////////////////////////////////////////////////////////////////////////
 // PFontNameOptionItemRow
 
-procedure PFontNameOptionItemRow.RowCloseUp(Sender: TObject; var Value: Variant; var Accept: Boolean);
-begin
-  if Value <> FOptionItem.Value then begin
-    FOptionItem.Value := Value;
-    Refresh;
-    if Assigned(FOnOptionItemRowChange) then
-      FOnOptionItemRowChange(Self);
-  end;
-end;
-
 procedure PFontNameOptionItemRow.CreateInspectorRow;
 var
-  PickRow: TdxInspectorTextPickRow;
+  lcxComboBoxProperties: TcxComboBoxProperties;
+  lcxFontNameComboBoxProperties: TcxFontNameComboBoxProperties;
 begin
-  FInspectorRow := FParentRow.Node.AddChildEx(TdxInspectorTextPickRow).Row;
-  PickRow := FInspectorRow as TdxInspectorTextPickRow;
-  PickRow.Items.Assign(Screen.Fonts);
-  PickRow.DropDownListStyle := True;
-  PickRow.PopupBorder := pbFlat;
-  PickRow.OnCloseUp := RowCloseUp;
-  DrawInspector;
-end;
-
-procedure PFontNameOptionItemRow.DrawInspector;
-var
-  PickRow: TdxInspectorTextPickRow;
-begin
-  FInspectorRow.Caption := FOptionItem.Caption;
-  PickRow := FInspectorRow as TdxInspectorTextPickRow;
-  PickRow.Text := FOptionItem.Value;
+  inherited;
+  InspectorRow.Properties.EditPropertiesClass := TcxFontNameComboBoxProperties;
+  lcxFontNameComboBoxProperties := InspectorRow.Properties.EditProperties as TcxFontNameComboBoxProperties;
+  lcxFontNameComboBoxProperties.MaxMRUFonts := 5;
+  lcxFontNameComboBoxProperties.FontPreview.Visible := True;
+  lcxFontNameComboBoxProperties.FontPreview.PreviewType := cxfpFontName;
+  lcxFontNameComboBoxProperties.FontPreview.ShowButtons := False;
 end;
 
 // PFontNameOptionItemRow
@@ -555,50 +343,15 @@ end;
 ////////////////////////////////////////////////////////////////////////////////
 // PFileNameOptionItemRow
 
-procedure PFileNameOptionItemRow.RowButtonClick(Sender: TObject; AbsoluteIndex: Integer);
-var
-  OpenDialog: TOpenDialog;
-begin
-  OpenDialog := TOpenDialog.Create(Application);
-  if OpenDialog.Execute then begin
-    FOptionItem.Value := OpenDialog.FileName;
-    Refresh;
-    if Assigned(FOnOptionItemRowChange) then
-      FOnOptionItemRowChange(Self);
-  end;
-  OpenDialog.Free;
-end;
-
 procedure PFileNameOptionItemRow.CreateInspectorRow;
 var
-  ButtonRow: TdxInspectorTextButtonRow;
+  lcxShellComboBoxProperties: TcxShellComboBoxProperties;
 begin
-  FInspectorRow := FParentRow.Node.AddChildEx(TdxInspectorTextButtonRow).Row;
-  ButtonRow := FInspectorRow as TdxInspectorTextButtonRow;
-  ButtonRow.OnButtonClick := RowButtonClick;
-  DrawInspector;
-end;
-
-procedure PFileNameOptionItemRow.DrawInspector;
-var
-  ButtonRow: TdxInspectorTextButtonRow;
-begin
-  FInspectorRow.Caption := FOptionItem.Caption;
-  ButtonRow := FInspectorRow as TdxInspectorTextButtonRow;
-  ButtonRow.Text := FOptionItem.Value;
-end;
-
-procedure PFileNameOptionItemRow.HandleValueChange;
-var
-  CurText: string;
-begin
-  CurText := (FInspectorRow as TdxInspectorTextButtonRow).Text;
-  if CurText <> FOptionItem.Value then begin
-    FOptionItem.Value := CurText;
-    Refresh;
-    if Assigned(FOnOptionItemRowChange) then
-      FOnOptionItemRowChange(Self);
-  end;
+  inherited;
+  InspectorRow.Properties.EditPropertiesClass := TcxShellComboBoxProperties;
+  lcxShellComboBoxProperties := InspectorRow.Properties.EditProperties as TcxShellComboBoxProperties;
+  lcxShellComboBoxProperties.ShowFullPath := sfpAlways;
+  lcxShellComboBoxProperties.ViewOptions := [scvoShowFiles];
 end;
 
 // PFileNameOptionItemRow
@@ -607,50 +360,14 @@ end;
 ////////////////////////////////////////////////////////////////////////////////
 // PPathNameOptionItemRow
 
-procedure PPathNameOptionItemRow.RowButtonClick(Sender: TObject; AbsoluteIndex: Integer);
-var
-  DirDialog: PDirectoryDialog;
-begin
-  DirDialog := PDirectoryDialog.Create(Application);
-  if DirDialog.Execute then begin
-    FOptionItem.Value := DirDialog.DirName;
-    Refresh;
-    if Assigned(FOnOptionItemRowChange) then
-      FOnOptionItemRowChange(Self);
-  end;
-  DirDialog.Free;
-end;
-
 procedure PPathNameOptionItemRow.CreateInspectorRow;
 var
-  ButtonRow: TdxInspectorTextButtonRow;
+  lcxShellComboBoxProperties: TcxShellComboBoxProperties;
 begin
-  FInspectorRow := FParentRow.Node.AddChildEx(TdxInspectorTextButtonRow).Row;
-  ButtonRow := FInspectorRow as TdxInspectorTextButtonRow;
-  ButtonRow.OnButtonClick := RowButtonClick;
-  DrawInspector;
-end;
-
-procedure PPathNameOptionItemRow.DrawInspector;
-var
-  ButtonRow: TdxInspectorTextButtonRow;
-begin
-  FInspectorRow.Caption := FOptionItem.Caption;
-  ButtonRow := FInspectorRow as TdxInspectorTextButtonRow;
-  ButtonRow.Text := FOptionItem.Value;
-end;
-
-procedure PPathNameOptionItemRow.HandleValueChange;
-var
-  CurText: string;
-begin
-  CurText := (FInspectorRow as TdxInspectorTextButtonRow).Text;
-  if CurText <> FOptionItem.Value then begin
-    FOptionItem.Value := CurText;
-    Refresh;
-    if Assigned(FOnOptionItemRowChange) then
-      FOnOptionItemRowChange(Self);
-  end;
+  inherited;
+  InspectorRow.Properties.EditPropertiesClass := TcxShellComboBoxProperties;
+  lcxShellComboBoxProperties := InspectorRow.Properties.EditProperties as TcxShellComboBoxProperties;
+  lcxShellComboBoxProperties.ShowFullPath := sfpAlways;
 end;
 
 // PPathNameOptionItemRow
@@ -659,112 +376,28 @@ end;
 ////////////////////////////////////////////////////////////////////////////////
 // PColorOptionItemRow
 
-destructor PColorOptionItemRow.Destroy;
-begin
-  ColorImages.Free;
-  inherited;
-end;
-
-function PColorOptionItemRow.GetColorIndex(ColorStr: string): Integer;
+procedure PColorOptionItemRow.HandleValueChange;
 var
-  ImageRow: TdxInspectorTextImageRow;
-  I: Integer;
+  lColor : TColor;
 begin
-  Result := -1;
-  ImageRow := FInspectorRow as TdxInspectorTextImageRow;
-  for I := 0 to ImageRow.Values.Count - 1 do
-    if ImageRow.Values[I] = ColorStr then begin
-      Result := I;
-      Exit;
-    end;
-end;
-
-procedure PColorOptionItemRow.AddColor(ColorStr: string);
-var
-  ImageRow: TdxInspectorTextImageRow;
-  Bitmap: Graphics.TBitmap;
-  Index: Integer;
-begin
-  if GetColorIndex(ColorStr) = -1 then begin
-    ImageRow := FInspectorRow as TdxInspectorTextImageRow;
-    Bitmap := Graphics.TBitmap.Create;
-    Bitmap.Width := 12; Bitmap.Height := 12;
-    Bitmap.Canvas.Brush.Color := ColorValue(ColorStr);
-    Bitmap.Canvas.Pen.Color := clGray;
-    Bitmap.Canvas.FillRect(Rect(0, 0, 12, 12));
-    Bitmap.Canvas.Rectangle(0, 0, 12, 12);
-    ImageRow.Images.AddMasked(Bitmap, clNone);
-    Index := ImageRow.Values.Count - 1;
-    ImageRow.Values.Insert(Index, ColorStr);
-    ImageRow.Descriptions.Insert(Index, ColorStr);
-  end;
-end;
-
-procedure PColorOptionItemRow.RowCloseUp(Sender: TObject; var Value: string; var Accept: Boolean);
-var
-  ColorDialog: TColorDialog;
-  ColorStr: string;
-begin
-  if Value = COLOR_CUSTOM then begin
-    ColorDialog := TColorDialog.Create(Application);
-    if ColorDialog.Execute then begin
-      ColorStr := ColorToStr(ColorDialog.Color);
-      if GetColorIndex(ColorStr) = -1 then
-        AddColor(ColorStr);
-      FOptionItem.Value := ColorStr;
-    end;
-    Accept := False;
-    ColorDialog.Free;
-  end
-  else
-    FOptionItem.Value := Value;
-  Refresh;
+  lColor := InspectorRow.Properties.Value;
+  OptionItem.Value := ColorToStr(lColor);
   if Assigned(FOnOptionItemRowChange) then
+  begin
     FOnOptionItemRowChange(Self);
+  end;
 end;
 
 procedure PColorOptionItemRow.CreateInspectorRow;
 var
-  ImageRow: TdxInspectorTextImageRow;
-  Bitmap: Graphics.TBitmap;
-  I: Integer;
+  lcxColorComboBoxProperties: TcxColorComboBoxProperties;
 begin
-  FInspectorRow := FParentRow.Node.AddChildEx(TdxInspectorTextImageRow).Row;
-  ColorImages := TImageList.Create(Application);
-  ColorImages.Width := 12;
-  ColorImages.Height := 12;
-  for I := 0 to Length(Colors) - 1 do begin
-    Bitmap := Graphics.TBitmap.Create;
-    Bitmap.Width := 12; Bitmap.Height := 12;
-    Bitmap.Canvas.Brush.Color := Colors[I];
-    Bitmap.Canvas.Pen.Color := clGray;
-    Bitmap.Canvas.FillRect(Rect(0, 0, 12, 12));
-    Bitmap.Canvas.Rectangle(0, 0, 12, 12);
-    ColorImages.AddMasked(Bitmap, clNone);
-  end;
-
-  ImageRow := FInspectorRow as TdxInspectorTextImageRow;
-  ImageRow.Images := ColorImages;
-  for I := 0 to Length(ColorNames) - 1 do begin
-    ImageRow.Values.Add(ColorToStr(Colors[I]));
-    ImageRow.Descriptions.Add(ColorNames[I]);
-  end;
-  ImageRow.Values.Add(COLOR_CUSTOM);
-  ImageRow.Descriptions.Add(TXT_COLOR_CUSTOM);
-  ImageRow.OnCloseUp := RowCloseUp;
-
-  DrawInspector;
-end;
-
-procedure PColorOptionItemRow.DrawInspector;
-var
-  ImageRow: TdxInspectorTextImageRow;
-begin
-  FInspectorRow.Caption := FOptionItem.Caption;
-  ImageRow := FInspectorRow as TdxInspectorTextImageRow;
-  if GetColorIndex(FOptionItem.Value) = -1 then
-    AddColor(FOptionItem.Value);
-  ImageRow.Text := FOptionItem.Value;
+  inherited;
+  InspectorRow.Properties.EditPropertiesClass := TcxColorComboBoxProperties;
+  lcxColorComboBoxProperties := InspectorRow.Properties.EditProperties as TcxColorComboBoxProperties;
+  InspectorRow.Properties.Value := StringToColor(OptionItem.Value);
+  lcxColorComboBoxProperties.AllowSelectColor := True;
+  lcxColorComboBoxProperties.ColorValueFormat := cxcvHexadecimal;
 end;
 
 // PColorOptionItemRow
@@ -775,35 +408,20 @@ end;
 
 procedure PRangeOptionItemRow.CreateInspectorRow;
 var
-  SpinRow: TdxInspectorTextSpinRow;
+  lcxSpinEditProperties: TcxSpinEditProperties;
+  lRangeOptionItem: PRangeOptionItem;
 begin
-  FInspectorRow := FParentRow.Node.AddChildEx(TdxInspectorTextSpinRow).Row;
-  SpinRow := FInspectorRow as TdxInspectorTextSpinRow;
-  SpinRow.Text := FOptionItem.Value;
-  SpinRow.MinValue := (FOptionItem as PRangeOptionItem).MinValue;
-  SpinRow.MaxValue := (FOptionItem as PRangeOptionItem).MaxValue;
-  SpinRow.Increment := (FOptionItem as PRangeOptionItem).Step;
-  DrawInspector;
-end;
-
-procedure PRangeOptionItemRow.DrawInspector;
-var
-  SpinRow: TdxInspectorTextSpinRow;
-begin
-  FInspectorRow.Caption := FOptionItem.Caption;
-  SpinRow := FInspectorRow as TdxInspectorTextSpinRow;
-  SpinRow.Text := FOptionItem.Value;
-end;
-
-procedure PRangeOptionItemRow.HandleValueChange;
-begin
-  FOptionItem.Value := (FInspectorRow as TdxInspectorTextSpinRow).Text;
-  Refresh;
-  if Assigned(FOnOptionItemRowChange) then
-    FOnOptionItemRowChange(Self);
+  inherited;
+  InspectorRow.Properties.EditPropertiesClass := TcxSpinEditProperties;
+  lcxSpinEditProperties := InspectorRow.Properties.EditProperties as TcxSpinEditProperties;
+  lRangeOptionItem := OptionItem as PRangeOptionItem;
+  lcxSpinEditProperties.MinValue := lRangeOptionItem.MinValue;
+  lcxSpinEditProperties.MaxValue := lRangeOptionItem.MaxValue;
+  lcxSpinEditProperties.Increment := lRangeOptionItem.Step;
 end;
 
 // PRangeOptionItemRow
 ////////////////////////////////////////////////////////////////////////////////
 
 end.
+

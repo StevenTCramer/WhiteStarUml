@@ -49,9 +49,25 @@ interface
 
 uses
   ApprMgr,
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ComCtrls, ExtCtrls,  ImgList, ToolWin, FlatPanel, FileCtrl,
-  dxPageControl, ShellCtrls, Buttons;
+  Windows,
+  Messages,
+  SysUtils,
+  Variants,
+  Classes,
+  Graphics,
+  Controls,
+  Forms,
+  Dialogs,
+  StdCtrls,
+  ComCtrls,
+  ExtCtrls,
+  ImgList,
+  ToolWin,
+  FlatPanel,
+  FileCtrl,
+  cxPC,
+  ShellCtrls,
+  Buttons;
 
 const
   DEFAULT_APPROACH_ICON_INDEX = 0;
@@ -62,7 +78,7 @@ type
   PProjectActionKind = (akNew, akOpen, akRecent);
 
   // Event Type
-  PRecentFileDeleteEvent = procedure (Sender: TObject; RecentFile: string) of object;
+  PRecentFileDeleteEvent = procedure(Sender: TObject; RecentFile: string) of object;
 
   // TNewProjectForm
   TNewProjectForm = class(TForm)
@@ -174,8 +190,10 @@ var
 implementation
 
 uses
-  Registry, HtmlHlp,
-  NLS, NLS_StarUML;
+  Registry,
+  HtmlHlp,
+  NLS,
+  NLS_StarUML;
 
 {$R *.dfm}
 
@@ -188,9 +206,11 @@ var
   Icon: TIcon;
   ImgIndex: Integer;
 begin
-  if FileExists(AApproach.FileName) then begin
+  if FileExists(AApproach.FileName) then
+  begin
     ImgIndex := DEFAULT_APPROACH_ICON_INDEX;
-    if FileExists(AApproach.IconFileName) and (UpperCase(ExtractFileExt(AApproach.IconFileName)) = '.ICO') then begin
+    if FileExists(AApproach.IconFileName) and (UpperCase(ExtractFileExt(AApproach.IconFileName)) = '.ICO') then
+    begin
       Icon := TIcon.Create;
       try
         Icon.LoadFromFile(AApproach.IconFileName);
@@ -248,7 +268,7 @@ end;
 procedure TNewProjectForm.SetDefaultApproachSelection;
 begin
   if (ApproachesListView.Selected <> nil) and
-     (ApproachesListView.Selected.Data <> nil) then
+    (ApproachesListView.Selected.Data <> nil) then
   begin
     if SelectApproachCheckBox.Checked then
       FDefaultApproachNameBuffer := PApproach(ApproachesListView.Selected.Data).Name
@@ -259,7 +279,8 @@ end;
 
 procedure TNewProjectForm.SetNumberOfRecentProjects(Value: Integer);
 begin
-  if FNumberOfRecentProjects <> Value then begin
+  if FNumberOfRecentProjects <> Value then
+  begin
     if (FNumberOfRecentProjects > Value) then OptionRecentFileDelete(Value);
     FNumberOfRecentProjects := Value;
   end;
@@ -271,7 +292,8 @@ var
   L: TListItem;
 begin
   DeleteCount := Value - FNumberOfRecentProjectsCount;
-  for I := RecentListView.Items.Count -1 downto DeleteCount do begin
+  for I := RecentListView.Items.Count - 1 downto DeleteCount do
+  begin
     L := RecentListView.Items.Item[I];
     if L <> nil then L.Delete;
   end;
@@ -283,11 +305,13 @@ var
   I: Integer;
   RecentFile, RecentPath: string;
 begin
-  for I := RecentListView.Items.Count - 1 downto 0 do begin
+  for I := RecentListView.Items.Count - 1 downto 0 do
+  begin
     L := RecentListView.Items.Item[I];
     RecentFile := L.Caption;
     RecentPath := L.SubItems.Strings[0];
-    if Not FileExists(RecentPath + RecentFile) then begin
+    if not FileExists(RecentPath + RecentFile) then
+    begin
       if Assigned(FOnRecentFileDelete) then FOnRecentFileDelete(Self, RecentPath + RecentFile);
       L.Delete;
     end;
@@ -300,18 +324,19 @@ var
   I: Integer;
   RecentFile, RecentPath: string;
 begin
-  for I := RecentListView.Items.Count - 1 downto 0 do begin
+  for I := RecentListView.Items.Count - 1 downto 0 do
+  begin
     L := RecentListView.Items.Item[I];
     RecentFile := L.Caption;
     RecentPath := L.SubItems.Strings[0];
-    if Assigned(FOnRecentFileDelete) then FOnRecentFileDelete(Self, RecentPath + RecentFile );
+    if Assigned(FOnRecentFileDelete) then FOnRecentFileDelete(Self, RecentPath + RecentFile);
   end;
   RecentListView.Clear;
 end;
 
 procedure TNewProjectForm.AcceptAction;
 var
-  Str : string;
+  Str: string;
   L: TListItem;
 begin
   if NewProjectPageControl.ActivePage = ApproachesPage then
@@ -410,9 +435,11 @@ begin
   AddBlankApproach;
 
   BlankAppr := nil;
-  for I := 0 to ApproachesListView.Items.Count - 1 do begin
+  for I := 0 to ApproachesListView.Items.Count - 1 do
+  begin
     L := ApproachesListView.Items.Item[I];
-    if (PApproach(L.Data) <> nil) then begin
+    if (PApproach(L.Data) <> nil) then
+    begin
       ApprName := PApproach(L.Data).Name;
       if (ApprName = FDefaultApproachName) then
       begin
@@ -424,7 +451,8 @@ begin
     else BlankAppr := L;
   end;
 
-  if BlankAppr <> nil then begin
+  if BlankAppr <> nil then
+  begin
     BlankAppr.Selected := True;
     SetDefaultApproachName('');
   end;
@@ -550,6 +578,7 @@ begin
   NLSManager.TranslateComponent(Self, []);
   SetDefaultApproachName('');
   LoadFromRegistry;
+  ShellTreeView.Parent := Self;
 end;
 
 procedure TNewProjectForm.FormDestroy(Sender: TObject);
@@ -675,3 +704,4 @@ begin
 end;
 
 end.
+

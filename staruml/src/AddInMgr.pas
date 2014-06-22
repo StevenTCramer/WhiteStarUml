@@ -48,20 +48,23 @@ unit AddInMgr;
 interface
 
 uses
-  Classes, ActiveX, XMLDoc, XMLIntf, ComObj, Windows, Registry, dxBar, SysUtils,
+  Classes,
+  ActiveX,
+  XMLDoc,
+  XMLIntf,
+  ComObj,
+  Windows,
+  Registry,
+  dxBar,
+  SysUtils,
   Graphics,
-  StarUML_TLB, dxPageControl;
-
-const
-  EXT_DIR = 'modules';
-  ADDIN_DESCRIPTION_EXTENSION = 'aid';
-  COM_EXTENSION = 'dll';
-  ICON_EXTENSION = 'ico';
-  ERR_EMPTY_DOCUMENT = 'The File is Empty Document.';
+  StarUMLProject_TLB,
+  cxPC,
+  StarUMLConstantsUnit;
 
 type
   // Event type
-  PAddInRelMsgOccuredEvent = procedure (str: string) of object;
+  PAddInRelMsgOccuredEvent = procedure(str: string) of object;
 
   // Exception type
   EAddInLoadingValuesException = class(Exception);
@@ -72,22 +75,23 @@ type
   // PAddIn
   PAddIn = class
   protected
-    FMenusList: TList;            // List Storing MenuItems
-    FRegKey: string;              // Registry Key
-    FAddInName: string;           // Add-In's Name
-    FDisplayName: string;         // Add-In's Display Name
-    FCompany: string;             // Add-In's Company Name
-    FCopyright: string;           // Add-In's Copyright Information
-    FVersion: string;             // Add-In's Version Information
-    FCOMObjName: string;          // Add-In COM Server Programmatic Identifier
-    FInstalledDir: string;        // Add-In Installed Directory Path
-    FMenuFileName: string;        // Add-In Menu File's Name
-    FHelpFileName: string;        // Add-In Help File's Name
-    FIconFileName: string;        // Add-In Icon File's Name
-    FIsActive: Boolean;           // Add-In Status whether it is active or not
+    FMenusList: TList; // List Storing MenuItems
+    FRegKey: string; // Registry Key
+    FAddInName: string; // Add-In's Name
+    FDisplayName: string; // Add-In's Display Name
+    FCompany: string; // Add-In's Company Name
+    FCopyright: string; // Add-In's Copyright Information
+    FVersion: string; // Add-In's Version Information
+    FCOMObjName: string; // Add-In COM Server Programmatic Identifier
+    FInstalledDir: string; // Add-In Installed Directory Path
+    FMenuFileName: string; // Add-In Menu File's Name
+    FHelpFileName: string; // Add-In Help File's Name
+    FIconFileName: string; // Add-In Icon File's Name
+    FIsActive: Boolean; // Add-In Status whether it is active or not
+    fPath: string; // Add-In Path
     FMenuItemIconList: TList;
     FIcon: TIcon;
-    FFilename: String;
+    FFilename: string;
     FModulePath: TStringList;
     FOnMessage: PAddInRelMsgOccuredEvent;
     procedure SetupMainMenus(XMLNode: IXMLNode);
@@ -99,7 +103,7 @@ type
     procedure SetAllMenuItemsVisibility(IsVisible: Boolean);
     { utility methods }
     function GetRegValue(Reg: TRegistry; RegValues: TStringList; Str: string): string;
-    function GetBase(XMLNode: IXMLNode):string;
+    function GetBase(XMLNode: IXMLNode): string;
     function GetExistingBase(Base: string): TdxBarSubItem;
     function GetCaption(XMLNode: IXMLNode): string;
     function GetScript(XMLNode: IXMLNode): string;
@@ -110,11 +114,12 @@ type
     function GetBeginGroup(XMLNode: IXMLNode): Boolean;
     function GetItemIcon(XMLNode: IXMLNode): TIcon;
     function HasSubMenuItemNode(XMLNode: IXMLNode; NodeName: string): Boolean;
+    function GetEnvironmentVariableAsString(const VariableName: string): string;
     procedure AddMenuItemToList(dxSubItem: TdxBarSubItem; AvailableTime: string); overload;
     procedure AddMenuItemToList(dxItem: TdxBarButton; AvailableTime: string); overload;
   protected
-    procedure SetupAddInInfo(XMLNode: IXMLNode; Path: String); virtual;
-    procedure SetupAuxiliaryData;//(XMLNode: IXMLNode; Path: String);
+    procedure SetupAddInInfo(XMLNode: IXMLNode; Path: string); virtual;
+    procedure SetupAuxiliaryData; //(XMLNode: IXMLNode; Path: String);
     { Properties Get/Set Methods }
     procedure SetIsActive(Value: Boolean); virtual;
     { Event Handler }
@@ -123,7 +128,7 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    procedure LoadXMLValues(XMLNode: IXMLNode; Path: String); virtual;
+    procedure LoadXMLValues(XMLNode: IXMLNode; Path: string); virtual;
     procedure SetupMenus; virtual;
     { properties }
     property AddInName: string read FAddInName;
@@ -135,6 +140,7 @@ type
     property InstalledDir: string read FInstalledDir;
     property IsActive: Boolean read FIsActive write SetIsActive;
     property Icon: TIcon read FIcon;
+    property Path: string read fPath write fPath;
     property OnMessage: PAddInRelMsgOccuredEvent write FOnMessage;
   end;
 
@@ -144,7 +150,7 @@ type
     FStarUMLAddIn: IStarUMLAddIn; // COM Object which implements IStarUMLAddIn Interface
     procedure SetupCOMObject(ActiveFlag: Boolean);
   protected
-    procedure SetupAddInInfo(XMLNode: IXMLNode; Path: String); override;
+    procedure SetupAddInInfo(XMLNode: IXMLNode; Path: string); override;
     { Properties Get/Set Methods }
     procedure SetIsActive(Value: Boolean); override;
     { Event Handler }
@@ -152,20 +158,20 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    procedure LoadXMLValues(XMLNode: IXMLNode; Path: String); override;
+    procedure LoadXMLValues(XMLNode: IXMLNode; Path: string); override;
     property COMInterface: IStarUMLAddIn read FStarUMLAddIn;
   end;
 
   // PFrameWindowAddIn
   PFrameWindowAddIn = class(PAddIn)
   private
-    FFrameWindowAddIn: IUnknown;                 // COM Object
+    FFrameWindowAddIn: IUnknown; // COM Object
     FFrameWindowParent: PAddInFrameWindowParent; // Add-In Frame Window's Parent Window
-    FTab: TdxTabSheet;
+    FTab: TcxTabSheet;
     FTabImageIndex: Integer;
     procedure SetupFrameWindow(ActiveFlag: Boolean);
   protected
-    procedure SetupAddInInfo(XMLNode: IXMLNode; Path: String); override;
+    procedure SetupAddInInfo(XMLNode: IXMLNode; Path: string); override;
     { Properties Get/Set Methods }
     procedure SetIsActive(Value: Boolean); override;
     { Event Handler }
@@ -173,7 +179,7 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    procedure LoadXMLValues(XMLNode: IXMLNode; Path: String); override;
+    procedure LoadXMLValues(XMLNode: IXMLNode; Path: string); override;
     procedure SetupMenus; override;
   end;
 
@@ -265,8 +271,18 @@ var
 implementation
 
 uses
-  Dialogs, Variants, xmldom, Forms, ShellAPI, OleCtnrs, Controls, ExtCtrls,
-  MainFrm, HtmlHlp, NLS_StarUML;
+  Dialogs,
+  Variants,
+  xmldom,
+  Forms,
+  ShellAPI,
+  OleCtnrs,
+  Controls,
+  ExtCtrls,
+  MainFrm,
+  HtmlHlp,
+  NLS_StarUML,
+  SettingsUnit;
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -291,49 +307,55 @@ begin
 end;
 
 destructor PAddIn.Destroy;
-    procedure SaveToRegistry;
-    var
-      Reg: TRegistry;
-      RegKey: string;
-    begin
-      Reg := TRegistry.Create;
-      try
-        Reg.RootKey := ROOTKEY;
-        RegKey := ADDINSKEY + '\' + FRegKey;
-        if Reg.OpenKey(RegKey, True) then begin
-          if FIsActive then Reg.WriteString(VN_ISACTIVE, 'True')
-          else Reg.WriteString(VN_ISACTIVE, 'False');
-        end;
-      finally
-        Reg.CloseKey;
-        Reg.Free;
+  procedure SaveToRegistry;
+  var
+    Reg: TRegistry;
+    RegKey: string;
+  begin
+    Reg := TRegistry.Create;
+    try
+      Reg.RootKey := ROOTKEY;
+      RegKey := ADDINSKEY + '\' + FRegKey;
+      if Reg.OpenKey(RegKey, True) then
+      begin
+        if FIsActive then Reg.WriteString(VN_ISACTIVE, 'True')
+        else Reg.WriteString(VN_ISACTIVE, 'False');
       end;
+    finally
+      Reg.CloseKey;
+      Reg.Free;
     end;
-    procedure ClearMenusList;
-    var
-      I: Integer;
-      Obj: TObject;
+  end;
+  procedure ClearMenusList;
+  var
+    I: Integer;
+    Obj: TObject;
+  begin
+    for I := FMenusList.Count - 1 downto 0 do
     begin
-      for I := FMenusList.Count - 1 downto 0 do begin
-        Obj := FMenusList.Items[I];
-        Obj.Free;
-      end;
+      Obj := FMenusList.Items[I];
+      Obj.Free;
     end;
-    procedure ClearMenuItemIconList;
-    var
-      I: Integer;
-      AIcon: TIcon;
+  end;
+  procedure ClearMenuItemIconList;
+  var
+    I: Integer;
+    AIcon: TIcon;
+  begin
+    for I := FMenuItemIconList.Count - 1 downto 0 do
     begin
-      for I := FMenuItemIconList.Count - 1 downto 0 do begin
-        AIcon := FMenuItemIconList.Items[I];
-        AIcon.Free;
-      end;
+      AIcon := FMenuItemIconList.Items[I];
+      AIcon.Free;
     end;
+  end;
 begin
-  if Assigned(FIcon) then FIcon.Free;
+  if Assigned(FIcon) then
+  begin
+    FIcon.Free;
+  end;
 (*
   SaveToRegistry;
-*)  
+ *)
   ClearMenusList;
   FMenusList.Free;
   ClearMenuItemIconList;
@@ -352,20 +374,26 @@ var
 begin
   MainMenu := MainForm.BarManager.Bars[0];
   XMLNodeList := XMLNode.ChildNodes;
-  for I := 0 to XMLNodeList.Count - 1 do begin
+  for I := 0 to XMLNodeList.Count - 1 do
+  begin
     XMLNode := XMLNodeList.Nodes[I];
-    if XMLNode.NodeName = XE_MAINITEM then begin
+    if XMLNode.NodeName = XE_MAINITEM then
+    begin
       Base := GetBase(XMLNode);
       // when to create a new top menu item
-      if UpperCase(Base) = TN_NEW_TOP then begin
-        if HasSubMenuItemNode(XMLNode, XE_MAINITEM) then begin
+      if UpperCase(Base) = TN_NEW_TOP then
+      begin
+        if HasSubMenuItemNode(XMLNode, XE_MAINITEM) then
+        begin
           SetupTopLevelMainMenuItem(MainMenu, XMLNode);
-        end else begin
+        end else
+        begin
           Msg := Format(ERR_ADDIN_MENUFILE_INVALID, [FMenuFileName]);
           raise EAddInMenuFileInvalidException.Create(Msg);
         end;
       // when to add a menu item at existing top menu item
-      end else begin
+      end else
+      begin
         dxSubItem := GetExistingBase(Base);
         SetupSubMenuItem(XMLNode, dxSubItem);
       end;
@@ -380,17 +408,21 @@ var
   I: Integer;
 begin
   XMLNodeList := XMLNode.ChildNodes;
-  for I := 0 to XMLNodeList.Count - 1 do begin
+  for I := 0 to XMLNodeList.Count - 1 do
+  begin
     XMLNode := XMLNodeList.Nodes[I];
-    if XMLNode.NodeName = XE_POPUPITEM then begin
+    if XMLNode.NodeName = XE_POPUPITEM then
+    begin
       Location := GetLocation(XMLNode);
       if (Location = PL_EXPLORER) or (Location = PL_BOTH) then
         SetupTopLevelPopupMenuItem(MainForm.ModelExplorerPopupMenu, XMLNode);
     end;
   end;
-  for I := 0 to XMLNodeList.Count - 1 do begin
+  for I := 0 to XMLNodeList.Count - 1 do
+  begin
     XMLNode := XMLNodeList.Nodes[I];
-    if XMLNode.NodeName = XE_POPUPITEM then begin
+    if XMLNode.NodeName = XE_POPUPITEM then
+    begin
       Location := GetLocation(XMLNode);
       if (Location = PL_DIAGRAM) or (Location = PL_BOTH) then
         SetupTopLevelPopupMenuItem(MainForm.DiagramEditorPopupMenu, XMLNode);
@@ -416,12 +448,14 @@ var
 begin
   // gathering data for menu file
   MICaption := GetCaption(XMLNode);
-  if MICaption = '-' then begin
+  if MICaption = '-' then
+  begin
     Msg := Format(ERR_ADDIN_MENUFILE_INVALID, [FMenuFileName]);
     raise EAddInMenuFileInvalidException.Create(Msg);
   end;
   MITag := GetItemID(XMLNode);
-  if MITag = -1 then begin
+  if MITag = -1 then
+  begin
     Msg := Format(ERR_ADDIN_MENUFILE_INVALID, [FMenuFileName]);
     raise EAddInMenuFileInvalidException.Create(Msg);
   end;
@@ -429,7 +463,8 @@ begin
   MIScript := GetScript(XMLNode);
   MIAvailableTime := GetAvailableTime(XMLNode);
   MIIcon := GetItemIcon(XMLNode);
-  if Assigned(MIIcon) then begin
+  if Assigned(MIIcon) then
+  begin
     ImageIdx := MainForm.TotalImageList.AddIcon(MIIcon);
     FMenuItemIconList.Add(MIIcon);
   end else ImageIdx := -1;
@@ -450,7 +485,8 @@ begin
   // create a sub menu item (assure than it has a MENUITEM Node)
   XMLNodeList := XMLNode.ChildNodes;
   try
-    for I := 0 to XMLNodeList.Count - 1 do begin
+    for I := 0 to XMLNodeList.Count - 1 do
+    begin
       XMLSubNode := XMLNodeList.Nodes[I];
       if XMLSubNode.NodeName = XE_MAINITEM then
         SetupSubMenuItem(XMLSubNode, dxSubItem);
@@ -487,7 +523,8 @@ begin
   // gathering data for menu file
   MICaption := GetCaption(XMLNode);
   MITag := GetItemID(XMLNode);
-  if MITag = -1 then begin
+  if MITag = -1 then
+  begin
     Msg := Format(ERR_ADDIN_MENUFILE_INVALID, [FMenuFileName]);
     raise EAddInMenuFileInvalidException.Create(Msg);
   end;
@@ -496,13 +533,15 @@ begin
   MIIndex := GetItemIndex(XMLNode);
   MIBeginGroup := GetBeginGroup(XMLNode);
   MIIcon := GetItemIcon(XMLNode);
-  if Assigned(MIIcon) then begin
+  if Assigned(MIIcon) then
+  begin
     ImageIdx := MainForm.TotalImageList.AddIcon(MIIcon);
     FMenuItemIconList.Add(MIIcon);
   end else ImageIdx := -1;
   // create menu item
   // (when to have no menuitem)
-  if not HasSubMenuItemNode(XMLNode, XE_POPUPITEM) then begin
+  if not HasSubMenuItemNode(XMLNode, XE_POPUPITEM) then
+  begin
     dxItem := TdxBarButton.Create(PopupMenu.BarManager);
     dxItem.Caption := MICaption;
     if MIScript <> '' then dxItem.Description := MIScript;
@@ -517,7 +556,8 @@ begin
     dxLink.Item := dxItem;
     if MIBeginGroup then dxLink.BeginGroup := True;
   // (when to have menuitem)
-  end else begin
+  end else
+  begin
     dxSubItem := TdxBarSubItem.Create(PopupMenu.BarManager);
     dxSubItem.Caption := MICaption;
     if MIScript <> '' then dxSubItem.Description := MIScript;
@@ -534,13 +574,15 @@ begin
     // Recursion: assure to exist sub MenuItem Node
     XMLNodeList := XMLNode.ChildNodes;
     try
-      for I := 0 to XMLNodeList.Count - 1 do begin
+      for I := 0 to XMLNodeList.Count - 1 do
+      begin
         XMLSubNode := XMLNodeList.Nodes[I];
-        if XMLSubNode.NodeName = XE_POPUPITEM then begin
+        if XMLSubNode.NodeName = XE_POPUPITEM then
+        begin
           SetupSubMenuItem(XMLSubNode, dxSubItem);
         end;
       end;
-      if dxSubItem.ItemLinks.Count <= 0 then Raise EAddInMenuFileInvalidException.Create('');
+      if dxSubItem.ItemLinks.Count <= 0 then raise EAddInMenuFileInvalidException.Create('');
     except on E: EAddInMenuFileInvalidException do
       begin
         dxLink.Free;
@@ -573,7 +615,8 @@ begin
   // gather data for File Menu
   MICaption := GetCaption(XMLNode);
   MITag := GetItemID(XMLNode);
-  if MITag = -1 then begin
+  if MITag = -1 then
+  begin
     Msg := Format(ERR_ADDIN_MENUFILE_INVALID, [FMenuFileName]);
     raise EAddInMenuFileInvalidException.Create(Msg);
   end;
@@ -582,13 +625,15 @@ begin
   MIIndex := GetItemIndex(XMLNode);
   MIBeginGroup := GetBeginGroup(XMLNode);
   MIIcon := GetItemIcon(XMLNode);
-  if Assigned(MIIcon) then begin
+  if Assigned(MIIcon) then
+  begin
     ImageIdx := MainForm.TotalImageList.AddIcon(MIIcon);
     FMenuItemIconList.Add(MIIcon);
   end else ImageIdx := -1;
   // create Menu item
   // (when to have no sub menu item)
-  if not HasSubMenuItemNode(XMLNode, XE_MAINITEM) then begin
+  if not HasSubMenuItemNode(XMLNode, XE_MAINITEM) then
+  begin
     dxItem := TdxBarButton.Create(ParentItem.BarManager);
     dxItem.Caption := MICaption;
     if MIScript <> '' then dxItem.Description := MIScript;
@@ -603,7 +648,8 @@ begin
     dxLink.Item := dxItem;
     if MIBeginGroup then dxLink.BeginGroup := True;
     // (when to hava sub menu item)
-  end else begin
+  end else
+  begin
     dxSubItem := TdxBarSubItem.Create(ParentItem.BarManager);
     dxSubItem.Caption := MICaption;
     if MIScript <> '' then dxSubItem.Description := MIScript;
@@ -620,12 +666,13 @@ begin
     // (Recursion: assure to exist sub MenuItem Node)
     XMLNodeList := XMLNode.ChildNodes;
     try
-      for I := 0 to XMLNodeList.Count - 1 do begin
+      for I := 0 to XMLNodeList.Count - 1 do
+      begin
         XMLSubNode := XMLNodeList.Nodes[I];
         if XMLSubNode.NodeName = XE_MAINITEM then
           SetupSubMenuItem(XMLSubNode, dxSubItem);
       end;
-      if dxSubItem.ItemLinks.Count <= 0 then Raise EAddInMenuFileInvalidException.Create('');
+      if dxSubItem.ItemLinks.Count <= 0 then raise EAddInMenuFileInvalidException.Create('');
     except on E: EAddInMenuFileInvalidException do
       begin
         dxLink.Free;
@@ -643,7 +690,8 @@ var
   dxLink: TdxBarItemLink;
   Idx: Integer;
 begin
-  if FHelpFileName <> '' then begin
+  if FHelpFileName <> '' then
+  begin
     dxLink := MainForm.HelpMenu.ItemLinks.Add;
     dxItem := TdxBarButton.Create(MainForm.BarManager);
     try
@@ -666,16 +714,17 @@ begin
 end;
 
 procedure PAddIn.SetAllMenuItemsVisibility(IsVisible: Boolean);
-    function BooleanToTdxVisible(Value: Boolean): TdxBarItemVisible;
-    begin
-      if Value = True then Result := ivAlways
-      else Result := ivNever;
-    end;
+  function BooleanToTdxVisible(Value: Boolean): TdxBarItemVisible;
+  begin
+    if Value = True then Result := ivAlways
+    else Result := ivNever;
+  end;
 var
   I: Integer;
   Obj: TObject;
 begin
-  for I := 0 to FMenusList.Count - 1 do begin
+  for I := 0 to FMenusList.Count - 1 do
+  begin
     Obj := FMenusList.Items[I];
     if Obj is TdxBarSubItem then (Obj as TdxBarSubItem).Visible := BooleanToTdxVisible(IsVisible)
     else if Obj is TdxBarButton then (Obj as TdxBarButton).Visible := BooleanToTdxVisible(IsVisible);
@@ -685,9 +734,12 @@ end;
 function PAddIn.GetRegValue(Reg: TRegistry; RegValues: TStringList; Str: string): string;
 begin
   Result := '';
-  if RegValues.IndexOf(Str) >= 0 then begin
-    try Result := Reg.ReadString(Str);
-    except on Exception do end;
+  if RegValues.IndexOf(Str) >= 0 then
+  begin
+    try
+      Result := Reg.ReadString(Str);
+    except on Exception do
+    end;
   end;
 end;
 
@@ -740,7 +792,8 @@ var
   Str: string;
   T: Integer;
 begin
-  if XMLNode.HasAttribute(XA_ACTIONID) then begin
+  if XMLNode.HasAttribute(XA_ACTIONID) then
+  begin
     try
       Str := XMLNode.Attributes[XA_ACTIONID];
       T := StrToInt(Str);
@@ -757,7 +810,8 @@ var
   Str: string;
   T: Integer;
 begin
-  if XMLNode.HasAttribute(XA_INDEX) then begin
+  if XMLNode.HasAttribute(XA_INDEX) then
+  begin
     try
       Str := XMLNode.Attributes[XA_INDEX];
       T := StrToInt(Str);
@@ -786,7 +840,8 @@ var
   Str: string;
 begin
   Result := False;
-  if XMLNode.HasAttribute(XA_BEGIN_GROUP) then begin
+  if XMLNode.HasAttribute(XA_BEGIN_GROUP) then
+  begin
     try
       Str := XMLNode.Attributes[XA_BEGIN_GROUP];
       Str := LowerCase(Trim(Str));
@@ -805,22 +860,27 @@ var
   Idx: Integer;
 begin
   Result := nil;
-  if XMLNode.HasAttribute(XA_ICON_FILE) then begin
+  if XMLNode.HasAttribute(XA_ICON_FILE) then
+  begin
     AIcon := TIcon.Create;
     try
       Str := XMLNode.Attributes[XA_ICON_FILE];
-      if Str <> '' then begin
+      if Str <> '' then
+      begin
         Ext := LowerCase(ExtractFileExt(Str));
-        if Ext = '.ico' then begin
+        if Ext = '.ico' then
+        begin
           AIcon.LoadFromFile(FInstalledDir + '\' + Str);
           Result := AIcon;
-        end else if Ext = '.bmp' then begin
+        end else if Ext = '.bmp' then
+        begin
           ABitmap := TBitmap.Create;
           ImgList := TImageList.Create(nil);
           try
             ABitmap.LoadFromFile(FInstalledDir + '\' + Str);
             Idx := ImgList.Add(ABitmap, nil);
-            if Idx >= 0 then begin
+            if Idx >= 0 then
+            begin
               ImgList.GetIcon(Idx, AIcon);
               Result := AIcon;
             end;
@@ -828,7 +888,7 @@ begin
             ABitmap.Free;
             ImgList.Free;
           end;
-        end else Raise Exception.Create('');
+        end else raise Exception.Create('');
       end;
     except on Exception do
       begin
@@ -846,9 +906,11 @@ var
 begin
   Result := False;
   XMLNodeList := XMLNode.ChildNodes;
-  for I := 0 to XMLNodeList.Count - 1 do begin
+  for I := 0 to XMLNodeList.Count - 1 do
+  begin
     XMLNode := XMLNodeList.Nodes[I];
-    if XMLNode.NodeName = NodeName then begin
+    if XMLNode.NodeName = NodeName then
+    begin
       Result := True;
       Break;
     end;
@@ -858,7 +920,8 @@ end;
 procedure PAddIn.AddMenuItemToList(dxSubItem: TdxBarSubItem; AvailableTime: string);
 begin
   FMenusList.Add(dxSubItem);
-  if AvailableTime = AT_ALWAYS then begin
+  if AvailableTime = AT_ALWAYS then
+  begin
     dxSubItem.Enabled := True;
     MainForm.AlwaysGroup.Add(dxSubItem);
   end
@@ -872,7 +935,8 @@ end;
 procedure PAddIn.AddMenuItemToList(dxItem: TdxBarButton; AvailableTime: string);
 begin
   FMenusList.Add(dxItem);
-  if AvailableTime = AT_ALWAYS then begin
+  if AvailableTime = AT_ALWAYS then
+  begin
     dxItem.Enabled := True;
     MainForm.AlwaysGroup.Add(dxItem);
   end
@@ -883,11 +947,12 @@ begin
   else if AvailableTime = AT_DIAGRAM_ACTIVATED then MainForm.DiagramActivatedGroup.Add(dxItem);
 end;
 
-procedure PAddIn.SetupAddInInfo(XMLNode: IXMLNode; Path: String);
+procedure PAddIn.SetupAddInInfo(XMLNode: IXMLNode; Path: string);
 var
   I: Integer;
-  Str: String;
+  Str: string;
   RootNode, ModuleNode: IXMLNode;
+  lPath: string;
 begin
   FAddInName := ReadChildStringValue(XMLNode, 'NAME', '');
   FRegKey := FAddInName;
@@ -900,9 +965,17 @@ begin
   FCOMObjName := ReadChildStringValue(XMLNode, 'COMOBJ', '');
   FFilename := ReadChildStringValue(XMLNode, 'FILENAME', '');
 
+  fPath := ReadChildStringValue(XMLNode, 'PATH', '');
+  if Trim(fPath) <> '' then
+  begin
+    lPath := GetEnvironmentVariableAsString('PATH');
+    lPath := lPath + ';' + fPath;
+    SetEnvironmentVariable('PATH', PChar(lPath));
+  end;
+
   RootNode := XMLNode.ChildNodes.FindNode('MODULES');
   if RootNode <> nil then
-    for I := 0 to RootNode.ChildNodes.Count-1 do
+    for I := 0 to RootNode.ChildNodes.Count - 1 do
       FModulePath.Add(RootNode.ChildNodes.Nodes[I].Text);
 
 (*
@@ -929,19 +1002,23 @@ var
   AHelpFileName: string;
 begin
   // Icon
-  if FIconFileName <> '' then begin
+  if FIconFileName <> '' then
+  begin
     try
       Ext := LowerCase(ExtractFileExt(FIconFileName));
-      if Ext = '.ico' then begin
+      if Ext = '.ico' then
+      begin
         FIcon := TIcon.Create;
         FIcon.LoadFromFile(FInstalledDir + '\' + FIconFileName);
-      end else if Ext = '.bmp' then begin
+      end else if Ext = '.bmp' then
+      begin
         ABitmap := TBitmap.Create;
         ImgList := TImageList.Create(nil);
         try
           ABitmap.LoadFromFile(FInstalledDir + '\' + FIconFileName);
           Idx := ImgList.Add(ABitmap, nil);
-          if Idx >= 0 then begin
+          if Idx >= 0 then
+          begin
             FIcon := TIcon.Create;
             ImgList.GetIcon(Idx, FIcon);
           end;
@@ -949,7 +1026,7 @@ begin
           ABitmap.Free;
           ImgList.Free;
         end;
-      end else Raise Exception.Create('');
+      end else raise Exception.Create('');
     except on Exception do
       begin
         //Msg := Format(ERR_ICONFILE_NOT_FOUND, [FIconFileName]);
@@ -965,17 +1042,21 @@ procedure PAddIn.SetIsActive(Value: Boolean);
 var
   Msg: string;
 begin
-  if FIsActive <> Value then begin
+  if FIsActive <> Value then
+  begin
     try
       FIsActive := Value;
       MainForm.BarManager.LockUpdate := True;
       SetAllMenuItemsVisibility(FIsActive);
       MainForm.BarManager.LockUpdate := False;
-      if Assigned(FOnMessage) then begin
-        if FIsActive then begin
+      if Assigned(FOnMessage) then
+      begin
+        if FIsActive then
+        begin
           Msg := Format(MSG_ADDIN_ACTIVATED, [FAddInName]);
           FOnMessage(Msg);
-        end else begin
+        end else
+        begin
           Msg := Format(MSG_ADDIN_DEACTIVATED, [FAddInName]);
           FOnMessage(Msg);
         end;
@@ -995,26 +1076,31 @@ var
   dxItem: TdxBarItem;
   script: string;
 begin
-  if Sender is TdxBarSubItem then begin
+  if Sender is TdxBarSubItem then
+  begin
     dxSubItem := Sender as TdxBarSubItem;
     script := dxSubItem.Description;
-    if script <> '' then begin
+    if script <> '' then
+    begin
       if ShellExecute(0, 'open', pchar(script), '', pchar(FInstalledDir), SW_SHOWNORMAL) <= 32
-      then if Assigned(FOnMessage) then FOnMessage(Format(ERR_ADDIN_SCRIPT_EXECUTION, [script]));
+        then if Assigned(FOnMessage) then FOnMessage(Format(ERR_ADDIN_SCRIPT_EXECUTION, [script]));
     end;
-  end else if Sender is TdxBarButton then begin
+  end else if Sender is TdxBarButton then
+  begin
     dxItem := Sender as TdxBarButton;
     script := dxItem.Description;
-    if script <> '' then begin
+    if script <> '' then
+    begin
       if ShellExecute(0, 'open', pchar(script), '', pchar(FInstalledDir), SW_SHOWNORMAL) <= 32
-      then if Assigned(FOnMessage) then FOnMessage(Format(ERR_ADDIN_SCRIPT_EXECUTION, [script]));
+        then if Assigned(FOnMessage) then FOnMessage(Format(ERR_ADDIN_SCRIPT_EXECUTION, [script]));
     end;
   end;
 end;
 
 procedure PAddIn.HelpMenuItemClickedHandler(Sender: TObject);
 begin
-  if FHelpFileName <> '' then begin
+  if FHelpFileName <> '' then
+  begin
     ShowHtmlHelp(FHelpFileName);
   end;
 
@@ -1048,7 +1134,7 @@ begin
 }
 end;
 
-procedure PAddIn.LoadXMLValues(XMLNode: IXMLNode; Path: String);
+procedure PAddIn.LoadXMLValues(XMLNode: IXMLNode; Path: string);
 (*
 var
   Reg: TRegistry;
@@ -1083,30 +1169,30 @@ end;
 *)
 begin
   SetupAddInInfo(XMLNode, Path);
-  SetupAuxiliaryData;//(XMLNode, Path);
+  SetupAuxiliaryData; //(XMLNode, Path);
 end;
 
 procedure PAddIn.SetupMenus;
-    function GetMenuFile: TXMLDocument;
-    var
-      XMLDoc: TXMLDocument;
-      FilePath: string;
-      Msg: string;
-    begin
-      Result := nil;
-      FilePath := FInstalledDir + '\' + FMenuFileName;
-      XMLDoc := TXMLDocument.Create(Application);
-      try
-        XMLDoc.LoadFromFile(FilePath);
-        Result := XMLDoc;
-      except on EDOMParseError do
-        begin
-          XMLDoc.Free;
-          Msg := Format(ERR_ADDIN_MENUFILE_NOT_EXIST, [FilePath]);
-          raise EAddInMenuFileInvalidException.Create(Msg);
-        end;
+  function GetMenuFile: TXMLDocument;
+  var
+    XMLDoc: TXMLDocument;
+    FilePath: string;
+    Msg: string;
+  begin
+    Result := nil;
+    FilePath := FInstalledDir + '\' + FMenuFileName;
+    XMLDoc := TXMLDocument.Create(Application);
+    try
+      XMLDoc.LoadFromFile(FilePath);
+      Result := XMLDoc;
+    except on EDOMParseError do
+      begin
+        XMLDoc.Free;
+        Msg := Format(ERR_ADDIN_MENUFILE_NOT_EXIST, [FilePath]);
+        raise EAddInMenuFileInvalidException.Create(Msg);
       end;
     end;
+  end;
 var
   XMLDoc: TXMLDocument;
   XMLNode, XMLSubNode: IXMLNode;
@@ -1134,7 +1220,8 @@ begin
     SetupHelpMenu;
     SetAllMenuItemsVisibility(FIsActive);
 
-    if IsActive then begin
+    if IsActive then
+    begin
       Msg := Format(MSG_ADDIN_MENU_CONFIGURED, [FAddInName]);
       if Assigned(FOnMessage) then FOnMessage(Msg);
     end;
@@ -1158,21 +1245,25 @@ end;
 
 destructor PStarUMLAddIn.Destroy;
 begin
-  if Assigned(FStarUMLAddin) then FStarUMLAddin.FinalizeAddIn;
+  if Assigned(FStarUMLAddin) then
+  begin
+    FStarUMLAddin.FinalizeAddIn;
+  end;
   FStarUMLAddin := nil;
   inherited;
 end;
 
 procedure PStarUMLAddIn.SetupCOMObject(ActiveFlag: Boolean);
 
-  function ExecAndWait(const ExecuteFile, ParamString : string): boolean;
+  function ExecAndWait(const ExecuteFile, ParamString: string): boolean;
   var
     SEInfo: TShellExecuteInfo;
     ExitCode: DWORD;
   begin
     FillChar(SEInfo, SizeOf(SEInfo), 0);
     SEInfo.cbSize := SizeOf(TShellExecuteInfo);
-    with SEInfo do begin
+    with SEInfo do
+    begin
       fMask := SEE_MASK_NOCLOSEPROCESS;
       Wnd := Application.Handle;
       lpFile := PChar(ExecuteFile);
@@ -1185,29 +1276,32 @@ procedure PStarUMLAddIn.SetupCOMObject(ActiveFlag: Boolean);
         Application.ProcessMessages;
         GetExitCodeProcess(SEInfo.hProcess, ExitCode);
       until (ExitCode <> STILL_ACTIVE) or Application.Terminated;
-      Result:=True;
+      Result := True;
     end
-    else Result:=False;
+    else Result := False;
   end;
 
 var
   Msg: string;
   I: Integer;
   R: Boolean;
+  lStarUMLApplication:IStarUMLApplication;
 begin
-  if FCOMObjName <> '' then begin
+  if FCOMObjName <> '' then
+  begin
     try
       ProgIDToClassID(FCOMObjName);
     except
-      R := ExecAndWait('regsvr32','/s "' + InstalledDir + '\' + FFilename + '"');
+      R := ExecAndWait('regsvr32', '/s "' + InstalledDir + '\' + FFilename + '"');
       if Assigned(FOnMessage) then
         if R then
           FOnMessage(Format('AddIn "%s" is registered successfully.', [FAddInName]))
         else
           FOnMessage(Format('AddIn "%s" registeration is failed.', [FAddInName]));
 
-      for I := 0 to FModulePath.Count-1 do begin
-        R := ExecAndWait('regsvr32','/s "' + InstalledDir + '\' + FModulePath.Strings[I] + '"');
+      for I := 0 to FModulePath.Count - 1 do
+      begin
+        R := ExecAndWait('regsvr32', '/s "' + InstalledDir + '\' + FModulePath.Strings[I] + '"');
         if Assigned(FOnMessage) then
           if R then
             FOnMessage(Format('AddIn sub module "%s" is registered successfully.', [ExtractFileName(FModulePath.Strings[I])]))
@@ -1217,10 +1311,14 @@ begin
     end;
 
     try
-      if ActiveFlag then begin
+      if ActiveFlag then
+      begin
         FStarUMLAddIn := CreateCOMObject(ProgIDToClassID(FCOMObjName)) as IStarUMLAddIn;
-        FStarUMLAddIn.InitializeAddIn;
-      end else begin
+        lStarUMLApplication := GetActiveOleObject('StarUMLProject.StarUMLApplication') as IStarUMLApplication;
+        FStarUMLAddIn.SetStarUMLApplication(lStarUMLApplication);
+        FStarUMLAddIn.InitializeAddIn;        
+      end else
+      begin
         if Assigned(FStarUMLAddIn) then FStarUMLAddIn.FinalizeAddIn;
         FStarUMLAddIn := nil;
       end;
@@ -1233,21 +1331,23 @@ begin
   end;
 end;
 
-procedure PStarUMLAddIn.SetupAddInInfo(XMLNode: IXMLNode; Path: String);
+procedure PStarUMLAddIn.SetupAddInInfo(XMLNode: IXMLNode; Path: string);
 var
   Msg: string;
 begin
   inherited;
   // InstalledDir
   FInstalledDir := Path;
-  if FInstalledDir = '' then begin
+  if FInstalledDir = '' then
+  begin
     Msg := Format(ERR_ADDIN_ITEM_REGVALUE, ['InstalledDir']);
     raise EAddInLoadingValuesException.Create(Msg);
   end;
   // MenuFile
   FMenuFileName := ReadChildStringValue(XMLNode, 'MENUFILE', '');
-  if FMenuFileName = '' then begin
-    Msg := Format(ERR_ADDIN_ITEM_REGVALUE, ['MenuFile']);
+  if FMenuFileName = '' then
+  begin
+    Msg := Format(ERR_ADDIN_MENUFILE_NOT_EXIST, ['MenuFile']);
     raise EAddInLoadingValuesException.Create(Msg);
   end;
 end;
@@ -1256,7 +1356,8 @@ procedure PStarUMLAddIn.SetIsActive(Value: Boolean);
 var
   Msg: string;
 begin
-  if FIsActive <> Value then begin
+  if FIsActive <> Value then
+  begin
     try
       SetupCOMObject(Value);
       inherited;
@@ -1275,30 +1376,34 @@ var
   dxItem: TdxBarItem;
 begin
   inherited;
-  if Sender is TdxBarSubItem then begin
+  if Sender is TdxBarSubItem then
+  begin
     dxSubItem := Sender as TdxBarSubItem;
-    if Assigned(FStarUMLAddIn) and (dxSubItem.Tag >= 1) then begin
+    if Assigned(FStarUMLAddIn) and (dxSubItem.Tag >= 1) then
+    begin
       try
         if FStarUMLAddIn.DoMenuAction(dxSubItem.Tag) <> S_OK then
           if Assigned(FOnMessage) then FOnMessage(Format(ERR_ADDIN_COMOBJ_MSG_SENDING, [FComObjName]));
       except on Exception do
-        if Assigned(FOnMessage) then FOnMessage(Format(ERR_ADDIN_COMOBJ_MSG_SENDING, [FComObjName]));
+          if Assigned(FOnMessage) then FOnMessage(Format(ERR_ADDIN_COMOBJ_MSG_SENDING, [FComObjName]));
       end;
     end;
-  end else if Sender is TdxBarButton then begin
+  end else if Sender is TdxBarButton then
+  begin
     dxItem := Sender as TdxBarButton;
-    if Assigned(FStarUMLAddIn) and (dxItem.Tag >= 1)  then begin
+    if Assigned(FStarUMLAddIn) and (dxItem.Tag >= 1) then
+    begin
       try
         if FStarUMLAddIn.DoMenuAction(dxItem.Tag) <> S_OK then
           if Assigned(FOnMessage) then FOnMessage(Format(ERR_ADDIN_COMOBJ_MSG_SENDING, [FComObjName]));
       except on Exception do
-        if Assigned(FOnMessage) then FOnMessage(Format(ERR_ADDIN_COMOBJ_MSG_SENDING, [FComObjName]));
+          if Assigned(FOnMessage) then FOnMessage(Format(ERR_ADDIN_COMOBJ_MSG_SENDING, [FComObjName]));
       end;
     end;
   end;
 end;
 
-procedure PStarUMLAddIn.LoadXMLValues(XMLNode: IXMLNode; Path: String);
+procedure PStarUMLAddIn.LoadXMLValues(XMLNode: IXMLNode; Path: string);
 begin
   inherited;
   SetupCOMObject(FIsActive);
@@ -1321,14 +1426,17 @@ destructor PFrameWindowAddIn.Destroy;
 var
   TempAddIn: IStarUMLAddIn;
 begin
-  if Assigned(FFrameWindowAddIn) then begin
-    if FFrameWindowAddIn.QueryInterface(IID_IStarUMLAddIn, TempAddIn) = S_OK then begin
+  if Assigned(FFrameWindowAddIn) then
+  begin
+    if FFrameWindowAddIn.QueryInterface(IID_IStarUMLAddIn, TempAddIn) = S_OK then
+    begin
       TempAddIn.FinalizeAddIn;
       TempAddIn := nil;
     end;
   end;
   FFrameWindowAddIn := nil;
-  if Assigned(FTab) then begin
+  if Assigned(FTab) then
+  begin
     FTab.PageControl := nil;
     FTab.Free;
   end;
@@ -1336,50 +1444,52 @@ begin
 end;
 
 procedure PFrameWindowAddIn.SetupFrameWindow(ActiveFlag: Boolean);
-    function CreateContainerWindow(ParentControl: TdxPageControl): TdxTabSheet;
-    var
-      Tab: TdxTabSheet;
-      Container: TOleContainer;
-      OleObj: Variant;
-      Msg: string;
-    begin
-      Result := nil;
-      Tab := TdxTabSheet.Create(ParentControl);
-      Tab.Parent := ParentControl;
-      Tab.PageControl := ParentControl;
-      Container := TOleContainer.Create(Tab);
-      Container.Parent := Tab;
-      Container.Align := alClient;
-      try
-        Container.AllowInPlace := True;
-        Container.CreateObject(FCOMObjName, False);
-        OleObj := Container.OleObject;
-        FFrameWindowAddIn := IUnknown(OleObj);
+  function CreateContainerWindow(ParentControl: TcxPageControl): TcxTabSheet;
+  var
+    Tab: TcxTabSheet;
+    Container: TOleContainer;
+    OleObj: Variant;
+    Msg: string;
+  begin
+    Result := nil;
+    Tab := TcxTabSheet.Create(ParentControl);
+    Tab.Parent := ParentControl;
+    Tab.PageControl := ParentControl;
+    Container := TOleContainer.Create(Tab);
+    Container.Parent := Tab;
+    Container.Align := alClient;
+    try
+      Container.AllowInPlace := True;
+      Container.CreateObject(FCOMObjName, False);
+      OleObj := Container.OleObject;
+      FFrameWindowAddIn := IUnknown(OleObj);
         //Container.AllowActiveDoc := False;
         //Container.SizeMode := smStretch;
         //Container.AutoActivate := aaGetFocus;
         //Container.DoVerb(ovShow);
         //Container.DoVerb(ovPrimary);
         //Container.DoVerb(ovInplaceActivate);
-        Result := Tab;
-      except on E: Exception do
-        begin
-          if Assigned(Tab) then Tab.Free;
-          Msg := Format(ERR_ADDIN_COMOBJ_CREATION, [FCOMObjName]);
-          raise EAddInLoadingValuesException.Create(Msg);
-        end;
+      Result := Tab;
+    except on E: Exception do
+      begin
+        if Assigned(Tab) then Tab.Free;
+        Msg := Format(ERR_ADDIN_COMOBJ_CREATION, [FCOMObjName]);
+        raise EAddInLoadingValuesException.Create(Msg);
       end;
     end;
+  end;
 var
-  PageControl: TdxPageControl;
+  PageControl: TcxPageControl;
   Msg: string;
 begin
   if FFrameWindowParent = pwError then Exit;
-  if FCOMObjName = '' then begin
+  if FCOMObjName = '' then
+  begin
     Msg := ERR_ADDIN_COMOBJ_INVALID_PROGID;
     raise EAddInLoadingValuesException.Create(Msg);
   end;
-  if ActiveFlag then begin
+  if ActiveFlag then
+  begin
     // if FFrameWindowParent = pwInformation then
     //   PageControl := MainForm.InformationFrame.InformationPageControl
     // else if FFrameWindowParent = pwBrowser then
@@ -1387,16 +1497,20 @@ begin
     // if FFrameWindowParent = pwInspector then
     //   PageControl := MainForm.InspectorFrame.InspectorPageControl;
     FTab := CreateContainerWindow(PageControl);
-    if Assigned(FTab) then begin
+    if Assigned(FTab) then
+    begin
       FTab.Caption := Self.DisplayName;
-      if Assigned(FIcon) then begin
+      if Assigned(FIcon) then
+      begin
         FTabImageIndex := PageControl.Images.AddIcon(FIcon);
         FTab.ImageIndex := FTabImageIndex;
       end;
     end;
-  end else begin
+  end else
+  begin
     FFrameWindowAddIn := nil;
-    if Assigned(FTab) then begin
+    if Assigned(FTab) then
+    begin
       FTab.PageControl := nil;
       FTab.Free;
       FTab := nil;
@@ -1404,20 +1518,22 @@ begin
   end;
 end;
 
-procedure PFrameWindowAddIn.SetupAddInInfo(XMLNode: IXMLNode; Path: String);
+procedure PFrameWindowAddIn.SetupAddInInfo(XMLNode: IXMLNode; Path: string);
 var
   Str, Msg: string;
 begin
   inherited;
   // InstalledDir
   FInstalledDir := Path;
-  if FInstalledDir = '' then begin
+  if FInstalledDir = '' then
+  begin
     Msg := Format(ERR_ADDIN_ITEM_REGVALUE, ['InstalledDir']);
     raise EAddInLoadingValuesException.Create(Msg);
   end;
   // MenuFile
   FMenuFileName := ReadChildStringValue(XMLNode, 'MENUFILE', '');
-  if FMenuFileName = '' then begin
+  if FMenuFileName = '' then
+  begin
     Msg := Format(ERR_ADDIN_ITEM_REGVALUE, ['MenuFile']);
     raise EAddInLoadingValuesException.Create(Msg);
   end;
@@ -1428,7 +1544,8 @@ begin
   if Str = 'browser' then FFrameWindowParent := pwBrowser
   else if Str = 'inspector' then FFrameWindowParent := pwInspector
   else if Str = 'information' then FFrameWindowParent := pwInformation
-  else begin
+  else
+  begin
     FFrameWindowParent := pwError;
     Msg := Format(ERR_ADDIN_ITEM_REGVALUE, ['FrameWindowPlace']);
     raise EAddInLoadingValuesException.Create(Msg);
@@ -1439,7 +1556,8 @@ procedure PFrameWindowAddIn.SetIsActive(Value: Boolean);
 var
   Msg: string;
 begin
-  if FIsActive <> Value then begin
+  if FIsActive <> Value then
+  begin
     try
       SetupFrameWindow(Value);
       inherited;
@@ -1460,27 +1578,31 @@ var
 begin
   inherited;
   if Assigned(FFrameWindowAddIn) and
-     (FFrameWindowAddIn.QueryInterface(IID_IStarUMLAddIn, TempAddIn) = S_OK) then
+    (FFrameWindowAddIn.QueryInterface(IID_IStarUMLAddIn, TempAddIn) = S_OK) then
   begin
     try
-      if Sender is TdxBarSubItem then begin
+      if Sender is TdxBarSubItem then
+      begin
         dxSubItem := Sender as TdxBarSubItem;
-        if dxSubItem.Tag >= 1 then begin
+        if dxSubItem.Tag >= 1 then
+        begin
           try
             if TempAddIn.DoMenuAction(dxSubItem.Tag) <> S_OK then
               if Assigned(FOnMessage) then FOnMessage(Format(ERR_ADDIN_COMOBJ_MSG_SENDING, [FComObjName]));
           except on Exception do
-            if Assigned(FOnMessage) then FOnMessage(Format(ERR_ADDIN_COMOBJ_MSG_SENDING, [FComObjName]));
+              if Assigned(FOnMessage) then FOnMessage(Format(ERR_ADDIN_COMOBJ_MSG_SENDING, [FComObjName]));
           end;
         end;
-      end else if Sender is TdxBarButton then begin
+      end else if Sender is TdxBarButton then
+      begin
         dxItem := Sender as TdxBarButton;
-        if dxItem.Tag >= 1  then begin
+        if dxItem.Tag >= 1 then
+        begin
           try
             if TempAddIn.DoMenuAction(dxItem.Tag) <> S_OK then
               if Assigned(FOnMessage) then FOnMessage(Format(ERR_ADDIN_COMOBJ_MSG_SENDING, [FComObjName]));
           except on Exception do
-            if Assigned(FOnMessage) then FOnMessage(Format(ERR_ADDIN_COMOBJ_MSG_SENDING, [FComObjName]));
+              if Assigned(FOnMessage) then FOnMessage(Format(ERR_ADDIN_COMOBJ_MSG_SENDING, [FComObjName]));
           end;
         end;
       end;
@@ -1490,7 +1612,7 @@ begin
   end;
 end;
 
-procedure PFrameWindowAddIn.LoadXMLValues(XMLNode: IXMLNode; Path: String);
+procedure PFrameWindowAddIn.LoadXMLValues(XMLNode: IXMLNode; Path: string);
 begin
   inherited;
   SetupFrameWindow(FIsActive);
@@ -1520,7 +1642,8 @@ var
   AddIn: PAddIn;
 begin
   try
-    for I := FAddIns.Count - 1 downto 0 do begin
+    for I := FAddIns.Count - 1 downto 0 do
+    begin
       AddIn := FAddIns.Items[I];
       if Assigned(AddIn) then AddIn.Free;
     end;
@@ -1627,7 +1750,7 @@ begin
     Result := (LowerCase(ReadChildStringValue(Node, 'ISFRAMEWINDOW', 'false')) = 'true');
   end;
 
-  function AddAddIn(Path, FilePath: String): Boolean;
+  function AddAddIn(Path, FilePath: string): Boolean;
   var
     XMLDoc: TXMLDocument;
     RootNode, Node: IXMLNode;
@@ -1643,32 +1766,40 @@ begin
     if XMLDoc.IsEmptyDoc then raise Exception.Create(ERR_EMPTY_DOCUMENT);
     RootNode := XMLDoc.DocumentElement;
     try
-      if IsFrameWindowAddIn(RootNode) then AddIn := PFrameWindowAddIn.Create
-      else AddIn := PStarUMLAddIn.Create;
+      if IsFrameWindowAddIn(RootNode) then
+      begin
+        AddIn := PFrameWindowAddIn.Create
+      end else
+      begin
+        AddIn := PStarUMLAddIn.Create;
+      end;
 
       AddIn.OnMessage := MessageProc;
       AddIn.LoadXMLValues(RootNode, Path);
       FAddIns.Add(AddIn);
     except
-      on E: Exception do begin
+      on E: Exception do
+      begin
         if XMLDoc <> nil then XMLDoc.Free;
         Result := false;
       end;
     end;
   end;
 
-  procedure LoadFiles(Path: String);
+  procedure LoadFiles(Path: string);
   var
     SearchRec: TSearchRec;
     AddInDescName, FileName: string;
   begin
     // files
-    if FindFirst(Path + '\*' + ADDIN_DESCRIPTION_EXTENSION, faArchive, SearchRec) = 0 then begin
+    if FindFirst(Path + '\*' + ADDIN_DESCRIPTION_EXTENSION, faArchive, SearchRec) = 0 then
+    begin
       repeat
-        AddInDescName := Copy(SearchRec.Name, 1, Length(SearchRec.Name)-Length('.'+ADDIN_DESCRIPTION_EXTENSION));
+        AddInDescName := Copy(SearchRec.Name, 1, Length(SearchRec.Name) - Length('.' + ADDIN_DESCRIPTION_EXTENSION));
         FileName := Path + '\' + AddInDescName + '.' + ADDIN_DESCRIPTION_EXTENSION;
 
-        if AddAddIn(Path, FileName) then begin
+        if AddAddIn(Path, FileName) then
+        begin
           MessageProc(MSG_ADDIN_LOADED, [AddInDescName]);
         end
         else
@@ -1677,16 +1808,16 @@ begin
     end;
 
     // folders
-    if FindFirst(Path + '\*', faDirectory, SearchRec) = 0 then begin
+    if FindFirst(Path + '\*', faDirectory, SearchRec) = 0 then
+    begin
       repeat
         if (SearchRec.Name <> '.') and (SearchRec.Name <> '..') then
           LoadFiles(Path + '\' + SearchRec.Name);
       until FindNext(SearchRec) <> 0;
     end;
   end;
-
 begin
-  LoadFiles(ExtractFileDir(Application.ExeName) + '\' + EXT_DIR);
+  LoadFiles(Settings[cExtentionDirectoryTag]);
 end;
 
 procedure PAddInManager.SetupMenus;
@@ -1694,11 +1825,13 @@ var
   I: Integer;
   AddIn: PAddIn;
 begin
-  if FAddIns.Count > 0 then begin
+  if FAddIns.Count > 0 then
+  begin
     try
       //MessageProc(MSG_START_MENUCONFIG);
       I := 0;
-      while I < FAddIns.Count do begin
+      while I < FAddIns.Count do
+      begin
         AddIn := FAddIns.Items[I];
         //MessageProc(MSG_ADDIN_NAME + AddIn.DisplayName);
         try
@@ -1731,7 +1864,8 @@ var
 begin
   Result := nil;
   for I := 0 to AddInsCount - 1 do
-    if AddIn[I].COMSvrName = COMObjectName then begin
+    if AddIn[I].COMSvrName = COMObjectName then
+    begin
       Result := AddIn[I];
       Exit;
     end;
@@ -1739,6 +1873,22 @@ end;
 
 // PAddInManager
 ////////////////////////////////////////////////////////////////////////////////
+
+function PAddIn.GetEnvironmentVariableAsString(
+  const VariableName: string): string;
+var
+  lBufferSize: Integer; // buffer size required for value
+begin
+  Result := '';
+  // Get required buffer size (inc. terminal #0)
+  lBufferSize := GetEnvironmentVariable(PChar(VariableName), nil, 0);
+  if lBufferSize > 0 then
+  begin
+    // Read env var value into result string
+    SetLength(Result, lBufferSize - 1);
+    GetEnvironmentVariable(PChar(VariableName), PChar(Result), lBufferSize);
+  end
+end;
 
 end.
 

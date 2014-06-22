@@ -50,7 +50,7 @@ interface
 uses
   Core, DiagramEditors,
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  dxPageControl, dxBar, ExtCtrls, FlatPanel;
+  dxBar, ExtCtrls, FlatPanel, cxControls, cxPC;
 
 type
   // Event Types.
@@ -58,13 +58,13 @@ type
 
   // TWorkingAreaFrame
   TWorkingAreaFrame = class(TFrame)
-    DiagramPageControl: TdxPageControl;
     MapButtonImage: TImage;
     ClientPanel: TFlatPanel;
-    procedure DiagramPageControlChanging(Sender: TObject;
-      NewPage: TdxTabSheet; var AllowChange: Boolean);
+    DiagramPageControl: TcxPageControl;
     procedure DiagramPageControlContextPopup(Sender: TObject;
       MousePos: TPoint; var Handled: Boolean);
+    procedure DiagramPageControlPageChanging(Sender: TObject;
+      NewPage: TcxTabSheet; var AllowChange: Boolean);
   private
     TabList: TList;
     DiagramEditorList: TList;
@@ -99,9 +99,9 @@ type
     procedure SetActiveDiagramEditor(Value: PDiagramEditor);
     function GetActiveDiagramIndex: Integer;
     function GetActiveDiagram: PDiagram;
-    function GetDiagramEditorOfTab(Tab: TdxTabSheet): PDiagramEditor;
+    function GetDiagramEditorOfTab(Tab: TcxTabSheet): PDiagramEditor;
     function GetDiagramEditorOfDiagram(ADiagram: PDiagram): PDiagramEditor;
-    function GetTabOfDiagram(ADiagram: PDiagram): TdxTabSheet;
+    function GetTabOfDiagram(ADiagram: PDiagram): TcxTabSheet;
     function AddDiagramEditor(ADiagram: PDiagram): PDiagramEditor;
     procedure RemoveDiagramEditor(ADiagramEditor: PDiagramEditor);
     procedure SetImageList(Value: TImageList);
@@ -312,7 +312,7 @@ begin
     Result := nil;
 end;
 
-function TWorkingAreaFrame.GetDiagramEditorOfTab(Tab: TdxTabSheet): PDiagramEditor;
+function TWorkingAreaFrame.GetDiagramEditorOfTab(Tab: TcxTabSheet): PDiagramEditor;
 var
   Idx: Integer;
 begin
@@ -338,7 +338,7 @@ begin
   Result := nil;
 end;
 
-function TWorkingAreaFrame.GetTabOfDiagram(ADiagram: PDiagram): TdxTabSheet;
+function TWorkingAreaFrame.GetTabOfDiagram(ADiagram: PDiagram): TcxTabSheet;
 var
   I, Idx: Integer;
   DE: PDiagramEditor;
@@ -357,12 +357,11 @@ end;
 
 function TWorkingAreaFrame.AddDiagramEditor(ADiagram: PDiagram): PDiagramEditor;
 var
-  Tab: TdxTabSheet;
+  Tab: TcxTabSheet;
   DiagramEditor: PDiagramEditor;
 begin
   // Making Tab.
-  Tab := TdxTabSheet.Create(DiagramPageControl);
-  Tab.Parent := DiagramPageControl;
+  Tab := TcxTabSheet.Create(DiagramPageControl);
   TabList.Add(Tab);
   // Making DiagramEditor.
   DiagramEditor := PDiagramEditor.Create(Tab, ADiagram.DiagramView);
@@ -384,7 +383,8 @@ begin
   // Initialze Tab.
   Tab.ImageIndex := DiagramEditor.DiagramImageIndex;
   Tab.Caption := ADiagram.Name;
-  Tab.PageControl := DiagramPageControl;
+  Tab.PageControl := DiagramPageControl; // Fires OnPageChaning if first Page added
+  Tab.Parent := DiagramPageControl; // Fires OnPageChaning if first Page added  
   DiagramPageControl.ActivePage := Tab;
   Result := DiagramEditor;
 end;
@@ -392,7 +392,7 @@ end;
 procedure TWorkingAreaFrame.RemoveDiagramEditor(ADiagramEditor: PDiagramEditor);
 var
   Idx: Integer;
-  Tab: TdxTabSheet;
+  Tab: TcxTabSheet;
 begin
   Idx := DiagramEditorList.IndexOf(ADiagramEditor);
   if Idx > -1 then begin
@@ -425,7 +425,7 @@ end;
 
 procedure TWorkingAreaFrame.OpenDiagram(ADiagram: PDiagram);
 var
-  Tab: TdxTabSheet;
+  Tab: TcxTabSheet;
 begin
   Tab := GetTabOfDiagram(ADiagram);
   if Tab <> nil then begin
@@ -530,7 +530,7 @@ end;
 procedure TWorkingAreaFrame.UpdateDiagramTabs;
 var
   I: Integer;
-  Tab: TdxTabSheet;
+  Tab: TcxTabSheet;
   DE: PDiagramEditor;
 begin
   for I := 0 to TabList.Count - 1 do
@@ -542,20 +542,20 @@ begin
   end;
 end;
 
-procedure TWorkingAreaFrame.DiagramPageControlChanging(Sender: TObject;
-  NewPage: TdxTabSheet; var AllowChange: Boolean);
-var
-  DiagramEditor: PDiagramEditor;
-begin
-  DiagramEditor := GetDiagramEditorOfTab(NewPage);
-  SetActiveDiagramEditor(DiagramEditor);
-end;
-
 procedure TWorkingAreaFrame.DiagramPageControlContextPopup(Sender: TObject;
   MousePos: TPoint; var Handled: Boolean);
 begin
   if FTabPopupMenu <> nil then
     FTabPopupMenu.PopupFromCursorPos;
+end;
+
+procedure TWorkingAreaFrame.DiagramPageControlPageChanging(Sender: TObject;
+  NewPage: TcxTabSheet; var AllowChange: Boolean);
+var
+  DiagramEditor: PDiagramEditor;
+begin
+  DiagramEditor := GetDiagramEditorOfTab(NewPage);
+  SetActiveDiagramEditor(DiagramEditor);
 end;
 
 end.

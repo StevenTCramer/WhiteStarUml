@@ -46,11 +46,18 @@ unit OptionMgrAux;
 {******************************************************************************}
 
 interface
-          
+
 uses
   OptMgr_TLB,
-  Classes, SysUtils, Graphics, Windows,
-  Xmldom, XMLIntf, Msxmldom, XMLDoc, dxInspRw;
+  Classes,
+  SysUtils,
+  Graphics,
+  Windows,
+  Xmldom,
+  XMLIntf,
+  Msxmldom,
+  XMLDoc;
+//  dxInspRw;
 
 const
   OPTION_SCHEMA_FILE_EXT = 'xml';
@@ -85,10 +92,10 @@ const
   XOD_ATTRIBUTE_KEY = 'key';
 
   OPTIONITEM_TYPES: array[0..10] of string =
-    (XOD_ELEMENT_ITEM_INTEGER, XOD_ELEMENT_ITEM_REAL, XOD_ELEMENT_ITEM_STRING,
-     XOD_ELEMENT_ITEM_BOOLEAN, XOD_ELEMENT_ITEM_TEXT, XOD_ELEMENT_ITEM_ENUMERATION,
-     XOD_ELEMENT_ITEM_RANGE, XOD_ELEMENT_ITEM_FONTNAME, XOD_ELEMENT_ITEM_FILENAME, XOD_ELEMENT_ITEM_PATHNAME,
-     XOD_ELEMENT_ITEM_COLOR);
+  (XOD_ELEMENT_ITEM_INTEGER, XOD_ELEMENT_ITEM_REAL, XOD_ELEMENT_ITEM_STRING,
+    XOD_ELEMENT_ITEM_BOOLEAN, XOD_ELEMENT_ITEM_TEXT, XOD_ELEMENT_ITEM_ENUMERATION,
+    XOD_ELEMENT_ITEM_RANGE, XOD_ELEMENT_ITEM_FONTNAME, XOD_ELEMENT_ITEM_FILENAME, XOD_ELEMENT_ITEM_PATHNAME,
+    XOD_ELEMENT_ITEM_COLOR);
 
   VALUE_TRUE = 'True';
   VALUE_FALSE = 'False';
@@ -139,7 +146,11 @@ implementation
 
 uses
   NLS_OPTMGR,
-  Forms, Dialogs, Variants, ShellAPI, ShlObj;
+  Forms,
+  Dialogs,
+  Variants,
+  ShellAPI,
+  ShlObj;
 
 ////////////////////////////////////////////////////////////////////////////////
 // PDirectoryDialog
@@ -158,7 +169,8 @@ begin
   BrowseInfo.ulFlags := BIF_RETURNONLYFSDIRS;
   lpItemID := SHBrowseForFolder(BrowseInfo);
   Result := not (lpItemId = nil);
-  if lpItemId <> nil then begin
+  if lpItemId <> nil then
+  begin
     SHGetPathFromIDList(lpItemID, TempPath);
     FDirName := TempPath;
     GlobalFreePtr(lpItemID);
@@ -221,7 +233,8 @@ var
 begin
   Result := False;
   for I := 0 to Length(OPTIONITEM_TYPES) - 1 do
-    if Value = OPTIONITEM_TYPES[I] then begin
+    if Value = OPTIONITEM_TYPES[I] then
+    begin
       Result := True;
       Exit;
     end;
@@ -232,7 +245,8 @@ var
   Vt: TVarType;
 begin
   Vt := VarType(Value);
-  if (Vt = varNull) or (Vt = varEmpty) then begin
+  if (Vt = varNull) or (Vt = varEmpty) then
+  begin
     Result := False;
     Exit;
   end;
@@ -247,8 +261,8 @@ begin
       Result := VarIsType(Value, varBoolean);
     otEnumeration:
       Result := VarIsOrdinal(Value);
-    else
-      Result := False;
+  else
+    Result := False;
   end;
 end;
 
@@ -259,7 +273,8 @@ var
 begin
   Result := HKEY_UNKNOWN;
   P := Pos(REG_DELIMITER, Path);
-  if P > 0 then begin
+  if P > 0 then
+  begin
     S := Copy(Path, 1, P - 1);
     if S = DESC_HKEY_CLASSES_ROOT then
       Result := HKEY_CLASSES_ROOT
@@ -290,7 +305,8 @@ begin
     P := Pos(REG_DELIMITER, S);
     if P = 0 then
       R := R + REG_DELIMITER + S
-    else begin
+    else
+    begin
       R := R + REG_DELIMITER + Copy(S, 1, P - 1);
       S := Copy(S, P + 1, Length(S) - P);
     end;
@@ -300,7 +316,7 @@ end;
 
 function GetDllPath: string;
 var
-  ModuleName : array[0..1023] of char;
+  ModuleName: array[0..1023] of char;
   Path: string;
 begin
   FillChar(ModuleName, Sizeof(ModuleName), #10);
@@ -313,3 +329,4 @@ end;
 ////////////////////////////////////////////////////////////////////////////////
 
 end.
+

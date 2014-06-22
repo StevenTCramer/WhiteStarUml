@@ -49,12 +49,10 @@ interface
 
 uses
   UMLModels,
-  Classes, XMLDoc, XMLIntf;
-
-const
-  EXT_DIR = 'modules';
-  APPROACH_EXTENSION = 'apr';
-  ICON_EXTENSION = 'ico';
+  Classes,
+  XMLDoc,
+  XMLIntf,
+  StarUMLConstantsUnit;
 
 type
   // forward declaration
@@ -196,7 +194,8 @@ var
 implementation
 
 uses
-  LogMgr, Windows, SysUtils, Forms, Variants, Registry, ActiveX, NLS_StarUML;
+  LogMgr, Windows, SysUtils, Forms, Variants, Registry, ActiveX, NLS_StarUML,
+  SettingsUnit;
 
 const
   APPROACHES_REGPATH = '\Software\StarUML\Approaches';
@@ -550,7 +549,7 @@ end;
 constructor PApproachManager.Create;
 begin
   inherited;
-  CoInitialize(nil);
+//  CoInitialize(nil);
   FApproaches := TList.Create;
   FApproachReader := PApproachReader.Create;
 end;
@@ -560,7 +559,7 @@ begin
   CloseApproaches;
   FApproaches.Free;
   FApproachReader.Free;
-  CoUninitialize;
+//  CoUninitialize;
   inherited;
 end;
 
@@ -627,7 +626,7 @@ procedure PApproachManager.LoadApproaches;
     end;
   end;
 begin
-  LoadFiles(ExtractFileDir(Application.ExeName) + '\' + EXT_DIR);
+  LoadFiles(Settings[cExtentionDirectoryTag]);
 end;
 
 procedure PApproachManager.CloseApproaches;

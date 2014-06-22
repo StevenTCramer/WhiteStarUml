@@ -1319,6 +1319,7 @@ begin
     E := FEntryList.Objects[I] as PClassRegistryEntry;
     E.Free;
   end;
+  FEntryList.Free;
   inherited;
 end;
 

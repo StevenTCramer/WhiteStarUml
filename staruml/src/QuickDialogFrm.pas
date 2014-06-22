@@ -50,7 +50,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, ImgList, StdCtrls, ExtCtrls, Buttons,
-  Core, ViewCore, UMLModels, UMLViews, JvComponent, JvBalloonHint;
+  Core, ViewCore, UMLModels, UMLViews, JvComponent, JvBalloonHint,
+  JvComponentBase;
 
 const
   CLASSIFIER_HINT =
@@ -1892,7 +1893,7 @@ var
   Idx: Integer;
   Kind: PUMLVisibilityKind;
 begin
-  Idx := VisibilityGroup.IndexOf(Sender as TComponent);
+  Idx := VisibilityGroup.IndexOf(Sender as TdxBarComponent);
   if Idx >= 0 then begin
     Kind := PUMLVisibilityKind(Idx);
     if FVisibilityKind <> Kind then begin
@@ -2454,7 +2455,7 @@ var
   Idx: Integer;
   Kind: PUMLAggregationKind;
 begin
-  Idx := AssociationGroup.IndexOf(Sender as TComponent);
+  Idx := AssociationGroup.IndexOf(Sender as TdxBarComponent);
   if Idx >= 0 then begin
     Kind := PUMLAggregationKind(Idx);
     if FAggregationKind <> Kind then begin

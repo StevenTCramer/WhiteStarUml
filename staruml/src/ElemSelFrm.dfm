@@ -82,16 +82,30 @@ object ElementSelectorForm: TElementSelectorForm
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 389
+      ExplicitHeight = 217
       inherited ClientPanel: TFlatPanel
         Width = 389
         Height = 191
+        ExplicitWidth = 389
+        ExplicitHeight = 191
         inherited ModelTree: TVirtualStringTree
           Width = 387
           Height = 189
+          ExplicitWidth = 387
+          ExplicitHeight = 189
         end
       end
-      inherited TBDock: TTBDock
-        Width = 389
+      inherited dxBarManager: TdxBarManager
+        Categories.ItemsVisibles = (
+          2)
+        Categories.Visibles = (
+          True)
+        DockControlHeights = (
+          0
+          0
+          26
+          0)
       end
     end
   end

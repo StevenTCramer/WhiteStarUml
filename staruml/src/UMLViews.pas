@@ -90,8 +90,16 @@ unit UMLViews;
 interface
 
 uses
-  BasicClasses, GraphicClasses, Core, ExtCore, ViewCore, UMLModels,
-  Classes, Types, Windows, Graphics;
+  BasicClasses,
+  GraphicClasses,
+  Core,
+  ExtCore,
+  ViewCore,
+  UMLModels,
+  Classes,
+  Types,
+  Windows,
+  Graphics;
 
 const
   // Compartment Margin(Use this in CompartmentView)
@@ -147,7 +155,7 @@ const
 
   USECASE_MINWIDTH = 70;
   USECASE_MINHEIGHT = 32;
-  USECASE_MINRATIO_PERCENT = 1;   // Not used yet. RATIO = WIDTH / HEIGHT
+  USECASE_MINRATIO_PERCENT = 1; // Not used yet. RATIO = WIDTH / HEIGHT
   USECASE_MAXRATIO_PERCENT = 1;
 
   ARTIFACT_RATIO_PERCENT = 85;
@@ -353,7 +361,7 @@ const
   DEFAULT_TEXT_CAPTION = 'Text';
   DEFAULT_SYSTEMBOUNDARY_CAPTION = 'System';
   TEXT_NOIMAGE = 'No Image';
-  
+
 type
   // Forward Declarations
   PUMLListCompartmentView = class;
@@ -413,10 +421,10 @@ type
     property NameLabel: PLabelView read FNameLabel write SetNameLabel;
     property StereotypeLabel: PLabelView read FStereotypeLabel write SetStereotypeLabel;
     property PropertyLabel: PLabelView read FPropertyLabel write SetPropertyLabel;
-    property ShowProperty: Boolean read GetShowProperty;  // TRANSIENT
-    property WordWrap: Boolean read FWordWrap write SetWordWrap;  // TRANSIENT
-    property StereotypeDisplay: PUMLStereotypeDisplayKind read GetStereotypeDisplay;  // TRANSIENT
-    property DecorationIconProc: PDrawingProcedure read FDecorationIconProc write FDecorationIconProc;  // TRANSIENT
+    property ShowProperty: Boolean read GetShowProperty; // TRANSIENT
+    property WordWrap: Boolean read FWordWrap write SetWordWrap; // TRANSIENT
+    property StereotypeDisplay: PUMLStereotypeDisplayKind read GetStereotypeDisplay; // TRANSIENT
+    property DecorationIconProc: PDrawingProcedure read FDecorationIconProc write FDecorationIconProc; // TRANSIENT
   end;
 
   // PUMLListCompartmentView
@@ -446,7 +454,7 @@ type
     property CompartmentItemText[Index: Integer]: string read GetCompartmentItemText;
     property CompartmentItemFontStyle[Index: Integer]: TFontStyles read GetCompartmentItemFontStyle;
     property ShowProperty: Boolean read GetShowProperty;
-    property Header: string read FHeader write FHeader;    
+    property Header: string read FHeader write FHeader;
   end;
 
   {****************************************************************************}
@@ -512,7 +520,7 @@ type
     property ShowParentName: Boolean read FShowParentName write SetShowParentName;
     property ShowProperty: Boolean read FShowProperty write SetShowProperty;
     property NameCompartment: PUMLNameCompartmentView read FNameCompartment write SetNameCompartment;
-    property StereotypeIcon: TGraphic read FStereotypeIcon write FStereotypeIcon;  // TRANSIENT
+    property StereotypeIcon: TGraphic read FStereotypeIcon write FStereotypeIcon; // TRANSIENT
     property WordWrap: Boolean read FWordWrap write SetWordWrap;
   end;
 
@@ -861,7 +869,7 @@ type
     procedure ArrangeIconicObject(Canvas: PCanvas); override;
   public
     procedure Update; override;
-    property IconRect: TRect read GetIconRect;  // trial
+    property IconRect: TRect read GetIconRect; // trial
   end;
 
   // PUMLSignalView
@@ -1472,7 +1480,7 @@ type
     function MOF_GetReference(Name: string): PElement; override;
     procedure MOF_SetReference(Name: string; Value: PElement); override;
     property InternalTransitionCompartment: PUMLInternalTransitionCompartmentView
-        read FInternalTransitionCompartment write SetInternalTransitionCompartment;
+      read FInternalTransitionCompartment write SetInternalTransitionCompartment;
   end;
 
   // PUMLStateView
@@ -1812,7 +1820,7 @@ type
     procedure MOF_SetAttribute(Name, Value: string); override;
     property Type_: PImageKind read FType write SetType;
     property ImageData: string read GetImageData write SetImageData;
-    property MaintainAspectRatio: Boolean read FMaintainAspectRatio write SetMaintainAspectRatio; 
+    property MaintainAspectRatio: Boolean read FMaintainAspectRatio write SetMaintainAspectRatio;
   end;
 
   {****************************************************************************}
@@ -1940,28 +1948,31 @@ type
   {****************************************************************************}
 
   // Enumeration Conversion Routines
-  function UMLStereotypeDisplayKindToString(Value: PUMLStereotypeDisplayKind): string;
-  function StringToUMLStereotypeDisplayKind(Value: string): PUMLStereotypeDisplayKind;
-  function UMLSwimlaneDirectionKindToString(Value: PUMLSwimlaneDirectionKind): string;
-  function StringToUMLSwimlaneDirectionKind(Value: string): PUMLSwimlaneDirectionKind;
-  function LineKindToString(Value: PLineKind): string;
-  function StringToLineKind(Value: string): PLineKind;
-  function ArrowheadStyleKindToString(Value: PArrowheadStyleKind): string;
-  function StringToArrowheadStyleKind(Value: string): PArrowheadStyleKind;
-  function ImageKindToString(Value: PImageKind): string;
-  function StringToImageKind(Value: string): PImageKind;
+function UMLStereotypeDisplayKindToString(Value: PUMLStereotypeDisplayKind): string;
+function StringToUMLStereotypeDisplayKind(Value: string): PUMLStereotypeDisplayKind;
+function UMLSwimlaneDirectionKindToString(Value: PUMLSwimlaneDirectionKind): string;
+function StringToUMLSwimlaneDirectionKind(Value: string): PUMLSwimlaneDirectionKind;
+function LineKindToString(Value: PLineKind): string;
+function StringToLineKind(Value: string): PLineKind;
+function ArrowheadStyleKindToString(Value: PArrowheadStyleKind): string;
+function StringToArrowheadStyleKind(Value: string): PArrowheadStyleKind;
+function ImageKindToString(Value: PImageKind): string;
+function StringToImageKind(Value: string): PImageKind;
 
   // Label Text Taking Routines
-  function GetPropertyString(M: PExtensibleModel; PresetProps: TStringList = nil): string;
+function GetPropertyString(M: PExtensibleModel; PresetProps: TStringList = nil): string;
 
   // Graphic Image Making Routines
-  function MetafileFromDiagram(ADiagramView: PDiagramView; SelectedViewsOnly, Enhanced: Boolean): TMetafile;
-  function BitmapFromDiagram(ADiagramView: PDiagramView; SelectedViewsOnly: Boolean = False): Graphics.TBitmap;
+function MetafileFromDiagram(ADiagramView: PDiagramView; SelectedViewsOnly, Enhanced: Boolean): TMetafile;
+function BitmapFromDiagram(ADiagramView: PDiagramView; SelectedViewsOnly: Boolean = False): Graphics.TBitmap;
 
 implementation
 
 uses
-  Math, SysUtils, Dialogs, JvStrings;
+  Math,
+  SysUtils,
+  Dialogs,
+  JvStrings;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Procedures and Functions
@@ -1978,9 +1989,9 @@ begin
   end;
 end;
 
-function GetTheta(X1, Y1, X2, Y2 : Extended) : Extended;
+function GetTheta(X1, Y1, X2, Y2: Extended): Extended;
 var
-  X, Y, th : Extended;
+  X, Y, th: Extended;
 begin
   X := X1 - X2;
   Y := Y1 - Y2;
@@ -2081,7 +2092,8 @@ end;
 
 procedure PUMLNameCompartmentView.SetNameLabel(Value: PLabelView);
 begin
-  if FNameLabel <> Value then begin
+  if FNameLabel <> Value then
+  begin
     RemoveSubView(FNameLabel);
     FNameLabel := Value;
     if FNameLabel <> nil then InitializeNameLabel(FNameLabel);
@@ -2091,7 +2103,8 @@ end;
 
 procedure PUMLNameCompartmentView.SetStereotypeLabel(Value: PLabelView);
 begin
-  if FStereotypeLabel <> Value then begin
+  if FStereotypeLabel <> Value then
+  begin
     RemoveSubView(FStereotypeLabel);
     FStereotypeLabel := Value;
     if FStereotypeLabel <> nil then InitializeStereotypeLabel(FStereotypeLabel);
@@ -2101,7 +2114,8 @@ end;
 
 procedure PUMLNameCompartmentView.SetPropertyLabel(Value: PLabelView);
 begin
-  if FPropertyLabel <> Value then begin
+  if FPropertyLabel <> Value then
+  begin
     RemoveSubView(FPropertyLabel);
     FPropertyLabel := Value;
     if FPropertyLabel <> nil then InitializePropertyLabel(FPropertyLabel);
@@ -2111,7 +2125,8 @@ end;
 
 procedure PUMLNameCompartmentView.SetWordWrap(Value: Boolean);
 begin
-  if FWordWrap <> Value then begin
+  if FWordWrap <> Value then
+  begin
     FWordWrap := Value;
     if FNameLabel <> nil then
       FNameLabel.WordWrap := FWordWrap;
@@ -2122,7 +2137,8 @@ procedure PUMLNameCompartmentView.AfterLoad(Reader: PObjectReader);
 begin
   inherited;
   // StarUML
-  if PropertyLabel = nil then begin
+  if PropertyLabel = nil then
+  begin
     PropertyLabel := MetaModel.CreateInstance('LabelView') as PLabelView;
   end;
 end;
@@ -2147,14 +2163,16 @@ var
   W, H: Integer;
   R: Integer;
 begin
-  W := 0; H := 0;
+  W := 0;
+  H := 0;
   R := Right;
   if IsDecorationView then
     R := Right - DECORATION_ICON_WIDTH - DECORATION_ICON_MARGIN;
   Y := Top + COMPARTMENT_TOP_MARGIN;
   // Arrange StereotypeLabel
   FStereotypeLabel.Visible := FStereotypeLabel.Text <> '';
-  if FStereotypeLabel.Visible then begin
+  if FStereotypeLabel.Visible then
+  begin
     FStereotypeLabel.Left := Left + COMPARTMENT_LEFT_MARGIN;
     FStereotypeLabel.Top := Y;
     FStereotypeLabel.Right := R - COMPARTMENT_RIGHT_MARGIN;
@@ -2169,7 +2187,8 @@ begin
   H := H + FNameLabel.Height;
   W := Max(W, FNameLabel.MinWidth);
   FPropertyLabel.Visible := ShowProperty and (FPropertyLabel.Text <> '');
-  if FPropertyLabel.Visible then begin
+  if FPropertyLabel.Visible then
+  begin
     Y := Y + FNameLabel.Height + COMPARTMENT_LABEL_INTERVAL;
     FPropertyLabel.Left := Left + COMPARTMENT_LEFT_MARGIN;
     FPropertyLabel.Top := Y;
@@ -2178,7 +2197,8 @@ begin
     W := Max(W, FPropertyLabel.MinWidth);
   end;
   // Decoration Icon
-  if IsDecorationView then begin
+  if IsDecorationView then
+  begin
     W := W + DECORATION_ICON_WIDTH + DECORATION_ICON_MARGIN;
     H := Max(H, DECORATION_ICON_HEIGHT);
   end;
@@ -2192,7 +2212,8 @@ var
   X, Y: Integer;
 begin
   inherited;
-  if IsDecorationView and Assigned(DecorationIconProc) then begin
+  if IsDecorationView and Assigned(DecorationIconProc) then
+  begin
     X := Right - DECORATION_ICON_WIDTH - COMPARTMENT_RIGHT_MARGIN;
     Y := Top + COMPARTMENT_TOP_MARGIN;
     DecorationIconProc(Canvas, Rect(X, Y, X + DECORATION_ICON_WIDTH, Y + DECORATION_ICON_HEIGHT));
@@ -2214,32 +2235,40 @@ end;
 
 function PUMLNameCompartmentView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'NameLabel' then begin
+  if Name = 'NameLabel' then
+  begin
     Result := NameLabel;
   end
-  else if Name = 'StereotypeLabel' then begin
+  else if Name = 'StereotypeLabel' then
+  begin
     Result := StereotypeLabel;
   end
-  else if Name = 'PropertyLabel' then begin
+  else if Name = 'PropertyLabel' then
+  begin
     Result := PropertyLabel;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLNameCompartmentView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'NameLabel' then begin
+  if Name = 'NameLabel' then
+  begin
     NameLabel := Value as PLabelView;
   end
-  else if Name = 'StereotypeLabel' then begin
+  else if Name = 'StereotypeLabel' then
+  begin
     StereotypeLabel := Value as PLabelView;
   end
-  else if Name = 'PropertyLabel' then begin
+  else if Name = 'PropertyLabel' then
+  begin
     PropertyLabel := Value as PLabelView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -2311,7 +2340,7 @@ begin
   AssignStyleToCanvas(Canvas);
   Y := StrToInt(ListItemTopPosList.Strings[Index]);
   Result := Rect(Left + COMPARTMENT_LEFT_MARGIN, Y,
-    Right - COMPARTMENT_RIGHT_MARGIN, Y + GetTextHeight(Canvas, GetCompartmentItemText(Index),GetCompartmentItemFontStyle(Index)));
+    Right - COMPARTMENT_RIGHT_MARGIN, Y + GetTextHeight(Canvas, GetCompartmentItemText(Index), GetCompartmentItemFontStyle(Index)));
 end;
 
 procedure PUMLListCompartmentView.DrawCompartmentItem(Canvas: PCanvas; Index: Integer);
@@ -2335,12 +2364,15 @@ begin
   AssignFontToCanvas(Canvas);
   AssignStyleToCanvas(Canvas);
   ListItemTopPosList.Clear;
-  W := 0; H := 0;
-  if FHeader <> '' then begin
+  W := 0;
+  H := 0;
+  if FHeader <> '' then
+  begin
     W := GetTextWidth(Canvas, FHeader, [fsBold]);
     H := GetTextHeight(Canvas, FHeader, [fsBold]);
   end;
-  for I := 0 to GetCompartmentItemCount - 1 do begin
+  for I := 0 to GetCompartmentItemCount - 1 do
+  begin
     ListItemTopPosList.Add(IntToStr(Top + COMPARTMENT_TOP_MARGIN + H));
     W := Max(W, GetTextWidth(Canvas, GetCompartmentItemText(I), GetCompartmentItemFontStyle(I)));
     H := H + GetTextHeight(Canvas, GetCompartmentItemText(I), GetCompartmentItemFontStyle(I)) + COMPARTMENT_LABEL_INTERVAL;
@@ -2360,11 +2392,12 @@ begin
   AssignStyleToCanvas(Canvas);
   for I := 0 to GetCompartmentItemCount - 1 do
     DrawCompartmentItem(Canvas, I);
-  if FHeader <> '' then begin
+  if FHeader <> '' then
+  begin
     Canvas.Font.Style := [fsBold];
     L := Left + (Width - GetTextWidth(Canvas, FHeader, [fsBold])) div 2;
     Canvas.TextOut(L, Top + COMPARTMENT_TOP_MARGIN, FHeader);
-  end;    
+  end;
 end;
 
 function PUMLListCompartmentView.GetCompartmentItemBoundingBox(Canvas: PCanvas; Index: Integer): TRect;
@@ -2378,7 +2411,8 @@ var
 begin
   Result := -1;
   for I := 0 to GetCompartmentItemCount - 1 do
-    if PtInRect(GetCompartmentItemRect(Canvas, I), Point) then begin
+    if PtInRect(GetCompartmentItemRect(Canvas, I), Point) then
+    begin
       Result := I;
       Exit;
     end;
@@ -2412,7 +2446,8 @@ end;
 
 procedure PUMLGeneralNodeView.SetStereotypeDisplay(Value: PUMLStereotypeDisplayKind);
 begin
-  if FStereotypeDisplay <> Value then begin
+  if FStereotypeDisplay <> Value then
+  begin
     FStereotypeDisplay := Value;
   end;
 end;
@@ -2431,21 +2466,24 @@ end;
 
 procedure PUMLGeneralNodeView.SetShowParentName(Value: Boolean);
 begin
-  if FShowParentName <> Value then begin
+  if FShowParentName <> Value then
+  begin
     FShowParentName := Value;
   end;
 end;
 
 procedure PUMLGeneralNodeView.SetShowProperty(Value: Boolean);
 begin
-  if FShowProperty <> Value then begin
+  if FShowProperty <> Value then
+  begin
     FShowProperty := Value;
   end;
 end;
 
 procedure PUMLGeneralNodeView.SetNameCompartment(Value: PUMLNameCompartmentView);
 begin
-  if FNameCompartment <> Value then begin
+  if FNameCompartment <> Value then
+  begin
     RemoveSubView(FNameCompartment);
     FNameCompartment := Value;
     if FNameCompartment <> nil then InitializeNameCompartment(FNameCompartment);
@@ -2455,7 +2493,8 @@ end;
 
 procedure PUMLGeneralNodeView.SetWordWrap(Value: Boolean);
 begin
-  if FWordWrap <> Value then begin
+  if FWordWrap <> Value then
+  begin
     FWordWrap := Value;
     if FNameCompartment <> nil then
       FNameCompartment.WordWrap := FWordWrap;
@@ -2475,13 +2514,15 @@ begin
   // PRECONDITION
   RR := (R.Right - R.Left) * 100 div (R.Bottom - R.Top);
   IR := FStereotypeIconMinWidth * 100 div FStereotypeIconMinHeight;
-  if RR >= IR then begin
+  if RR >= IR then
+  begin
     H := (R.Bottom - R.Top);
     W := H * IR div 100;
     X := R.Left + (R.Right - R.Left - W) div 2;
     Y := R.Top;
   end
-  else begin
+  else
+  begin
     W := (R.Right - R.Left);
     H := W * 100 div IR;
     Y := R.Top + (R.Bottom - R.Top - H) div 2;
@@ -2504,8 +2545,10 @@ var
 begin
   W := NameCompartment.MinWidth;
   H := NameCompartment.MinHeight + COMPARTMENT_INTERVAL;
-  for I := 0 to Length(Compartments) - 1 do begin
-    if Compartments[I].Visible then begin
+  for I := 0 to Length(Compartments) - 1 do
+  begin
+    if Compartments[I].Visible then
+    begin
       W := Max(W, Compartments[I].MinWidth);
       H := H + Compartments[I].MinHeight + COMPARTMENT_INTERVAL;
     end;
@@ -2521,8 +2564,10 @@ var
 begin
   W := Max(NameCompartment.MinWidth, IconMinWidth);
   H := IconMinHeight + NameCompartment.MinHeight + COMPARTMENT_INTERVAL;
-  for I := 0 to Length(Compartments) - 1 do begin
-    if Compartments[I].Visible then begin
+  for I := 0 to Length(Compartments) - 1 do
+  begin
+    if Compartments[I].Visible then
+    begin
       W := Max(W, Compartments[I].MinWidth);
       H := H + Compartments[I].MinHeight + COMPARTMENT_INTERVAL;
     end;
@@ -2540,7 +2585,8 @@ begin
   NameCompartment.Right := Bound.Right;
   NameCompartment.Top := Bound.Top;
   Y := NameCompartment.Bottom + COMPARTMENT_INTERVAL;
-  for I := 0 to Length(Compartments) - 1 do begin
+  for I := 0 to Length(Compartments) - 1 do
+  begin
     Compartments[I].Left := Bound.Left;
     Compartments[I].Right := Bound.Right;
     Compartments[I].Top := Y;
@@ -2555,10 +2601,12 @@ var
   I: Integer;
 begin
   Y := Bottom;
-  for I := Length(Compartments) - 1 downto 0 do begin
+  for I := Length(Compartments) - 1 downto 0 do
+  begin
     Compartments[I].Left := Bound.Left;
     Compartments[I].Right := Bound.Right;
-    if Compartments[I].Visible then begin
+    if Compartments[I].Visible then
+    begin
       Compartments[I].Top := Y - Compartments[I].Height - COMPARTMENT_INTERVAL;
       Y := Y - Compartments[I].Height - COMPARTMENT_INTERVAL;
     end
@@ -2617,7 +2665,8 @@ end;
 
 procedure PUMLGeneralNodeView.ArrangeIconicObject(Canvas: PCanvas);
 begin
-  if AutoResize then begin
+  if AutoResize then
+  begin
     Width := MinWidth;
     Height := MinHeight;
   end;
@@ -2626,7 +2675,8 @@ end;
 
 procedure PUMLGeneralNodeView.ArrangeDecorationObject(Canvas: PCanvas);
 begin
-  if AutoResize then begin
+  if AutoResize then
+  begin
     Width := MinWidth;
     Height := MinHeight;
   end;
@@ -2639,8 +2689,10 @@ var
   I: Integer;
 begin
   R := Rect(Left, Top, Right, Bottom);
-  for I := 0 to ContainedViewCount - 1 do begin
-    if ContainedViews[I].ContainerExtending then begin
+  for I := 0 to ContainedViewCount - 1 do
+  begin
+    if ContainedViews[I].ContainerExtending then
+    begin
       VR := ContainedViews[I].GetBoundingBox(Canvas);
       VR := Rect(VR.Left - COMPARTMENT_LEFT_MARGIN, VR.Top - COMPARTMENT_TOP_MARGIN,
         VR.Right + COMPARTMENT_RIGHT_MARGIN, VR.Bottom + COMPARTMENT_BOTTOM_MARGIN);
@@ -2657,13 +2709,15 @@ procedure PUMLGeneralNodeView.Draw(Canvas: PCanvas);
 var
   I: Integer;
 begin
-  if Visible then begin
+  if Visible then
+  begin
     Arrange(Canvas);
     // edited by hskim 2005.08.09 begin
     if ShowExtendedNotation and IsExtendedView then
       DrawExtendedView(Canvas)
     // edited by hskim 2005.08.09 end
-    else begin
+    else
+    begin
       if IsIconicView then
         DrawIconicObject(Canvas)
       else if IsDecorationView then
@@ -2686,7 +2740,8 @@ begin
   if ShowExtendedNotation and IsExtendedView then
   // edited by hskim 2005.08.09 end
     ArrangeExtendedView(Canvas)
-  else begin
+  else
+  begin
     for I := 0 to SubViewCount - 1 do
       SubViews[I].Arrange(Canvas);
     DelimitContainingBoundary(Canvas);
@@ -2711,8 +2766,10 @@ begin
   // for Name
   M := (Model as PUMLModelElement);
   // Updating Name
-  if NameCompartment.NameLabel.Text <> M.Name then begin
-    if M is PUMLClassifier then begin
+  if NameCompartment.NameLabel.Text <> M.Name then
+  begin
+    if M is PUMLClassifier then
+    begin
       Classifier := M as PUMLClassifier;
       for I := 0 to Classifier.TypedFeatureCount - 1 do
         Classifier.TypedFeatures[I].UpdateViews;
@@ -2729,7 +2786,8 @@ begin
   FStereotypeIconMinWidth := 0;
   FStereotypeIconMinHeight := 0;
   S := ExtensionManager.FindStereotype(M.StereotypeProfile, M.StereotypeName, M.MetaClass.Name);
-  if S <> nil then begin
+  if S <> nil then
+  begin
     FStereotypeIcon := S.Icon;
     FStereotypeIconMinWidth := S.IconMinWidth;
     FStereotypeIconMinHeight := S.IconMinHeight;
@@ -2744,58 +2802,72 @@ end;
 
 function PUMLGeneralNodeView.MOF_GetAttribute(Name: string): string;
 begin
-  if Name = 'StereotypeDisplay' then begin
+  if Name = 'StereotypeDisplay' then
+  begin
     Result := UMLStereotypeDisplayKindToString(StereotypeDisplay);
   end
-  else if Name = 'ShowParentName' then begin
+  else if Name = 'ShowParentName' then
+  begin
     Result := BooleanToString(ShowParentName);
   end
-  else if Name = 'ShowProperty' then begin
+  else if Name = 'ShowProperty' then
+  begin
     Result := BooleanToString(ShowProperty);
   end
-  else if Name = 'WordWrap' then begin
+  else if Name = 'WordWrap' then
+  begin
     Result := BooleanToString(WordWrap);
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetAttribute(Name);
   end;
 end;
 
 procedure PUMLGeneralNodeView.MOF_SetAttribute(Name, Value: string);
 begin
-  if Name = 'StereotypeDisplay' then begin
+  if Name = 'StereotypeDisplay' then
+  begin
     StereotypeDisplay := StringToUMLStereotypeDisplayKind(Value);
   end
-  else if Name = 'ShowParentName' then begin
+  else if Name = 'ShowParentName' then
+  begin
     ShowParentName := StringToBoolean(Value);
   end
-  else if Name = 'ShowProperty' then begin
+  else if Name = 'ShowProperty' then
+  begin
     ShowProperty := StringToBoolean(Value);
   end
-  else if Name = 'WordWrap' then begin
+  else if Name = 'WordWrap' then
+  begin
     WordWrap := StringToBoolean(Value);
   end
-  else begin
+  else
+  begin
     inherited MOF_SetAttribute(Name, Value);
   end;
 end;
 
 function PUMLGeneralNodeView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'NameCompartment' then begin
+  if Name = 'NameCompartment' then
+  begin
     Result := NameCompartment;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLGeneralNodeView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'NameCompartment' then begin
+  if Name = 'NameCompartment' then
+  begin
     NameCompartment := Value as PUMLNameCompartmentView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -2831,7 +2903,7 @@ begin
   PropertyLabel := MetaModel.CreateInstance('EdgeLabelView') as PEdgeLabelView;
   PropertyLabel.EdgePosition := epMiddle;
   PropertyLabel.Distance := 15;
-  PropertyLabel.Alpha := - PI / 2;
+  PropertyLabel.Alpha := -PI / 2;
   PropertyLabel.Model := Model;
 end;
 
@@ -2879,14 +2951,16 @@ end;
 
 procedure PUMLGeneralEdgeView.SetShowProperty(Value: Boolean);
 begin
-  if FShowProperty <> Value then begin
+  if FShowProperty <> Value then
+  begin
     FShowProperty := Value;
   end;
 end;
 
 procedure PUMLGeneralEdgeView.SetNameLabel(Value: PEdgeLabelView);
 begin
-  if FNameLabel <> Value then begin
+  if FNameLabel <> Value then
+  begin
     RemoveSubView(FNameLabel);
     FNameLabel := Value;
     if FNameLabel <> nil then InitializeNameLabel(FNameLabel);
@@ -2896,7 +2970,8 @@ end;
 
 procedure PUMLGeneralEdgeView.SetStereotypeLabel(Value: PEdgeLabelView);
 begin
-  if FStereotypeLabel <> Value then begin
+  if FStereotypeLabel <> Value then
+  begin
     RemoveSubView(FStereotypeLabel);
     FStereotypeLabel := Value;
     if FStereotypeLabel <> nil then InitializeStereotypeLabel(FStereotypeLabel);
@@ -2906,7 +2981,8 @@ end;
 
 procedure PUMLGeneralEdgeView.SetPropertyLabel(Value: PEdgeLabelView);
 begin
-  if FPropertyLabel <> Value then begin
+  if FPropertyLabel <> Value then
+  begin
     RemoveSubView(FPropertyLabel);
     FPropertyLabel := Value;
     if FPropertyLabel <> nil then InitializePropertyLabel(FPropertyLabel);
@@ -2921,7 +2997,8 @@ begin
   if Model = nil then Exit;
   inherited;
   FNameLabel.Text := Model.Name;
-  if Model is PUMLModelElement then begin
+  if Model is PUMLModelElement then
+  begin
     M := Model as PUMLModelElement;
     if M.StereotypeName = '' then
       FStereotypeLabel.Text := ''
@@ -2935,11 +3012,12 @@ procedure PUMLGeneralEdgeView.AfterLoad(Reader: PObjectReader);
 begin
   inherited;
   // StarUML
-  if PropertyLabel = nil then begin
+  if PropertyLabel = nil then
+  begin
     PropertyLabel := MetaModel.CreateInstance('EdgeLabelView') as PEdgeLabelView;
     PropertyLabel.EdgePosition := epMiddle;
     PropertyLabel.Distance := 15;
-    PropertyLabel.Alpha := - PI / 2;
+    PropertyLabel.Alpha := -PI / 2;
     PropertyLabel.Model := Model;
   end;
 end;
@@ -2954,52 +3032,64 @@ end;
 
 function PUMLGeneralEdgeView.MOF_GetAttribute(Name: string): string;
 begin
-  if Name = 'ShowProperty' then begin
+  if Name = 'ShowProperty' then
+  begin
     Result := BooleanToString(ShowProperty);
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetAttribute(Name);
   end;
 end;
 
 procedure PUMLGeneralEdgeView.MOF_SetAttribute(Name, Value: string);
 begin
-  if Name = 'ShowProperty' then begin
+  if Name = 'ShowProperty' then
+  begin
     ShowProperty := StringToBoolean(Value);
   end
-  else begin
+  else
+  begin
     inherited MOF_SetAttribute(Name, Value);
   end;
 end;
 
 function PUMLGeneralEdgeView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'NameLabel' then begin
+  if Name = 'NameLabel' then
+  begin
     Result := NameLabel;
   end
-  else if Name = 'StereotypeLabel' then begin
+  else if Name = 'StereotypeLabel' then
+  begin
     Result := StereotypeLabel;
   end
-  else if Name = 'PropertyLabel' then begin
+  else if Name = 'PropertyLabel' then
+  begin
     Result := PropertyLabel;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLGeneralEdgeView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'NameLabel' then begin
+  if Name = 'NameLabel' then
+  begin
     NameLabel := Value as PEdgeLabelView;
   end
-  else if Name = 'StereotypeLabel' then begin
+  else if Name = 'StereotypeLabel' then
+  begin
     StereotypeLabel := Value as PEdgeLabelView;
   end
-  else if Name = 'PropertyLabel' then begin
+  else if Name = 'PropertyLabel' then
+  begin
     PropertyLabel := Value as PEdgeLabelView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -3061,11 +3151,13 @@ begin
 
   S := '';
   // Stereotype
-  if ShowStereotype then begin
+  if ShowStereotype then
+  begin
     if M.StereotypeName <> '' then S := S + '<<' + M.StereotypeName + '>>';
   end;
   // Visibility Symbol
-  if ShowVisibility then begin
+  if ShowVisibility then
+  begin
     S := S + VisibilityToSymbol(M.Visibility);
   end;
   // Name
@@ -3077,14 +3169,16 @@ begin
     S := S + ': ' + M.TypeExpression;
   // Multiplicity
   if M.Ordering = okOrdered then Ordering := ' ordered' else Ordering := '';
-  if Trim(M.Multiplicity) <> '' then begin
+  if Trim(M.Multiplicity) <> '' then
+  begin
     S := S + '[' + M.Multiplicity + Ordering + ']';
   end;
   // Initial Value
   if M.InitialValue <> '' then
     S := S + ' = ' + M.InitialValue;
   // Changability & Properties
-  if ShowProperty then begin
+  if ShowProperty then
+  begin
     SL := TStringList.Create;
     try
       if M.Changeability = ckFrozen then
@@ -3117,7 +3211,7 @@ begin
 
   M := (Model as PUMLClassifier).Attributes[Index];
   if M.OwnerScope = skClassifier then Result := [fsUnderline]
-                                 else Result := [];
+  else Result := [];
 end;
 
 procedure PUMLAttributeCompartmentView.DrawObject(Canvas: PCanvas);
@@ -3205,30 +3299,36 @@ begin
   M := (Model as PUMLClassifier).Operations[Index];
   S := '';
   // Stereotype
-  if ShowStereotype then begin
+  if ShowStereotype then
+  begin
     if M.StereotypeName <> '' then S := S + '<<' + M.StereotypeName + '>>';
   end;
   // Visibility Symbol
-  if ShowVisibility then begin
+  if ShowVisibility then
+  begin
     S := S + VisibilityToSymbol(M.Visibility);
   end;
   S := S + M.Name;
   // Signature
-  if ShowSignature then begin
+  if ShowSignature then
+  begin
     RetStr := '';
     Sig := False;
     Ret := False;
     S := S + '(';
-    for I := 0 to M.ParameterCount - 1 do begin
+    for I := 0 to M.ParameterCount - 1 do
+    begin
       MParam := M.Parameters[I];
-      if (not Ret) and (MParam.DirectionKind = pdkReturn) then begin
+      if (not Ret) and (MParam.DirectionKind = pdkReturn) then
+      begin
         Ret := True;
         if Assigned(MParam.Type_) then
           RetStr := MParam.Type_.Name
         else
           RetStr := MParam.TypeExpression;
       end
-      else begin
+      else
+      begin
         if Sig then
           S := S + ', ';
         Sig := True;
@@ -3250,17 +3350,19 @@ begin
   else
     S := S + '()';
   // Raised Signals
-  if M.RaisedSignalCount > 0 then begin
+  if M.RaisedSignalCount > 0 then
+  begin
     S := S + ' raises ' + M.RaisedSignals[0].Name;
     for I := 1 to M.RaisedSignalCount - 1 do
       S := S + ', ' + M.RaisedSignals[I].Name;
   end;
   // Properties
-  if ShowProperty then begin
+  if ShowProperty then
+  begin
     PS := GetPropertyString(M);
     if PS <> '' then
       S := S + ' ' + PS;
-  end;      
+  end;
   Result := S;
 end;
 
@@ -3349,16 +3451,19 @@ begin
   M := (Model as PUMLEnumeration).Literals[Index];
   S := '';
   // Stereotype
-  if ShowStereotype then begin
+  if ShowStereotype then
+  begin
     if M.StereotypeName <> '' then S := S + '<<' + M.StereotypeName + '>>';
   end;
   // Visibility Symbol
-  if ShowVisibility then begin
+  if ShowVisibility then
+  begin
     S := S + VisibilityToSymbol(M.Visibility);
   end;
   S := S + M.Name;
   // Properties
-  if ShowProperty then begin
+  if ShowProperty then
+  begin
     PS := GetPropertyString(M);
     if PS <> '' then
       S := S + ' ' + PS;
@@ -3418,11 +3523,12 @@ begin
     S := S + ' : ' + M.ParameterType;
   if M.DefaultValue <> '' then
     S := S + ' = ' + M.DefaultValue;
-  if ShowProperty then begin
+  if ShowProperty then
+  begin
     PS := GetPropertyString(M);
     if PS <> '' then
       S := S + ' ' + PS;
-  end;      
+  end;
 
   Result := S;
 end;
@@ -3526,7 +3632,8 @@ end;
 
 procedure PUMLClassifierView.SetAttributeCompartment(Value: PUMLAttributeCompartmentView);
 begin
-  if FAttributeCompartment <> Value then begin
+  if FAttributeCompartment <> Value then
+  begin
     RemoveSubView(FAttributeCompartment);
     FAttributeCompartment := Value;
     if FAttributeCompartment <> nil then InitializeAttributeCompartment(FAttributeCompartment);
@@ -3536,7 +3643,8 @@ end;
 
 procedure PUMLClassifierView.SetOperationCompartment(Value: PUMLOperationCompartmentView);
 begin
-  if FOperationCompartment <> Value then begin
+  if FOperationCompartment <> Value then
+  begin
     RemoveSubView(FOperationCompartment);
     FOperationCompartment := Value;
     if FOperationCompartment <> nil then InitializeOperationCompartment(FOperationCompartment);
@@ -3585,70 +3693,88 @@ end;
 
 function PUMLClassifierView.MOF_GetAttribute(Name: string): string;
 begin
-  if Name = 'SuppressAttributes' then begin
+  if Name = 'SuppressAttributes' then
+  begin
     Result := BooleanToString(SuppressAttributes);
   end
-  else if Name = 'SuppressOperations' then begin
+  else if Name = 'SuppressOperations' then
+  begin
     Result := BooleanToString(SuppressOperations);
   end
-  else if Name = 'ShowOperationSignature' then begin
+  else if Name = 'ShowOperationSignature' then
+  begin
     Result := BooleanToString(ShowOperationSignature);
   end
-  else if Name = 'ShowCompartmentStereotype' then begin
+  else if Name = 'ShowCompartmentStereotype' then
+  begin
     Result := BooleanToString(ShowCompartmentStereotype);
   end
-  else if Name = 'ShowCompartmentVisibility' then begin
+  else if Name = 'ShowCompartmentVisibility' then
+  begin
     Result := BooleanToString(ShowCompartmentVisibility);
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetAttribute(Name);
   end;
 end;
 
 procedure PUMLClassifierView.MOF_SetAttribute(Name, Value: string);
 begin
-  if Name = 'SuppressAttributes' then begin
+  if Name = 'SuppressAttributes' then
+  begin
     SuppressAttributes := StringToBoolean(Value);
   end
-  else if Name = 'SuppressOperations' then begin
+  else if Name = 'SuppressOperations' then
+  begin
     SuppressOperations := StringToBoolean(Value);
   end
-  else if Name = 'ShowOperationSignature' then begin
+  else if Name = 'ShowOperationSignature' then
+  begin
     ShowOperationSignature := StringToBoolean(Value);
   end
-  else if Name = 'ShowCompartmentStereotype' then begin
+  else if Name = 'ShowCompartmentStereotype' then
+  begin
     ShowCompartmentStereotype := StringToBoolean(Value);
   end
-  else if Name = 'ShowCompartmentVisibility' then begin
+  else if Name = 'ShowCompartmentVisibility' then
+  begin
     ShowCompartmentVisibility := StringToBoolean(Value);
   end
-  else begin
+  else
+  begin
     inherited MOF_SetAttribute(Name, Value);
   end;
 end;
 
 function PUMLClassifierView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'AttributeCompartment' then begin
+  if Name = 'AttributeCompartment' then
+  begin
     Result := AttributeCompartment;
   end
-  else if Name = 'OperationCompartment' then begin
+  else if Name = 'OperationCompartment' then
+  begin
     Result := OperationCompartment;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLClassifierView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'AttributeCompartment' then begin
+  if Name = 'AttributeCompartment' then
+  begin
     AttributeCompartment := Value as PUMLAttributeCompartmentView;
   end
-  else if Name = 'OperationCompartment' then begin
+  else if Name = 'OperationCompartment' then
+  begin
     OperationCompartment := Value as PUMLOperationCompartmentView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -3667,7 +3793,7 @@ begin
   TabRightX := Left + (Right - Left) * 2 div 5;
   TabBottomY := Top + PACKAGE_TAB_HEIGHT;
   Canvas.Rectangle(Left, Top, TabRightX, TabBottomY);
-  Canvas.Rectangle(Left, TabBottomY-1, Right, Bottom);
+  Canvas.Rectangle(Left, TabBottomY - 1, Right, Bottom);
 end;
 
 procedure PUMLPackageView.ArrangeObject(Canvas: PCanvas);
@@ -3748,7 +3874,8 @@ end;
 
 procedure PUMLSubsystemView.SetOperationCompartment(Value: PUMLOperationCompartmentView);
 begin
-  if FOperationCompartment <> Value then begin
+  if FOperationCompartment <> Value then
+  begin
     RemoveSubView(FOperationCompartment);
     FOperationCompartment := Value;
     if FOperationCompartment <> nil then InitializeOperationCompartment(FOperationCompartment);
@@ -3762,14 +3889,14 @@ var
 begin
   inherited;
   TextBoxRight_X := Left + (Right - Left) * 2 div 5;
-  Canvas.PolyLine([Point(TextBoxRight_X-8, Top+3), Point(TextBoxRight_X-8, Top+7)]);
-  Canvas.MoveTo(TextBoxRight_X-11, Top+11);
-  Canvas.LineTo(TextBoxRight_X-11, Top+7);
-  Canvas.LineTo(TextBoxRight_X-5, Top+7);
+  Canvas.PolyLine([Point(TextBoxRight_X - 8, Top + 3), Point(TextBoxRight_X - 8, Top + 7)]);
+  Canvas.MoveTo(TextBoxRight_X - 11, Top + 11);
+  Canvas.LineTo(TextBoxRight_X - 11, Top + 7);
+  Canvas.LineTo(TextBoxRight_X - 5, Top + 7);
 
-  Canvas.MoveTo(TextBoxRight_X-5, Top+11);
-  Canvas.LineTo(TextBoxRight_X-5, Top+7);
-  Canvas.LineTo(TextBoxRight_X-11, Top+7);
+  Canvas.MoveTo(TextBoxRight_X - 5, Top + 11);
+  Canvas.LineTo(TextBoxRight_X - 5, Top + 7);
+  Canvas.LineTo(TextBoxRight_X - 11, Top + 7);
 end;
 
 procedure PUMLSubsystemView.ArrangeObject(Canvas: PCanvas);
@@ -3824,58 +3951,72 @@ end;
 
 function PUMLSubsystemView.MOF_GetAttribute(Name: string): string;
 begin
-  if Name = 'SuppressOperations' then begin
+  if Name = 'SuppressOperations' then
+  begin
     Result := BooleanToString(SuppressOperations);
   end
-  else if Name = 'ShowOperationSignature' then begin
+  else if Name = 'ShowOperationSignature' then
+  begin
     Result := BooleanToString(ShowOperationSignature);
   end
-  else if Name = 'ShowCompartmentStereotype' then begin
+  else if Name = 'ShowCompartmentStereotype' then
+  begin
     Result := BooleanToString(ShowCompartmentStereotype);
   end
-  else if Name = 'ShowCompartmentVisibility' then begin
+  else if Name = 'ShowCompartmentVisibility' then
+  begin
     Result := BooleanToString(ShowCompartmentVisibility);
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetAttribute(Name);
   end;
 end;
 
 procedure PUMLSubsystemView.MOF_SetAttribute(Name, Value: string);
 begin
-  if Name = 'SuppressOperations' then begin
+  if Name = 'SuppressOperations' then
+  begin
     SuppressOperations := StringToBoolean(Value);
   end
-  else if Name = 'ShowOperationSignature' then begin
+  else if Name = 'ShowOperationSignature' then
+  begin
     ShowOperationSignature := StringToBoolean(Value);
   end
-  else if Name = 'ShowCompartmentStereotype' then begin
+  else if Name = 'ShowCompartmentStereotype' then
+  begin
     ShowCompartmentStereotype := StringToBoolean(Value);
   end
-  else if Name = 'ShowCompartmentVisibility' then begin
+  else if Name = 'ShowCompartmentVisibility' then
+  begin
     ShowCompartmentVisibility := StringToBoolean(Value);
   end
-  else begin
+  else
+  begin
     inherited MOF_SetAttribute(Name, Value);
   end;
 end;
 
 function PUMLSubsystemView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'OperationCompartment' then begin
+  if Name = 'OperationCompartment' then
+  begin
     Result := OperationCompartment;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLSubsystemView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'OperationCompartment' then begin
+  if Name = 'OperationCompartment' then
+  begin
     OperationCompartment := Value as PUMLOperationCompartmentView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -3892,8 +4033,8 @@ var
 begin
   inherited;
   TabRightX := Left + (Right - Left) * 2 div 5;
-  Canvas.PolyLine([Point(TabRightX-9, Top+3), Point(TabRightX-15, Top+10),
-                   Point(TabRightX-3, Top+10), Point(TabRightX-9, Top+3)]);
+  Canvas.PolyLine([Point(TabRightX - 9, Top + 3), Point(TabRightX - 15, Top + 10),
+    Point(TabRightX - 3, Top + 10), Point(TabRightX - 9, Top + 3)]);
 end;
 
 procedure PUMLModelView.Update;
@@ -3986,7 +4127,8 @@ end;
 
 procedure PUMLEnumerationView.SetEnumerationLiteralCompartment(Value: PUMLEnumerationLiteralCompartmentView);
 begin
-  if FEnumerationLiteralCompartment <> Value then begin
+  if FEnumerationLiteralCompartment <> Value then
+  begin
     RemoveSubView(FEnumerationLiteralCompartment);
     FEnumerationLiteralCompartment := Value;
     if FEnumerationLiteralCompartment <> nil then InitializeLiteralCompartment(FEnumerationLiteralCompartment);
@@ -3996,7 +4138,8 @@ end;
 
 procedure PUMLEnumerationView.SetOperationCompartment(Value: PUMLOperationCompartmentView);
 begin
-  if FOperationCompartment <> Value then begin
+  if FOperationCompartment <> Value then
+  begin
     RemoveSubView(FOperationCompartment);
     FOperationCompartment := Value;
     if FOperationCompartment <> nil then InitializeOperationCompartment(FOperationCompartment);
@@ -4059,70 +4202,88 @@ end;
 
 function PUMLEnumerationView.MOF_GetAttribute(Name: string): string;
 begin
-  if Name = 'SuppressLiterals' then begin
+  if Name = 'SuppressLiterals' then
+  begin
     Result := BooleanToString(SuppressLiterals);
   end
-  else if Name = 'SuppressOperations' then begin
+  else if Name = 'SuppressOperations' then
+  begin
     Result := BooleanToString(SuppressOperations);
   end
-  else if Name = 'ShowOperationSignature' then begin
+  else if Name = 'ShowOperationSignature' then
+  begin
     Result := BooleanToString(ShowOperationSignature);
   end
-  else if Name = 'ShowCompartmentStereotype' then begin
+  else if Name = 'ShowCompartmentStereotype' then
+  begin
     Result := BooleanToString(ShowCompartmentStereotype);
   end
-  else if Name = 'ShowCompartmentVisibility' then begin
+  else if Name = 'ShowCompartmentVisibility' then
+  begin
     Result := BooleanToString(ShowCompartmentVisibility);
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetAttribute(Name);
   end;
 end;
 
 procedure PUMLEnumerationView.MOF_SetAttribute(Name, Value: string);
 begin
-  if Name = 'SuppressLiterals' then begin
+  if Name = 'SuppressLiterals' then
+  begin
     SuppressLiterals := StringToBoolean(Value);
   end
-  else if Name = 'SuppressOperations' then begin
+  else if Name = 'SuppressOperations' then
+  begin
     SuppressOperations := StringToBoolean(Value);
   end
-  else if Name = 'ShowOperationSignature' then begin
+  else if Name = 'ShowOperationSignature' then
+  begin
     ShowOperationSignature := StringToBoolean(Value);
   end
-  else if Name = 'ShowCompartmentStereotype' then begin
+  else if Name = 'ShowCompartmentStereotype' then
+  begin
     ShowCompartmentStereotype := StringToBoolean(Value);
   end
-  else if Name = 'ShowCompartmentVisibility' then begin
+  else if Name = 'ShowCompartmentVisibility' then
+  begin
     ShowCompartmentVisibility := StringToBoolean(Value);
   end
-  else begin
+  else
+  begin
     inherited MOF_SetAttribute(Name, Value);
   end;
 end;
 
 function PUMLEnumerationView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'EnumerationLiteralCompartment' then begin
+  if Name = 'EnumerationLiteralCompartment' then
+  begin
     Result := EnumerationLiteralCompartment;
   end
-  else if Name = 'OperationCompartment' then begin
+  else if Name = 'OperationCompartment' then
+  begin
     Result := OperationCompartment;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLEnumerationView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'EnumerationLiteralCompartment' then begin
+  if Name = 'EnumerationLiteralCompartment' then
+  begin
     EnumerationLiteralCompartment := Value as PUMLEnumerationLiteralCompartmentView;
   end
-  else if Name = 'OperationCompartment' then begin
+  else if Name = 'OperationCompartment' then
+  begin
     OperationCompartment := Value as PUMLOperationCompartmentView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -4153,7 +4314,8 @@ end;
 
 procedure PUMLClassView.SetTemplateParameterCompartment(Value: PUMLTemplateParameterCompartmentView);
 begin
-  if FTemplateParameterCompartment <> Value then begin
+  if FTemplateParameterCompartment <> Value then
+  begin
     RemoveSubView(FTemplateParameterCompartment);
     FTemplateParameterCompartment := Value;
     if FTemplateParameterCompartment <> nil then InitializeTemplateParameterCompartment(FTemplateParameterCompartment);
@@ -4173,20 +4335,23 @@ var
   R: TRect;
 begin
   AssignStyleToCanvas(Canvas);
-  if TemplateParameterCompartment.Visible then begin
+  if TemplateParameterCompartment.Visible then
+  begin
     R.Left := Left;
     R.Top := Top + TemplateParameterCompartment.Height - TEMPLATEPARAMETERCOMPARTMENT_OVERLAP;
     R.Right := Right - TEMPLATEPARAMETERCOMPARTMENT_RIGHT_OCCUPY;
     R.Bottom := Bottom;
   end
-  else begin
+  else
+  begin
     R.Left := Left;
     R.Top := Top;
     R.Right := Right;
     R.Bottom := Bottom;
   end;
   Canvas.Rectangle(R.Left, R.Top, R.Right, R.Bottom);
-  if IsActiveClass then begin
+  if IsActiveClass then
+  begin
     Canvas.MoveTo(R.Left + CLASS_ACTIVE_VERTLINE_WIDTH, R.Top);
     Canvas.LineTo(R.Left + CLASS_ACTIVE_VERTLINE_WIDTH, R.Bottom);
     Canvas.MoveTo(R.Right - CLASS_ACTIVE_VERTLINE_WIDTH - 1, R.Top);
@@ -4200,7 +4365,8 @@ var
 begin
   inherited;
   MeasureObjectMinSize([AttributeCompartment, OperationCompartment], GENERALNODE_MINWIDTH, GENERALNODE_MINHEIGHT);
-  if TemplateParameterCompartment.Visible then begin
+  if TemplateParameterCompartment.Visible then
+  begin
     MinWidth := Max(MinWidth, TemplateParameterCompartment.MinWidth) + TEMPLATEPARAMETERCOMPARTMENT_LEFT_MARGIN + TEMPLATEPARAMETERCOMPARTMENT_RIGHT_OCCUPY;
     MinHeight := MinHeight + TemplateParameterCompartment.MinHeight - TEMPLATEPARAMETERCOMPARTMENT_OVERLAP;
   end;
@@ -4214,7 +4380,8 @@ begin
   if TemplateParameterCompartment.Visible then
     R := Rect(R.Left, R.Top + TemplateParameterCompartment.Height - TEMPLATEPARAMETERCOMPARTMENT_OVERLAP,
       R.Right - TEMPLATEPARAMETERCOMPARTMENT_RIGHT_OCCUPY, R.Bottom);
-  if IsActiveClass then begin
+  if IsActiveClass then
+  begin
     R.Left := R.Left + CLASS_ACTIVE_VERTLINE_WIDTH;
     R.Right := R.Right - CLASS_ACTIVE_VERTLINE_WIDTH;
   end;
@@ -4245,25 +4412,29 @@ begin
   if Model = nil then Exit;
   inherited;
   TemplateParameterCompartment.Visible := ((Model as PUMLClass).TemplateParameterCount > 0);
-  if (Model as PUMLClass).TemplateParameterCount > 0 then  TemplateParameterCompartment.Update;
+  if (Model as PUMLClass).TemplateParameterCount > 0 then TemplateParameterCompartment.Update;
 end;
 
 function PUMLClassView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'TemplateParameterCompartment' then begin
+  if Name = 'TemplateParameterCompartment' then
+  begin
     Result := TemplateParameterCompartment;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLClassView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'TemplateParameterCompartment' then begin
+  if Name = 'TemplateParameterCompartment' then
+  begin
     TemplateParameterCompartment := Value as PUMLTemplateParameterCompartmentView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -4282,13 +4453,15 @@ var
 begin
   RR := (Right - Left) * 100 div (NameCompartment.Top - Top);
   IR := 100;
-  if RR >= IR then begin
+  if RR >= IR then
+  begin
     H := (NameCompartment.Top - Top);
     W := H * IR div 100;
     X := Left + (Right - Left - W) div 2;
     Y := Top;
   end
-  else begin
+  else
+  begin
     W := (Right - Left);
     H := W * 100 div IR;
     Y := Top + (NameCompartment.Top - Top - H) div 2;
@@ -4303,20 +4476,21 @@ var
   I: Integer;
 begin
   RealizationViews.Clear;
-  for I := 0 to OwnerDiagramView.OwnedViewCount - 1 do begin
+  for I := 0 to OwnerDiagramView.OwnedViewCount - 1 do
+  begin
     V := OwnerDiagramView.OwnedViews[I];
     if (V is PUMLRealizationView) and ((V as PUMLRealizationView).Head = Self) then
       RealizationViews.Add(V);
 
     // trials
     if (V is PUMLGeneralizationView) and
-       (((V as PUMLGeneralizationView).Head = Self) or ((V as PUMLGeneralizationView).Tail = Self)) then
+      (((V as PUMLGeneralizationView).Head = Self) or ((V as PUMLGeneralizationView).Tail = Self)) then
       RealizationViews.Add(V);
 
     if (V is PUMLAssociationView) and
-       (((V as PUMLAssociationView).Head = Self) or ((V as PUMLAssociationView).Tail = Self)) then
+      (((V as PUMLAssociationView).Head = Self) or ((V as PUMLAssociationView).Tail = Self)) then
       RealizationViews.Add(V);
-      
+
   end;
 end;
 
@@ -4326,7 +4500,8 @@ var
   I: Integer;
 begin
   DependencyViews.Clear;
-  for I := 0 to OwnerDiagramView.OwnedViewCount - 1 do begin
+  for I := 0 to OwnerDiagramView.OwnedViewCount - 1 do
+  begin
     V := OwnerDiagramView.OwnedViews[I];
     if (V is PUMLDependencyView) and ((V as PUMLDependencyView).Head = Self) then
       DependencyViews.Add(V);
@@ -4350,49 +4525,57 @@ var
 begin
   RR := (Right - Left) * 100 div (NameCompartment.Top - Top);
   IR := 100;
-  if RR >= IR then begin
+  if RR >= IR then
+  begin
     H := (NameCompartment.Top - Top);
     W := H * IR div 100;
     X := Left + (Right - Left - W) div 2;
     Y := Top;
   end
-  else begin
+  else
+  begin
     W := (Right - Left);
     H := W * 100 div IR;
     Y := Top + (NameCompartment.Top - Top - H) div 2;
     X := Left;
   end;
   // R := Rect(X, Y, X + W, Y + H);
-  R := self.GetIconRect;  // trial
+  R := self.GetIconRect; // trial
 
   C := GetCenter(R);
-  for I := 0 to SupplierDependencyViews.Count - 1 do begin
+  for I := 0 to SupplierDependencyViews.Count - 1 do
+  begin
     V := SupplierDependencyViews.Items[I] as PUMLDependencyView;
     // ASSERTIONS
     Assert(V.Tail = Self);
     // ASSERTIONS
     B := Junction(R, V.Points.Points[V.Points.Count - 1]);
-    if (B.X = R.Right) and (B.Y >= R.Top) and (B.Y <= R.Bottom) then begin
+    if (B.X = R.Right) and (B.Y >= R.Top) and (B.Y <= R.Bottom) then
+    begin
       T := C.Y - B.Y;
       P := Point(C.X + T, R.Bottom);
       Q := Point(C.X - T, R.Top);
     end
-    else if (B.Y = R.Top) and (B.X >= R.Left) and (B.X <= R.Right) then begin
+    else if (B.Y = R.Top) and (B.X >= R.Left) and (B.X <= R.Right) then
+    begin
       T := C.X - B.X;
       P := Point(R.Right, C.Y - T);
       Q := Point(R.Left, C.Y + T);
     end
-    else if (B.X = R.Left) and (B.Y >= R.Top) and (B.Y <= R.Bottom) then begin
+    else if (B.X = R.Left) and (B.Y >= R.Top) and (B.Y <= R.Bottom) then
+    begin
       T := B.Y - C.Y;
       P := Point(C.X - T, R.Top);
       Q := Point(C.X + T, R.Bottom);
     end
-    else if (B.Y = R.Bottom) and (B.X >= R.Left) and (B.X <= R.Right) then begin
+    else if (B.Y = R.Bottom) and (B.X >= R.Left) and (B.X <= R.Right) then
+    begin
       T := B.X - C.X;
       P := Point(R.Left, C.Y + T);
       Q := Point(R.Right, C.Y - T);
     end
-    else begin
+    else
+    begin
       // Unknown points
     end;
     Canvas.Arc(R.Left, R.Top, R.Right, R.Bottom, P.X, P.Y, Q.X, Q.Y);
@@ -4453,7 +4636,8 @@ procedure PUMLInterfaceView.DrawDecorationIcon(Canvas: PCanvas; R: TRect);
 var
   C: TPoint;
 begin
-  if StereotypeIcon = nil then begin
+  if StereotypeIcon = nil then
+  begin
     C := CenterPoint(R);
     Canvas.Ellipse(C.X - 7, C.Y - 7, C.X + 7, C.Y + 7);
   end
@@ -4545,7 +4729,8 @@ var
   W: Integer;
 begin
   R := Rect(Left, Top, Right, NameCompartment.Top);
-  if ((R.Right - R.Left) * 100 div (R.Bottom - R.Top)) >= ARTIFACT_RATIO_PERCENT then begin
+  if ((R.Right - R.Left) * 100 div (R.Bottom - R.Top)) >= ARTIFACT_RATIO_PERCENT then
+  begin
     W := ARTIFACT_RATIO_PERCENT * (R.Bottom - R.Top) div 100;
     R.Left := R.Left + ((Right - Left) - W) div 2;
     R.Right := R.Left + W;
@@ -4565,10 +4750,11 @@ end;
 
 procedure PUMLArtifactView.DrawDecorationIcon(Canvas: PCanvas; R: TRect);
 begin
-  if FStereotypeIcon = nil then begin
+  if FStereotypeIcon = nil then
+  begin
     Canvas.Polygon([Point(R.Left + 8, R.Top + 5), Point(R.Right - 11, R.Top + 5),
       Point(R.Right - 6, R.Top + 10), Point(R.Right - 6, R.Bottom - 5),
-      Point(R.Left + 8, R.Bottom - 5), Point(R.Left + 8, R.Top + 5)]);
+        Point(R.Left + 8, R.Bottom - 5), Point(R.Left + 8, R.Top + 5)]);
     Canvas.Polygon([Point(R.Right - 11, R.Top + 5), Point(R.Right - 6, R.Top + 10),
       Point(R.Right - 11, R.Top + 10), Point(R.Right - 11, R.Top + 5)]);
   end
@@ -4661,11 +4847,13 @@ begin
 
   S := '';
   // Stereotype
-  if ShowStereotype then begin
+  if ShowStereotype then
+  begin
     if M.StereotypeName <> '' then S := S + '<<' + M.StereotypeName + '>>';
   end;
   // Visibility Symbol
-  if ShowVisibility then begin
+  if ShowVisibility then
+  begin
     S := S + VisibilityToSymbol(M.Visibility);
   end;
   // Name
@@ -4677,18 +4865,20 @@ begin
     S := S + ' : ' + M.TypeExpression;
   // Multiplicity
   if M.Ordering = okOrdered then Ordering := ' ordered' else Ordering := '';
-  if Trim(M.Multiplicity) <> '' then begin
+  if Trim(M.Multiplicity) <> '' then
+  begin
     S := S + '[' + M.Multiplicity + Ordering + ']';
   end;
   // Initial Value
   if M.InitialValue <> '' then
     S := S + ' = ' + M.InitialValue;
   // Properties
-  if ShowProperty then begin
+  if ShowProperty then
+  begin
     PS := GetPropertyString(M);
     if PS <> '' then
       S := S + ' ' + PS;
-  end;      
+  end;
   Result := S;
 end;
 
@@ -4708,7 +4898,7 @@ begin
 
   M := (Model as PUMLAssociationEnd).Qualifiers[Index];
   if M.OwnerScope = skClassifier then Result := [fsUnderline]
-                                 else Result := [];
+  else Result := [];
 end;
 
 procedure PUMLQualifierCompartmentView.DrawObject(Canvas: PCanvas);
@@ -4760,15 +4950,18 @@ begin
   EC := (Model as PUMLState).EntryActionCount;
   DC := (Model as PUMLState).DoActivityCount;
   XC := (Model as PUMLState).ExitActionCount;
-  if (Index >= 0) and (Index <= EC - 1) then begin
+  if (Index >= 0) and (Index <= EC - 1) then
+  begin
     M := (Model as PUMLState).EntryActions[Index];
     Result := 'entry' + '/' + M.Name;
   end
-  else if (Index >= EC) and (Index <= EC + DC - 1) then begin
+  else if (Index >= EC) and (Index <= EC + DC - 1) then
+  begin
     M := (Model as PUMLState).DoActivities[Index - EC];
     Result := 'do' + '/' + M.Name;
   end
-  else if (Index >= EC + DC) and (Index <= EC + DC + XC - 1) then begin
+  else if (Index >= EC + DC) and (Index <= EC + DC + XC - 1) then
+  begin
     M := (Model as PUMLState).ExitActions[Index - EC - DC];
     Result := 'exit' + '/' + M.Name;
   end;
@@ -4776,7 +4969,8 @@ end;
 
 procedure PUMLInternalTransitionCompartmentView.DrawObject(Canvas: PCanvas);
 begin
-  if CompartmentItemCount > 0 then begin
+  if CompartmentItemCount > 0 then
+  begin
     inherited;
     Canvas.MoveTo(Left, Top);
     Canvas.LineTo(Right, Top);
@@ -4821,7 +5015,8 @@ end;
 
 procedure PUMLResidentCompartmentView.DrawObject(Canvas: PCanvas);
 begin
-  if CompartmentItemCount > 0 then begin
+  if CompartmentItemCount > 0 then
+  begin
     inherited;
     Canvas.MoveTo(Left, Top);
     Canvas.LineTo(Right, Top);
@@ -4866,7 +5061,8 @@ end;
 
 procedure PUMLDeployedComponentCompartmentView.DrawObject(Canvas: PCanvas);
 begin
-  if CompartmentItemCount > 0 then begin
+  if CompartmentItemCount > 0 then
+  begin
     inherited;
     Canvas.MoveTo(Left, Top);
     Canvas.LineTo(Right, Top);
@@ -4911,7 +5107,8 @@ end;
 
 procedure PUMLDeployedArtifactCompartmentView.DrawObject(Canvas: PCanvas);
 begin
-  if CompartmentItemCount > 0 then begin
+  if CompartmentItemCount > 0 then
+  begin
     inherited;
     Canvas.MoveTo(Left, Top);
     Canvas.LineTo(Right, Top);
@@ -4966,7 +5163,8 @@ end;
 
 procedure PUMLSlotCompartmentView.DrawObject(Canvas: PCanvas);
 begin
-  if CompartmentItemCount > 0 then begin
+  if CompartmentItemCount > 0 then
+  begin
     inherited;
     Canvas.MoveTo(Left, Top);
     Canvas.LineTo(Right, Top);
@@ -5016,7 +5214,8 @@ end;
 
 procedure PUMLExtensionPointCompartmentView.DrawObject(Canvas: PCanvas);
 begin
-  if CompartmentItemCount > 0 then begin
+  if CompartmentItemCount > 0 then
+  begin
     inherited;
     Canvas.MoveTo(Left, Top);
     Canvas.LineTo(Right, Top);
@@ -5058,23 +5257,26 @@ begin
   inherited;
   LineMode := lmDot;
   HeadEndStyle := esTriangle;
-  if Head is PUMLInterfaceView then begin
+  if Head is PUMLInterfaceView then
+  begin
     V := Head as PUMLInterfaceView;
-    if (V.StereotypeDisplay = sdkIcon) and (V.StereotypeIcon = nil) then begin
+    if (V.StereotypeDisplay = sdkIcon) and (V.StereotypeIcon = nil) then
+    begin
       LineMode := lmSolid;
       HeadEndStyle := esFlat;
 
       // trial
       C := Points.Count;
-      P := Junction(V.IconRect, self.Points.Points[C-1]);
-      Points.Points[C-1] := P;
-      if (LineStyle = lsRectilinear) and (C >= 2) then begin
-        P2 := Points.Points[C-2];
+      P := Junction(V.IconRect, self.Points.Points[C - 1]);
+      Points.Points[C - 1] := P;
+      if (LineStyle = lsRectilinear) and (C >= 2) then
+      begin
+        P2 := Points.Points[C - 2];
         if abs(P2.X - P.X) > abs(P2.Y - P.Y) then
           P2.Y := P.Y
         else
           P2.X := P.X;
-        Points.Points[C-2] := P2;
+        Points.Points[C - 2] := P2;
       end;
 
     end;
@@ -5103,23 +5305,26 @@ begin
   inherited;
   LineMode := lmDot;
   HeadEndStyle := esStickArrow;
-  if Head is PUMLInterfaceView then begin
+  if Head is PUMLInterfaceView then
+  begin
     V := Head as PUMLInterfaceView;
-    if (V.StereotypeDisplay = sdkIcon) and (V.StereotypeIcon = nil) then begin
+    if (V.StereotypeDisplay = sdkIcon) and (V.StereotypeIcon = nil) then
+    begin
       LineMode := lmSolid;
       HeadEndStyle := esFlat;
 
       // trial
       C := Points.Count;
-      P := Junction(V.IconRect, self.Points.Points[C-1]);
-      Points.Points[C-1] := P;
-      if (LineStyle = lsRectilinear) and (C >= 2) then begin
-        P2 := Points.Points[C-2];
+      P := Junction(V.IconRect, self.Points.Points[C - 1]);
+      Points.Points[C - 1] := P;
+      if (LineStyle = lsRectilinear) and (C >= 2) then
+      begin
+        P2 := Points.Points[C - 2];
         if abs(P2.X - P.X) > abs(P2.Y - P.Y) then
           P2.Y := P.Y
         else
           P2.X := P.X;
-        Points.Points[C-2] := P2;
+        Points.Points[C - 2] := P2;
       end;
 
     end;
@@ -5261,7 +5466,8 @@ end;
 
 procedure PUMLAssociationView.SetHeadRoleNameLabel(Value: PEdgeLabelView);
 begin
-  if FHeadRoleNameLabel <> Value then begin
+  if FHeadRoleNameLabel <> Value then
+  begin
     RemoveSubView(FHeadRoleNameLabel);
     FHeadRoleNameLabel := Value;
     if FHeadRoleNameLabel <> nil then InitializeRoleNameLabel(FHeadRoleNameLabel);
@@ -5271,7 +5477,8 @@ end;
 
 procedure PUMLAssociationView.SetTailRoleNameLabel(Value: PEdgeLabelView);
 begin
-  if FTailRoleNameLabel <> Value then begin
+  if FTailRoleNameLabel <> Value then
+  begin
     RemoveSubView(FTailRoleNameLabel);
     FTailRoleNameLabel := Value;
     if FTailRoleNameLabel <> nil then InitializeRoleNameLabel(FTailRoleNameLabel);
@@ -5281,7 +5488,8 @@ end;
 
 procedure PUMLAssociationView.SetHeadMultiplicityLabel(Value: PEdgeLabelView);
 begin
-  if FHeadMultiplicityLabel <> Value then begin
+  if FHeadMultiplicityLabel <> Value then
+  begin
     RemoveSubView(FHeadMultiplicityLabel);
     FHeadMultiplicityLabel := Value;
     if FHeadMultiplicityLabel <> nil then InitializeMultiplicityLabel(FHeadMultiplicityLabel);
@@ -5291,7 +5499,8 @@ end;
 
 procedure PUMLAssociationView.SetTailMultiplicityLabel(Value: PEdgeLabelView);
 begin
-  if FTailMultiplicityLabel <> Value then begin
+  if FTailMultiplicityLabel <> Value then
+  begin
     RemoveSubView(FTailMultiplicityLabel);
     FTailMultiplicityLabel := Value;
     if FTailMultiplicityLabel <> nil then InitializeMultiplicityLabel(FTailMultiplicityLabel);
@@ -5301,7 +5510,8 @@ end;
 
 procedure PUMLAssociationView.SetHeadPropertyLabel(Value: PEdgeLabelView);
 begin
-  if FHeadPropertyLabel <> Value then begin
+  if FHeadPropertyLabel <> Value then
+  begin
     RemoveSubView(FHeadPropertyLabel);
     FHeadPropertyLabel := Value;
     if FHeadPropertyLabel <> nil then InitializePropertyLabel(FHeadPropertyLabel);
@@ -5311,7 +5521,8 @@ end;
 
 procedure PUMLAssociationView.SetTailPropertyLabel(Value: PEdgeLabelView);
 begin
-  if FTailPropertyLabel <> Value then begin
+  if FTailPropertyLabel <> Value then
+  begin
     RemoveSubView(FTailPropertyLabel);
     FTailPropertyLabel := Value;
     if FTailPropertyLabel <> nil then InitializePropertyLabel(FTailPropertyLabel);
@@ -5321,7 +5532,8 @@ end;
 
 procedure PUMLAssociationView.SetHeadQualifierCompartment(Value: PUMLQualifierCompartmentView);
 begin
-  if FHeadQualifierCompartment <> Value then begin
+  if FHeadQualifierCompartment <> Value then
+  begin
     RemoveSubView(FHeadQualifierCompartment);
     FHeadQualifierCompartment := Value;
     if FHeadQualifierCompartment <> nil then InitializeQualifierCompartment(FHeadQualifierCompartment);
@@ -5331,7 +5543,8 @@ end;
 
 procedure PUMLAssociationView.SetTailQualifierCompartment(Value: PUMLQualifierCompartmentView);
 begin
-  if FTailQualifierCompartment <> Value then begin
+  if FTailQualifierCompartment <> Value then
+  begin
     RemoveSubView(FTailQualifierCompartment);
     FTailQualifierCompartment := Value;
     if FTailQualifierCompartment <> nil then InitializeQualifierCompartment(FTailQualifierCompartment);
@@ -5349,41 +5562,48 @@ procedure PUMLAssociationView.ArrangeObject(Canvas: PCanvas);
     P, PN, P1: TPoint;
     DX, DY: Integer;
   begin
-    if ConnectionNum = 0 then begin // tail
+    if ConnectionNum = 0 then
+    begin // tail
       QV := FTailQualifierCompartment;
       NV := Tail as PNodeView;
       P1 := Points.Points[1];
       JP := 0;
     end
-    else begin  // head
+    else
+    begin // head
       QV := FHeadQualifierCompartment;
       NV := Head as PNodeView;
       P1 := Points.Points[Points.Count - 2];
       JP := Points.Count - 1;
     end;
-    if QV.Visible then begin
+    if QV.Visible then
+    begin
       PN := Junction(NV.GetBoundingBox(Canvas), P1);
       DX := Abs(P1.X - PN.X);
       DY := Abs(P1.Y - PN.Y);
 
       // stick to right side of Node
-      if (PN.X <= P1.X) and (DX >= DY) then begin
+      if (PN.X <= P1.X) and (DX >= DY) then
+      begin
         QV.Left := NV.Right - 1;
-        QV.Top := PN.Y - QV.Height div 2;
+        QV.Top := P1.Y  - QV.Height div 2;
       end
       // stick to top side of Node
-      else if (PN.Y >= P1.Y) and (DY > DX) then begin
-        QV.Left := PN.X - QV.Width div 2;
+      else if (PN.Y >= P1.Y) and (DY > DX) then
+      begin
+        QV.Left := P1.X + 1 - QV.Width div 2 -(QV.Width mod 2);
         QV.Top := NV.Top - QV.Height + 2;
       end
       // stick to left side of Node
-      else if (PN.X > P1.X) and (DX >= DY) then begin
+      else if (PN.X > P1.X) and (DX >= DY) then
+      begin
         QV.Left := NV.Left - QV.Width + 2;
-        QV.Top := PN.Y - QV.Height div 2;
+        QV.Top := P1.Y - QV.Height div 2;
       end
       // stick to bottom side of Node
-      else if (PN.Y < P1.Y) and (DY > DX) then begin
-        QV.Left := PN.X - QV.Width div 2;
+      else if (PN.Y < P1.Y) and (DY > DX) then
+      begin
+        QV.Left := P1.X + 1 - QV.Width div 2 -(QV.Width mod 2);
         QV.Top := NV.Bottom - 1;
       end;
 
@@ -5402,12 +5622,15 @@ begin
   ArrrangeQualifierCompartment(1);
   ArrrangeQualifierCompartment(0);
 
-  T := nil; H := nil;
-  if FTailQualifierCompartment.Visible then begin
+  T := nil;
+  H := nil;
+  if FTailQualifierCompartment.Visible then
+  begin
     T := Tail;
     Tail := FTailQualifierCompartment;
   end;
-  if FHeadQualifierCompartment.Visible then begin
+  if FHeadQualifierCompartment.Visible then
+  begin
     H := Head;
     Head := FHeadQualifierCompartment;
   end;
@@ -5467,7 +5690,8 @@ begin
     else if Con2.Aggregation = akComposite then
       HeadEndStyle := esArrowFilledDiamond;
   end
-  else begin
+  else
+  begin
     TailEndStyle := esFlat;
     HeadEndStyle := esFlat;
     // Aggregation (Connection1)
@@ -5488,11 +5712,13 @@ begin
     TailRoleNameLabel.FontStyle := TailRoleNameLabel.FontStyle + [fsUnderline]
   else
     TailRoleNameLabel.FontStyle := TailRoleNameLabel.FontStyle - [fsUnderline];
-  if Con1.Name <> '' then begin
+  if Con1.Name <> '' then
+  begin
     TailRoleNameLabel.Visible := True;
     TailRoleNameLabel.Text := S;
   end
-  else begin
+  else
+  begin
     TailRoleNameLabel.Visible := False;
   end;
   // RoleName (Connection2)
@@ -5502,20 +5728,22 @@ begin
     HeadRoleNameLabel.FontStyle := HeadRoleNameLabel.FontStyle + [fsUnderline]
   else
     HeadRoleNameLabel.FontStyle := HeadRoleNameLabel.FontStyle - [fsUnderline];
-  if Con2.Name <> '' then begin
+  if Con2.Name <> '' then
+  begin
     HeadRoleNameLabel.Visible := True;
     HeadRoleNameLabel.Text := S;
   end
-  else begin
+  else
+  begin
     HeadRoleNameLabel.Visible := False;
   end;
   // Multiplicity (Connection1)
   if Con1.Multiplicity = '' then TailMultiplicityLabel.Visible := False
-                            else TailMultiplicityLabel.Visible := True;
+  else TailMultiplicityLabel.Visible := True;
   TailMultiplicityLabel.Text := Con1.Multiplicity;
   // Multiplicity (Connection2)
   if Con2.Multiplicity = '' then HeadMultiplicityLabel.Visible := False
-                            else HeadMultiplicityLabel.Visible := True;
+  else HeadMultiplicityLabel.Visible := True;
   HeadMultiplicityLabel.Text := Con2.Multiplicity;
 
   SL := TStringList.Create;
@@ -5548,88 +5776,112 @@ end;
 
 function PUMLAssociationView.MOF_GetAttribute(Name: string): string;
 begin
-  if Name = 'ShowCompartmentStereotype' then begin
+  if Name = 'ShowCompartmentStereotype' then
+  begin
     Result := BooleanToString(ShowCompartmentStereotype);
   end
-  else if Name = 'ShowCompartmentVisibility' then begin
+  else if Name = 'ShowCompartmentVisibility' then
+  begin
     Result := BooleanToString(ShowCompartmentVisibility);
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetAttribute(Name);
   end;
 end;
 
 procedure PUMLAssociationView.MOF_SetAttribute(Name, Value: string);
 begin
-  if Name = 'ShowCompartmentStereotype' then begin
+  if Name = 'ShowCompartmentStereotype' then
+  begin
     ShowCompartmentStereotype := StringToBoolean(Value);
   end
-  else if Name = 'ShowCompartmentVisibility' then begin
+  else if Name = 'ShowCompartmentVisibility' then
+  begin
     ShowCompartmentVisibility := StringToBoolean(Value);
   end
-  else begin
+  else
+  begin
     inherited MOF_SetAttribute(Name, Value);
   end;
 end;
 
 function PUMLAssociationView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'HeadRoleNameLabel' then begin
+  if Name = 'HeadRoleNameLabel' then
+  begin
     Result := HeadRoleNameLabel;
   end
-  else if Name = 'TailRoleNameLabel' then begin
+  else if Name = 'TailRoleNameLabel' then
+  begin
     Result := TailRoleNameLabel;
   end
-  else if Name = 'HeadMultiplicityLabel' then begin
+  else if Name = 'HeadMultiplicityLabel' then
+  begin
     Result := HeadMultiplicityLabel;
   end
-  else if Name = 'TailMultiplicityLabel' then begin
+  else if Name = 'TailMultiplicityLabel' then
+  begin
     Result := TailMultiplicityLabel;
   end
-  else if Name = 'HeadPropertyLabel' then begin
+  else if Name = 'HeadPropertyLabel' then
+  begin
     Result := HeadPropertyLabel;
   end
-  else if Name = 'TailPropertyLabel' then begin
+  else if Name = 'TailPropertyLabel' then
+  begin
     Result := TailPropertyLabel;
   end
-  else if Name = 'HeadQualifierCompartment' then begin
+  else if Name = 'HeadQualifierCompartment' then
+  begin
     Result := HeadQualifierCompartment;
   end
-  else if Name = 'TailQualifierCompartment' then begin
+  else if Name = 'TailQualifierCompartment' then
+  begin
     Result := TailQualifierCompartment;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLAssociationView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'HeadRoleNameLabel' then begin
+  if Name = 'HeadRoleNameLabel' then
+  begin
     HeadRoleNameLabel := Value as PEdgeLabelView;
   end
-  else if Name = 'TailRoleNameLabel' then begin
+  else if Name = 'TailRoleNameLabel' then
+  begin
     TailRoleNameLabel := Value as PEdgeLabelView;
   end
-  else if Name = 'HeadMultiplicityLabel' then begin
+  else if Name = 'HeadMultiplicityLabel' then
+  begin
     HeadMultiplicityLabel := Value as PEdgeLabelView;
   end
-  else if Name = 'TailMultiplicityLabel' then begin
+  else if Name = 'TailMultiplicityLabel' then
+  begin
     TailMultiplicityLabel := Value as PEdgeLabelView;
   end
-  else if Name = 'HeadPropertyLabel' then begin
+  else if Name = 'HeadPropertyLabel' then
+  begin
     HeadPropertyLabel := Value as PEdgeLabelView;
   end
-  else if Name = 'TailPropertyLabel' then begin
+  else if Name = 'TailPropertyLabel' then
+  begin
     TailPropertyLabel := Value as PEdgeLabelView;
   end
-  else if Name = 'HeadQualifierCompartment' then begin
+  else if Name = 'HeadQualifierCompartment' then
+  begin
     HeadQualifierCompartment := Value as PUMLQualifierCompartmentView;
   end
-  else if Name = 'TailQualifierCompartment' then begin
+  else if Name = 'TailQualifierCompartment' then
+  begin
     TailQualifierCompartment := Value as PUMLQualifierCompartmentView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -5709,7 +5961,8 @@ end;
 
 procedure PUMLComponentView.SetResidentCompartment(Value: PUMLResidentCompartmentView);
 begin
-  if FResidentCompartment <> Value then begin
+  if FResidentCompartment <> Value then
+  begin
     RemoveSubView(FResidentCompartment);
     FResidentCompartment := Value;
     if FResidentCompartment <> nil then InitializeResidentCompartment(FResidentCompartment);
@@ -5721,7 +5974,8 @@ procedure PUMLComponentView.AfterLoad(Reader: PObjectReader);
 begin
   inherited;
   // StarUML
-  if ResidentCompartment = nil then begin
+  if ResidentCompartment = nil then
+  begin
     ResidentCompartment := MetaModel.CreateInstance('UMLResidentCompartmentView') as PUMLResidentCompartmentView;
     ResidentCompartment.Model := Model;
   end;
@@ -5729,7 +5983,8 @@ end;
 
 procedure PUMLComponentView.DrawDecorationIcon(Canvas: PCanvas; R: TRect);
 begin
-  if FStereotypeIcon = nil then begin
+  if FStereotypeIcon = nil then
+  begin
     AssignStyleToCanvas(Canvas);
     Canvas.Rectangle(R.Left + 9, R.Top + 5, R.Left + 22, R.Top + 21);
     Canvas.Rectangle(R.Left + 6, R.Top + 8, R.Left + 13, R.Top + 12);
@@ -5750,7 +6005,8 @@ begin
   NameCompartment.Left := Left + COMPONENT_STATIC_MARGIN;
   NameCompartment.Top := Top;
   NameCompartment.Right := Right;
-  if ResidentCompartment.Visible then begin
+  if ResidentCompartment.Visible then
+  begin
     ResidentCompartment.Left := Left + COMPONENT_RECT_INDENT;
     ResidentCompartment.Top := Top + Max(NameCompartment.MinHeight, COMPONENT_BALANCED_HEIGHT);
     ResidentCompartment.Right := Right;
@@ -5791,7 +6047,7 @@ begin
     NameCompartment.NameLabel.FontStyle := NameCompartment.NameLabel.FontStyle - [fsItalic];
   if (StereotypeDisplay = sdkDecoration) and (M.StereotypeName = '') then
     NameCompartment.StereotypeLabel.Text := '<<component>>';
-  ResidentCompartment.Visible := (M.ResidentCount > 0);    
+  ResidentCompartment.Visible := (M.ResidentCount > 0);
   for I := 0 to M.InstanceCount - 1 do
     if M.Instances[I] is PUMLComponentInstance then
       (M.Instances[I] as PUMLComponentInstance).UpdateViews;
@@ -5799,20 +6055,24 @@ end;
 
 function PUMLComponentView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'ResidentCompartment' then begin
+  if Name = 'ResidentCompartment' then
+  begin
     Result := ResidentCompartment;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLComponentView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'ResidentCompartment' then begin
+  if Name = 'ResidentCompartment' then
+  begin
     ResidentCompartment := Value as PUMLResidentCompartmentView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -5825,7 +6085,8 @@ end;
 
 procedure PUMLComponentInstanceView.DrawDecorationIcon(Canvas: PCanvas; R: TRect);
 begin
-  if FStereotypeIcon = nil then begin
+  if FStereotypeIcon = nil then
+  begin
     AssignStyleToCanvas(Canvas);
     Canvas.Rectangle(R.Left + 9, R.Top + 5, R.Left + 22, R.Top + 21);
     Canvas.Rectangle(R.Left + 6, R.Top + 8, R.Left + 13, R.Top + 12);
@@ -5871,13 +6132,14 @@ var
 begin
   AssignStyleToCanvas(Canvas);
 
-  R := Right - 1; B := Bottom - 1;
-  Canvas.Polygon([Point(Left, Top+NODE_STATIC_MARGIN), Point(R-NODE_STATIC_MARGIN, Top+NODE_STATIC_MARGIN),
-                  Point(R-NODE_STATIC_MARGIN, B), Point(Left, B)]);
-  Canvas.Polygon([Point(Left, Top+NODE_STATIC_MARGIN), Point(Left+NODE_STATIC_MARGIN, Top),
-                  Point(R, Top), Point(R-NODE_STATIC_MARGIN, Top+NODE_STATIC_MARGIN)]);
-  Canvas.Polygon([Point(R, Top), Point(R-NODE_STATIC_MARGIN, Top+NODE_STATIC_MARGIN),
-                  Point(R-NODE_STATIC_MARGIN, B), Point(R, B-NODE_STATIC_MARGIN)]);
+  R := Right - 1;
+  B := Bottom - 1;
+  Canvas.Polygon([Point(Left, Top + NODE_STATIC_MARGIN), Point(R - NODE_STATIC_MARGIN, Top + NODE_STATIC_MARGIN),
+    Point(R - NODE_STATIC_MARGIN, B), Point(Left, B)]);
+  Canvas.Polygon([Point(Left, Top + NODE_STATIC_MARGIN), Point(Left + NODE_STATIC_MARGIN, Top),
+    Point(R, Top), Point(R - NODE_STATIC_MARGIN, Top + NODE_STATIC_MARGIN)]);
+  Canvas.Polygon([Point(R, Top), Point(R - NODE_STATIC_MARGIN, Top + NODE_STATIC_MARGIN),
+    Point(R - NODE_STATIC_MARGIN, B), Point(R, B - NODE_STATIC_MARGIN)]);
 end;
 
 procedure PUMLCustomNodeView.DrawDecorationObject(Canvas: PCanvas);
@@ -5937,7 +6199,8 @@ end;
 
 procedure PUMLNodeView.SetDeployedComponentCompartment(Value: PUMLDeployedComponentCompartmentView);
 begin
-  if FDeployedComponentCompartment <> Value then begin
+  if FDeployedComponentCompartment <> Value then
+  begin
     RemoveSubView(FDeployedComponentCompartment);
     FDeployedComponentCompartment := Value;
     if FDeployedComponentCompartment <> nil then InitializeDeployedComponentCompartment(FDeployedComponentCompartment);
@@ -5947,7 +6210,8 @@ end;
 
 procedure PUMLNodeView.SetDeployedArtifactCompartment(Value: PUMLDeployedArtifactCompartmentView);
 begin
-  if FDeployedArtifactCompartment <> Value then begin
+  if FDeployedArtifactCompartment <> Value then
+  begin
     RemoveSubView(FDeployedArtifactCompartment);
     FDeployedArtifactCompartment := Value;
     if FDeployedArtifactCompartment <> nil then InitializeDeployedArtifactCompartment(FDeployedArtifactCompartment);
@@ -5959,11 +6223,13 @@ procedure PUMLNodeView.AfterLoad(Reader: PObjectReader);
 begin
   inherited;
   // StarUML
-  if DeployedComponentCompartment = nil then begin
+  if DeployedComponentCompartment = nil then
+  begin
     DeployedComponentCompartment := MetaModel.CreateInstance('UMLDeployedComponentCompartmentView') as PUMLDeployedComponentCompartmentView;
     DeployedComponentCompartment.Model := Model;
   end;
-  if DeployedArtifactCompartment = nil then begin
+  if DeployedArtifactCompartment = nil then
+  begin
     DeployedArtifactCompartment := MetaModel.CreateInstance('UMLDeployedArtifactCompartmentView') as PUMLDeployedArtifactCompartmentView;
     DeployedArtifactCompartment.Model := Model;
   end;
@@ -5971,7 +6237,8 @@ end;
 
 procedure PUMLNodeView.DrawDecorationIcon(Canvas: PCanvas; R: TRect);
 begin
-  if FStereotypeIcon = nil then begin
+  if FStereotypeIcon = nil then
+  begin
     AssignStyleToCanvas(Canvas);
     Canvas.Rectangle(R.Left + 3, R.Top + 10, R.Left + 20, R.Top + 21);
     Canvas.Polygon([Point(R.Left + 3, R.Top + 10), Point(R.Left + 8, R.Top + 5),
@@ -6028,7 +6295,7 @@ begin
   else
     NameCompartment.NameLabel.FontStyle := NameCompartment.NameLabel.FontStyle - [fsItalic];
   DeployedComponentCompartment.Visible := (M.DeployedComponentCount > 0);
-  DeployedArtifactCompartment.Visible := (M.DeployedArtifactCount > 0);    
+  DeployedArtifactCompartment.Visible := (M.DeployedArtifactCount > 0);
   for I := 0 to M.InstanceCount - 1 do
     if M.Instances[I] is PUMLNodeInstance then
       (M.Instances[I] as PUMLNodeInstance).UpdateViews;
@@ -6036,26 +6303,32 @@ end;
 
 function PUMLNodeView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'DeployedComponentCompartment' then begin
+  if Name = 'DeployedComponentCompartment' then
+  begin
     Result := DeployedComponentCompartment;
   end
-  else if Name = 'DeployedArtifactCompartment' then begin
+  else if Name = 'DeployedArtifactCompartment' then
+  begin
     Result := DeployedArtifactCompartment;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLNodeView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'DeployedComponentCompartment' then begin
+  if Name = 'DeployedComponentCompartment' then
+  begin
     DeployedComponentCompartment := Value as PUMLDeployedComponentCompartmentView;
   end
-  else if Name = 'DeployedArtifactCompartment' then begin
+  else if Name = 'DeployedArtifactCompartment' then
+  begin
     DeployedArtifactCompartment := Value as PUMLDeployedArtifactCompartmentView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -6068,7 +6341,8 @@ end;
 
 procedure PUMLNodeInstanceView.DrawDecorationIcon(Canvas: PCanvas; R: TRect);
 begin
-  if FStereotypeIcon = nil then begin
+  if FStereotypeIcon = nil then
+  begin
     AssignStyleToCanvas(Canvas);
     Canvas.Rectangle(R.Left + 3, R.Top + 10, R.Left + 20, R.Top + 21);
     Canvas.Polygon([Point(R.Left + 3, R.Top + 10), Point(R.Left + 8, R.Top + 5),
@@ -6123,7 +6397,7 @@ begin
   // head, body, arm, left leg, right leg
   Canvas.Ellipse(ARect.Left + XH, ARect.Top + 1, ARect.Right - XH, YH);
   Canvas.PolyLine([Point(CX, YH), Point(CX, YL)]);
-  Canvas.PolyLine([Point(ARect.Left + XA , YA), Point(ARect.Right - XA, YA)]);
+  Canvas.PolyLine([Point(ARect.Left + XA, YA), Point(ARect.Right - XA, YA)]);
   Canvas.PolyLine([Point(CX, YL), Point(ARect.Left, ARect.Bottom - 1)]);
   Canvas.PolyLine([Point(CX, YL), Point(ARect.Right, ARect.Bottom - 1)]);
 end;
@@ -6138,9 +6412,11 @@ var
   RA: TRect;
   W: Integer;
 begin
-  if FStereotypeIcon = nil then begin
+  if FStereotypeIcon = nil then
+  begin
     RA := R;
-    if ((RA.Right - RA.Left) * 100 div (RA.Bottom - RA.Top)) >= ACTOR_RATIO_PERCENT then begin
+    if ((RA.Right - RA.Left) * 100 div (RA.Bottom - RA.Top)) >= ACTOR_RATIO_PERCENT then
+    begin
       W := ACTOR_RATIO_PERCENT * (RA.Bottom - RA.Top) div 100;
       RA.Left := RA.Left + ((R.Right - R.Left) - W) div 2;
       RA.Right := RA.Left + W;
@@ -6158,7 +6434,8 @@ var
 begin
   AssignStyleToCanvas(Canvas);
   R := Rect(Left, Top, Right, NameCompartment.Top);
-  if ((R.Right - R.Left) * 100 div (R.Bottom - R.Top)) >= ACTOR_RATIO_PERCENT then begin
+  if ((R.Right - R.Left) * 100 div (R.Bottom - R.Top)) >= ACTOR_RATIO_PERCENT then
+  begin
     W := ACTOR_RATIO_PERCENT * (R.Bottom - R.Top) div 100;
     R.Left := R.Left + ((Right - Left) - W) div 2;
     R.Right := R.Left + W;
@@ -6212,7 +6489,8 @@ end;
 
 procedure PUMLUseCaseView.SetExtensionPointCompartment(Value: PUMLExtensionPointCompartmentView);
 begin
-  if FExtensionPointCompartment <> Value then begin
+  if FExtensionPointCompartment <> Value then
+  begin
     RemoveSubView(FExtensionPointCompartment);
     FExtensionPointCompartment := Value;
     if FExtensionPointCompartment <> nil then InitializeExtensionPointCompartment(FExtensionPointCompartment);
@@ -6230,14 +6508,16 @@ begin
   W := R.Right - R.Left;
   H := R.Bottom - R.Top;
   RR := W * 100 div H;
-  IR := USECASE_ICONMINWIDTH * 100 div USECASE_ICONMINHEIGHT; 
-  if RR >= IR then begin
+  IR := USECASE_ICONMINWIDTH * 100 div USECASE_ICONMINHEIGHT;
+  if RR >= IR then
+  begin
     H := (R.Bottom - R.Top);
     W := H * IR div 100;
     X := R.Left + (R.Right - R.Left - W) div 2;
     Y := R.Top;
   end
-  else begin
+  else
+  begin
     W := (R.Right - R.Left);
     H := W * 100 div IR;
     Y := R.Top + (R.Bottom - R.Top - H) div 2;
@@ -6250,7 +6530,8 @@ procedure PUMLUseCaseView.AfterLoad(Reader: PObjectReader);
 begin
   inherited;
   // StarUML
-  if ExtensionPointCompartment = nil then begin
+  if ExtensionPointCompartment = nil then
+  begin
     ExtensionPointCompartment := MetaModel.CreateInstance('UMLExtensionPointCompartmentView') as PUMLExtensionPointCompartmentView;
     ExtensionPointCompartment.Model := Model;
   end;
@@ -6281,11 +6562,11 @@ begin
   AssignStyleToCanvas(Canvas);
   R := Rect(Left, Top, Right, Bottom);
   if ExtensionPointCompartment.Visible then
-   R.Bottom := R.Bottom - ExtensionPointCompartment.Height - COMPARTMENT_INTERVAL;
+    R.Bottom := R.Bottom - ExtensionPointCompartment.Height - COMPARTMENT_INTERVAL;
   if OperationCompartment.Visible then
-   R.Bottom := R.Bottom - OperationCompartment.Height - COMPARTMENT_INTERVAL;
+    R.Bottom := R.Bottom - OperationCompartment.Height - COMPARTMENT_INTERVAL;
   if AttributeCompartment.Visible then
-   R.Bottom := R.Bottom - AttributeCompartment.Height - COMPARTMENT_INTERVAL;
+    R.Bottom := R.Bottom - AttributeCompartment.Height - COMPARTMENT_INTERVAL;
   Canvas.Ellipse(R.Left, R.Top, R.Right, R.Bottom);
 end;
 
@@ -6330,19 +6611,22 @@ begin
 
   // Arranging view objects
   Y := Bottom;
-  if ExtensionPointCompartment.Visible then begin
+  if ExtensionPointCompartment.Visible then
+  begin
     Y := Y - ExtensionPointCompartment.Height - COMPARTMENT_INTERVAL;
     ExtensionPointCompartment.Left := Left;
     ExtensionPointCompartment.Right := Right;
     ExtensionPointCompartment.Top := Y;
   end;
-  if OperationCompartment.Visible then begin
+  if OperationCompartment.Visible then
+  begin
     Y := Y - OperationCompartment.Height - COMPARTMENT_INTERVAL;
     OperationCompartment.Left := Left;
     OperationCompartment.Right := Right;
     OperationCompartment.Top := Y;
   end;
-  if AttributeCompartment.Visible then begin
+  if AttributeCompartment.Visible then
+  begin
     Y := Y - AttributeCompartment.Height - COMPARTMENT_INTERVAL;
     AttributeCompartment.Left := Left;
     AttributeCompartment.Right := Right;
@@ -6386,20 +6670,24 @@ end;
 
 function PUMLUseCaseView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'ExtensionPointCompartment' then begin
+  if Name = 'ExtensionPointCompartment' then
+  begin
     Result := ExtensionPointCompartment;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLUseCaseView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'ExtensionPointCompartment' then begin
+  if Name = 'ExtensionPointCompartment' then
+  begin
     ExtensionPointCompartment := Value as PUMLExtensionPointCompartmentView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -6423,7 +6711,6 @@ begin
   inherited;
   StereotypeLabel.Text := '<<include>>';
 end;
-
 
 // PUMLIncludeView
 ////////////////////////////////////////////////////////////////////////////////
@@ -6480,20 +6767,24 @@ end;
 
 function PUMLSystemBoundaryView.MOF_GetAttribute(Name: string): string;
 begin
-  if Name = 'Caption' then begin
+  if Name = 'Caption' then
+  begin
     Result := Caption;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetAttribute(Name);
   end;
 end;
 
 procedure PUMLSystemBoundaryView.MOF_SetAttribute(Name, Value: string);
 begin
-  if Name = 'Caption' then begin
+  if Name = 'Caption' then
+  begin
     Caption := Value;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetAttribute(Name, Value);
   end;
 end;
@@ -6525,21 +6816,26 @@ begin
   // if Model's Action is PUMLDestroyAction in UMLCustomSeqMessageView connected to self,
   // draw Destruction Mark.
   IsDestruction := False;
-  for I := 0 to GetDiagramView.OwnedViewCount - 1 do begin
-    if GetDiagramView.OwnedViews[I] is PUMLCustomSeqMessageView then begin
+  for I := 0 to GetDiagramView.OwnedViewCount - 1 do
+  begin
+    if GetDiagramView.OwnedViews[I] is PUMLCustomSeqMessageView then
+    begin
       V := GetDiagramView.OwnedViews[I] as PUMLCustomSeqMessageView;
-      if Model <> nil then begin
-        if V.Head = Self then begin
+      if Model <> nil then
+      begin
+        if V.Head = Self then
+        begin
           if (V.Model is PUMLStimulus) and ((V.Model as PUMLStimulus).Action is PUMLDestroyAction) then
             IsDestruction := True;
           if (V.Model is PUMLMessage) and ((V.Model as PUMLMessage).Action is PUMLDestroyAction) then
             IsDestruction := True;
         end;
-      end;        
+      end;
     end;
   end;
   // draw Destruction Mark.
-  if IsDestruction then begin
+  if IsDestruction then
+  begin
     Canvas.Pen.Style := psSolid;
     Canvas.MoveTo(C - 10, Bottom - 10);
     Canvas.LineTo(C + 10, Bottom + 10);
@@ -6560,16 +6856,19 @@ begin
   Width := MinWidth;
   // LifeLine's Height is long to contain all MessageView.
   B := (Parent as PNodeView).Bottom;
-  for I := 0 to GetDiagramView.OwnedViewCount - 1 do begin
-    if (GetDiagramView.OwnedViews[I] is PUMLCustomSeqMessageView) then begin
+  for I := 0 to GetDiagramView.OwnedViewCount - 1 do
+  begin
+    if (GetDiagramView.OwnedViews[I] is PUMLCustomSeqMessageView) then
+    begin
       MessageView := GetDiagramView.OwnedViews[I] as PUMLCustomSeqMessageView;
-      if (MessageView.Head = Self) or (MessageView.Tail = Self) then begin
+      if (MessageView.Head = Self) or (MessageView.Tail = Self) then
+      begin
         if MessageView.Activation.Bottom > B then B := MessageView.Activation.Bottom;
       end;
     end;
   end;
   if B > (Parent as PNodeView).Bottom then
-    (Parent as PNodeView).Bottom := B + 20;  //
+    (Parent as PNodeView).Bottom := B + 20; //
 end;
 
 function PUMLLifeLineView.ContainsPoint(Canvas: PCanvas; P: TPoint): Boolean;
@@ -6585,6 +6884,7 @@ end;
 // -----------------------------------------------------------------------------
 // return the most extruded ActivationView existing at YPosition
 // -----------------------------------------------------------------------------
+
 function PUMLLifeLineView.GetActivationAt(YPosition: Integer): PUMLActivationView;
 var
   I: Integer;
@@ -6594,18 +6894,23 @@ begin
   FrontMostActivation := nil;
   // find the most extruded Activation(FrontMostActivation)
   // regard Activation whose Top position is the lowest as the most extruded Activation
-  for I := 0 to GetDiagramView.OwnedViewCount - 1 do begin
-    if GetDiagramView.OwnedViews[I] is PUMLCustomSeqMessageView then begin
+  for I := 0 to GetDiagramView.OwnedViewCount - 1 do
+  begin
+    if GetDiagramView.OwnedViews[I] is PUMLCustomSeqMessageView then
+    begin
       Msg := GetDiagramView.OwnedViews[I] as PUMLCustomSeqMessageView;
-      if Msg.Head = Self then begin
+      if Msg.Head = Self then
+      begin
         if (Msg.Activation.Visible) and
-           (Msg.Activation.Top <= YPosition) and
-           (Msg.Activation.Bottom > YPosition) then
+          (Msg.Activation.Top <= YPosition) and
+          (Msg.Activation.Bottom > YPosition) then
         begin
-          if FrontMostActivation <> nil then begin
+          if FrontMostActivation <> nil then
+          begin
             if Msg.Activation.Top > FrontMostActivation.Top then FrontMostActivation := Msg.Activation;
           end
-          else begin
+          else
+          begin
             FrontMostActivation := Msg.Activation;
           end;
         end;
@@ -6637,7 +6942,8 @@ end;
 
 procedure PUMLCustomSeqObjectView.SetLifeLine(Value: PUMLLifeLineView);
 begin
-  if FLifeLine <> Value then begin
+  if FLifeLine <> Value then
+  begin
     RemoveSubView(FLifeLine);
     FLifeLine := Value;
     if FLifeLine <> nil then InitializeLifeLine(FLifeLine);
@@ -6663,7 +6969,8 @@ var
 begin
   AssignStyleToCanvas(Canvas);
   R := Rect(Left, Top, Right, NameCompartment.Top);
-  if ((R.Right - R.Left) * 100 div (R.Bottom - R.Top)) >= ACTOR_RATIO_PERCENT then begin
+  if ((R.Right - R.Left) * 100 div (R.Bottom - R.Top)) >= ACTOR_RATIO_PERCENT then
+  begin
     W := ACTOR_RATIO_PERCENT * (R.Bottom - R.Top) div 100;
     R.Left := R.Left + ((Right - Left) - W) div 2;
     R.Right := R.Left + W;
@@ -6750,20 +7057,24 @@ end;
 
 function PUMLCustomSeqObjectView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'LifeLine' then begin
+  if Name = 'LifeLine' then
+  begin
     Result := LifeLine;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLCustomSeqObjectView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'LifeLine' then begin
+  if Name = 'LifeLine' then
+  begin
     LifeLine := Value as PUMLLifeLineView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -6779,7 +7090,8 @@ var
   M: PUMLObject;
 begin
   Result := False;
-  if (Model <> nil) and (Model is PUMLObject) then begin
+  if (Model <> nil) and (Model is PUMLObject) then
+  begin
     M := Model as PUMLObject;
     if (M.Classifier <> nil) and (M.Classifier is PUMLClass) then
       Result := (M.Classifier as PUMLClass).IsActive;
@@ -6792,23 +7104,28 @@ var
   R: TRect;
 begin
   AssignStyleToCanvas(Canvas);
-  if Model <> nil then begin
+  if Model <> nil then
+  begin
     M := Model as PUMLObject;
-    if (M.Classifier <> nil) and (M.Classifier is PUMLActor) then begin
+    if (M.Classifier <> nil) and (M.Classifier is PUMLActor) then
+    begin
       DrawActorShapeObject(Canvas);
       Exit;
     end;
   end;
-  if Model <> nil then begin
+  if Model <> nil then
+  begin
     M := Model as PUMLObject;
     R := Rect(Left, Top, Right, NameCompartment.Bottom);
-    if M.IsMultiInstance then begin
+    if M.IsMultiInstance then
+    begin
       Canvas.Rectangle(R.Left + MULTI_OBJECT_MARGIN, R.Top + MULTI_OBJECT_MARGIN,
         R.Right + MULTI_OBJECT_MARGIN, R.Bottom + MULTI_OBJECT_MARGIN);
     end;
   end;
   inherited;
-  if IsActiveObject then begin
+  if IsActiveObject then
+  begin
     Canvas.MoveTo(Left + CLASS_ACTIVE_VERTLINE_WIDTH, NameCompartment.Top);
     Canvas.LineTo(Left + CLASS_ACTIVE_VERTLINE_WIDTH, NameCompartment.Bottom);
     Canvas.MoveTo(Right - CLASS_ACTIVE_VERTLINE_WIDTH - 1, NameCompartment.Top);
@@ -6820,15 +7137,18 @@ procedure PUMLSeqObjectView.ArrangeObject(Canvas: PCanvas);
 var
   M: PUMLObject;
 begin
-  if Model <> nil then begin
+  if Model <> nil then
+  begin
     M := Model as PUMLObject;
-    if (M.Classifier <> nil) and (M.Classifier is PUMLActor) then begin
+    if (M.Classifier <> nil) and (M.Classifier is PUMLActor) then
+    begin
       ArrangeActorShapeObject(Canvas);
       Exit;
     end
   end;
   inherited;
-  if IsActiveObject then begin
+  if IsActiveObject then
+  begin
     MinWidth := MinWidth + CLASS_ACTIVE_VERTLINE_WIDTH * 2;
     NameCompartment.Left := Left + CLASS_ACTIVE_VERTLINE_WIDTH;
     NameCompartment.Right := Right - CLASS_ACTIVE_VERTLINE_WIDTH;
@@ -6868,9 +7188,11 @@ procedure PUMLSeqClassifierRoleView.DrawObject(Canvas: PCanvas);
 var
   M: PUMLClassifierRole;
 begin
-  if Model <> nil then begin
+  if Model <> nil then
+  begin
     M := Model as PUMLClassifierRole;
-    if (M.Base <> nil) and (M.Base is PUMLActor) then begin
+    if (M.Base <> nil) and (M.Base is PUMLActor) then
+    begin
       DrawActorShapeObject(Canvas);
       Exit;
     end;
@@ -6882,9 +7204,11 @@ procedure PUMLSeqClassifierRoleView.ArrangeObject(Canvas: PCanvas);
 var
   M: PUMLClassifierRole;
 begin
-  if Model <> nil then begin
+  if Model <> nil then
+  begin
     M := Model as PUMLClassifierRole;
-    if (M.Base <> nil) and (M.Base is PUMLActor) then begin
+    if (M.Base <> nil) and (M.Base is PUMLActor) then
+    begin
       ArrangeActorShapeObject(Canvas);
       Exit;
     end
@@ -6966,26 +7290,32 @@ begin
     Left := LifeLine.Left - (ACTIVATION_MINWIDTH div 2);
 
   // if Activation is not shown
-  if not Visible then begin
+  if not Visible then
+  begin
     if ParentActivation <> nil then
       Left := ParentActivation.Left
     else
       Left := LifeLine.Left;
   end
   // if Activation is shown
-  else begin
+  else
+  begin
     // Height must wrap all Child Activations at least.
     //   - Child Activation satisfies below conditions
     //     (1) in all current LifeLine's In-coming Messages,
     //     (2) if its head side's y position is between Top and Bottom,
     //     (3) the message's Activation is really Child Activation.
     MinimumBottom := Top + ACTIVATION_MINHEIGHT;
-    for I := 0 to GetDiagramView.OwnedViewCount - 1 do begin
-      if GetDiagramView.OwnedViews[I] is PUMLCustomSeqMessageView then begin
+    for I := 0 to GetDiagramView.OwnedViewCount - 1 do
+    begin
+      if GetDiagramView.OwnedViews[I] is PUMLCustomSeqMessageView then
+      begin
         Msg := GetDiagramView.OwnedViews[I] as PUMLCustomSeqMessageView;
-        if (Msg.Head = LifeLine) and (Msg <> MessageView) then begin
+        if (Msg.Head = LifeLine) and (Msg <> MessageView) then
+        begin
           Y := Msg.Points.Points[Msg.Points.Count - 1].Y;
-          if (Top <= Y) and (Bottom > Y) then begin
+          if (Top <= Y) and (Bottom > Y) then
+          begin
             if Msg.Activation.Visible and (Msg.Activation.Bottom > MinimumBottom) then
               MinimumBottom := Msg.Activation.Bottom;
           end;
@@ -7072,7 +7402,8 @@ end;
 
 procedure PUMLCustomSeqMessageView.SetNameLabel(Value: PEdgeLabelView);
 begin
-  if FNameLabel <> Value then begin
+  if FNameLabel <> Value then
+  begin
     RemoveSubView(FNameLabel);
     FNameLabel := Value;
     if FNameLabel <> nil then InitializeNameLabel(FNameLabel);
@@ -7082,7 +7413,8 @@ end;
 
 procedure PUMLCustomSeqMessageView.SetStereotypeLabel(Value: PEdgeLabelView);
 begin
-  if FStereotypeLabel <> Value then begin
+  if FStereotypeLabel <> Value then
+  begin
     RemoveSubView(FStereotypeLabel);
     FStereotypeLabel := Value;
     if FStereotypeLabel <> nil then InitializeStereotypeLabel(FStereotypeLabel);
@@ -7092,7 +7424,8 @@ end;
 
 procedure PUMLCustomSeqMessageView.SetPropertyLabel(Value: PEdgeLabelView);
 begin
-  if FPropertyLabel <> Value then begin
+  if FPropertyLabel <> Value then
+  begin
     RemoveSubView(FPropertyLabel);
     FPropertyLabel := Value;
     if FPropertyLabel <> nil then InitializePropertyLabel(FPropertyLabel);
@@ -7102,7 +7435,8 @@ end;
 
 procedure PUMLCustomSeqMessageView.SetActivation(Value: PUMLActivationView);
 begin
-  if FActivation <> Value then begin
+  if FActivation <> Value then
+  begin
     RemoveSubView(FActivation);
     FActivation := Value;
     if FActivation <> nil then InitializeActivation(FActivation);
@@ -7112,7 +7446,8 @@ end;
 
 procedure PUMLCustomSeqMessageView.SetShowProperty(Value: Boolean);
 begin
-  if FShowProperty <> Value then begin
+  if FShowProperty <> Value then
+  begin
     FShowProperty := Value;
   end;
 end;
@@ -7136,13 +7471,17 @@ var
     SeqNum: Integer;
   begin
     SeqNum := 0;
-    for I := 0 to GetDiagramView.OwnedViewCount - 1 do begin
-      if GetDiagramView.OwnedViews[I] is PUMLCustomSeqMessageView then begin
+    for I := 0 to GetDiagramView.OwnedViewCount - 1 do
+    begin
+      if GetDiagramView.OwnedViews[I] is PUMLCustomSeqMessageView then
+      begin
         V := GetDiagramView.OwnedViews[I] as PUMLCustomSeqMessageView;
-        if V.Points.Points[0].Y < YPos then begin
+        if V.Points.Points[0].Y < YPos then
+        begin
           SeqNum := SeqNum + 1;
         end
-        else if V.Points.Points[0].Y = YPos then begin
+        else if V.Points.Points[0].Y = YPos then
+        begin
           if V.Points.Points[0].X < XPos then SeqNum := SeqNum + 1;
         end;
       end;
@@ -7154,12 +7493,14 @@ begin
   FromLifeLine := Tail as PUMLLifeLineView;
   FromActivation := FromLifeLine.GetActivationAt(Points.Points[0].Y);
   DgmView := GetDiagramView;
-  if Model is PUMLStimulus then begin
+  if Model is PUMLStimulus then
+  begin
     Sti := Model as PUMLStimulus;
     InterIns := Sti.InteractionInstanceSet;
     SN := Sti.InteractionInstanceSet.IndexOfParticipatingStimulus(Sti);
   end
-  else if Model is PUMLMessage then begin
+  else if Model is PUMLMessage then
+  begin
     Msg := Model as PUMLMessage;
     Inter := Msg.Interaction;
     SN := Msg.Interaction.IndexOfMessage(Msg);
@@ -7167,8 +7508,10 @@ begin
 
   // determine SequenceNumber
   SN2 := GetSequenceNumberByPos(Points.Points[0].X, Points.Points[0].Y);
-  if SN <> SN2 then begin // if SequenceNumber is changed
-    if Model is PUMLStimulus then begin
+  if SN <> SN2 then
+  begin // if SequenceNumber is changed
+    if Model is PUMLStimulus then
+    begin
       // move at OwnerView's Indext to correspond to SequenceNumber
       C := DgmView.IndexOfOwnedView(Sti.InteractionInstanceSet.ParticipatingStimuli[SN2].Views[0]);
       DgmView.RemoveOwnedView(Self);
@@ -7177,7 +7520,8 @@ begin
       InterIns.RemoveParticipatingStimulus(Sti);
       InterIns.InsertParticipatingStimulus(SN2, Sti);
     end
-    else if Model is PUMLMessage then begin
+    else if Model is PUMLMessage then
+    begin
       // change by OwnedView's Indext to correspond to SequenceNumber
       C := DgmView.IndexOfOwnedView(Msg.Interaction.Messages[SN2].Views[0]);
       DgmView.RemoveOwnedView(Self);
@@ -7193,13 +7537,14 @@ procedure PUMLCustomSeqMessageView.AfterLoad(Reader: PObjectReader);
 begin
   inherited;
   // StarUML
-  if PropertyLabel = nil then begin
-  PropertyLabel := MetaModel.CreateInstance('EdgeLabelView') as PEdgeLabelView;
+  if PropertyLabel = nil then
+  begin
+    PropertyLabel := MetaModel.CreateInstance('EdgeLabelView') as PEdgeLabelView;
     PropertyLabel.Model := Model;
     PropertyLabel.HostEdge := Self;
     PropertyLabel.EdgePosition := epMiddle;
     PropertyLabel.Distance := 10;
-    PropertyLabel.Alpha := - PI / 2;
+    PropertyLabel.Alpha := -PI / 2;
   end;
 end;
 
@@ -7215,7 +7560,8 @@ procedure PUMLCustomSeqMessageView.ArrangeObject(Canvas: PCanvas);
   var
     PI: Integer;
   begin
-    if Points.Count <> Cnt then begin
+    if Points.Count <> Cnt then
+    begin
       Points.Clear;
       for PI := 1 to Cnt do Points.Add(Point(XPos, YPos));
     end;
@@ -7237,7 +7583,8 @@ begin
   ToActivation := ToLifeLine.GetActivationAt(Points.Points[Points.Count - 1].Y);
 
   // (1) in case of Self message
-  if Head = Tail then begin
+  if Head = Tail then
+  begin
     FixPointCount(4, Points.Points[0].X, Points.Points[0].Y);
     if (FromActivation <> nil) and FromActivation.Visible then
       Points.Points[0] := Point(FromActivation.Right, Points.Points[0].Y)
@@ -7251,7 +7598,8 @@ begin
       Points.Points[3] := Point((Tail as PUMLLifeLineView).Right, Points.Points[0].Y + SELF_MESSAGE_HEIGHT)
   end
   // (2) in case of left-to-right directed message
-  else if Points.Points[1].X > Points.Points[0].X then begin
+  else if Points.Points[1].X > Points.Points[0].X then
+  begin
     FixPointCount(2, Points.Points[0].X, Points.Points[0].Y);
     if (FromActivation <> nil) and FromActivation.Visible then
       Points.Points[0] := Point(FromActivation.Right, Points.Points[0].Y)
@@ -7263,7 +7611,8 @@ begin
       Points.Points[1] := Point((Head as PUMLLifeLineView).Left, Points.Points[0].Y)
   end
   // (3) in case of right-to-left direced message
-  else begin
+  else
+  begin
     FixPointCount(2, Points.Points[0].X, Points.Points[0].Y);
     if (FromActivation <> nil) and FromActivation.Visible then
       Points.Points[0] := Point(FromActivation.Left, Points.Points[0].Y)
@@ -7282,12 +7631,14 @@ end;
 procedure PUMLCustomSeqMessageView.Initialize(Canvas: PCanvas; X1, Y1, X2, Y2: Integer);
 begin
   LineStyle := lsRectilinear;
-  if Head <> Tail then begin
+  if Head <> Tail then
+  begin
     Points.Clear;
     Points.Add(Point((Tail as PUMLLifeLineView).Right, Y1));
     Points.Add(Point((Head as PUMLLifeLineView).Left, Y2));
   end
-  else begin // Self Message
+  else
+  begin // Self Message
     Points.Clear;
     Points.Add(Point(X1, Y1));
     Points.Add(Point(X1, Y1));
@@ -7317,7 +7668,7 @@ begin
   PropertyLabel.HostEdge := Self;
   PropertyLabel.EdgePosition := epMiddle;
   PropertyLabel.Distance := 10;
-  PropertyLabel.Alpha := - PI / 2;
+  PropertyLabel.Alpha := -PI / 2;
 end;
 
 procedure PUMLCustomSeqMessageView.Arrange(Canvas: PCanvas);
@@ -7341,7 +7692,8 @@ var
   begin
     Result := 'void';
     for I := 0 to Op.ParameterCount - 1 do
-      if (Op.Parameters[I].DirectionKind = pdkReturn) and (Op.Parameters[I].TypeExpression <> '') then begin
+      if (Op.Parameters[I].DirectionKind = pdkReturn) and (Op.Parameters[I].TypeExpression <> '') then
+      begin
         Result := Op.Parameters[I].TypeExpression;
         Exit;
       end;
@@ -7352,15 +7704,18 @@ var
     OpStr: string;
   begin
     OpStr := '';
-    if OpName <> '' then begin
+    if OpName <> '' then
+    begin
       if Return <> '' then
         OpStr := OpStr + Return + ' := ';
       OpStr := OpStr + OpName;
-      if SignatureKind = mskNone then begin
+      if SignatureKind = mskNone then
+      begin
         if NeedBraces then
           OpStr := OpStr + '()'
       end
-      else begin
+      else
+      begin
         if NeedBraces or (Arguments <> '') then
           OpStr := OpStr + '(' + Arguments + ')';
       end;
@@ -7384,13 +7739,15 @@ var
     RetTypeStr := '';
     if (Return = '') and ((SignatureKind = mskTypeOnly) or (SignatureKind = mskNameAndType)) then
       RetTypeStr := ': ' + GetReturnType(Op);
-    if Arguments <> '' then begin
+    if Arguments <> '' then
+    begin
       if SignatureKind = mskNone then
         ParamStr := '()'
       else
         ParamStr := '(' + Arguments + ')'
     end
-    else begin
+    else
+    begin
       case SignatureKind of
         mskNone:
           ParamStr := '()';
@@ -7398,8 +7755,10 @@ var
           begin
             PAdded := False;
             ParamStr := '(';
-            for I := 0 to Op.ParameterCount - 1 do begin
-              if Op.Parameters[I].DirectionKind <> pdkReturn then begin
+            for I := 0 to Op.ParameterCount - 1 do
+            begin
+              if Op.Parameters[I].DirectionKind <> pdkReturn then
+              begin
                 if PAdded then
                   ParamStr := ParamStr + ', ';
                 PAdded := True;
@@ -7412,8 +7771,10 @@ var
           begin
             PAdded := False;
             ParamStr := '(';
-            for I := 0 to Op.ParameterCount - 1 do begin
-              if Op.Parameters[I].DirectionKind <> pdkReturn then begin
+            for I := 0 to Op.ParameterCount - 1 do
+            begin
+              if Op.Parameters[I].DirectionKind <> pdkReturn then
+              begin
                 if PAdded then
                   ParamStr := ParamStr + ', ';
                 PAdded := True;
@@ -7429,8 +7790,10 @@ var
           begin
             PAdded := False;
             ParamStr := '(';
-            for I := 0 to Op.ParameterCount - 1 do begin
-              if Op.Parameters[I].DirectionKind <> pdkReturn then begin
+            for I := 0 to Op.ParameterCount - 1 do
+            begin
+              if Op.Parameters[I].DirectionKind <> pdkReturn then
+              begin
                 if PAdded then
                   ParamStr := ParamStr + ', ';
                 PAdded := True;
@@ -7449,7 +7812,8 @@ var
 
 begin
   S := '';
-  if MessageOrStimulus is PUMLStimulus then begin
+  if MessageOrStimulus is PUMLStimulus then
+  begin
     Action := (MessageOrStimulus as PUMLStimulus).Action;
     SeqNum := (MessageOrStimulus as PUMLStimulus).InteractionInstanceSet.IndexOfParticipatingStimulus(MessageOrStimulus as PUMLStimulus) + 1;
     Iteration := (MessageOrStimulus as PUMLStimulus).Iteration;
@@ -7457,7 +7821,8 @@ begin
     Return := (MessageOrStimulus as PUMLStimulus).Return;
     Arguments := (MessageOrStimulus as PUMLStimulus).Arguments;
   end
-  else if MessageOrStimulus is PUMLMessage then begin
+  else if MessageOrStimulus is PUMLMessage then
+  begin
     Action := (MessageOrStimulus as PUMLMessage).Action;
     SeqNum := (MessageOrStimulus as PUMLMessage).Interaction.IndexOfMessage(MessageOrStimulus as PUMLMessage) + 1;
     Iteration := (MessageOrStimulus as PUMLMessage).Iteration;
@@ -7541,58 +7906,72 @@ end;
 
 function PUMLCustomSeqMessageView.MOF_GetAttribute(Name: string): string;
 begin
-  if Name = 'ShowProperty' then begin
+  if Name = 'ShowProperty' then
+  begin
     Result := BooleanToString(ShowProperty);
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetAttribute(Name);
   end;
 end;
 
 procedure PUMLCustomSeqMessageView.MOF_SetAttribute(Name, Value: string);
 begin
-  if Name = 'ShowProperty' then begin
+  if Name = 'ShowProperty' then
+  begin
     ShowProperty := StringToBoolean(Value);
   end
-  else begin
+  else
+  begin
     inherited MOF_SetAttribute(Name, Value);
   end;
 end;
 
 function PUMLCustomSeqMessageView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'NameLabel' then begin
+  if Name = 'NameLabel' then
+  begin
     Result := NameLabel;
   end
-  else if Name = 'StereotypeLabel' then begin
+  else if Name = 'StereotypeLabel' then
+  begin
     Result := StereotypeLabel;
   end
-  else if Name = 'PropertyLabel' then begin
+  else if Name = 'PropertyLabel' then
+  begin
     Result := PropertyLabel;
   end
-  else if Name = 'Activation' then begin
+  else if Name = 'Activation' then
+  begin
     Result := Activation;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLCustomSeqMessageView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'NameLabel' then begin
+  if Name = 'NameLabel' then
+  begin
     NameLabel := Value as PEdgeLabelView;
   end
-  else if Name = 'StereotypeLabel' then begin
+  else if Name = 'StereotypeLabel' then
+  begin
     StereotypeLabel := Value as PEdgeLabelView;
   end
-  else if Name = 'PropertyLabel' then begin
+  else if Name = 'PropertyLabel' then
+  begin
     PropertyLabel := Value as PEdgeLabelView;
   end
-  else if Name = 'Activation' then begin
+  else if Name = 'Activation' then
+  begin
     Activation := Value as PUMLActivationView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -7640,7 +8019,8 @@ end;
 
 procedure PUMLCustomFrameView.SetNameLabel(Value: PLabelView);
 begin
-  if FNameLabel <> Value then begin
+  if FNameLabel <> Value then
+  begin
     RemoveSubView(FNameLabel);
     FNameLabel := Value;
     if FNameLabel <> nil then InitializeNameLabel(FNameLabel);
@@ -7650,7 +8030,8 @@ end;
 
 procedure PUMLCustomFrameView.SetFrameTypeLabel(Value: PLabelView);
 begin
-  if FFrameTypeLabel <> Value then begin
+  if FFrameTypeLabel <> Value then
+  begin
     RemoveSubView(FFrameTypeLabel);
     FFrameTypeLabel := Value;
     if FFrameTypeLabel <> nil then InitializeFrameTypeLabel(FFrameTypeLabel);
@@ -7710,26 +8091,32 @@ end;
 
 function PUMLCustomFrameView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'NameLabel' then begin
+  if Name = 'NameLabel' then
+  begin
     Result := NameLabel;
   end
-  else if Name = 'FrameTypeLabel' then begin
+  else if Name = 'FrameTypeLabel' then
+  begin
     Result := FrameTypeLabel;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLCustomFrameView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'NameLabel' then begin
+  if Name = 'NameLabel' then
+  begin
     NameLabel := Value as PLabelView;
   end
-  else if Name = 'FrameTypeLabel' then begin
+  else if Name = 'FrameTypeLabel' then
+  begin
     FrameTypeLabel := Value as PLabelView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -7765,7 +8152,8 @@ var
   M: PUMLCombinedFragment;
 begin
   Result := '';
-  if (Model <> nil) and (Model is PUMLCombinedFragment) then begin
+  if (Model <> nil) and (Model is PUMLCombinedFragment) then
+  begin
     M := Model as PUMLCombinedFragment;
     case M.InteractionOperator of
       iokSeq: Result := 'seq';
@@ -7801,13 +8189,15 @@ var
   FirstIOV, LastIOV: PUMLInteractionOperandView;
   I: Integer;
 begin
-  if ContainedViewCount > 0 then begin
+  if ContainedViewCount > 0 then
+  begin
     InterOpViews := TList.Create;
     try
       for I := 0 to ContainedViewCount - 1 do
         if ContainedViews[I] is PUMLInteractionOperandView then
           InterOpViews.Add(ContainedViews[I]);
-      if InterOpViews.Count > 0 then begin
+      if InterOpViews.Count > 0 then
+      begin
         InterOpViews.Sort(CompareInteractionOperandViewYPosition);
         FirstIOV := InterOpViews[0];
         FirstIOV.Top := Max(FrameTypeLabel.Bottom, NameLabel.Bottom) + COMPARTMENT_BOTTOM_MARGIN;
@@ -7830,7 +8220,8 @@ var
 begin
   inherited;
   for I := 0 to ContainedViewCount - 1 do
-    if ContainedViews[I] is PUMLInteractionOperandView then begin
+    if ContainedViews[I] is PUMLInteractionOperandView then
+    begin
       InterOpView := ContainedViews[I] as PUMLInteractionOperandView;
       InterOpView.Left := Left;
       InterOpView.Right := Right;
@@ -7881,7 +8272,8 @@ end;
 
 procedure PUMLInteractionOperandView.SetGuardLabel(Value: PLabelView);
 begin
-  if FGuardLabel <> Value then begin
+  if FGuardLabel <> Value then
+  begin
     RemoveSubView(FGuardLabel);
     FGuardLabel := Value;
     if FGuardLabel <> nil then InitializeGuardLabel(FGuardLabel);
@@ -7897,11 +8289,14 @@ var
 begin
   Result := True;
   if ContainerView <> nil then
-    for I := 0 to ContainerView.ContainedViewCount - 1 do begin
+    for I := 0 to ContainerView.ContainedViewCount - 1 do
+    begin
       V := ContainerView.ContainedViews[I];
-      if (V is PUMLInteractionOperandView) and (V <> Self) then begin
+      if (V is PUMLInteractionOperandView) and (V <> Self) then
+      begin
         InterOpView := V as PUMLInteractionOperandView;
-        if InterOpView.Top < Top then begin
+        if InterOpView.Top < Top then
+        begin
           Result := False;
           Exit;
         end;
@@ -7922,12 +8317,13 @@ end;
 
 procedure PUMLInteractionOperandView.DrawObject(Canvas: PCanvas);
 begin
-  if not IsTopInterationOperandView then begin
+  if not IsTopInterationOperandView then
+  begin
     AssignStyleToCanvas(Canvas);
     Canvas.Pen.Style := psDash;
     Canvas.MoveTo(Left, Top);
     Canvas.LineTo(Right, Top);
-  end;    
+  end;
 end;
 
 procedure PUMLInteractionOperandView.Setup;
@@ -7957,20 +8353,24 @@ end;
 
 function PUMLInteractionOperandView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'GuardLabel' then begin
+  if Name = 'GuardLabel' then
+  begin
     Result := GuardLabel;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLInteractionOperandView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'GuardLabel' then begin
+  if Name = 'GuardLabel' then
+  begin
     GuardLabel := Value as PLabelView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -8001,7 +8401,8 @@ end;
 
 procedure PUMLCollaborationView.SetTemplateParameterCompartment(Value: PUMLTemplateParameterCompartmentView);
 begin
-  if FTemplateParameterCompartment <> Value then begin
+  if FTemplateParameterCompartment <> Value then
+  begin
     RemoveSubView(FTemplateParameterCompartment);
     FTemplateParameterCompartment := Value;
     if FTemplateParameterCompartment <> nil then InitializeTemplateParameterCompartment(FTemplateParameterCompartment);
@@ -8014,7 +8415,8 @@ var
   R: TRect;
 begin
   AssignStyleToCanvas(Canvas);
-  if TemplateParameterCompartment.Visible then begin
+  if TemplateParameterCompartment.Visible then
+  begin
     R.Left := Left;
     R.Top := Top + TemplateParameterCompartment.Height - TEMPLATEPARAMETERCOMPARTMENT_OVERLAP;
     R.Right := Right - TEMPLATEPARAMETERCOMPARTMENT_RIGHT_OCCUPY;
@@ -8034,7 +8436,8 @@ begin
   // rectangle's circumscription's height and width are Sqrt(2) times of rectangle's height and width
   W := Max(Trunc(Sqrt(2) * NameCompartment.MinWidth), COLLABORATION_MINWIDTH);
   H := Max(Trunc(Sqrt(2) * NameCompartment.MinHeight), COLLABORATION_MINHEIGHT);
-  if TemplateParameterCompartment.Visible then begin
+  if TemplateParameterCompartment.Visible then
+  begin
     W := Max(W, TemplateParameterCompartment.MinWidth);
     W := W + TEMPLATEPARAMETERCOMPARTMENT_LEFT_MARGIN + TEMPLATEPARAMETERCOMPARTMENT_RIGHT_OCCUPY;
     H := H + TemplateParameterCompartment.MinHeight - TEMPLATEPARAMETERCOMPARTMENT_OVERLAP;
@@ -8042,7 +8445,8 @@ begin
   MinWidth := W;
   MinHeight := H;
   // Arranging view objects.
-  if TemplateParameterCompartment.Visible then begin
+  if TemplateParameterCompartment.Visible then
+  begin
     TemplateParameterCompartment.Left := Right - TEMPLATEPARAMETERCOMPARTMENT_RIGHT_OCCUPY - TemplateParameterCompartment.MinWidth;
     TemplateParameterCompartment.Top := Top;
     TemplateParameterCompartment.Right := Right;
@@ -8050,7 +8454,8 @@ begin
     NameCompartment.Top := ((Bottom + Top + TemplateParameterCompartment.Height - TEMPLATEPARAMETERCOMPARTMENT_OVERLAP) div 2) - (NameCompartment.Height div 2);
     NameCompartment.Right := Right - TEMPLATEPARAMETERCOMPARTMENT_RIGHT_OCCUPY;
   end
-  else begin
+  else
+  begin
     NameCompartment.Left := Left;
     NameCompartment.Top := ((Bottom + Top) div 2) - (NameCompartment.Height div 2);
     NameCompartment.Right := Right;
@@ -8070,11 +8475,13 @@ begin
   TemplateParameterCompartment.Top := Top;
   TemplateParameterCompartment.Right := Right;
   NameCompartment.Left := Left;
-  if TemplateParameterCompartment.Visible then begin
+  if TemplateParameterCompartment.Visible then
+  begin
     NameCompartment.Right := Right - TEMPLATEPARAMETERCOMPARTMENT_RIGHT_OCCUPY;
     NameCompartment.Top := Top + TemplateParameterCompartment.Height - TEMPLATEPARAMETERCOMPARTMENT_OVERLAP;
   end
-  else begin
+  else
+  begin
     NameCompartment.Right := Right;
     NameCompartment.Top := Top;
   end;
@@ -8099,25 +8506,29 @@ begin
   else
     NameCompartment.NameLabel.FontStyle := NameCompartment.NameLabel.FontStyle - [fsItalic];
   TemplateParameterCompartment.Visible := ((Model as PUMLCollaboration).TemplateParameterCount > 0);
-  if (Model as PUMLCollaboration).TemplateParameterCount > 0 then  TemplateParameterCompartment.Update;
+  if (Model as PUMLCollaboration).TemplateParameterCount > 0 then TemplateParameterCompartment.Update;
 end;
 
 function PUMLCollaborationView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'TemplateParameterCompartment' then begin
+  if Name = 'TemplateParameterCompartment' then
+  begin
     Result := TemplateParameterCompartment;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLCollaborationView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'TemplateParameterCompartment' then begin
+  if Name = 'TemplateParameterCompartment' then
+  begin
     TemplateParameterCompartment := Value as PUMLTemplateParameterCompartmentView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -8177,7 +8588,8 @@ var
 begin
   AssignStyleToCanvas(Canvas);
   R := Rect(Left, Top, Right, NameCompartment.Top);
-  if ((R.Right - R.Left) * 100 div (R.Bottom - R.Top)) >= ACTOR_RATIO_PERCENT then begin
+  if ((R.Right - R.Left) * 100 div (R.Bottom - R.Top)) >= ACTOR_RATIO_PERCENT then
+  begin
     W := ACTOR_RATIO_PERCENT * (R.Bottom - R.Top) div 100;
     R.Left := R.Left + ((Right - Left) - W) div 2;
     R.Right := R.Left + W;
@@ -8229,7 +8641,8 @@ end;
 
 procedure PUMLColObjectView.SetSlotCompartment(Value: PUMLSlotCompartmentView);
 begin
-  if FSlotCompartment <> Value then begin
+  if FSlotCompartment <> Value then
+  begin
     RemoveSubView(FSlotCompartment);
     FSlotCompartment := Value;
     if FSlotCompartment <> nil then InitializeSlotCompartment(FSlotCompartment);
@@ -8242,7 +8655,8 @@ var
   M: PUMLObject;
 begin
   Result := False;
-  if (Model <> nil) and (M is PUMLObject) then begin
+  if (Model <> nil) and (M is PUMLObject) then
+  begin
     M := Model as PUMLObject;
     if (M.Classifier <> nil) and (M.Classifier is PUMLClass) then
       Result := (M.Classifier as PUMLClass).IsActive;
@@ -8253,7 +8667,8 @@ procedure PUMLColObjectView.AfterLoad(Reader: PObjectReader);
 begin
   inherited;
   // StarUML
-  if SlotCompartment = nil then begin
+  if SlotCompartment = nil then
+  begin
     SlotCompartment := MetaModel.CreateInstance('UMLSlotCompartmentView') as PUMLSlotCompartmentView;
     SlotCompartment.Model := Model;
   end;
@@ -8265,9 +8680,11 @@ var
   R: TRect;
 begin
   AssignStyleToCanvas(Canvas);
-  if Model <> nil then begin
+  if Model <> nil then
+  begin
     M := Model as PUMLObject;
-    if (M.Classifier <> nil) and (M.Classifier is PUMLActor) then begin
+    if (M.Classifier <> nil) and (M.Classifier is PUMLActor) then
+    begin
       DrawActorShapeObject(Canvas);
       Exit;
     end;
@@ -8276,14 +8693,17 @@ begin
   R.Top := Top;
   R.Right := Right;
   R.Bottom := Bottom;
-  if Model <> nil then begin
-    if M.IsMultiInstance then begin
+  if Model <> nil then
+  begin
+    if M.IsMultiInstance then
+    begin
       Canvas.Rectangle(R.Left + MULTI_OBJECT_MARGIN, R.Top + MULTI_OBJECT_MARGIN,
         R.Right + MULTI_OBJECT_MARGIN, R.Bottom + MULTI_OBJECT_MARGIN);
     end;
   end;
   Canvas.Rectangle(R.Left, R.Top, R.Right, R.Bottom);
-  if IsActiveObject then begin
+  if IsActiveObject then
+  begin
     Canvas.MoveTo(Left + CLASS_ACTIVE_VERTLINE_WIDTH, Top);
     Canvas.LineTo(Left + CLASS_ACTIVE_VERTLINE_WIDTH, Bottom);
     Canvas.MoveTo(Right - CLASS_ACTIVE_VERTLINE_WIDTH - 1, Top);
@@ -8298,9 +8718,11 @@ var
 begin
   inherited;
 
-  if (Model <> nil) and (Model is PUMLObject) then begin
+  if (Model <> nil) and (Model is PUMLObject) then
+  begin
     M := Model as PUMLObject;
-    if (M.Classifier <> nil) and (M.Classifier is PUMLActor) then begin
+    if (M.Classifier <> nil) and (M.Classifier is PUMLActor) then
+    begin
       ArrangeActorShapeObject(Canvas);
       Exit;
     end
@@ -8310,7 +8732,8 @@ begin
   if IsActiveObject then
     MinWidth := MinWidth + CLASS_ACTIVE_VERTLINE_WIDTH * 2;
   R := Rect(Left, Top, Right, Bottom);
-  if IsActiveObject then begin
+  if IsActiveObject then
+  begin
     R.Left := R.Left + CLASS_ACTIVE_VERTLINE_WIDTH;
     R.Right := R.Right - CLASS_ACTIVE_VERTLINE_WIDTH;
   end;
@@ -8356,20 +8779,24 @@ end;
 
 function PUMLColObjectView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'SlotCompartment' then begin
+  if Name = 'SlotCompartment' then
+  begin
     Result := SlotCompartment;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLColObjectView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'SlotCompartment' then begin
+  if Name = 'SlotCompartment' then
+  begin
     SlotCompartment := Value as PUMLSlotCompartmentView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -8384,9 +8811,11 @@ procedure PUMLColClassifierRoleView.DrawObject(Canvas: PCanvas);
 var
   M: PUMLClassifierRole;
 begin
-  if Model <> nil then begin
+  if Model <> nil then
+  begin
     M := Model as PUMLClassifierRole;
-    if (M.Base <> nil) and (M.Base is PUMLActor) then begin
+    if (M.Base <> nil) and (M.Base is PUMLActor) then
+    begin
       DrawActorShapeObject(Canvas);
       Exit;
     end;
@@ -8398,9 +8827,11 @@ procedure PUMLColClassifierRoleView.ArrangeObject(Canvas: PCanvas);
 var
   M: PUMLClassifierRole;
 begin
-  if Model <> nil then begin
+  if Model <> nil then
+  begin
     M := Model as PUMLClassifierRole;
-    if (M.Base <> nil) and (M.Base is PUMLActor) then begin
+    if (M.Base <> nil) and (M.Base is PUMLActor) then
+    begin
       ArrangeActorShapeObject(Canvas);
       Exit;
     end
@@ -8422,7 +8853,8 @@ begin
   if Model = nil then Exit;
   inherited;
   M := (Model as PUMLClassifierRole);
-  if M.Name <> '' then begin
+  if M.Name <> '' then
+  begin
     if ShowParentName and (M.VirtualNameSpace <> nil) then
       S := '/' + M.VirtualNameSpace.Name + '::' + M.Name
     else
@@ -8465,7 +8897,8 @@ end;
 
 procedure PUMLLinkView.SetHeadEndLabel(Value: PEdgeLabelView);
 begin
-  if FHeadEndLabel <> Value then begin
+  if FHeadEndLabel <> Value then
+  begin
     RemoveSubView(FHeadEndLabel);
     FHeadEndLabel := Value;
     if FHeadEndLabel <> nil then InitializeEndLabel(FHeadEndLabel);
@@ -8475,7 +8908,8 @@ end;
 
 procedure PUMLLinkView.SetTailEndLabel(Value: PEdgeLabelView);
 begin
-  if FTailEndLabel <> Value then begin
+  if FTailEndLabel <> Value then
+  begin
     RemoveSubView(FTailEndLabel);
     FTailEndLabel := Value;
     if FTailEndLabel <> nil then InitializeEndLabel(FTailEndLabel);
@@ -8515,30 +8949,35 @@ end;
 
 function PUMLLinkView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'HeadEndLabel' then begin
+  if Name = 'HeadEndLabel' then
+  begin
     Result := HeadEndLabel;
   end
-  else if Name = 'TailEndLabel' then begin
+  else if Name = 'TailEndLabel' then
+  begin
     Result := TailEndLabel;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLLinkView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'HeadEndLabel' then begin
+  if Name = 'HeadEndLabel' then
+  begin
     HeadEndLabel := Value as PEdgeLabelView;
   end
-  else if Name = 'TailEndLabel' then begin
+  else if Name = 'TailEndLabel' then
+  begin
     TailEndLabel := Value as PEdgeLabelView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
-
 
 // PUMLLinkView
 ////////////////////////////////////////////////////////////////////////////////
@@ -8602,7 +9041,8 @@ end;
 
 procedure PUMLCustomColMessageView.SetNameLabel(Value: PNodeLabelView);
 begin
-  if FNameLabel <> Value then begin
+  if FNameLabel <> Value then
+  begin
     RemoveSubView(FNameLabel);
     FNameLabel := Value;
     if FNameLabel <> nil then InitializeNameLabel(FNameLabel);
@@ -8612,7 +9052,8 @@ end;
 
 procedure PUMLCustomColMessageView.SetStereotypeLabel(Value: PNodeLabelView);
 begin
-  if FStereotypeLabel <> Value then begin
+  if FStereotypeLabel <> Value then
+  begin
     RemoveSubView(FStereotypeLabel);
     FStereotypeLabel := Value;
     if FStereotypeLabel <> nil then InitializeStereotypeLabel(FStereotypeLabel);
@@ -8622,7 +9063,8 @@ end;
 
 procedure PUMLCustomColMessageView.SetPropertyLabel(Value: PNodeLabelView);
 begin
-  if FPropertyLabel <> Value then begin
+  if FPropertyLabel <> Value then
+  begin
     RemoveSubView(FPropertyLabel);
     FPropertyLabel := Value;
     if FPropertyLabel <> nil then InitializePropertyLabel(FPropertyLabel);
@@ -8632,7 +9074,8 @@ end;
 
 procedure PUMLCustomColMessageView.SetShowProperty(Value: Boolean);
 begin
-  if FShowProperty <> Value then begin
+  if FShowProperty <> Value then
+  begin
     FShowProperty := Value;
   end;
 end;
@@ -8640,9 +9083,9 @@ end;
 procedure PUMLCustomColMessageView.CalcPosition(Canvas: PCanvas);
 var
   P1, P2: TPoint;
-  tempP1, tempP2 : TPoint;
-  tempTh, tempMiddleX, tempMiddleY, tempX, tempY, tempHPointX, tempHPointY, tempTPointY, tempTPointX : Extended;
-  MidPointIndex : Integer;
+  tempP1, tempP2: TPoint;
+  tempTh, tempMiddleX, tempMiddleY, tempX, tempY, tempHPointX, tempHPointY, tempTPointY, tempTPointX: Extended;
+  MidPointIndex: Integer;
 
   RT: TRect;
   A, B, TH, TH1, TH2: Extended;
@@ -8650,7 +9093,7 @@ begin
   MidPointIndex := HostEdge.Points.Count div 2;
   if HostEdge.Points.Count mod 2 = 0 then MidPointIndex := MidPointIndex - 1;
   P1 := HostEdge.Points.Points[MidPointIndex];
-  P2 := HostEdge.Points.Points[MidPointIndex+1];
+  P2 := HostEdge.Points.Points[MidPointIndex + 1];
   tempP1 := P1;
   tempP2 := P2;
   // Calc Theta of Link
@@ -8669,15 +9112,18 @@ begin
   tempX := 20 * Cos(tempTh);
   tempY := 20 * Sin(tempTh);
 
-  if Model is PUMLStimulus then begin
-    if (Model as PUMLStimulus).Sender = (Model as PUMLStimulus).CommunicationLink.Connections[0].Instance then begin
+  if Model is PUMLStimulus then
+  begin
+    if (Model as PUMLStimulus).Sender = (Model as PUMLStimulus).CommunicationLink.Connections[0].Instance then
+    begin
       // Forward Stimulus
       tempHPointX := tempMiddleX + tempX;
       tempHPointY := tempMiddleY - tempY;
       tempTPointX := tempMiddleX - tempX;
       tempTPointY := tempMiddleY + tempY;
     end
-    else begin
+    else
+    begin
       // Reverse Stimulus
       tempTPointX := tempMiddleX + tempX;
       tempTPointY := tempMiddleY - tempY;
@@ -8685,15 +9131,18 @@ begin
       tempHPointY := tempMiddleY + tempY;
     end;
   end
-  else if Model is PUMLMessage then begin
-    if (Model as PUMLMessage).Sender = (Model as PUMLMessage).CommunicationConnection.Connections[0].Participant then begin
+  else if Model is PUMLMessage then
+  begin
+    if (Model as PUMLMessage).Sender = (Model as PUMLMessage).CommunicationConnection.Connections[0].Participant then
+    begin
       // Forward Message
       tempHPointX := tempMiddleX + tempX;
       tempHPointY := tempMiddleY - tempY;
       tempTPointX := tempMiddleX - tempX;
       tempTPointY := tempMiddleY + tempY;
     end
-    else begin
+    else
+    begin
       // Reverse Message
       tempTPointX := tempMiddleX + tempX;
       tempTPointY := tempMiddleY - tempY;
@@ -8712,7 +9161,7 @@ begin
   A := RT.Bottom - RT.Top;
   B := (RT.Right - RT.Left + 0.00001);
   TH := ArcTan(A / B);
-  if ((A < 0) and (B < 0)) or ((A > 0) and (B < 0)) or ((A = 0) and (B < 0)) THen
+  if ((A < 0) and (B < 0)) or ((A > 0) and (B < 0)) or ((A = 0) and (B < 0)) then
     TH := TH + 3.141592;
   TH1 := TH - 3.141592 / 8;
   TH2 := TH + 3.141592 / 8;
@@ -8729,7 +9178,8 @@ procedure PUMLCustomColMessageView.AfterLoad(Reader: PObjectReader);
 begin
   inherited;
   // StarUML
-  if PropertyLabel = nil then begin
+  if PropertyLabel = nil then
+  begin
     PropertyLabel := MetaModel.CreateInstance('NodeLabelView') as PNodeLabelView;
     PropertyLabel.Model := Self.Model;
     PropertyLabel.Distance := 10;
@@ -8749,10 +9199,12 @@ var
 begin
   AssignStyleToCanvas(Canvas);
   Canvas.Brush.Color := BACKGROUND_COLOR;
-  if Model is PUMLStimulus then begin
+  if Model is PUMLStimulus then
+  begin
     Action := (Model as PUMLStimulus).Action;
   end
-  else if Model is PUMLMessage then begin
+  else if Model is PUMLMessage then
+  begin
     Action := (Model as PUMLMessage).Action;
   end;
   // Message body
@@ -8767,7 +9219,8 @@ begin
     Canvas.Polyline([ArrowPoint1, FHeadPoint, ArrowPoint2])
   else if Action.IsAsynchronous then
     Canvas.Polyline([ArrowPoint1, FHeadPoint, ArrowPoint2])
-  else begin
+  else
+  begin
     Canvas.Brush.Color := LineColor;
     Canvas.Polygon([ArrowPoint1, FHeadPoint, ArrowPoint2, ArrowPoint1]);
     Canvas.Brush.Color := FillColor;
@@ -8795,8 +9248,10 @@ begin
   Height := Max(FHeadPoint.Y, FTailPoint.Y) - Min(FHeadPoint.Y, FTailPoint.Y);
 
   // Reassign distance of NameLabel, StereotypeLabel
-  if (not V) and PropertyLabel.Visible then begin
-    if NameLabel.Distance < 25 then begin
+  if (not V) and PropertyLabel.Visible then
+  begin
+    if NameLabel.Distance < 25 then
+    begin
       if StereotypeLabel.Distance <= NameLabel.Distance + 15 then
         StereotypeLabel.Distance := StereotypeLabel.Distance + 15;
       NameLabel.Distance := NameLabel.Distance + 15
@@ -8883,60 +9338,72 @@ end;
 
 function PUMLCustomColMessageView.ContainsPoint(Canvas: PCanvas; P: TPoint): Boolean;
 var
-  R : TRect;
+  R: TRect;
 begin
   R := Rect(FHeadPoint.X, FHeadPoint.Y, FTailPoint.X, FTailPoint.Y);
-  Result :=  PtInLine(R, P);
+  Result := PtInLine(R, P);
 end;
 
 function PUMLCustomColMessageView.MOF_GetAttribute(Name: string): string;
 begin
-  if Name = 'ShowProperty' then begin
+  if Name = 'ShowProperty' then
+  begin
     Result := BooleanToString(FShowProperty);
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetAttribute(Name);
   end;
 end;
 
 procedure PUMLCustomColMessageView.MOF_SetAttribute(Name, Value: string);
 begin
-  if Name = 'ShowProperty' then begin
+  if Name = 'ShowProperty' then
+  begin
     FShowProperty := StringToBoolean(Value);
   end
-  else begin
+  else
+  begin
     inherited MOF_SetAttribute(Name, Value);
   end;
 end;
 
 function PUMLCustomColMessageView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'NameLabel' then begin
+  if Name = 'NameLabel' then
+  begin
     Result := NameLabel;
   end
-  else if Name = 'StereotypeLabel' then begin
+  else if Name = 'StereotypeLabel' then
+  begin
     Result := StereotypeLabel;
   end
-  else if Name = 'PropertyLabel' then begin
+  else if Name = 'PropertyLabel' then
+  begin
     Result := PropertyLabel;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLCustomColMessageView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'NameLabel' then begin
+  if Name = 'NameLabel' then
+  begin
     NameLabel := Value as PNodeLabelView;
   end
-  else if Name = 'StereotypeLabel' then begin
+  else if Name = 'StereotypeLabel' then
+  begin
     StereotypeLabel := Value as PNodeLabelView;
   end
-  else if Name = 'PropertyLabel' then begin
+  else if Name = 'PropertyLabel' then
+  begin
     PropertyLabel := Value as PNodeLabelView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -8969,7 +9436,8 @@ end;
 
 procedure PUMLCustomStateView.SetInternalTransitionCompartment(Value: PUMLInternalTransitionCompartmentView);
 begin
-  if FInternalTransitionCompartment <> Value then begin
+  if FInternalTransitionCompartment <> Value then
+  begin
     RemoveSubView(FInternalTransitionCompartment);
     FInternalTransitionCompartment := Value;
     if FInternalTransitionCompartment <> nil then InitializeInternalTransitionCompartment(FInternalTransitionCompartment);
@@ -9037,7 +9505,8 @@ var
   I: Integer;
 begin
   // Recalculate subview's position not to enter the name area
-  if ContainedViewCount > 0 then begin
+  if ContainedViewCount > 0 then
+  begin
     R := Rect(Left + COMPARTMENT_LEFT_MARGIN, Top + NameCompartment.Height + COMPARTMENT_INTERVAL + COMPARTMENT_TOP_MARGIN,
       Right - COMPARTMENT_RIGHT_MARGIN, Bottom - COMPARTMENT_BOTTOM_MARGIN);
     CR := ContainedViews[0].GetBoundingBox(Canvas);
@@ -9048,7 +9517,7 @@ begin
     if (DX > 0) or (DY > 0) then
       for I := 0 to ContainedViewCount - 1 do
         if (ContainedViews[I].GetBoundingBox(Canvas).Left < R.Left) or
-           (ContainedViews[I].GetBoundingBox(Canvas).Top < R.Top) then
+          (ContainedViews[I].GetBoundingBox(Canvas).Top < R.Top) then
           ContainedViews[I].Move(Canvas, DX, DY);
     for I := 0 to ContainedViewCount - 1 do
       R := GraphicClasses.UnionRect(R, ContainedViews[I].GetBoundingBox(Canvas));
@@ -9073,8 +9542,8 @@ begin
   if MC <> nil then
   begin
     if MC.IsKindOf('UMLCustomStateView') or
-       MC.IsKindOf('UMLPseudostateView') or
-       MC.IsKindOf('UMLFinalStateView') then
+      MC.IsKindOf('UMLPseudostateView') or
+      MC.IsKindOf('UMLFinalStateView') then
       Result := True;
   end;
 end;
@@ -9100,7 +9569,8 @@ end;
 
 procedure PUMLSubmachineStateView.SetIncludeLabel(Value: PLabelView);
 begin
-  if FIncludeLabel <> Value then begin
+  if FIncludeLabel <> Value then
+  begin
     RemoveSubView(FIncludeLabel);
     FIncludeLabel := Value;
     if FIncludeLabel <> nil then InitializeIncludeLabel(FIncludeLabel);
@@ -9111,13 +9581,14 @@ end;
 procedure PUMLSubmachineStateView.DrawObject(Canvas: PCanvas);
 begin
   inherited;
-  if IncludeLabel.Visible then begin
+  if IncludeLabel.Visible then
+  begin
     Canvas.MoveTo(Left, IncludeLabel.Top - COMPARTMENT_TOP_MARGIN);
     Canvas.LineTo(Right, IncludeLabel.Top - COMPARTMENT_TOP_MARGIN);
   end;
-  Canvas.Ellipse(Right-26, Bottom-16, Right-20, Bottom-10);
-  Canvas.PolyLine([Point(Right-20, Bottom-13), Point(Right-14, Bottom-13)]);
-  Canvas.Ellipse(Right-14, Bottom-16, Right-8, Bottom-10);
+  Canvas.Ellipse(Right - 26, Bottom - 16, Right - 20, Bottom - 10);
+  Canvas.PolyLine([Point(Right - 20, Bottom - 13), Point(Right - 14, Bottom - 13)]);
+  Canvas.Ellipse(Right - 14, Bottom - 16, Right - 8, Bottom - 10);
 end;
 
 procedure PUMLSubmachineStateView.ArrangeObject(Canvas: PCanvas);
@@ -9130,14 +9601,16 @@ begin
   W := Max(W, STATE_DECOMPOSIT_INDICATOR_WIDTH);
   H := MinHeight + STATE_DECOMPOSIT_INDICATOR_HEIGHT;
   Y := NameCompartment.Bottom;
-  if IncludeLabel.Visible then begin
+  if IncludeLabel.Visible then
+  begin
     W := Max(W, IncludeLabel.MinWidth + COMPARTMENT_LEFT_MARGIN + COMPARTMENT_RIGHT_MARGIN);
-    H := H + COMPARTMENT_TOP_MARGIN + IncludeLabel.MinHeight + COMPARTMENT_BOTTOM_MARGIN +COMPARTMENT_INTERVAL;
+    H := H + COMPARTMENT_TOP_MARGIN + IncludeLabel.MinHeight + COMPARTMENT_BOTTOM_MARGIN + COMPARTMENT_INTERVAL;
   end;
   MinWidth := W;
   MinHeight := H;
 
-  if IncludeLabel.Visible then begin
+  if IncludeLabel.Visible then
+  begin
     IncludeLabel.Left := Left + COMPARTMENT_LEFT_MARGIN;
     IncludeLabel.Top := NameCompartment.Bottom + COMPARTMENT_INTERVAL + COMPARTMENT_TOP_MARGIN;
     IncludeLabel.Right := Right - COMPARTMENT_RIGHT_MARGIN;
@@ -9212,50 +9685,59 @@ begin
   M := (Model as PUMLPseudostate);
   AssignStyleToCanvas(Canvas);
   case M.PseudostateKind of
-    pkInitial: begin
-      Canvas.Brush.Color := LineColor;
-      Canvas.Ellipse(Left, Top, Right, Bottom);
-    end;
-    pkShallowHistory: begin
-      Canvas.Brush.Color := BACKGROUND_COLOR;
-      Canvas.Ellipse(Left, Top, Right, Bottom);
-      Canvas.Font.Style := Canvas.Font.Style + [fsBold];
-      X := Left + (Width - Canvas.TextWidth('H')) div 2;
-      Y := Top + (Height - Canvas.TextHeight('H')) div 2;
-      Canvas.TextOut(X, Y, 'H');
-    end;
-    pkDeepHistory: begin
-      Canvas.Brush.Color := BACKGROUND_COLOR;
-      Canvas.Ellipse(Left, Top, Right, Bottom);
-      Canvas.Font.Style := Canvas.Font.Style + [fsBold];
-      X := Left + (Width - Canvas.TextWidth('H*')) div 2;
-      Y := Top + (Height - Canvas.TextHeight('H*')) div 2;
-      Canvas.TextOut(X, Y, 'H*');
-    end;
-    pkSynchronization: begin
-      Canvas.Pen.Color := LineColor;
-      Canvas.Pen.Style := psSolid;
-      Canvas.Brush.Color := LineColor;
-      if Abs(Right - Left) >= Abs(Bottom - Top) then begin
-        Canvas.Rectangle(Left, Top, Right, Top + SYNCHRONIZATION_MINTHICK);
-      end
-      else begin
-        Canvas.Rectangle(Left, Top, Left + SYNCHRONIZATION_MINTHICK, Bottom);
+    pkInitial:
+      begin
+        Canvas.Brush.Color := LineColor;
+        Canvas.Ellipse(Left, Top, Right, Bottom);
       end;
-    end;
-    pkJunction: begin
-      Canvas.Brush.Color := LineColor;
-      Canvas.Pen.Color := LineColor;
-      Canvas.Ellipse(Left, Top, Right, Bottom);
-    end;
-    pkChoice: begin
-      Canvas.Ellipse(Left, Top, Right, Bottom);
-    end;
-    pkDecision: begin
-      X := Left + (Width div 2);
-      Y := Top + (Height div 2);
-      Canvas.Polygon([Point(Left, Y), Point(X, Top), Point(Right, Y), Point(X, Bottom), Point(Left, Y)]);
-    end;
+    pkShallowHistory:
+      begin
+        Canvas.Brush.Color := BACKGROUND_COLOR;
+        Canvas.Ellipse(Left, Top, Right, Bottom);
+        Canvas.Font.Style := Canvas.Font.Style + [fsBold];
+        X := Left + (Width - Canvas.TextWidth('H')) div 2;
+        Y := Top + (Height - Canvas.TextHeight('H')) div 2;
+        Canvas.TextOut(X, Y, 'H');
+      end;
+    pkDeepHistory:
+      begin
+        Canvas.Brush.Color := BACKGROUND_COLOR;
+        Canvas.Ellipse(Left, Top, Right, Bottom);
+        Canvas.Font.Style := Canvas.Font.Style + [fsBold];
+        X := Left + (Width - Canvas.TextWidth('H*')) div 2;
+        Y := Top + (Height - Canvas.TextHeight('H*')) div 2;
+        Canvas.TextOut(X, Y, 'H*');
+      end;
+    pkSynchronization:
+      begin
+        Canvas.Pen.Color := LineColor;
+        Canvas.Pen.Style := psSolid;
+        Canvas.Brush.Color := LineColor;
+        if Abs(Right - Left) >= Abs(Bottom - Top) then
+        begin
+          Canvas.Rectangle(Left, Top, Right, Top + SYNCHRONIZATION_MINTHICK);
+        end
+        else
+        begin
+          Canvas.Rectangle(Left, Top, Left + SYNCHRONIZATION_MINTHICK, Bottom);
+        end;
+      end;
+    pkJunction:
+      begin
+        Canvas.Brush.Color := LineColor;
+        Canvas.Pen.Color := LineColor;
+        Canvas.Ellipse(Left, Top, Right, Bottom);
+      end;
+    pkChoice:
+      begin
+        Canvas.Ellipse(Left, Top, Right, Bottom);
+      end;
+    pkDecision:
+      begin
+        X := Left + (Width div 2);
+        Y := Top + (Height div 2);
+        Canvas.Polygon([Point(Left, Y), Point(X, Top), Point(Right, Y), Point(X, Bottom), Point(Left, Y)]);
+      end;
   end;
 end;
 
@@ -9271,61 +9753,70 @@ begin
   inherited;
   M := (Model as PUMLPseudostate);
   case M.PseudostateKind of
-    pkInitial: begin
-      Sizable := szNone;
-      MinWidth := INITIALSTATE_MINWIDTHH;
-      MinHeight := INITIALSTATE_MINHEIGHT;
-      Width := MinWidth;
-      Height := MinHeight;
-    end;
-    pkShallowHistory: begin
-      Sizable := szNone;
-      MinWidth := HISTORYSTATE_MINWIDTHH;
-      MinHeight := HISTORYSTATE_MINHEIGHT;
-      Width := MinWidth;
-      Height := MinHeight;
-    end;
-    pkDeepHistory: begin
-      Sizable := szNone;
-      MinWidth := HISTORYSTATE_MINWIDTHH;
-      MinHeight := HISTORYSTATE_MINHEIGHT;
-      Width := MinWidth;
-      Height := MinHeight;
-    end;
-    pkSynchronization: begin
-      Sizable := szFree;
-      if Height > Width then begin
-        // Vertical Synchronization
-        MinWidth := SYNCHRONIZATION_MINTHICK;
-        MinHeight := SYNCHRONIZATION_MINLENGTH;
+    pkInitial:
+      begin
+        Sizable := szNone;
+        MinWidth := INITIALSTATE_MINWIDTHH;
+        MinHeight := INITIALSTATE_MINHEIGHT;
         Width := MinWidth;
-      end
-      else begin
-        // Horizontal Synchronization
-        MinWidth := SYNCHRONIZATION_MINLENGTH;
-        MinHeight := SYNCHRONIZATION_MINTHICK;
         Height := MinHeight;
       end;
-    end;
-    pkJunction: begin
-      Sizable := szNone;
-      MinWidth := JUNCTION_MINWIDTH;
-      MinHeight := JUNCTION_MINHEIGHT;
-      Width := MinWidth;
-      Height := MinHeight;
-    end;
-    pkChoice: begin
-      Sizable := szNone;
-      MinWidth := CHOICE_MINWIDTH;
-      MinHeight := CHOICE_MINHEIGHT;
-      Width := MinWidth;
-      Height := MinHeight;
-    end;
-    pkDecision: begin
-      Sizable := szFree;
-      MinWidth := DECISION_MINWIDTH;
-      MinHeight := DECISION_MINHEIGHT;
-    end;
+    pkShallowHistory:
+      begin
+        Sizable := szNone;
+        MinWidth := HISTORYSTATE_MINWIDTHH;
+        MinHeight := HISTORYSTATE_MINHEIGHT;
+        Width := MinWidth;
+        Height := MinHeight;
+      end;
+    pkDeepHistory:
+      begin
+        Sizable := szNone;
+        MinWidth := HISTORYSTATE_MINWIDTHH;
+        MinHeight := HISTORYSTATE_MINHEIGHT;
+        Width := MinWidth;
+        Height := MinHeight;
+      end;
+    pkSynchronization:
+      begin
+        Sizable := szFree;
+        if Height > Width then
+        begin
+        // Vertical Synchronization
+          MinWidth := SYNCHRONIZATION_MINTHICK;
+          MinHeight := SYNCHRONIZATION_MINLENGTH;
+          Width := MinWidth;
+        end
+        else
+        begin
+        // Horizontal Synchronization
+          MinWidth := SYNCHRONIZATION_MINLENGTH;
+          MinHeight := SYNCHRONIZATION_MINTHICK;
+          Height := MinHeight;
+        end;
+      end;
+    pkJunction:
+      begin
+        Sizable := szNone;
+        MinWidth := JUNCTION_MINWIDTH;
+        MinHeight := JUNCTION_MINHEIGHT;
+        Width := MinWidth;
+        Height := MinHeight;
+      end;
+    pkChoice:
+      begin
+        Sizable := szNone;
+        MinWidth := CHOICE_MINWIDTH;
+        MinHeight := CHOICE_MINHEIGHT;
+        Width := MinWidth;
+        Height := MinHeight;
+      end;
+    pkDecision:
+      begin
+        Sizable := szFree;
+        MinWidth := DECISION_MINWIDTH;
+        MinHeight := DECISION_MINHEIGHT;
+      end;
   end;
 end;
 
@@ -9342,7 +9833,7 @@ begin
   Canvas.Ellipse(Left, Top, Right, Bottom);
   Canvas.Brush.Color := LineColor;
   Canvas.Pen.Color := LineColor;
-  Canvas.Ellipse(Left+5, Top+5, Right-5, Bottom-5);
+  Canvas.Ellipse(Left + 5, Top + 5, Right - 5, Bottom - 5);
 end;
 
 procedure PUMLFinalStateView.DrawNoModeledMark(Canvas: PCanvas);
@@ -9407,7 +9898,8 @@ end;
 
 procedure PUMLSubactivityStateView.SetIncludeLabel(Value: PLabelView);
 begin
-  if FIncludeLabel <> Value then begin
+  if FIncludeLabel <> Value then
+  begin
     RemoveSubView(FIncludeLabel);
     FIncludeLabel := Value;
     if FIncludeLabel <> nil then InitializeIncludeLabel(FIncludeLabel);
@@ -9430,7 +9922,8 @@ begin
     Canvas.RoundRect(Left, Top, Right, Bottom, Width div 3, Height);
 
   // draw include-compartment boundary line
-  if IncludeLabel.Visible then begin
+  if IncludeLabel.Visible then
+  begin
     if Width div 3 > Height then
       A := Height div 2
     else
@@ -9456,8 +9949,8 @@ begin
   CY := Top + B;
   Y := Bottom - 8;
   X := Trunc(CX + A * Sqrt(Sqr(B) - Sqr(Y - CY)) / B);
-  Canvas.RoundRect(X - 28, Y, X - 20, Y - 6, 5, 5);  // left-lower state
-  Canvas.RoundRect(X - 14, Y - 10, X - 6, Y - 4, 5, 5);  // X-upper state
+  Canvas.RoundRect(X - 28, Y, X - 20, Y - 6, 5, 5); // left-lower state
+  Canvas.RoundRect(X - 14, Y - 10, X - 6, Y - 4, 5, 5); // X-upper state
   Canvas.PolyLine([Point(X - 20, Y - 4), Point(X - 14, Y - 6)]);
 //  Canvas.PolyLine([Point(Right - 18, Bottom - 13), Point(Right - 14, Bottom - 12), Point(Right - 17, Bottom - 8)]);
 end;
@@ -9467,15 +9960,17 @@ begin
   inherited;
   MinHeight := MinHeight + STATE_DECOMPOSIT_INDICATOR_HEIGHT;
   MinWidth := Max(MinWidth, STATE_DECOMPOSIT_INDICATOR_WIDTH);
-  if IncludeLabel.Visible then begin
+  if IncludeLabel.Visible then
+  begin
     MinWidth := Max(MinWidth, IncludeLabel.MinWidth + COMPARTMENT_LEFT_MARGIN + COMPARTMENT_RIGHT_MARGIN);
-    MinHeight := MinHeight + COMPARTMENT_TOP_MARGIN + IncludeLabel.MinHeight + COMPARTMENT_BOTTOM_MARGIN +COMPARTMENT_INTERVAL;
+    MinHeight := MinHeight + COMPARTMENT_TOP_MARGIN + IncludeLabel.MinHeight + COMPARTMENT_BOTTOM_MARGIN + COMPARTMENT_INTERVAL;
   end;
   if MinWidth div 3 > MinHeight then
     MinWidth := MinWidth + MinHeight div 2
   else
     MinWidth := MinWidth + MinWidth div 6;
-  if IncludeLabel.Visible then begin
+  if IncludeLabel.Visible then
+  begin
     IncludeLabel.Left := Left + COMPARTMENT_LEFT_MARGIN;
     IncludeLabel.Top := NameCompartment.Bottom + COMPARTMENT_INTERVAL + COMPARTMENT_TOP_MARGIN;
     IncludeLabel.Right := Right - COMPARTMENT_RIGHT_MARGIN;
@@ -9546,7 +10041,8 @@ end;
 
 procedure PUMLSwimlaneView.SetNameLabel(Value: PLabelView);
 begin
-  if FNameLabel <> Value then begin
+  if FNameLabel <> Value then
+  begin
     RemoveSubView(FNameLabel);
     FNameLabel := Value;
     if FNameLabel <> nil then InitializeNameLabel(FNameLabel);
@@ -9556,7 +10052,8 @@ end;
 
 procedure PUMLSwimlaneView.SetDirection(Value: PUMLSwimlaneDirectionKind);
 begin
-  if FDirection <> Value then begin
+  if FDirection <> Value then
+  begin
     FDirection := Value;
   end;
 end;
@@ -9567,16 +10064,18 @@ var
 begin
   AssignStyleToCanvas(Canvas);
   Canvas.Pen.Width := SWIMLANE_PEN_WIDTH;
-  if Direction = slkVertical then begin
+  if Direction = slkVertical then
+  begin
     H := Top + NameLabel.Height + SWIMLANE_HEADER_TOP_MARGIN + SWIMLANE_HEADER_BOTTOM_MARGIN;
     Canvas.Rectangle(Left, Top, Right, H);
     Canvas.PolyLine([Point(Left, Bottom), Point(Left, Top), Point(Right - 1, Top), Point(Right - 1, Bottom)]);
   end
-  else begin
+  else
+  begin
     W := Left + NameLabel.Width + SWIMLANE_HEADER_TOP_MARGIN + SWIMLANE_HEADER_BOTTOM_MARGIN;
     Canvas.Rectangle(Left, Top, W, Bottom);
     Canvas.PolyLine([Point(Right, Top), Point(Left, Top), Point(Left, Bottom - 1), Point(Right, Bottom - 1)]);
-  end;    
+  end;
   Canvas.Pen.Width := 1;
 end;
 
@@ -9590,7 +10089,8 @@ var
   W, H: Integer;
 begin
   // not inherited (SwimlaneView must not be affected by 'AutoResize' attribute.
-  if Direction = slkVertical then begin
+  if Direction = slkVertical then
+  begin
     NameLabel.Direction := dkHorizontal;
     W := NameLabel.MinWidth + SWIMLANE_HEADER_LEFT_MARGIN + SWIMLANE_HEADER_RIGHT_MARGIN;
     MinWidth := Max(W, SWIMLANE_VERT_MINWIDTH);
@@ -9602,7 +10102,8 @@ begin
     NameLabel.Right := Right;
     NameLabel.Top := Top + SWIMLANE_HEADER_TOP_MARGIN;
   end
-  else begin
+  else
+  begin
     NameLabel.Direction := dkVertical;
     W := NameLabel.MinWidth + SWIMLANE_HEADER_TOP_MARGIN + SWIMLANE_HEADER_BOTTOM_MARGIN;
     MinWidth := Max(W, SWIMLANE_HORIZ_MINWIDTH);
@@ -9635,20 +10136,24 @@ end;
 
 function PUMLSwimlaneView.MOF_GetAttribute(Name: string): string;
 begin
-  if Name = 'Direction' then begin
+  if Name = 'Direction' then
+  begin
     Result := UMLSwimlaneDirectionKindToString(FDirection);
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetAttribute(Name);
   end;
 end;
 
 procedure PUMLSwimlaneView.MOF_SetAttribute(Name, Value: string);
 begin
-  if Name = 'Direction' then begin
+  if Name = 'Direction' then
+  begin
     FDirection := StringToUMLSwimlaneDirectionKind(Value);
   end
-  else begin
+  else
+  begin
     inherited MOF_SetAttribute(Name, Value);
   end;
 end;
@@ -9739,7 +10244,8 @@ begin
     FStereotypeLabel.Text := '<<' + M.StereotypeName + '>>';
 
   S := '';
-  for I := 0 to M.TriggerCount - 1 do begin
+  for I := 0 to M.TriggerCount - 1 do
+  begin
     S := S + M.Triggers[I].Name;
     if I < M.TriggerCount - 1 then
       S := S + ', '
@@ -9748,9 +10254,11 @@ begin
   end;
   if M.GuardCondition <> '' then
     S := S + '[ ' + M.GuardCondition + ' ] ';
-  if M.EffectCount > 0 then begin
+  if M.EffectCount > 0 then
+  begin
     S := S + '/ ';
-    for I := 0 to M.EffectCount - 1 do begin
+    for I := 0 to M.EffectCount - 1 do
+    begin
       S := S + M.Effects[I].Name;
       if I < M.EffectCount - 1 then
         S := S + ', '
@@ -9803,7 +10311,8 @@ begin
   S := '';
   if M.Type_ <> nil then
     S := S + M.Type_.Name;
-  if M.Name <> '' then begin
+  if M.Name <> '' then
+  begin
     if S <> '' then
       S := S + ' ';
     S := S + '[' + M.Name + ']';
@@ -9859,14 +10368,14 @@ begin
   inherited;
   AssignStyleToCanvas(Canvas);
   Canvas.Polygon([Point(Left, Top), Point(Right, Top), Point(Right - Height div 2,
-    Top + Height div 2), Point(Right, Bottom), Point(Left, Bottom)]);
+      Top + Height div 2), Point(Right, Bottom), Point(Left, Bottom)]);
 end;
 
 procedure PUMLSignalAcceptStateView.ArrangeObject(Canvas: PCanvas);
 begin
   inherited;
   MinWidth := NameCompartment.MinWidth + Height div 2;
-  NameCompartment.Width := Width - Height div 2; 
+  NameCompartment.Width := Width - Height div 2;
 end;
 
 // PUMLSignalAcceptStateView
@@ -9952,7 +10461,8 @@ end;
 
 procedure PUMLPortView.SetNameLabel(Value: PNodeLabelView);
 begin
-  if FNameLabel <> Value then begin
+  if FNameLabel <> Value then
+  begin
     RemoveSubView(FNameLabel);
     FNameLabel := Value;
     if FNameLabel <> nil then InitializeNameLabel(FNameLabel);
@@ -9962,7 +10472,8 @@ end;
 
 procedure PUMLPortView.SetStereotypeLabel(Value: PNodeLabelView);
 begin
-  if FStereotypeLabel <> Value then begin
+  if FStereotypeLabel <> Value then
+  begin
     RemoveSubView(FStereotypeLabel);
     FStereotypeLabel := Value;
     if FStereotypeLabel <> nil then InitializeStereotypeLabel(FStereotypeLabel);
@@ -9972,7 +10483,8 @@ end;
 
 procedure PUMLPortView.SetPropertyLabel(Value: PNodeLabelView);
 begin
-  if FPropertyLabel <> Value then begin
+  if FPropertyLabel <> Value then
+  begin
     RemoveSubView(FPropertyLabel);
     FPropertyLabel := Value;
     if FPropertyLabel <> nil then InitializePropertyLabel(FPropertyLabel);
@@ -9982,7 +10494,8 @@ end;
 
 procedure PUMLPortView.SetShowProperty(Value: Boolean);
 begin
-  if FShowProperty <> Value then begin
+  if FShowProperty <> Value then
+  begin
     FShowProperty := Value;
   end;
 end;
@@ -10004,7 +10517,8 @@ begin
   C.X := (R.Left + R.Right) div 2;
   C.Y := (R.Top + R.Bottom) div 2;
 
-  if (C.X = P.X) or (C.Y = P.Y) then begin
+  if (C.X = P.X) or (C.Y = P.Y) then
+  begin
     Result := OrthoJunction(R, P);
     Exit;
   end;
@@ -10012,31 +10526,35 @@ begin
   Lean := (P.Y - C.Y) / (P.X - C.X);
   // contact points
   CP[0] := Point(R.Left, Round(Lean * (R.Left - C.X) + C.Y)); // left
-  CP[1] := Point(R.Right, Round(Lean * (R.Right - C.X) + C.Y));  // right
-  CP[2] := Point(Round((R.Top - C.Y) / Lean + C.X), R.Top);  // top
+  CP[1] := Point(R.Right, Round(Lean * (R.Right - C.X) + C.Y)); // right
+  CP[2] := Point(Round((R.Top - C.Y) / Lean + C.X), R.Top); // top
   CP[3] := Point(Round((R.Bottom - C.Y) / Lean + C.X), R.Bottom); // bottom
 
-  if PtInRect(R, P) then begin
+  if PtInRect(R, P) then
+  begin
     Idx := 0;
     MD := Sqrt(Sqr(CP[0].X - P.X) + Sqr(CP[0].Y - P.Y));
-    for I := 1 to 3 do begin
+    for I := 1 to 3 do
+    begin
       D := Sqrt(Sqr(CP[I].X - P.X) + Sqr(CP[I].Y - P.Y));
-      if D < MD then begin
+      if D < MD then
+      begin
         MD := D;
         Idx := I;
       end;
     end;
     Result := CP[Idx];
   end
-  else begin
+  else
+  begin
     NormalizeRect(C.X, C.Y, P.X, P.Y);
     I := -1;
     repeat
       Inc(I);
     until (((R.Left <= CP[I].X) and (CP[I].X <= R.Right) and
-           (R.Top <= CP[I].Y) and (CP[I].Y <= R.Bottom) and
-           (C.X <= CP[I].X) and (CP[I].X <= P.X) and
-           (C.Y <= CP[I].Y) and (CP[I].Y <= P.Y)) or (I > 4) );
+      (R.Top <= CP[I].Y) and (CP[I].Y <= R.Bottom) and
+      (C.X <= CP[I].X) and (CP[I].X <= P.X) and
+      (C.Y <= CP[I].Y) and (CP[I].Y <= P.Y)) or (I > 4));
 
     if I > 3 then
       Result := Point((R.Left + R.Right) div 2, (R.Top + R.Bottom) div 2)
@@ -10053,7 +10571,8 @@ begin
   inherited;
   MinWidth := PORT_MINWIDTH;
   MinHeight := PORT_MINHEIGHT;
-  if ContainerView <> nil then begin
+  if ContainerView <> nil then
+  begin
     R := ContainerView.GetBoundingBox(Canvas);
     C := CenterPoint(Rect(Left, Top, Right, Bottom));
     P := Junction2(R, C);
@@ -10101,52 +10620,64 @@ end;
 
 function PUMLPortView.MOF_GetAttribute(Name: string): string;
 begin
-  if Name = 'ShowProperty' then begin
+  if Name = 'ShowProperty' then
+  begin
     Result := BooleanToString(FShowProperty);
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetAttribute(Name);
   end;
 end;
 
 procedure PUMLPortView.MOF_SetAttribute(Name, Value: string);
 begin
-  if Name = 'ShowProperty' then begin
+  if Name = 'ShowProperty' then
+  begin
     FShowProperty := StringToBoolean(Value);
   end
-  else begin
+  else
+  begin
     inherited MOF_SetAttribute(Name, Value);
   end;
 end;
 
 function PUMLPortView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'NameLabel' then begin
+  if Name = 'NameLabel' then
+  begin
     Result := NameLabel;
   end
-  else if Name = 'StereotypeLabel' then begin
+  else if Name = 'StereotypeLabel' then
+  begin
     Result := StereotypeLabel;
   end
-  else if Name = 'PropertyLabel' then begin
+  else if Name = 'PropertyLabel' then
+  begin
     Result := PropertyLabel;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLPortView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'NameLabel' then begin
+  if Name = 'NameLabel' then
+  begin
     NameLabel := Value as PNodeLabelView;
   end
-  else if Name = 'StereotypeLabel' then begin
+  else if Name = 'StereotypeLabel' then
+  begin
     StereotypeLabel := Value as PNodeLabelView;
   end
-  else if Name = 'PropertyLabel' then begin
+  else if Name = 'PropertyLabel' then
+  begin
     PropertyLabel := Value as PNodeLabelView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -10181,11 +10712,14 @@ begin
   Result := False;
   if Model = nil then Exit;
   M := Model as PUMLAttribute;
-  if M.Type_ <> nil then begin
-    for I := 0 to M.Type_.AssociationCount - 1 do begin
+  if M.Type_ <> nil then
+  begin
+    for I := 0 to M.Type_.AssociationCount - 1 do
+    begin
       AssocEnd := M.Type_.Associations[I];
       OtherSide := GetOtherSide(AssocEnd);
-      if (AssocEnd.Name = M.Name) and (OtherSide.Participant = M.Owner) then begin
+      if (AssocEnd.Name = M.Name) and (OtherSide.Participant = M.Owner) then
+      begin
         if OtherSide.Aggregation = akComposite then
           Result := False
         else
@@ -10300,7 +10834,8 @@ end;
 
 procedure PUMLConnectorView.SetHeadRoleNameLabel(Value: PEdgeLabelView);
 begin
-  if FHeadRoleNameLabel <> Value then begin
+  if FHeadRoleNameLabel <> Value then
+  begin
     RemoveSubView(FHeadRoleNameLabel);
     FHeadRoleNameLabel := Value;
     if FHeadRoleNameLabel <> nil then InitializeRoleNameLabel(FHeadRoleNameLabel);
@@ -10310,7 +10845,8 @@ end;
 
 procedure PUMLConnectorView.SetTailRoleNameLabel(Value: PEdgeLabelView);
 begin
-  if FTailRoleNameLabel <> Value then begin
+  if FTailRoleNameLabel <> Value then
+  begin
     RemoveSubView(FTailRoleNameLabel);
     FTailRoleNameLabel := Value;
     if FTailRoleNameLabel <> nil then InitializeRoleNameLabel(FTailRoleNameLabel);
@@ -10320,7 +10856,8 @@ end;
 
 procedure PUMLConnectorView.SetHeadMultiplicityLabel(Value: PEdgeLabelView);
 begin
-  if FHeadMultiplicityLabel <> Value then begin
+  if FHeadMultiplicityLabel <> Value then
+  begin
     RemoveSubView(FHeadMultiplicityLabel);
     FHeadMultiplicityLabel := Value;
     if FHeadMultiplicityLabel <> nil then InitializeMultiplicityLabel(FHeadMultiplicityLabel);
@@ -10330,7 +10867,8 @@ end;
 
 procedure PUMLConnectorView.SetTailMultiplicityLabel(Value: PEdgeLabelView);
 begin
-  if FTailMultiplicityLabel <> Value then begin
+  if FTailMultiplicityLabel <> Value then
+  begin
     RemoveSubView(FTailMultiplicityLabel);
     FTailMultiplicityLabel := Value;
     if FTailMultiplicityLabel <> nil then InitializeMultiplicityLabel(FTailMultiplicityLabel);
@@ -10350,67 +10888,81 @@ begin
   // RoleName (Connection1)
   S := VisibilityToSymbol(Con1.Visibility);
   S := S + Con1.Name;
-  if Con1.Name <> '' then begin
+  if Con1.Name <> '' then
+  begin
     TailRoleNameLabel.Visible := True;
     TailRoleNameLabel.Text := S;
   end
-  else begin
+  else
+  begin
     TailRoleNameLabel.Visible := False;
   end;
   // RoleName (Connection2)
   S := VisibilityToSymbol(Con2.Visibility);
   S := S + Con2.Name;
-  if Con2.Name <> '' then begin
+  if Con2.Name <> '' then
+  begin
     HeadRoleNameLabel.Visible := True;
     HeadRoleNameLabel.Text := S;
   end
-  else begin
+  else
+  begin
     HeadRoleNameLabel.Visible := False;
   end;
   // Multiplicity (Connection1)
   if Con1.Multiplicity = '' then TailMultiplicityLabel.Visible := False
-                            else TailMultiplicityLabel.Visible := True;
+  else TailMultiplicityLabel.Visible := True;
   TailMultiplicityLabel.Text := Con1.Multiplicity;
   // Multiplicity (Connection2)
   if Con2.Multiplicity = '' then HeadMultiplicityLabel.Visible := False
-                            else HeadMultiplicityLabel.Visible := True;
+  else HeadMultiplicityLabel.Visible := True;
   HeadMultiplicityLabel.Text := Con2.Multiplicity;
 end;
 
 function PUMLConnectorView.MOF_GetReference(Name: string): PElement;
 begin
-  if Name = 'HeadRoleNameLabel' then begin
+  if Name = 'HeadRoleNameLabel' then
+  begin
     Result := HeadRoleNameLabel;
   end
-  else if Name = 'TailRoleNameLabel' then begin
+  else if Name = 'TailRoleNameLabel' then
+  begin
     Result := TailRoleNameLabel;
   end
-  else if Name = 'HeadMultiplicityLabel' then begin
+  else if Name = 'HeadMultiplicityLabel' then
+  begin
     Result := HeadMultiplicityLabel;
   end
-  else if Name = 'TailMultiplicityLabel' then begin
+  else if Name = 'TailMultiplicityLabel' then
+  begin
     Result := TailMultiplicityLabel;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetReference(Name);
   end;
 end;
 
 procedure PUMLConnectorView.MOF_SetReference(Name: string; Value: PElement);
 begin
-  if Name = 'HeadRoleNameLabel' then begin
+  if Name = 'HeadRoleNameLabel' then
+  begin
     HeadRoleNameLabel := Value as PEdgeLabelView;
   end
-  else if Name = 'TailRoleNameLabel' then begin
+  else if Name = 'TailRoleNameLabel' then
+  begin
     TailRoleNameLabel := Value as PEdgeLabelView;
   end
-  else if Name = 'HeadMultiplicityLabel' then begin
+  else if Name = 'HeadMultiplicityLabel' then
+  begin
     HeadMultiplicityLabel := Value as PEdgeLabelView;
   end
-  else if Name = 'TailMultiplicityLabel' then begin
+  else if Name = 'TailMultiplicityLabel' then
+  begin
     TailMultiplicityLabel := Value as PEdgeLabelView;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetReference(Name, Value);
   end;
 end;
@@ -10435,7 +10987,8 @@ end;
 
 procedure PUMLCustomTextView.SetText(Value: string);
 begin
-  if FLines.Text <> Value then begin
+  if FLines.Text <> Value then
+  begin
     FLines.Text := Value;
   end;
 end;
@@ -10450,7 +11003,8 @@ var
   I: Integer;
 begin
   AssignFontToCanvas(Canvas);
-  for I := 0 to FLines.Count - 1 do begin
+  for I := 0 to FLines.Count - 1 do
+  begin
     Canvas.TextOut(Left + COMPARTMENT_LEFT_MARGIN, Top + COMPARTMENT_TOP_MARGIN + I * (Canvas.TextHeight('^_') + 2), Lines.Strings[I]);
   end;
 end;
@@ -10475,20 +11029,24 @@ end;
 
 function PUMLCustomTextView.MOF_GetAttribute(Name: string): string;
 begin
-  if Name = 'Text' then begin
+  if Name = 'Text' then
+  begin
     Result := Text;
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetAttribute(Name);
   end;
 end;
 
 procedure PUMLCustomTextView.MOF_SetAttribute(Name, Value: string);
 begin
-  if Name = 'Text' then begin
+  if Name = 'Text' then
+  begin
     Text := Value;
   end
-  else begin
+  else
+  begin
     inherited MOF_SetAttribute(Name, Value);
   end;
 end;
@@ -10510,15 +11068,16 @@ var
   R, B: Integer;
 begin
   AssignStyleToCanvas(Canvas);
-  R := Right - 1; B := Bottom - 1;
+  R := Right - 1;
+  B := Bottom - 1;
   Canvas.PolyGon([Point(Left, Top), Point(R - NOTE_FOLDING_SIZE, Top),
-                   Point(R, Top + NOTE_FOLDING_SIZE),
-                   Point(R, B),
-                   Point(Left, B),
-                   Point(Left, Top)]);
+    Point(R, Top + NOTE_FOLDING_SIZE),
+      Point(R, B),
+      Point(Left, B),
+      Point(Left, Top)]);
   Canvas.PolyGon([Point(R - NOTE_FOLDING_SIZE, Top),
-                   Point(R - NOTE_FOLDING_SIZE, Top + NOTE_FOLDING_SIZE),
-                   Point(R, Top + NOTE_FOLDING_SIZE)]);
+    Point(R - NOTE_FOLDING_SIZE, Top + NOTE_FOLDING_SIZE),
+      Point(R, Top + NOTE_FOLDING_SIZE)]);
   inherited;
 end;
 
@@ -10572,14 +11131,16 @@ end;
 
 procedure PShapeView.SetLineWidth(Value: Integer);
 begin
-  if FLineWidth <> Value then begin
+  if FLineWidth <> Value then
+  begin
     FLineWidth := Value;
   end;
 end;
 
 procedure PShapeView.SetLineKind(Value: PLineKind);
 begin
-  if FLineKind <> Value then begin
+  if FLineKind <> Value then
+  begin
     FLineKind := Value;
   end;
 end;
@@ -10604,26 +11165,32 @@ end;
 
 function PShapeView.MOF_GetAttribute(Name: string): string;
 begin
-  if Name = 'LineWidth' then begin
+  if Name = 'LineWidth' then
+  begin
     Result := IntegerToString(LineWidth);
   end
-  else if Name = 'LineKind' then begin
+  else if Name = 'LineKind' then
+  begin
     Result := LineKindToString(LineKind);
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetAttribute(Name);
   end;
 end;
 
 procedure PShapeView.MOF_SetAttribute(Name, Value: string);
 begin
-  if Name = 'LineWidth' then begin
+  if Name = 'LineWidth' then
+  begin
     LineWidth := StringToInteger(Value);
   end
-  else if Name = 'LineKind' then begin
+  else if Name = 'LineKind' then
+  begin
     LineKind := StringToLineKind(Value);
   end
-  else begin
+  else
+  begin
     inherited MOF_SetAttribute(Name, Value);
   end;
 end;
@@ -10719,7 +11286,8 @@ begin
   Result := False;
   for I := 0 to FPoints.Count - 2 do
     if RectInLine(R, Point(FPoints.Points[I].X, FPoints.Points[I].Y),
-                     Point(FPoints.Points[I + 1].X, FPoints.Points[I + 1].Y)) then begin
+      Point(FPoints.Points[I + 1].X, FPoints.Points[I + 1].Y)) then
+    begin
       Result := True;
       Exit;
     end;
@@ -10727,21 +11295,24 @@ end;
 
 procedure PLineView.SetPoints(Value: PPoints);
 begin
-  if (Value <> FPoints) and (Value <> nil) then begin
+  if (Value <> FPoints) and (Value <> nil) then
+  begin
     FPoints.Assign(Value);
   end;
 end;
 
 procedure PLineView.SetBeginArrowheadStyle(Value: PArrowheadStyleKind);
 begin
-  if FBeginArrowheadStyle <> Value then begin
+  if FBeginArrowheadStyle <> Value then
+  begin
     FBeginArrowheadStyle := Value;
   end;
 end;
 
 procedure PLineView.SetEndArrowheadStyle(Value: PArrowheadStyleKind);
 begin
-  if FEndArrowheadStyle <> Value then begin
+  if FEndArrowheadStyle <> Value then
+  begin
     FEndArrowheadStyle := Value;
   end;
 end;
@@ -10779,32 +11350,40 @@ end;
 
 function PLineView.MOF_GetAttribute(Name: string): string;
 begin
-  if Name = 'Points' then begin
+  if Name = 'Points' then
+  begin
     Result := PointsToString(FPoints);
   end
-  else if Name = 'BeginArrowheadStyle' then begin
+  else if Name = 'BeginArrowheadStyle' then
+  begin
     Result := ArrowheadStyleKindToString(BeginArrowheadStyle);
   end
-  else if Name = 'EndArrowheadStyle' then begin
+  else if Name = 'EndArrowheadStyle' then
+  begin
     Result := ArrowheadStyleKindToString(EndArrowheadStyle);
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetAttribute(Name);
   end;
 end;
 
 procedure PLineView.MOF_SetAttribute(Name, Value: string);
 begin
-  if Name = 'Points' then begin
+  if Name = 'Points' then
+  begin
     StringToPoints(Value, FPoints);
   end
-  else if Name = 'BeginArrowheadStyle' then begin
+  else if Name = 'BeginArrowheadStyle' then
+  begin
     BeginArrowheadStyle := StringToArrowheadStyleKind(Value);
   end
-  else if Name = 'EndArrowheadStyle' then begin
+  else if Name = 'EndArrowheadStyle' then
+  begin
     EndArrowheadStyle := StringToArrowheadStyleKind(Value);
   end
-  else begin
+  else
+  begin
     inherited MOF_SetAttribute(Name, Value);
   end;
 end;
@@ -10832,7 +11411,8 @@ end;
 
 procedure PImageView.SetType(Value: PImageKind);
 begin
-  if Value <> FType then begin
+  if Value <> FType then
+  begin
     FType := Value;
   end;
 end;
@@ -10853,14 +11433,16 @@ begin
     S := Value
   else
     S := B64Decode(Value);
-  if S <> FImageData then begin
+  if S <> FImageData then
+  begin
     FImageData := S;
   end;
 end;
 
 procedure PImageView.SetMaintainAspectRatio(Value: Boolean);
 begin
-  if Value <> FMaintainAspectRatio then begin
+  if Value <> FMaintainAspectRatio then
+  begin
     FMaintainAspectRatio := Value;
   end;
 end;
@@ -10871,7 +11453,8 @@ var
 begin
   AssignStyleToCanvas(Canvas);
   AssignFontToCanvas(Canvas);
-  if Picture = nil then begin
+  if Picture = nil then
+  begin
     Canvas.Pen.Color := clGray;
     Canvas.Pen.Style := psDot;
     Canvas.Brush.Color := $00F0F0F0;
@@ -10890,19 +11473,23 @@ procedure PImageView.ArrangeObject(Canvas: PCanvas);
 var
   RR: Integer;
 begin
-  if Picture = nil then begin
+  if Picture = nil then
+  begin
     MinWidth := Max(Canvas.TextWidth(TEXT_NOIMAGE) + 10, IMAGE_EMPTY_MINWIDTH);
     MinHeight := Max(Canvas.TextHeight(TEXT_NOIMAGE) + 10, IMAGE_EMPTY_MINHEIGHT);
   end
-  else begin
+  else
+  begin
     MinWidth := IMAGE_MINWIDTH;
     MinHeight := IMAGE_MINHEIGHT;
-    if AutoResize then begin
+    if AutoResize then
+    begin
       Width := Picture.Width;
       Height := Picture.Height;
     end;
   end;
-  if (Picture <> nil) and FMaintainAspectRatio and not AutoResize then begin
+  if (Picture <> nil) and FMaintainAspectRatio and not AutoResize then
+  begin
     RR := Picture.Width * 100 div Picture.Height;
     Height := Width * 100 div RR;
   end;
@@ -10912,12 +11499,15 @@ procedure PImageView.Update;
 var
   Stream: TStringStream;
 begin
-  if Picture <> nil then begin
+  if Picture <> nil then
+  begin
     Picture.Free;
     Picture := nil;
   end;
-  if ImageData <> '' then begin
-    if FType = ikBitmap then begin
+  if ImageData <> '' then
+  begin
+    if FType = ikBitmap then
+    begin
       Picture := TBitmap.Create;
       Stream := TStringStream.Create(FImageData);
       try
@@ -10927,7 +11517,8 @@ begin
         Stream.Free;
       end;
     end
-    else if FType = ikMetafile then begin
+    else if FType = ikMetafile then
+    begin
       Picture := TMetafile.Create;
       Stream := TStringStream.Create(FImageData);
       try
@@ -10942,32 +11533,40 @@ end;
 
 function PImageView.MOF_GetAttribute(Name: string): string;
 begin
-  if Name = 'Type_' then begin
+  if Name = 'Type_' then
+  begin
     Result := ImageKindToString(Type_);
   end
-  else if Name = 'ImageData' then begin
+  else if Name = 'ImageData' then
+  begin
     Result := ImageData;
   end
-  else if Name = 'MaintainAspectRatio' then begin
+  else if Name = 'MaintainAspectRatio' then
+  begin
     Result := BooleanToString(MaintainAspectRatio);
   end
-  else begin
+  else
+  begin
     Result := inherited MOF_GetAttribute(Name);
   end;
 end;
 
 procedure PImageView.MOF_SetAttribute(Name, Value: string);
 begin
-  if Name = 'Type_' then begin
+  if Name = 'Type_' then
+  begin
     Type_ := StringToImageKind(Value);
   end
-  else if Name = 'ImageData' then begin
+  else if Name = 'ImageData' then
+  begin
     ImageData := Value;
   end
-  else if Name = 'MaintainAspectRatio' then begin
+  else if Name = 'MaintainAspectRatio' then
+  begin
     MaintainAspectRatio := StringToBoolean(Value);
   end
-  else begin
+  else
+  begin
     inherited MOF_SetAttribute(Name, Value);
   end;
 end;
@@ -10989,11 +11588,14 @@ begin
   try
     for I := 0 to OwnedViewCount - 1 do
       Views.Add(OwnedViews[I]);
-    for I := Length(PrecedentViewKinds) - 1 downto 0 do begin
+    for I := Length(PrecedentViewKinds) - 1 downto 0 do
+    begin
       VClass := PrecedentViewKinds[I];
-      for J := Views.Count - 1 downto 0 do begin
+      for J := Views.Count - 1 downto 0 do
+      begin
         V := Views[J];
-        if V is VClass then begin
+        if V is VClass then
+        begin
           RemoveOwnedView(V);
           InsertOwnedView(0, V);
         end;
@@ -11007,9 +11609,9 @@ end;
 function PUMLDiagramView.CanOwnViewKind(Kind: string): Boolean;
 begin
   if (Kind = 'UMLTextView') or
-     (Kind = 'UMLNoteView') or
-     (Kind = 'UMLNoteLinkView') or
-     (Kind = 'ShapeView') then
+    (Kind = 'UMLNoteView') or
+    (Kind = 'UMLNoteLinkView') or
+    (Kind = 'ShapeView') then
     Result := True
   else
     Result := inherited CanOwnViewKind(Kind);
@@ -11021,8 +11623,8 @@ var
 begin
   C := 0;
   for I := 0 to SelectedViewCount - 1 do
-    if (SelectedViews[I] is PNodeView) and not(SelectedViews[I] is PParasiticView) and SelectedViews[I].ContainerChangeable
-    then Inc(C);
+    if (SelectedViews[I] is PNodeView) and not (SelectedViews[I] is PParasiticView) and SelectedViews[I].ContainerChangeable
+      then Inc(C);
   Result := (C > 0);
 end;
 
@@ -11040,30 +11642,30 @@ end;
 function PUMLClassDiagramView.CanOwnViewKind(Kind: string): Boolean;
 begin
   if (Kind = 'UMLModelView') or
-     (Kind = 'UMLSubsystemView') or
-     (Kind = 'UMLPackageView') or
-     (Kind = 'UMLClassView') or
-     (Kind = 'UMLInterfaceView') or
-     (Kind = 'UMLEnumerationView') or
-     (Kind = 'UMLSignalView') or
-     (Kind = 'UMLExceptionView') or
-     (Kind = 'UMLActorView') or
-     (Kind = 'UMLUseCaseView') or
-     (Kind = 'UMLComponentView') or
-     (Kind = 'UMLNodeView') or
-     (Kind = 'UMLComponentInstanceView') or
-     (Kind = 'UMLNodeInstanceView') or
-     (Kind = 'UMLColObjectView') or
-     (Kind = 'UMLCollaborationView') or
-     (Kind = 'UMLCollaborationInstanceSetView') or
-     (Kind = 'UMLAssociationView') or
-     (Kind = 'UMLGeneralizationView') or
-     (Kind = 'UMLDependencyView') or
-     (Kind = 'UMLRealizationView') or
-     (Kind = 'UMLAssociationClassView') or
-     (Kind = 'UMLIncludeView') or
-     (Kind = 'UMLExtendView') or
-     (Kind = 'UMLLinkView') then
+    (Kind = 'UMLSubsystemView') or
+    (Kind = 'UMLPackageView') or
+    (Kind = 'UMLClassView') or
+    (Kind = 'UMLInterfaceView') or
+    (Kind = 'UMLEnumerationView') or
+    (Kind = 'UMLSignalView') or
+    (Kind = 'UMLExceptionView') or
+    (Kind = 'UMLActorView') or
+    (Kind = 'UMLUseCaseView') or
+    (Kind = 'UMLComponentView') or
+    (Kind = 'UMLNodeView') or
+    (Kind = 'UMLComponentInstanceView') or
+    (Kind = 'UMLNodeInstanceView') or
+    (Kind = 'UMLColObjectView') or
+    (Kind = 'UMLCollaborationView') or
+    (Kind = 'UMLCollaborationInstanceSetView') or
+    (Kind = 'UMLAssociationView') or
+    (Kind = 'UMLGeneralizationView') or
+    (Kind = 'UMLDependencyView') or
+    (Kind = 'UMLRealizationView') or
+    (Kind = 'UMLAssociationClassView') or
+    (Kind = 'UMLIncludeView') or
+    (Kind = 'UMLExtendView') or
+    (Kind = 'UMLLinkView') then
     Result := True
   else
     Result := inherited CanOwnViewKind(Kind);
@@ -11094,7 +11696,7 @@ begin
     (Model is PUMLAttribute) or
     (Model is PUMLPort) or
 
-    (Model is PUMLDependency) or
+  (Model is PUMLDependency) or
     (Model is PUMLGeneralization) or
     (Model is PUMLAssociation) or
     (Model is PUMLAssociationClass) or
@@ -11112,10 +11714,10 @@ end;
 function PUMLClassDiagramView.CanPasteViews(Kind, CopyContext: string): Boolean;
 begin
   if (Kind = 'UMLClassDiagramView') or
-     (Kind = 'UMLUseCaseDiagramView') or
-     (Kind = 'UMLComponentDiagramView') or
-     (Kind = 'UMLDeploymentDiagramView') or
-     (Kind = 'UMLCompositeStructureDiagramView') then
+    (Kind = 'UMLUseCaseDiagramView') or
+    (Kind = 'UMLComponentDiagramView') or
+    (Kind = 'UMLDeploymentDiagramView') or
+    (Kind = 'UMLCompositeStructureDiagramView') then
     Result := True
   else
     Result := False;
@@ -11135,30 +11737,30 @@ end;
 function PUMLUseCaseDiagramView.CanOwnViewKind(Kind: string): Boolean;
 begin
   if (Kind = 'UMLModelView') or
-     (Kind = 'UMLSubsystemView') or
-     (Kind = 'UMLPackageView') or
-     (Kind = 'UMLClassView') or
-     (Kind = 'UMLInterfaceView') or
-     (Kind = 'UMLEnumerationView') or
-     (Kind = 'UMLSignalView') or
-     (Kind = 'UMLExceptionView') or
-     (Kind = 'UMLActorView') or
-     (Kind = 'UMLUseCaseView') or
-     (Kind = 'UMLComponentView') or
-     (Kind = 'UMLNodeView') or
-     (Kind = 'UMLComponentInstanceView') or
-     (Kind = 'UMLNodeInstanceView') or
-     (Kind = 'UMLColObjectView') or
-     (Kind = 'UMLCollaborationView') or
-     (Kind = 'UMLCollaborationInstanceSetView') or
-     (Kind = 'UMLAssociationView') or
-     (Kind = 'UMLGeneralizationView') or
-     (Kind = 'UMLDependencyView') or
-     (Kind = 'UMLRealizationView') or
-     (Kind = 'UMLAssociationClassView') or
-     (Kind = 'UMLIncludeView') or
-     (Kind = 'UMLExtendView') or
-     (Kind = 'UMLLinkView') then
+    (Kind = 'UMLSubsystemView') or
+    (Kind = 'UMLPackageView') or
+    (Kind = 'UMLClassView') or
+    (Kind = 'UMLInterfaceView') or
+    (Kind = 'UMLEnumerationView') or
+    (Kind = 'UMLSignalView') or
+    (Kind = 'UMLExceptionView') or
+    (Kind = 'UMLActorView') or
+    (Kind = 'UMLUseCaseView') or
+    (Kind = 'UMLComponentView') or
+    (Kind = 'UMLNodeView') or
+    (Kind = 'UMLComponentInstanceView') or
+    (Kind = 'UMLNodeInstanceView') or
+    (Kind = 'UMLColObjectView') or
+    (Kind = 'UMLCollaborationView') or
+    (Kind = 'UMLCollaborationInstanceSetView') or
+    (Kind = 'UMLAssociationView') or
+    (Kind = 'UMLGeneralizationView') or
+    (Kind = 'UMLDependencyView') or
+    (Kind = 'UMLRealizationView') or
+    (Kind = 'UMLAssociationClassView') or
+    (Kind = 'UMLIncludeView') or
+    (Kind = 'UMLExtendView') or
+    (Kind = 'UMLLinkView') then
     Result := True
   else
     Result := inherited CanOwnViewKind(Kind);
@@ -11189,7 +11791,7 @@ begin
     (Model is PUMLAttribute) or
     (Model is PUMLPort) or
 
-    (Model is PUMLDependency) or
+  (Model is PUMLDependency) or
     (Model is PUMLGeneralization) or
     (Model is PUMLAssociation) or
     (Model is PUMLAssociationClass) or
@@ -11207,10 +11809,10 @@ end;
 function PUMLUseCaseDiagramView.CanPasteViews(Kind, CopyContext: string): Boolean;
 begin
   if (Kind = 'UMLClassDiagramView') or
-     (Kind = 'UMLUseCaseDiagramView') or
-     (Kind = 'UMLComponentDiagramView') or
-     (Kind = 'UMLDeploymentDiagramView') or
-     (Kind = 'UMLCompositeStructureDiagramView') then
+    (Kind = 'UMLUseCaseDiagramView') or
+    (Kind = 'UMLComponentDiagramView') or
+    (Kind = 'UMLDeploymentDiagramView') or
+    (Kind = 'UMLCompositeStructureDiagramView') then
     Result := True
   else
     Result := False;
@@ -11246,7 +11848,7 @@ end;
 function PUMLSequenceDiagramView.CanOwnViewKind(Kind: string): Boolean;
 begin
   if (Kind = 'UMLSeqObjectView') or
-     (Kind = 'UMLSeqStimulusView') then
+    (Kind = 'UMLSeqStimulusView') then
     Result := True
   else
     Result := inherited CanOwnViewKind(Kind);
@@ -11257,18 +11859,21 @@ var
   VN, VN2: PModel;
 begin
   if (Model is PUMLClass) or
-     (Model is PUMLInterface) or
-     (Model is PUMLComponent) or
-     (Model is PUMLNode) or
-     (Model is PUMLActor) then begin
+    (Model is PUMLInterface) or
+    (Model is PUMLComponent) or
+    (Model is PUMLNode) or
+    (Model is PUMLActor) then
+    begin
     Result := True;
-  end else if (Model is PUMLObject) then begin
+  end else if (Model is PUMLObject) then
+  begin
     VN := Model.VirtualNamespace;
     VN2 := Self.Diagram.VirtualNamespace;
     if VN2 <> nil then VN2 := VN2.VirtualNamespace;
     if VN = VN2 then Result := True
     else Result := False;
-  end else begin
+  end else
+  begin
     Result := inherited CanAcceptModel(Model);
   end;
 end;
@@ -11308,7 +11913,7 @@ end;
 function PUMLSequenceRoleDiagramView.CanOwnViewKind(Kind: string): Boolean;
 begin
   if (Kind = 'UMLSeqClassifierRoleView') or
-     (Kind = 'UMLSeqMessageView') then
+    (Kind = 'UMLSeqMessageView') then
     Result := True
   else
     Result := inherited CanOwnViewKind(Kind);
@@ -11319,18 +11924,21 @@ var
   VN, VN2: PModel;
 begin
   if (Model is PUMLClass) or
-     (Model is PUMLInterface) or
-     (Model is PUMLComponent) or
-     (Model is PUMLNode) or
-     (Model is PUMLActor) then begin
+    (Model is PUMLInterface) or
+    (Model is PUMLComponent) or
+    (Model is PUMLNode) or
+    (Model is PUMLActor) then
+    begin
     Result := True;
-  end else if (Model is PUMLClassifierRole) then begin
+  end else if (Model is PUMLClassifierRole) then
+  begin
     VN := Model.VirtualNamespace;
     VN2 := Self.Diagram.VirtualNamespace;
     if VN2 <> nil then VN2 := VN2.VirtualNamespace;
     if VN = VN2 then Result := True
     else Result := False;
-  end else begin
+  end else
+  begin
     Result := inherited CanAcceptModel(Model);
   end;
 end;
@@ -11354,7 +11962,7 @@ end;
 function PUMLCollaborationDiagramView.CanOwnViewKind(Kind: string): Boolean;
 begin
   if (Kind = 'UMLColObjectView') or
-     (Kind = 'UMLColStimulusView') then
+    (Kind = 'UMLColStimulusView') then
     Result := True
   else
     Result := inherited CanOwnViewKind(Kind);
@@ -11365,21 +11973,24 @@ var
   VN, VN2: PModel;
 begin
   if (Model is PUMLClass) or
-     (Model is PUMLInterface) or
-     (Model is PUMLComponent) or
-     (Model is PUMLNode) or
-     (Model is PUMLActor) or
+    (Model is PUMLInterface) or
+    (Model is PUMLComponent) or
+    (Model is PUMLNode) or
+    (Model is PUMLActor) or
 
-     (Model is PUMLLink) then begin
+  (Model is PUMLLink) then
+  begin
 
     Result := True;
-  end else if (Model is PUMLObject) then begin
+  end else if (Model is PUMLObject) then
+  begin
     VN := Model.VirtualNamespace;
     VN2 := Self.Diagram.VirtualNamespace;
     if VN2 <> nil then VN2 := VN2.VirtualNamespace;
     if VN = VN2 then Result := True
     else Result := False;
-  end else begin
+  end else
+  begin
     Result := inherited CanAcceptModel(Model);
   end;
 end;
@@ -11403,7 +12014,7 @@ end;
 function PUMLCollaborationRoleDiagramView.CanOwnViewKind(Kind: string): Boolean;
 begin
   if (Kind = 'UMLColClassifierRoleView') or
-     (Kind = 'UMLColMessageView') then
+    (Kind = 'UMLColMessageView') then
     Result := True
   else
     Result := inherited CanOwnViewKind(Kind);
@@ -11414,21 +12025,24 @@ var
   VN, VN2: PModel;
 begin
   if (Model is PUMLClass) or
-     (Model is PUMLInterface) or
-     (Model is PUMLComponent) or
-     (Model is PUMLNode) or
-     (Model is PUMLActor) or
+    (Model is PUMLInterface) or
+    (Model is PUMLComponent) or
+    (Model is PUMLNode) or
+    (Model is PUMLActor) or
 
-     (Model is PUMLAssociationRole) then begin
+  (Model is PUMLAssociationRole) then
+  begin
 
     Result := True;
-  end else if (Model is PUMLClassifierRole) then begin
+  end else if (Model is PUMLClassifierRole) then
+  begin
     VN := Model.VirtualNamespace;
     VN2 := Self.Diagram.VirtualNamespace;
     if VN2 <> nil then VN2 := VN2.VirtualNamespace;
     if VN = VN2 then Result := True
     else Result := False;
-  end else begin
+  end else
+  begin
     Result := inherited CanAcceptModel(Model);
   end;
 end;
@@ -11452,11 +12066,11 @@ end;
 function PUMLStatechartDiagramView.CanOwnViewKind(Kind: string): Boolean;
 begin
   if (Kind = 'UMLStateView') or
-     (Kind = 'UMLSubmachineStateView') or
-     (Kind = 'UMLPseudostateView') or
-     (Kind = 'UMLFinalStateView') or
+    (Kind = 'UMLSubmachineStateView') or
+    (Kind = 'UMLPseudostateView') or
+    (Kind = 'UMLFinalStateView') or
 
-     (Kind = 'UMLTransitionView') then
+  (Kind = 'UMLTransitionView') then
 
     Result := True
   else
@@ -11472,7 +12086,7 @@ begin
     (Model is PUMLStateMachine) or
     (Model is PUMLFlowFinalState) or
 
-    (Model is PUMLTransition) then
+  (Model is PUMLTransition) then
 
     Result := True
   else
@@ -11542,11 +12156,11 @@ end;
 function PUMLActivityDiagramView.CanOwnViewKind(Kind: string): Boolean;
 begin
   if (Kind = 'UMLActionStateView') or
-     (Kind = 'UMLSubactivityStateView') or
-     (Kind = 'UMLPseudostateView') or
-     (Kind = 'UMLFinalStateView') or
-     (Kind = 'UMLSwimlaneView') or
-     (Kind = 'UMLTransitionView') then
+    (Kind = 'UMLSubactivityStateView') or
+    (Kind = 'UMLPseudostateView') or
+    (Kind = 'UMLFinalStateView') or
+    (Kind = 'UMLSwimlaneView') or
+    (Kind = 'UMLTransitionView') then
     Result := True
   else
     Result := inherited CanOwnViewKind(Kind);
@@ -11555,17 +12169,17 @@ end;
 function PUMLActivityDiagramView.CanAcceptModel(Model: PModel): Boolean;
 begin
   if (Model is PUMLActionState) or
-     (Model is PUMLSubactivityState) or
-     (Model is PUMLPseudostate) or
-     (Model is PUMLFinalState) or
-     (Model is PUMLPartition) or
-     (Model is PUMLActivityGraph) or
-     (Model is PUMLObjectFlowState) or
-     (Model is PUMLFlowFinalState) or
-     (Model is PUMLSignalAcceptState) or
-     (Model is PUMLSignalSendState) or
+    (Model is PUMLSubactivityState) or
+    (Model is PUMLPseudostate) or
+    (Model is PUMLFinalState) or
+    (Model is PUMLPartition) or
+    (Model is PUMLActivityGraph) or
+    (Model is PUMLObjectFlowState) or
+    (Model is PUMLFlowFinalState) or
+    (Model is PUMLSignalAcceptState) or
+    (Model is PUMLSignalSendState) or
 
-     (Model is PUMLTransition) then
+  (Model is PUMLTransition) then
 
     Result := True
   else
@@ -11593,30 +12207,30 @@ end;
 function PUMLComponentDiagramView.CanOwnViewKind(Kind: string): Boolean;
 begin
   if (Kind = 'UMLModelView') or
-     (Kind = 'UMLSubsystemView') or
-     (Kind = 'UMLPackageView') or
-     (Kind = 'UMLClassView') or
-     (Kind = 'UMLInterfaceView') or
-     (Kind = 'UMLEnumerationView') or
-     (Kind = 'UMLSignalView') or
-     (Kind = 'UMLExceptionView') or
-     (Kind = 'UMLActorView') or
-     (Kind = 'UMLUseCaseView') or
-     (Kind = 'UMLComponentView') or
-     (Kind = 'UMLNodeView') or
-     (Kind = 'UMLComponentInstanceView') or
-     (Kind = 'UMLNodeInstanceView') or
-     (Kind = 'UMLColObjectView') or
-     (Kind = 'UMLCollaborationView') or
-     (Kind = 'UMLCollaborationInstanceSetView') or
-     (Kind = 'UMLAssociationView') or
-     (Kind = 'UMLGeneralizationView') or
-     (Kind = 'UMLDependencyView') or
-     (Kind = 'UMLRealizationView') or
-     (Kind = 'UMLAssociationClassView') or
-     (Kind = 'UMLIncludeView') or
-     (Kind = 'UMLExtendView') or
-     (Kind = 'UMLLinkView') then
+    (Kind = 'UMLSubsystemView') or
+    (Kind = 'UMLPackageView') or
+    (Kind = 'UMLClassView') or
+    (Kind = 'UMLInterfaceView') or
+    (Kind = 'UMLEnumerationView') or
+    (Kind = 'UMLSignalView') or
+    (Kind = 'UMLExceptionView') or
+    (Kind = 'UMLActorView') or
+    (Kind = 'UMLUseCaseView') or
+    (Kind = 'UMLComponentView') or
+    (Kind = 'UMLNodeView') or
+    (Kind = 'UMLComponentInstanceView') or
+    (Kind = 'UMLNodeInstanceView') or
+    (Kind = 'UMLColObjectView') or
+    (Kind = 'UMLCollaborationView') or
+    (Kind = 'UMLCollaborationInstanceSetView') or
+    (Kind = 'UMLAssociationView') or
+    (Kind = 'UMLGeneralizationView') or
+    (Kind = 'UMLDependencyView') or
+    (Kind = 'UMLRealizationView') or
+    (Kind = 'UMLAssociationClassView') or
+    (Kind = 'UMLIncludeView') or
+    (Kind = 'UMLExtendView') or
+    (Kind = 'UMLLinkView') then
     Result := True
   else
     Result := inherited CanOwnViewKind(Kind);
@@ -11647,7 +12261,7 @@ begin
     (Model is PUMLAttribute) or
     (Model is PUMLPort) or
 
-    (Model is PUMLDependency) or
+  (Model is PUMLDependency) or
     (Model is PUMLGeneralization) or
     (Model is PUMLAssociation) or
     (Model is PUMLAssociationClass) or
@@ -11665,10 +12279,10 @@ end;
 function PUMLComponentDiagramView.CanPasteViews(Kind, CopyContext: string): Boolean;
 begin
   if (Kind = 'UMLClassDiagramView') or
-     (Kind = 'UMLUseCaseDiagramView') or
-     (Kind = 'UMLComponentDiagramView') or
-     (Kind = 'UMLDeploymentDiagramView') or
-     (Kind = 'UMLCompositeStructureDiagramView') then
+    (Kind = 'UMLUseCaseDiagramView') or
+    (Kind = 'UMLComponentDiagramView') or
+    (Kind = 'UMLDeploymentDiagramView') or
+    (Kind = 'UMLCompositeStructureDiagramView') then
     Result := True
   else
     Result := False;
@@ -11683,30 +12297,30 @@ end;
 function PUMLDeploymentDiagramView.CanOwnViewKind(Kind: string): Boolean;
 begin
   if (Kind = 'UMLModelView') or
-     (Kind = 'UMLSubsystemView') or
-     (Kind = 'UMLPackageView') or
-     (Kind = 'UMLClassView') or
-     (Kind = 'UMLInterfaceView') or
-     (Kind = 'UMLEnumerationView') or
-     (Kind = 'UMLSignalView') or
-     (Kind = 'UMLExceptionView') or
-     (Kind = 'UMLActorView') or
-     (Kind = 'UMLUseCaseView') or
-     (Kind = 'UMLComponentView') or
-     (Kind = 'UMLNodeView') or
-     (Kind = 'UMLComponentInstanceView') or
-     (Kind = 'UMLNodeInstanceView') or
-     (Kind = 'UMLColObjectView') or
-     (Kind = 'UMLCollaborationView') or
-     (Kind = 'UMLCollaborationInstanceSetView') or
-     (Kind = 'UMLAssociationView') or
-     (Kind = 'UMLGeneralizationView') or
-     (Kind = 'UMLDependencyView') or
-     (Kind = 'UMLRealizationView') or
-     (Kind = 'UMLAssociationClassView') or
-     (Kind = 'UMLIncludeView') or
-     (Kind = 'UMLExtendView') or
-     (Kind = 'UMLLinkView') then
+    (Kind = 'UMLSubsystemView') or
+    (Kind = 'UMLPackageView') or
+    (Kind = 'UMLClassView') or
+    (Kind = 'UMLInterfaceView') or
+    (Kind = 'UMLEnumerationView') or
+    (Kind = 'UMLSignalView') or
+    (Kind = 'UMLExceptionView') or
+    (Kind = 'UMLActorView') or
+    (Kind = 'UMLUseCaseView') or
+    (Kind = 'UMLComponentView') or
+    (Kind = 'UMLNodeView') or
+    (Kind = 'UMLComponentInstanceView') or
+    (Kind = 'UMLNodeInstanceView') or
+    (Kind = 'UMLColObjectView') or
+    (Kind = 'UMLCollaborationView') or
+    (Kind = 'UMLCollaborationInstanceSetView') or
+    (Kind = 'UMLAssociationView') or
+    (Kind = 'UMLGeneralizationView') or
+    (Kind = 'UMLDependencyView') or
+    (Kind = 'UMLRealizationView') or
+    (Kind = 'UMLAssociationClassView') or
+    (Kind = 'UMLIncludeView') or
+    (Kind = 'UMLExtendView') or
+    (Kind = 'UMLLinkView') then
     Result := True
   else
     Result := inherited CanOwnViewKind(Kind);
@@ -11737,7 +12351,7 @@ begin
     (Model is PUMLAttribute) or
     (Model is PUMLPort) or
 
-    (Model is PUMLDependency) or
+  (Model is PUMLDependency) or
     (Model is PUMLGeneralization) or
     (Model is PUMLAssociation) or
     (Model is PUMLAssociationClass) or
@@ -11755,10 +12369,10 @@ end;
 function PUMLDeploymentDiagramView.CanPasteViews(Kind, CopyContext: string): Boolean;
 begin
   if (Kind = 'UMLClassDiagramView') or
-     (Kind = 'UMLUseCaseDiagramView') or
-     (Kind = 'UMLComponentDiagramView') or
-     (Kind = 'UMLDeploymentDiagramView') or
-     (Kind = 'UMLCompositeStructureDiagramView') then
+    (Kind = 'UMLUseCaseDiagramView') or
+    (Kind = 'UMLComponentDiagramView') or
+    (Kind = 'UMLDeploymentDiagramView') or
+    (Kind = 'UMLCompositeStructureDiagramView') then
     Result := True
   else
     Result := False;
@@ -11773,30 +12387,30 @@ end;
 function PUMLCompositeStructureDiagramView.CanOwnViewKind(Kind: string): Boolean;
 begin
   if (Kind = 'UMLModelView') or
-     (Kind = 'UMLSubsystemView') or
-     (Kind = 'UMLPackageView') or
-     (Kind = 'UMLClassView') or
-     (Kind = 'UMLInterfaceView') or
-     (Kind = 'UMLEnumerationView') or
-     (Kind = 'UMLSignalView') or
-     (Kind = 'UMLExceptionView') or
-     (Kind = 'UMLActorView') or
-     (Kind = 'UMLUseCaseView') or
-     (Kind = 'UMLComponentView') or
-     (Kind = 'UMLNodeView') or
-     (Kind = 'UMLComponentInstanceView') or
-     (Kind = 'UMLNodeInstanceView') or
-     (Kind = 'UMLColObjectView') or
-     (Kind = 'UMLCollaborationView') or
-     (Kind = 'UMLCollaborationInstanceSetView') or
-     (Kind = 'UMLAssociationView') or
-     (Kind = 'UMLGeneralizationView') or
-     (Kind = 'UMLDependencyView') or
-     (Kind = 'UMLRealizationView') or
-     (Kind = 'UMLAssociationClassView') or
-     (Kind = 'UMLIncludeView') or
-     (Kind = 'UMLExtendView') or
-     (Kind = 'UMLLinkView') then
+    (Kind = 'UMLSubsystemView') or
+    (Kind = 'UMLPackageView') or
+    (Kind = 'UMLClassView') or
+    (Kind = 'UMLInterfaceView') or
+    (Kind = 'UMLEnumerationView') or
+    (Kind = 'UMLSignalView') or
+    (Kind = 'UMLExceptionView') or
+    (Kind = 'UMLActorView') or
+    (Kind = 'UMLUseCaseView') or
+    (Kind = 'UMLComponentView') or
+    (Kind = 'UMLNodeView') or
+    (Kind = 'UMLComponentInstanceView') or
+    (Kind = 'UMLNodeInstanceView') or
+    (Kind = 'UMLColObjectView') or
+    (Kind = 'UMLCollaborationView') or
+    (Kind = 'UMLCollaborationInstanceSetView') or
+    (Kind = 'UMLAssociationView') or
+    (Kind = 'UMLGeneralizationView') or
+    (Kind = 'UMLDependencyView') or
+    (Kind = 'UMLRealizationView') or
+    (Kind = 'UMLAssociationClassView') or
+    (Kind = 'UMLIncludeView') or
+    (Kind = 'UMLExtendView') or
+    (Kind = 'UMLLinkView') then
     Result := True
   else
     Result := inherited CanOwnViewKind(Kind);
@@ -11827,7 +12441,7 @@ begin
     (Model is PUMLAttribute) or
     (Model is PUMLPort) or
 
-    (Model is PUMLDependency) or
+  (Model is PUMLDependency) or
     (Model is PUMLGeneralization) or
     (Model is PUMLAssociation) or
     (Model is PUMLAssociationClass) or
@@ -11845,10 +12459,10 @@ end;
 function PUMLCompositeStructureDiagramView.CanPasteViews(Kind, CopyContext: string): Boolean;
 begin
   if (Kind = 'UMLClassDiagramView') or
-     (Kind = 'UMLUseCaseDiagramView') or
-     (Kind = 'UMLComponentDiagramView') or
-     (Kind = 'UMLDeploymentDiagramView') or
-     (Kind = 'UMLCompositeStructureDiagramView') then
+    (Kind = 'UMLUseCaseDiagramView') or
+    (Kind = 'UMLComponentDiagramView') or
+    (Kind = 'UMLDeploymentDiagramView') or
+    (Kind = 'UMLCompositeStructureDiagramView') then
     Result := True
   else
     Result := False;
@@ -12022,7 +12636,8 @@ function GetPropertyString(M: PExtensibleModel; PresetProps: TStringList = nil):
     Prefix: string;
   begin
     Result := Origin;
-    if Length(Origin) >= 3 then begin
+    if Length(Origin) >= 3 then
+    begin
       Prefix := Copy(Origin, 1, 2);
       if (Prefix = 'is') or (Prefix = 'Is') then
         if IsUpperCaseLetter(Origin[3]) then
@@ -12038,13 +12653,15 @@ function GetPropertyString(M: PExtensibleModel; PresetProps: TStringList = nil):
     SL := TStringList.Create;
     try
       SL.Text := Value;
-      if SL.Count = 1 then begin
+      if SL.Count = 1 then
+      begin
         if Length(SL[0]) > 20 then
           Result := Copy(SL[0], 1, 20) + '...'
         else
           Result := SL[0];
       end
-      else if SL.Count >= 2 then begin
+      else if SL.Count >= 2 then
+      begin
         if Length(SL[0]) > 20 then
           Result := Copy(SL[0], 1, 20) + '...'
         else
@@ -12063,15 +12680,18 @@ var
 begin
   S := '';
   if PresetProps <> nil then
-    for I := 0 to PresetProps.Count - 1 do begin
+    for I := 0 to PresetProps.Count - 1 do
+    begin
       if S <> '' then
         S := S + ', ';
       S := S + PresetProps[I];
     end;
-  for I := 0 to M.TaggedValueCount - 1 do begin
+  for I := 0 to M.TaggedValueCount - 1 do
+  begin
     Tag := M.TaggedValues[I];
     TagDef := Tag.GetTagDefinition;
-    if TagDef <> nil then begin
+    if TagDef <> nil then
+    begin
       if S <> '' then
         S := S + ', ';
       case TagDef.TagType of
@@ -12093,7 +12713,8 @@ begin
           begin
             V := '';
             for J := 0 to Tag.ReferenceValueCount - 1 do
-              if Tag.ReferenceValues[J] <> nil then begin
+              if Tag.ReferenceValues[J] <> nil then
+              begin
                 if V <> '' then
                   V := V + '; ';
                 V := V + Tag.ReferenceValues[J].Name;
@@ -12135,23 +12756,26 @@ begin
       ARect := ADiagramView.GetSelectedBoundingBox(ADiagramView.Canvas)
     else ARect := ADiagramView.GetBoundingBox(ADiagramView.Canvas);
 
-    with ARect do begin
+    with ARect do
+    begin
       NormalizeRect(Left, Top, Right, Bottom);
       ARect := Rect(Left - 20, ARect.Top - 20, ARect.Right + 20, ARect.Bottom + 20);
       AMetafile.Width := Right - Left;
       AMetafile.Height := Bottom - Top;
     end;
-    
+
     AMetafileCanvas := TMetafileCanvas.Create(AMetafile, AMetafile.Handle);
     ACanvas := PCanvas.Create(AMetafileCanvas);
     try
       ACanvas.ZoomFactor := ZoomFactor(100, 100);
       ACanvas.Font.Height := -13;
       ACanvas.Font.Name := 'Verdana';
-      ACanvas.OriginX := - ARect.Left;
-      ACanvas.OriginY := - ARect.Top;
-      if SelectedViewsOnly then begin
-        for I := 0 to ADiagramView.SelectedViewCount - 1 do begin
+      ACanvas.OriginX := -ARect.Left;
+      ACanvas.OriginY := -ARect.Top;
+      if SelectedViewsOnly then
+      begin
+        for I := 0 to ADiagramView.SelectedViewCount - 1 do
+        begin
           AView := ADiagramView.SelectedViews[I] as PView;
           if AView is PParasiticView then Continue;
           AView.Draw(ACanvas);
@@ -12164,7 +12788,7 @@ begin
     end;
 
   except on Exception do
-    AMetafile.Free;
+      AMetafile.Free;
   end;
 end;
 
@@ -12183,7 +12807,8 @@ begin
       ARect := ADiagramView.GetSelectedBoundingBox(ADiagramView.Canvas)
     else ARect := ADiagramView.GetBoundingBox(ADiagramView.Canvas);
 
-    with ARect do begin
+    with ARect do
+    begin
       NormalizeRect(Left, Top, Right, Bottom);
       ARect := Rect(Left - 20, ARect.Top - 20, ARect.Right + 20, ARect.Bottom + 20);
       ABitmap.Width := Right - Left;
@@ -12195,15 +12820,16 @@ begin
       ACanvas.ZoomFactor := ZoomFactor(100, 100);
       ACanvas.Font.Height := -13;
       ACanvas.Font.Name := 'Verdana';
-      ACanvas.OriginX := - ARect.Left;
-      ACanvas.OriginY := - ARect.Top;
+      ACanvas.OriginX := -ARect.Left;
+      ACanvas.OriginY := -ARect.Top;
       ADiagramView.Draw(ACanvas);
       Result := ABitmap;
     finally
       ACanvas.Free;
     end;
-  except on Exception do
-    ABitmap.Free;
+  except
+    on Exception do
+      ABitmap.Free;
   end;
 end;
 

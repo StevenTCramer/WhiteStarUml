@@ -51,7 +51,7 @@ interface
 
 uses
   Windows, ActiveX, Classes, ComObj,
-  StarUML_TLB;
+  StarUMLProject_TLB;
 
 type
   // TRoseAddInObj
@@ -63,6 +63,7 @@ type
     function FinalizeAddIn: HResult; stdcall;
     function DoMenuAction(ActionID: Integer): HResult; stdcall;
   public
+    function SetStarUMLApplication(const aStarUMLApplication: IStarUMLApplication): HResult; stdcall;
     procedure Initialize; override;
     destructor Destroy; override;
   end;
@@ -82,8 +83,10 @@ uses
 procedure TRoseAddInObj.Initialize;
 begin
   inherited;
-  StarUMLApp := CreateOleObject('StarUML.StarUMLApplication') as IStarUMLApplication;
-  Application.Handle := StarUMLApp.Handle;
+//  StarUMLApp := GetActiveOleObject(CLASS_StarUMLApplication) as IStarUMLApplication;
+//  StarUMLApp := CoStarUMLApplication.Create;
+//  StarUMLApp := CreateOleObject('StarUMLProject.StarUMLApplication') as IStarUMLApplication;
+//  Application.Handle := StarUMLApp.Handle;
 end;
 
 destructor TRoseAddInObj.Destroy;
@@ -95,6 +98,12 @@ end;
 function TRoseAddInObj.InitializeAddIn: HResult;
 begin
   Result := S_OK;
+end;
+
+function TRoseAddInObj.SetStarUMLApplication(
+  const aStarUMLApplication: IStarUMLApplication): HResult;
+begin
+ StarUMLApp := aStarUMLApplication;
 end;
 
 function TRoseAddInObj.FinalizeAddIn: HResult;

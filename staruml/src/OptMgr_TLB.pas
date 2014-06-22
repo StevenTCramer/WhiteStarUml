@@ -56,7 +56,7 @@ unit OptMgr_TLB;
 // manual modifications will be lost.                                         
 // ************************************************************************ //
 
-// PASTLWTR : $Revision: 1.2 $
+// PASTLWTR : $Revision:1.0$
 // File generated on 2002-10-04 ¿ÀÈÄ 5:24:54 from Type Library described below.
 
 // ************************************************************************  //

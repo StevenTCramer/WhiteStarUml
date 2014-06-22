@@ -48,8 +48,15 @@ unit OptionNodes;
 interface
 
 uses
-  OptMgr_TLB, OptionMgrAux,     
-  Classes, ComObj, ActiveX, Xmldom, XMLIntf, Msxmldom, XMLDoc;
+  OptMgr_TLB,
+  OptionMgrAux,
+  Classes,
+  ComObj,
+  ActiveX,
+  Xmldom,
+  XMLIntf,
+  Msxmldom,
+  XMLDoc;
 
 type
   // forward declaration
@@ -326,8 +333,13 @@ type
 implementation
 
 uses
-  PVariants, NLS_OPTMGR,
-  ComServ, SysUtils, Variants, Graphics, Dialogs;
+  PVariants,
+  NLS_OPTMGR,
+  ComServ,
+  SysUtils,
+  Variants,
+  Graphics,
+  Dialogs;
 
 ////////////////////////////////////////////////////////////////////////////////
 // POptionItem
@@ -351,7 +363,8 @@ function POptionItem.GetValue: OleVariant;
 begin
   if IsValidValue(FValue) then
     Result := AsValidType(FValue)
-  else begin
+  else
+  begin
     Value := FDefaultValue;
     Result := AsValidType(FValue);
   end;
@@ -359,7 +372,8 @@ end;
 
 procedure POptionItem.SetValue(Value: OleVariant);
 begin
-  if IsValidValue(Value) then begin
+  if IsValidValue(Value) then
+  begin
     FValue := AsValidType(Value);
     FChanged := (FValue <> FOldValue);
   end;
@@ -454,13 +468,15 @@ end;
 function POptionItem.ReadFromXMLElement(Element: IXMLNode): Boolean;
 begin
   Result := True;
-  if not IsOptionItemTypeName(Element.NodeName) then begin
+  if not IsOptionItemTypeName(Element.NodeName) then
+  begin
     Result := False;
     Exit;
   end;
   FType := TagToOptionType(Element.NodeName);
 
-  if VarIsNull(Element.Attributes[XOD_ATTRIBUTE_KEY]) then begin
+  if VarIsNull(Element.Attributes[XOD_ATTRIBUTE_KEY]) then
+  begin
     Result := False;
     Exit;
   end;
@@ -476,7 +492,8 @@ begin
   else
     DefaultValue := Element.ChildValues[XOD_ELEMENT_DEFAULT_VALUE];
 
-  if not IsValidValue(DefaultValue) then begin
+  if not IsValidValue(DefaultValue) then
+  begin
     Result := False;
     Exit;
   end;
@@ -493,16 +510,19 @@ end;
 
 procedure POptionItem.SetInitalValue(Value: OleVariant);
 begin
-  if VarIsNull(Value) then begin
+  if VarIsNull(Value) then
+  begin
     POptionManagerMessages.InvalidValue(FCaption);
     Exit;
   end;
-  if IsValidValue(Value) then begin
+  if IsValidValue(Value) then
+  begin
     FChanged := False;
     FValue := AsValidType(Value);
     FOldValue := AsValidType(Value);
   end
-  else begin
+  else
+  begin
     FChanged := True;
     FValue := AsValidType(FDefaultValue);
     FOldValue := AsValidType(FDefaultValue);
@@ -514,7 +534,6 @@ begin
   FValue := FOldValue;
   FChanged := False;
 end;
-
 
 // POptionItem
 ////////////////////////////////////////////////////////////////////////////////
@@ -530,6 +549,7 @@ end;
 
 destructor POptionClassification.Destroy;
 begin
+  ClearOptionItems;
   FOptionItems.Free;
   inherited Destroy;
 end;
@@ -583,13 +603,14 @@ procedure POptionClassification.ClearOptionItems;
 var
   I: Integer;
 begin
-  for I := 0 to OptionItemCount - 1 do
+  for I := OptionItemCount - 1 downto 0 do
     DeleteOptionItem(I);
 end;
 
 procedure POptionClassification.AddOptionItem(Value: POptionItem);
 begin
-  if Value <> nil then begin
+  if Value <> nil then
+  begin
     FOptionItems.Add(Value);
     Value._AddRef;
   end;
@@ -597,7 +618,8 @@ end;
 
 procedure POptionClassification.RemoveOptionItem(Value: POptionItem);
 begin
-  if Value <> nil then begin
+  if Value <> nil then
+  begin
     FOptionItems.Remove(Value);
     Value._Release;
   end;
@@ -605,7 +627,8 @@ end;
 
 procedure POptionClassification.InsertOptionItem(Index: Integer; Value: POptionItem);
 begin
-  if Value <> nil then begin
+  if Value <> nil then
+  begin
     FOptionItems.Insert(Index, Value);
     Value._AddRef;
   end;
@@ -633,44 +656,58 @@ begin
     FDescription := ''
   else
     FDescription := Element.ChildValues[XOD_ELEMENT_DESCRIPTION];
-  for I := 0 to Element.ChildNodes.Count - 1 do begin
+  for I := 0 to Element.ChildNodes.Count - 1 do
+  begin
     Child := Element.ChildNodes[I];
     OI := nil;
-    if IsOptionItemTypeName(Child.NodeName) then begin
-      if Child.NodeName = XOD_ELEMENT_ITEM_INTEGER then begin
+    if IsOptionItemTypeName(Child.NodeName) then
+    begin
+      if Child.NodeName = XOD_ELEMENT_ITEM_INTEGER then
+      begin
         OI := PIntegerOptionItem.Create(ComServer.TypeLib, IOptionItem);
       end
-      else if Child.NodeName = XOD_ELEMENT_ITEM_REAL then begin
+      else if Child.NodeName = XOD_ELEMENT_ITEM_REAL then
+      begin
         OI := PRealOptionItem.Create(ComServer.TypeLib, IOptionItem);
       end
-      else if Child.NodeName = XOD_ELEMENT_ITEM_STRING then begin
+      else if Child.NodeName = XOD_ELEMENT_ITEM_STRING then
+      begin
         OI := PStringOptionItem.Create(ComServer.TypeLib, IOptionItem);
       end
-      else if Child.NodeName = XOD_ELEMENT_ITEM_BOOLEAN then begin
+      else if Child.NodeName = XOD_ELEMENT_ITEM_BOOLEAN then
+      begin
         OI := PBooleanOptionItem.Create(ComServer.TypeLib, IOptionItem);
       end
-      else if Child.NodeName = XOD_ELEMENT_ITEM_TEXT then begin
+      else if Child.NodeName = XOD_ELEMENT_ITEM_TEXT then
+      begin
         OI := PTextOptionItem.Create(ComServer.TypeLib, IOptionItem);
       end
-      else if Child.NodeName = XOD_ELEMENT_ITEM_ENUMERATION then begin
+      else if Child.NodeName = XOD_ELEMENT_ITEM_ENUMERATION then
+      begin
         OI := PEnumerationOptionItem.Create(ComServer.TypeLib, IOptionItem);
       end
-      else if Child.NodeName = XOD_ELEMENT_ITEM_RANGE then begin
+      else if Child.NodeName = XOD_ELEMENT_ITEM_RANGE then
+      begin
         OI := PRangeOptionItem.Create(ComServer.TypeLib, IOptionItem);
       end
-      else if Child.NodeName = XOD_ELEMENT_ITEM_FONTNAME then begin
+      else if Child.NodeName = XOD_ELEMENT_ITEM_FONTNAME then
+      begin
         OI := PFontNameOptionItem.Create(ComServer.TypeLib, IOptionItem);
       end
-      else if Child.NodeName = XOD_ELEMENT_ITEM_FILENAME then begin
+      else if Child.NodeName = XOD_ELEMENT_ITEM_FILENAME then
+      begin
         OI := PFileNameOptionItem.Create(ComServer.TypeLib, IOptionItem);
       end
-      else if Child.NodeName = XOD_ELEMENT_ITEM_PATHNAME then begin
+      else if Child.NodeName = XOD_ELEMENT_ITEM_PATHNAME then
+      begin
         OI := PPathNameOptionItem.Create(ComServer.TypeLib, IOptionItem);
       end
-      else if Child.NodeName = XOD_ELEMENT_ITEM_COLOR then begin
+      else if Child.NodeName = XOD_ELEMENT_ITEM_COLOR then
+      begin
         OI := PColorOptionItem.Create(ComServer.TypeLib, IOptionItem);
       end;
-      if OI <> nil then begin
+      if OI <> nil then
+      begin
         if OI.ReadFromXMLElement(Child) then
           AddOptionItem(OI)
         else
@@ -694,6 +731,7 @@ end;
 
 destructor POptionCategory.Destroy;
 begin
+  ClearOptionClassifications;
   FOptionClassifications.Free;
   inherited Destroy;
 end;
@@ -747,13 +785,14 @@ procedure POptionCategory.ClearOptionClassifications;
 var
   I: Integer;
 begin
-  for I := 0 to OptionClassificationCount - 1 do
+  for I := OptionClassificationCount - 1 downto 0 do
     DeleteOptionClassification(I);
 end;
 
 procedure POptionCategory.AddOptionClassification(Value: POptionClassification);
 begin
-  if Value <> nil then begin
+  if Value <> nil then
+  begin
     FOptionClassifications.Add(Value);
     Value._AddRef;
   end;
@@ -761,7 +800,8 @@ end;
 
 procedure POptionCategory.RemoveOptionClassification(Value: POptionClassification);
 begin
-  if Value <> nil then begin
+  if Value <> nil then
+  begin
     FOptionClassifications.Remove(Value);
     Value._Release;
   end;
@@ -769,7 +809,8 @@ end;
 
 procedure POptionCategory.InsertOptionClassification(Index: Integer; Value: POptionClassification);
 begin
-  if Value <> nil then begin
+  if Value <> nil then
+  begin
     FOptionClassifications.Insert(Index, Value);
     Value._AddRef;
   end;
@@ -797,9 +838,11 @@ begin
     FDescription := ''
   else
     FDescription := Element.ChildValues[XOD_ELEMENT_DESCRIPTION];
-  for I := 0 to Element.ChildNodes.Count - 1 do begin
+  for I := 0 to Element.ChildNodes.Count - 1 do
+  begin
     Child := Element.ChildNodes[I];
-    if Child.NodeName = XOD_ELEMENT_CLASSIFICATION then begin
+    if Child.NodeName = XOD_ELEMENT_CLASSIFICATION then
+    begin
       OL := POptionClassification.Create(ComServer.TypeLib, IOptionClassification);
       OL.ReadFromXMLElement(Child);
       AddOptionClassification(OL);
@@ -821,6 +864,7 @@ end;
 
 destructor POptionSchema.Destroy;
 begin
+  ClearOptionCategories;
   FOptionCategorys.Free;
   inherited Destroy;
 end;
@@ -889,13 +933,14 @@ procedure POptionSchema.ClearOptionCategories;
 var
   I: Integer;
 begin
-  for I := 0 to OptionCategoryCount - 1 do
+  for I := OptionCategoryCount - 1 downto 0 do
     DeleteOptionCategory(I);
 end;
 
 procedure POptionSchema.AddOptionCategory(Value: POptionCategory);
 begin
-  if Value <> nil then begin
+  if Value <> nil then
+  begin
     FOptionCategorys.Add(Value);
     Value._AddRef;
   end;
@@ -903,7 +948,8 @@ end;
 
 procedure POptionSchema.RemoveOptionCategory(Value: POptionCategory);
 begin
-  if Value <> nil then begin
+  if Value <> nil then
+  begin
     FOptionCategorys.Remove(Value);
     Value._Release;
   end;
@@ -911,7 +957,8 @@ end;
 
 procedure POptionSchema.InsertOptionCategory(Index: Integer; Value: POptionCategory);
 begin
-  if Value <> nil then begin
+  if Value <> nil then
+  begin
     FOptionCategorys.Insert(Index, Value);
     Value._AddRef;
   end;
@@ -933,13 +980,17 @@ var
   I, J, K: Integer;
 begin
   Result := nil;
-  for I := 0 to OptionCategoryCount - 1 do begin
+  for I := 0 to OptionCategoryCount - 1 do
+  begin
     Category := OptionCategories[I];
-    for J := 0 to Category.OptionClassificationCount - 1 do begin
+    for J := 0 to Category.OptionClassificationCount - 1 do
+    begin
       Classification := Category.OptionClassifications[J];
-      for K := 0 to Classification.OptionItemCount - 1 do begin
+      for K := 0 to Classification.OptionItemCount - 1 do
+      begin
         Item := Classification.OptionItems[K];
-        if Item.Key = Key then begin
+        if Item.Key = Key then
+        begin
           Result := Item;
           Exit;
         end;
@@ -957,16 +1008,19 @@ var
 begin
   Result := True;
   HeaderNode := Element.ChildNodes[XOD_ELEMENT_HEADER];
-  if HeaderNode = nil then begin
+  if HeaderNode = nil then
+  begin
     Result := False;
     Exit;
   end;
   BodyNode := Element.ChildNodes[XOD_ELEMENT_BODY];
-  if BodyNode = nil then begin
+  if BodyNode = nil then
+  begin
     Result := False;
     Exit;
   end;
-  if VarIsNull(Element.Attributes[XOD_ATTRIBUTE_ID]) then begin
+  if VarIsNull(Element.Attributes[XOD_ATTRIBUTE_ID]) then
+  begin
     Result := False;
     Exit;
   end
@@ -980,9 +1034,11 @@ begin
     FDescription := ''
   else
     FDescription := HeaderNode.ChildValues[XOD_ELEMENT_DESCRIPTION];
-  for I := 0 to BodyNode.ChildNodes.Count - 1 do begin
+  for I := 0 to BodyNode.ChildNodes.Count - 1 do
+  begin
     Child := BodyNode.ChildNodes[I];
-    if Child.NodeName = XOD_ELEMENT_CATEGORY then begin
+    if Child.NodeName = XOD_ELEMENT_CATEGORY then
+    begin
       OC := POptionCategory.Create(ComServer.TypeLib, IOptionCategory);
       OC.ReadFromXMLElement(Child);
       AddOptionCategory(OC);
@@ -1034,7 +1090,8 @@ var
   V: Integer;
 begin
   Result := False;
-  if IsInteger(Value) then begin
+  if IsInteger(Value) then
+  begin
     V := Value;
     Result := (V >= 0) and (V <= EnumerationItemCount - 1);
   end;
@@ -1045,8 +1102,10 @@ var
   I: Integer;
   R: Boolean;
 begin
-  for I := 0 to Element.ChildNodes.Count - 1 do begin
-    if Element.ChildNodes[I].NodeName = XOD_ELEMENT_ENUMURATION_ITEM then begin
+  for I := 0 to Element.ChildNodes.Count - 1 do
+  begin
+    if Element.ChildNodes[I].NodeName = XOD_ELEMENT_ENUMURATION_ITEM then
+    begin
       FEnumerationItems.Add(Element.ChildNodes[I].NodeValue);
     end;
   end;
@@ -1102,15 +1161,18 @@ end;
 
 function PRangeOptionItem.ReadFromXMLElement(Element: IXMLNode): Boolean;
 begin
-  if VarIsNull(Element.ChildValues[XOD_ELEMENT_MIN_VALUE]) then begin
+  if VarIsNull(Element.ChildValues[XOD_ELEMENT_MIN_VALUE]) then
+  begin
     Result := False;
     Exit;
   end;
-  if VarIsNull(Element.ChildValues[XOD_ELEMENT_MAX_VALUE]) then begin
+  if VarIsNull(Element.ChildValues[XOD_ELEMENT_MAX_VALUE]) then
+  begin
     Result := False;
     Exit;
   end;
-  if VarIsNull(Element.ChildValues[XOD_ELEMENT_STEP]) then begin
+  if VarIsNull(Element.ChildValues[XOD_ELEMENT_STEP]) then
+  begin
     Result := False;
     Exit;
   end;
@@ -1314,3 +1376,4 @@ end;
 ////////////////////////////////////////////////////////////////////////////////
 
 end.
+

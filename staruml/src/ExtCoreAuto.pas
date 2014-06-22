@@ -48,7 +48,7 @@ unit ExtCoreAuto;
 interface
 
 uses
-  BasicClasses, Core, ExtCore, CoreAuto, StarUML_TLB;
+  BasicClasses, Core, ExtCore, CoreAuto, StarUMLProject_TLB;
 
 type
   // PExtensibleModelAuto
@@ -61,6 +61,7 @@ type
     function GetConstraintAt(Index: Integer): IConstraint; safecall;
     function GetTaggedValueCount: Integer; safecall;
     function GetTaggedValueAt(Index: Integer): ITaggedValue; safecall;
+    function FindTaggedValue(const Profile: WideString; const TagDefinitionSet: WideString;  const Name: WideString): ITaggedValue; safecall;
     function GetReferencingTagCount: Integer; safecall;
     function GetReferencingTagAt(Index: Integer): ITaggedValue; safecall;
     function GetStereotype: IStereotype; safecall;
@@ -288,6 +289,20 @@ end;
 function PExtensibleModelAuto.GetTaggedValueAt(Index: Integer): ITaggedValue;
 begin
   Result := (TheObject as PExtensibleModel).TaggedValues[Index].GetAutomationObject as ITaggedValue;
+end;
+
+function PExtensibleModelAuto.FindTaggedValue(const Profile: WideString; const TagDefinitionSet: WideString;  const Name: WideString): ITaggedValue; safecall;
+var
+  T:PTaggedValue;
+begin
+  T := (TheObject as PExtensibleModel).FindTaggedValue(Profile,TagDefinitionSet,Name);
+  if Assigned(T) then
+  begin
+    Result := T.GetAutomationObject as ITaggedValue;
+  end else
+  begin
+    Result := nil;
+  end;
 end;
 
 function PExtensibleModelAuto.GetReferencingTagCount: Integer;
@@ -1075,6 +1090,7 @@ begin
   ClassRegistry.RegisterAutomationClass(PTagDefinitionSet, PTagDefinitionSetAuto, IID_ITagDefinitionSet);
   ClassRegistry.RegisterAutomationClass(PExtensionManager, PExtensionManagerAuto, IID_IExtensionManager);
 end;
+
 
 initialization
   RegisterAutomationClasses;

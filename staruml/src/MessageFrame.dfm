@@ -185,9 +185,9 @@ object MessagePanel: TMessagePanel
   end
   object SaveMessagesDialog: TSaveDialogEx
     DefaultExt = 'txt'
-    Filter = #53581#49828#53944' '#54028#51068'(*.txt)|*.txt'
+    Filter = '??? ??(*.txt)|*.txt'
     Options = [ofHideReadOnly, ofNoValidate, ofEnableSizing]
-    Title = #47700#49884#51648' '#51200#51109
+    Title = '??? ??'
     Left = 56
     Top = 24
   end

@@ -49,12 +49,12 @@ interface
 
 uses
   BasicClasses, Core, NxMgr,
-  Classes, Graphics, SysUtils, XMLDoc, XMLIntf;
-
-const
-  EXT_DIR = 'modules';
-  PROFILE_EXTENSION = 'prf';
-  ICON_EXTENSION = 'ico';
+  Classes,
+  Graphics,
+  SysUtils,
+  XMLDoc,
+  XMLIntf,
+  StarUMLConstantsUnit;
 
 type
   // Forward Declarations
@@ -630,7 +630,8 @@ implementation
 
 uses
   LogMgr,
-  Windows, Variants, Forms, Registry, NLS_StarUML;
+  Windows, Variants, Forms, Registry, NLS_StarUML,
+  SettingsUnit;
 
 const
   PROFILES_REGPATH = '\Software\StarUML\Profiles';
@@ -1835,7 +1836,7 @@ begin
       FIcon := TMetaFile.Create;
       try
         FIcon.LoadFromFile(FIconFile);
-      except
+      finally
         FIcon.Free;
         FIcon := nil;
       end;
@@ -1844,7 +1845,7 @@ begin
       FIcon := Graphics.TBitmap.Create;
       try
         FIcon.LoadFromFile(FIconFile);
-      except
+      finally
         FIcon.Free;
         FIcon := nil;
       end;
@@ -3402,7 +3403,7 @@ procedure PExtensionManager.LoadProfiles;
 
 begin
   FAvailableProfiles.Clear;
-  LoadFiles(ExtractFileDir(Application.ExeName) + '\' + EXT_DIR);
+  LoadFiles(Settings[cExtentionDirectoryTag]);
 end;
 
 // PExtensionManager

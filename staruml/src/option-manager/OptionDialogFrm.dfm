@@ -41,7 +41,7 @@ object OptionDialogForm: TOptionDialogForm
     Width = 53
     Height = 13
     Caption = 'Option &item'
-    FocusControl = OptionInspector
+    FocusControl = OptionsInspectorcxVerticalGrid
   end
   object DescLabel: TLabel
     Left = 8
@@ -110,19 +110,6 @@ object OptionDialogForm: TOptionDialogForm
     ShowHint = True
     TabOrder = 3
   end
-  object OptionInspector: TdxInspector
-    Left = 200
-    Top = 24
-    Width = 354
-    Height = 213
-    Color = clWindow
-    TabOrder = 1
-    DividerPos = 181
-    GridColor = clBtnFace
-    Options = [ioAutoWidth, ioBandSizing, ioColumnSizing, ioDynamicColumnSizing, ioEditing, ioTabThrough, ioTabs]
-    PaintStyle = ipsNET
-    Anchors = [akLeft, akTop, akRight]
-  end
   object OptionTreeView: TTreeView
     Left = 6
     Top = 24
@@ -132,7 +119,7 @@ object OptionDialogForm: TOptionDialogForm
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
-    Font.Name = #44404#47548
+    Font.Name = 'Default'
     Font.Style = []
     HideSelection = False
     Images = CategoryImageList
@@ -163,12 +150,28 @@ object OptionDialogForm: TOptionDialogForm
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
-      Font.Name = #44404#47548
+      Font.Name = '??'
       Font.Style = []
       ImeName = 'Microsoft Korean IME 2002'
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
+    end
+  end
+  object OptionsInspectorcxVerticalGrid: TcxVerticalGrid
+    Left = 200
+    Top = 24
+    Width = 354
+    Height = 213
+    Anchors = [akLeft, akTop, akRight]
+    OptionsView.RowHeaderWidth = 118
+    TabOrder = 1
+    object OptionsInspectorcxVerticalGridCategoryRow1: TcxCategoryRow
+    end
+    object OptionsInspectorcxVerticalGridEditorRow1: TcxEditorRow
+      Properties.EditPropertiesClassName = 'TcxMemoProperties'
+      Properties.DataBinding.ValueType = 'String'
+      Properties.Value = Null
     end
   end
   object CategoryImageList: TImageList

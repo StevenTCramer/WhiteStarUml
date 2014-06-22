@@ -48,8 +48,18 @@ unit NLS_StarUML;
 interface
 
 uses
-  Classes, SysUtils, IniFiles, NLS, dxBar, dxPageControl, TB2Toolbar, TB2Item,
-  AreaTitleBar, FlatPanel, CompactFontDlg, dxNavBar, dxNavBarCollns, dxNavBarStyles;
+  Classes,
+  SysUtils,
+  IniFiles,
+  NLS,
+  dxBar,
+  cxPC,
+  AreaTitleBar,
+  FlatPanel,
+  CompactFontDlg,
+  dxNavBar,
+  dxNavBarCollns,
+  dxNavBarStyles;
 
 const
   // Common
@@ -86,7 +96,7 @@ const
   C_ERR_ADDIN_COMOBJ_INVALID_PROGID = '(Reason) Unable to determine the COM object¡¯s Programmatic ID.';
   C_ERR_ADDIN_COMOBJ_MSG_SENDING = 'Unable to deliver message to the COM object "%s".';
   C_ERR_ADDIN_SCRIPT_EXECUTION = 'Failed to run script "%s".';
-  C_ERR_ADDIN_HELPFILE_CANNOT_OPEN ='Unable to open the help file "%s".';
+  C_ERR_ADDIN_HELPFILE_CANNOT_OPEN = 'Unable to open the help file "%s".';
   C_ERR_ADDIN_HELPFILE_INVALID = 'The help file "%s" is an unsupported format.';
   C_TXT_ADDIN_HELPFILE_DISPLAYNAME = '%s Help';
 
@@ -156,12 +166,12 @@ const
   C_MSG_ELEMSELTTL_IMPORT_FRAMEWORK = 'Select a Package where the Framework will be imported to.';
   C_MSG_ELEMSELTTL_IMPORT_MODELFRAGMENT = 'Select a Package where the Model Fragment will be imported to';
   C_MSG_PERSONAL_EDITION_IS_NOT_ALLOWED = 'This feature is not supported in the Personal Edition.'
-                                        + #13#10 + 'To use this feature, please contact Plastic Software, Inc.';
+    + #13#10 + 'To use this feature, please contact Plastic Software, Inc.';
   C_QUERY_SAVE_MODIFICATION = 'Save the changes?';
   C_QUERY_SAVE_CHANGED_UNITS = 'Save all modified Units as well?';
   C_QUERY_DELETE_UNIT = 'Delete the Unit?';
   C_QUERY_RELOAD_PROJECT = 'The file(s) has been changed outside of the program.' + #13#10 +
-                         'Reload the Project?';
+    'Reload the Project?';
   C_ERR_DIAGRAM_NO_COLLECTIONS = 'Diagram do not have Collections.';
   C_ERR_DIAGRAM_NO_CONSTRAINTS = 'Diagram do not have Constraints.';
   C_ERR_DIAGRAM_NO_TAGGEDVALUES = 'Diagram do not have Tagged Values.';
@@ -170,7 +180,7 @@ const
   C_ERR_NOAPPLICATION_ASSOCIATED = 'No application associated to open the file.';
   C_ERR_SEQ_DGM_CMD_NOT_SUPPORT = 'This command cannot be used on the Sequence Diagram.';
   C_ERR_DGM_EXPORT_NO_OPENED_DGM = 'No opened diagram.' + #13#10 +
-                                 'Open the diagram you want to export.';
+    'Open the diagram you want to export.';
   C_ERR_DGM_EXPORT_EMPTY_DGM = 'Empty diagram.';
   C_ERR_INVALID_MODEL_FILE = 'Failed to open the model file. Invalid file format.';
   C_TXT_DOC_TYPE_PROJECT = '[Project]';
@@ -188,13 +198,13 @@ const
   C_ERR_READONLY = 'Readonly elements cannot be modified.';
   C_ERR_SUBVIEW_CANNOT_BE_DELETED = 'This is a View element that cannot be deleted individually.';
   C_QUERY_DELETE_UNITS = 'There are Units in the elements to be deleted. To delete the Units, you must perform a merge the Unit first.'
-                       + #13#10 + 'Do you want to merge the Units and then delete?';
+    + #13#10 + 'Do you want to merge the Units and then delete?';
   C_ERR_MODEL_COPY_EXCEEDED = 'Too many elements to copy.';
   C_ERR_MODEL_PASTE_EXCEEDED = 'Too many elements selected.';
   C_ERR_IMPROPER_ELEMENET = 'This is not an element appropriate for carrying out the command.';
   C_ERR_DIRECTORY_NOT_FOUND = 'Directory not found.';
   C_ERR_INVALID_FILE_NAME = 'Invalid file name.'
-                          + #13#10 + 'File name cannot contains the following charactors: \, /, :, *, ?, ", <, >, |';
+    + #13#10 + 'File name cannot contains the following charactors: \, /, :, *, ?, ", <, >, |';
 
   // PageSetupFrm, PrintFrm
   C_ERR_MARGIN_OVERFLOW = 'The value for margins exceeds the limit.';
@@ -204,7 +214,7 @@ const
   C_TXT_PRINTER_STATUS_ERROR = 'Error';
   C_TXT_PRINTER_STATUS_PENDING_DELETION = 'Pending deleting';
   C_TXT_PRINTER_STATUS_PAPER_JAM = 'Paper jam';
-  C_TXT_PRINTER_STATUS_PAPER_OUT ='Paper out';
+  C_TXT_PRINTER_STATUS_PAPER_OUT = 'Paper out';
   C_TXT_PRINTER_STATUS_MANUAL_FEED = 'Manual feed';
   C_TXT_PRINTER_STATUS_PAPER_PROBLEM = 'Paper problem';
   C_TXT_PRINTER_STATUS_OFFLINE = 'Offline';
@@ -235,7 +245,7 @@ const
 
   // ProfileMgrFrm
   C_QUERY_REMOVE_PROFILE = 'If you delete the Profile, some Stereotypes, Datatypes, Tagged Values, etc.' + #13#10 +
-                         'may no longer be displayed properly. Do you want to delete it?';
+    'may no longer be displayed properly. Do you want to delete it?';
 
   // ProjectMgr
   C_ERR_FILE_LOADING_FAILED = 'Cannot load the file "%s".';
@@ -266,7 +276,7 @@ const
   C_TXT_INPUT_ELEM_NAME = 'Enter element name';
   C_TXT_INPUT_CLASS_NAME = 'Enter a name for the Class.';
   C_TXT_INPUT_OPERATION_NAME = 'Enter a name for the Operation.' + #13#10 +
-                               '(Full expression is not supported)';
+    '(Full expression is not supported)';
   C_MSG_SELECT_OPERATION = 'Select an Operation.';
   C_MSG_SELECT_SIGNAL = 'Select a Signal.';
   C_MSG_SELECT_INSTANTIATION = 'Select a Classifier.';
@@ -278,7 +288,7 @@ const
   C_TXT_DESC_NO_STEREOTYPE = 'No stereotype has been entered.';
   C_TXT_DESC_NOT_DEFINED_STEREOTYPE = 'This stereotype is user-specified and not defined any included Profiles.';
   C_TXT_DESC_PRIFILE_EXCLUDED_STEREOTYPE = 'The profile in which this stereotype is defined has not been installed on the system or is not included in the current project.'
-                                         + #13#10 + 'Open the Profile Manager and check whether the profile has been installed or included.';
+    + #13#10 + 'Open the Profile Manager and check whether the profile has been installed or included.';
 
   // TagColEdtFrm
   C_ERR_INVALID_TAG_TYPE = 'Invalid TagDefinition.';
@@ -460,7 +470,7 @@ var
   ERR_SEQ_DGM_CMD_NOT_SUPPORT: string;
   ERR_DGM_EXPORT_NO_OPENED_DGM: string;
   ERR_DGM_EXPORT_EMPTY_DGM: string;
-  ERR_INVALID_MODEL_FILE: string;  
+  ERR_INVALID_MODEL_FILE: string;
   TXT_DOC_TYPE_PROJECT: string;
   TXT_DOC_TYPE_UNIT: string;
   TXT_DOC_STATUS_READONLY: string;
@@ -649,7 +659,7 @@ begin
     if not UseSystemFont then
       NLSValues.ReadFont(AComponent, Font);
     for I := 0 to NLSValues.ReadInteger(AComponent, 'Bars.Count', 0) - 1 do
-      Bars.Items[I].Caption := NLSValues.ReadString(AComponent, 'Bars.Items['+IntToStr(I)+'].Caption', Bars.Items[I].Caption);
+      Bars.Items[I].Caption := NLSValues.ReadString(AComponent, 'Bars.Items[' + IntToStr(I) + '].Caption', Bars.Items[I].Caption);
   end;
 end;
 
@@ -663,7 +673,7 @@ begin
     NLSValues.WriteFont(AComponent, Font);
     NLSValues.WriteInteger(AComponent, 'Bars.Count', Bars.Count);
     for I := 0 to Bars.Count - 1 do
-      NLSValues.WriteString(AComponent, 'Bars.Items['+IntToStr(I)+'].Caption', Bars.Items[I].Caption);
+      NLSValues.WriteString(AComponent, 'Bars.Items[' + IntToStr(I) + '].Caption', Bars.Items[I].Caption);
   end;
 end;
 
@@ -687,11 +697,11 @@ begin
   end;
 end;
 
-// TdxPageControl ------------------------------------------------------------------
+// TcxPageControl ------------------------------------------------------------------
 
 procedure NLS_dxPageControl_Import(NLSValues: TNLSValues; AComponent: TComponent);
 begin
-  with AComponent as TdxPageControl do
+  with AComponent as TcxPageControl do
   begin
     ParentFont := NLSValues.ReadBoolean(AComponent, 'ParentFont', ParentFont);
     if not ParentFont then
@@ -704,7 +714,7 @@ end;
 
 procedure NLS_dxPageControl_Export(NLSValues: TNLSValues; AComponent: TComponent);
 begin
-  with AComponent as TdxPageControl do
+  with AComponent as TcxPageControl do
   begin
     NLSValues.WriteBoolean(AComponent, 'ParentFont', ParentFont);
     NLSValues.WriteFont(AComponent, Font);
@@ -713,11 +723,11 @@ begin
   end;
 end;
 
-// TdxTabSheet -----------------------------------------------------------------
+// TcxTabSheet -----------------------------------------------------------------
 
 procedure NLS_dxTabSheet_Import(NLSValues: TNLSValues; AComponent: TComponent);
 begin
-  with AComponent as TdxTabSheet do
+  with AComponent as TcxTabSheet do
   begin
     Caption := NLSValues.ReadString(AComponent, 'Caption', Caption);
     Hint := NLSValues.ReadString(AComponent, 'Hint', Hint);
@@ -726,7 +736,7 @@ end;
 
 procedure NLS_dxTabSheet_Export(NLSValues: TNLSValues; AComponent: TComponent);
 begin
-  with AComponent as TdxTabSheet do
+  with AComponent as TcxTabSheet do
   begin
     NLSValues.WriteString(AComponent, 'Caption', Caption);
     NLSValues.WriteString(AComponent, 'Hint', Hint);
@@ -735,48 +745,48 @@ end;
 
 // TTBToolBar ---------------------------------------------------------------------
 
-procedure NLS_TBToolBar_Import(NLSValues: TNLSValues; AComponent: TComponent);
-begin
-  with AComponent as TTBToolBar do
-  begin
-    Caption := NLSValues.ReadString(AComponent, 'Caption', Caption);
-    Hint := NLSValues.ReadString(AComponent, 'Hint', Hint);
-    ParentFont := NLSValues.ReadBoolean(AComponent, 'ParentFont', ParentFont);
-    if not ParentFont then
-      NLSValues.ReadFont(AComponent, Font);
-  end;
-end;
-
-procedure NLS_TBToolBar_Export(NLSValues: TNLSValues; AComponent: TComponent);
-begin
-  with AComponent as TTBToolBar do
-  begin
-    NLSValues.WriteString(AComponent, 'Caption', Caption);
-    NLSValues.WriteString(AComponent, 'Hint', Hint);
-    NLSValues.WriteBoolean(AComponent, 'ParentFont', ParentFont);
-    NLSValues.WriteFont(AComponent, Font);
-  end;
-end;
-
-// TTBItem ---------------------------------------------------------------------
-
-procedure NLS_TBItem_Import(NLSValues: TNLSValues; AComponent: TComponent);
-begin
-  with AComponent as TTBItem do
-  begin
-    Caption := NLSValues.ReadString(AComponent, 'Caption', Caption);
-    Hint := NLSValues.ReadString(AComponent, 'Hint', Hint);
-  end;
-end;
-
-procedure NLS_TBItem_Export(NLSValues: TNLSValues; AComponent: TComponent);
-begin
-  with AComponent as TTBItem do
-  begin
-    NLSValues.WriteString(AComponent, 'Caption', Caption);
-    NLSValues.WriteString(AComponent, 'Hint', Hint);
-  end;
-end;
+//procedure NLS_TBToolBar_Import(NLSValues: TNLSValues; AComponent: TComponent);
+//begin
+//  with AComponent as TTBToolBar do
+//  begin
+//    Caption := NLSValues.ReadString(AComponent, 'Caption', Caption);
+//    Hint := NLSValues.ReadString(AComponent, 'Hint', Hint);
+//    ParentFont := NLSValues.ReadBoolean(AComponent, 'ParentFont', ParentFont);
+//    if not ParentFont then
+//      NLSValues.ReadFont(AComponent, Font);
+//  end;
+//end;
+//
+//procedure NLS_TBToolBar_Export(NLSValues: TNLSValues; AComponent: TComponent);
+//begin
+//  with AComponent as TTBToolBar do
+//  begin
+//    NLSValues.WriteString(AComponent, 'Caption', Caption);
+//    NLSValues.WriteString(AComponent, 'Hint', Hint);
+//    NLSValues.WriteBoolean(AComponent, 'ParentFont', ParentFont);
+//    NLSValues.WriteFont(AComponent, Font);
+//  end;
+//end;
+//
+//// TTBItem ---------------------------------------------------------------------
+//
+//procedure NLS_TBItem_Import(NLSValues: TNLSValues; AComponent: TComponent);
+//begin
+//  with AComponent as TTBItem do
+//  begin
+//    Caption := NLSValues.ReadString(AComponent, 'Caption', Caption);
+//    Hint := NLSValues.ReadString(AComponent, 'Hint', Hint);
+//  end;
+//end;
+//
+//procedure NLS_TBItem_Export(NLSValues: TNLSValues; AComponent: TComponent);
+//begin
+//  with AComponent as TTBItem do
+//  begin
+//    NLSValues.WriteString(AComponent, 'Caption', Caption);
+//    NLSValues.WriteString(AComponent, 'Hint', Hint);
+//  end;
+//end;
 
 // TAreaTitleBar ---------------------------------------------------------------
 
@@ -897,7 +907,7 @@ end;
 
 procedure NLS_dxNavBar_Import(NLSValues: TNLSValues; AComponent: TComponent);
 
-  procedure ReadBaseNavBarStyle(Style: TdxBaseNavBarStyle; StyleName: string);
+  procedure ReadBaseNavBarStyle(Style: TdxNavBarBaseStyle; StyleName: string);
   begin
     Style.Font.Name := NLSValues.ReadString(AComponent, AComponent.Name + 'DefaultStyles.' + StyleName + '.Font.Name', Style.Font.Name);
     Style.Font.Size := NLSValues.ReadInteger(AComponent, AComponent.Name + 'DefaultStyles.' + StyleName + '.Font.Size', Style.Font.Size);
@@ -933,7 +943,7 @@ end;
 
 procedure NLS_dxNavBar_Export(NLSValues: TNLSValues; AComponent: TComponent);
 
-  procedure WriteBaseNavBarStyle(Style: TdxBaseNavBarStyle; StyleName: string);
+  procedure WriteBaseNavBarStyle(Style: TdxNavBarBaseStyle; StyleName: string);
   begin
     NLSValues.WriteString(AComponent, AComponent.Name + 'DefaultStyles.' + StyleName + '.Font.Name', Style.Font.Name);
     NLSValues.WriteInteger(AComponent, AComponent.Name + 'DefaultStyles.' + StyleName + '.Font.Size', Style.Font.Size);
@@ -1024,10 +1034,10 @@ initialization
   // Register NLS Components
   NLSManager.RegisterNLSComponent(TdxBarManager, False, NLS_dxBarManager_Import, NLS_dxBarManager_Export);
   NLSManager.RegisterNLSComponent(TdxBarItem, False, NLS_dxBarItem_Import, NLS_dxBarItem_Export);
-  NLSManager.RegisterNLSComponent(TdxPageControl, True, NLS_dxPageControl_Import, NLS_dxPageControl_Export);
-  NLSManager.RegisterNLSComponent(TdxTabSheet, True, NLS_dxTabSheet_Import, NLS_dxTabSheet_Export);
-  NLSManager.RegisterNLSComponent(TTBToolBar, True, NLS_TBToolBar_Import, NLS_TBToolBar_Export);
-  NLSManager.RegisterNLSComponent(TTBItem, False, NLS_TBItem_Import, NLS_TBItem_Export);
+  NLSManager.RegisterNLSComponent(TcxPageControl, True, NLS_dxPageControl_Import, NLS_dxPageControl_Export);
+  NLSManager.RegisterNLSComponent(TcxTabSheet, True, NLS_dxTabSheet_Import, NLS_dxTabSheet_Export);
+//  NLSManager.RegisterNLSComponent(TTBToolBar, True, NLS_TBToolBar_Import, NLS_TBToolBar_Export);
+//  NLSManager.RegisterNLSComponent(TTBItem, False, NLS_TBItem_Import, NLS_TBItem_Export);
   NLSManager.RegisterNLSComponent(TAreaTitleBar, False, NLS_AreaTitleBar_Import, NLS_AreaTitleBar_Export);
   NLSManager.RegisterNLSComponent(TFlatPanel, True, NLS_FlatPanel_Import, NLS_FlatPanel_Export);
   NLSManager.RegisterNLSComponent(TCompactFontDialog, True, NLS_CompactFontDialog_Import, NLS_CompactFontDialog_Export);
@@ -1287,3 +1297,4 @@ initialization
   NLSManager.TranslateString(NLS_STR_SECTION, 'TXT_UNTIL_EXPIRATION', TXT_UNTIL_EXPIRATION, C_TXT_UNTIL_EXPIRATION);
   NLSManager.TranslateString(NLS_STR_SECTION, 'TXT_EXPIRED', TXT_EXPIRED, C_TXT_EXPIRED);
 end.
+

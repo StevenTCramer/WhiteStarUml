@@ -706,15 +706,15 @@ begin
       case Argument of
         FA_UNINTERPRETEDACTION_ENTRY: begin
           InsertToOwner(Owner, M, 'EntryActions', InsertIndex);
-          AssignNewName(M, 'EntryAction');
+          AssignNewName(M, 'Entry' + Owner.Name);
         end;
         FA_UNINTERPRETEDACTION_DO: begin
           InsertToOwner(Owner, M, 'DoActivities', InsertIndex);
-          AssignNewName(M, 'DoAction');
+          AssignNewName(M, 'Do' + Owner.Name);
         end;
         FA_UNINTERPRETEDACTION_EXIT: begin
           InsertToOwner(Owner, M, 'ExitActions', InsertIndex);
-          AssignNewName(M, 'ExitAction');
+          AssignNewName(M, 'Exit' + Owner.Name);
         end;
       end;
     end

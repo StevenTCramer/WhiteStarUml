@@ -48,8 +48,12 @@ unit ProjectMgr;
 interface
 
 uses
-  Core, ExtCore, UMLModels, UMLAux,
-  Classes, Forms;
+  Core,
+  ExtCore,
+  UMLModels,
+  UMLAux,
+  Classes,
+  Forms;
 
 const
   DEFAULT_PROJECTFILE_EXT = '.uml';
@@ -164,8 +168,15 @@ type
 implementation
 
 uses
-  FrwMgr, ApprMgr, UMLFacto, LogMgr, NLS_StarUML,
-  SysUtils, Variants, Dialogs, Windows;
+  FrwMgr,
+  ApprMgr,
+  UMLFacto,
+  LogMgr,
+  NLS_StarUML,
+  SysUtils,
+  Variants,
+  Dialogs,
+  Windows;
 
 ////////////////////////////////////////////////////////////////////////////////
 // PProjectManager
@@ -261,7 +272,8 @@ var
   Attr: Integer;
 begin
   Attr := FileGetAttr(AFileName);
-  if FileExists(AFileName) and ((Attr and faReadOnly) = faReadOnly) then begin
+  if FileExists(AFileName) and ((Attr and faReadOnly) = faReadOnly) then
+  begin
     Attr := Attr and not faReadOnly;
     FileSetAttr(AFileName, Attr);
   end;
@@ -331,7 +343,7 @@ begin
   begin
     BkFileName := ExtractFilePath(TargetFileName) +
       StringReplace(ExtractFileName(TargetFileName),
-        DefaultExt, BackupExt, [rfReplaceAll, rfIgnoreCase]);
+      DefaultExt, BackupExt, [rfReplaceAll, rfIgnoreCase]);
     if FileExists(BkFileName) then
       SysUtils.DeleteFile(BkFileName);
     CopyFile(PChar(TargetFileName), PChar(BkFileName), False);
@@ -353,7 +365,7 @@ begin
   Assert(AParentUnit <> nil);
   Assert(AReferenceResolver <> nil);
   // PRECONDITIONS
-  If not FileExists(AFileName) then
+  if not FileExists(AFileName) then
     raise EFileNotFound.Create(AFileName);
   S := PUMLUnitDocumentInputStream.Create(AFileName, AReferenceResolver);
   S.OnLoadingProgress := LoadingProgressHandler;
@@ -415,7 +427,10 @@ end;
 procedure PProjectManager.SaveProjectDocument(AProjectDoc: PUMLProjectDocument);
 var
   S: PUMLProjectDocumentOutputStream;
+  lTempDecimalSeparator: Char;
 begin
+  lTempDecimalSeparator := DecimalSeparator;
+  DecimalSeparator := '.';
   S := PUMLProjectDocumentOutputStream.Create(AProjectDoc.FileName);
   S.OnSavingProgress := SavingProgressHandler;
   try
@@ -423,6 +438,7 @@ begin
     S.Close(AProjectDoc);
   finally
     S.Free;
+    DecimalSeparator := lTempDecimalSeparator;
   end;
 end;
 
@@ -432,9 +448,13 @@ var
   Owner: PUMLNamespace;
   Idx: Integer;
   S: PUMLUnitDocumentOutputStream;
+  lTempDecimalSeparator: Char;
 begin
   if (AUnitDoc <> nil) and (AUnitDoc.DocumentElement <> nil) then
   begin
+    lTempDecimalSeparator := DecimalSeparator;
+    DecimalSeparator := '.';
+
     // memorize Unit package's Namespace temporarily
     Pkg := AUnitDoc.DocumentElement as PUMLPackage;
     Owner := Pkg.Namespace;
@@ -454,6 +474,7 @@ begin
     finally
       // restore temporary memorized Namespace
       Owner.InsertOwnedElement(Idx, Pkg);
+      DecimalSeparator := lTempDecimalSeparator;
     end;
   end;
 end;
@@ -475,7 +496,8 @@ procedure PProjectManager.NewProject(ApproachName: string = '');
 
   procedure SetStereotype(APackage: PUMLPackage; AElemNode: PModelElementNode);
   begin
-    if AElemNode.StereotypeName <> '' then begin
+    if AElemNode.StereotypeName <> '' then
+    begin
       if AElemNode.StereotypeProfile <> '' then
         APackage.SetStereotype(AElemNode.StereotypeProfile, AElemNode.StereotypeName)
       else
@@ -496,9 +518,11 @@ procedure PProjectManager.NewProject(ApproachName: string = '');
     Path: string;
     I: Integer;
   begin
-    for I := 0 to AModelStrNode.ChildNodeCount - 1 do begin
+    for I := 0 to AModelStrNode.ChildNodeCount - 1 do
+    begin
       Node := AModelStrNode.ChildNodes[I];
-      if Node is PModelElementNode then begin
+      if Node is PModelElementNode then
+      begin
         ElemNode := Node as PModelElementNode;
         case ElemNode.Kind of
           nkModel:
@@ -507,46 +531,55 @@ procedure PProjectManager.NewProject(ApproachName: string = '');
             Pkg := UMLFactory.CreateModel(APackage, 'Subsystem') as PUMLPackage;
           nkPackage:
             Pkg := UMLFactory.CreateModel(APackage, 'Package') as PUMLPackage;
-          else
-            Pkg := nil;
+        else
+          Pkg := nil;
         end;
-        if Pkg <> nil then begin
+        if Pkg <> nil then
+        begin
           Pkg.Name := Node.Name;
           SetStereotype(Pkg, ElemNode);
           BuildModelStrNode(AApproach, Node, Pkg);
-        end;          
+        end;
       end
-      else if Node is PImportFrameworkNode then begin
+      else if Node is PImportFrameworkNode then
+      begin
         ImportFramework(APackage, Node.Name);
       end
-      else if Node is PImportModelFragmentNode then begin
+      else if Node is PImportModelFragmentNode then
+      begin
         ModelFragNode := Node as PImportModelFragmentNode;
-        if ModelFragNode.FileName <> '' then begin
+        if ModelFragNode.FileName <> '' then
+        begin
           Path := AApproach.Path + '\' + ModelFragNode.FileName;
           if FileExists(Path) then
             ImportModelFragment(APackage, Path);
-        end;  
+        end;
       end
-      else if Node is PDiagramNode then begin
+      else if Node is PDiagramNode then
+      begin
         Dgm := nil;
         DgmNode := Node as PDiagramNode;
-        if (DgmNode.DiagramTypeProfile <> '') and (DgmNode.DiagramTypeName <> '') then begin
+        if (DgmNode.DiagramTypeProfile <> '') and (DgmNode.DiagramTypeName <> '') then
+        begin
           DT := ExtensionManager.FindDiagramType(DgmNode.DiagramTypeProfile, DgmNode.DiagramTypeName);
-          if DT <> nil then begin
+          if DT <> nil then
+          begin
             Dgm := UMLFactory.CreateDiagram(APackage, DT.BaseDiagram, DT.Name, DgmModel);
             if Dgm <> nil then
               Dgm.DiagramType := DgmNode.DiagramTypeName;
           end;
         end;
-        if Dgm = nil then begin
+        if Dgm = nil then
+        begin
           case DgmNode.DiagramType of
-            dkClass:      Dgm := UMLFactory.CreateDiagram(APackage, 'ClassDiagram', DgmModel);
-            dkUsecase:    Dgm := UMLFactory.CreateDiagram(APackage, 'UseCaseDiagram', DgmModel);
-            dkComponent:  Dgm := UMLFactory.CreateDiagram(APackage, 'ComponentDiagram', DgmModel);
+            dkClass: Dgm := UMLFactory.CreateDiagram(APackage, 'ClassDiagram', DgmModel);
+            dkUsecase: Dgm := UMLFactory.CreateDiagram(APackage, 'UseCaseDiagram', DgmModel);
+            dkComponent: Dgm := UMLFactory.CreateDiagram(APackage, 'ComponentDiagram', DgmModel);
             dkDeployment: Dgm := UMLFactory.CreateDiagram(APackage, 'DeploymentDiagram', DgmModel);
           end;
         end;
-        if Dgm <> nil then begin
+        if Dgm <> nil then
+        begin
           Dgm.DefaultDiagram := DgmNode.DefaultDiagram;
           Dgm.Name := Node.Name;
         end;
@@ -566,10 +599,12 @@ begin
     FProjectDocument.DocumentElement := FProject;
     FProjectDocument.OnModified := DocumentModified;
     FProjectDocument.OnSaved := DocumentSaved;
-    if ApproachName <> '' then begin
+    if ApproachName <> '' then
+    begin
       Approach := ApproachManager.GetApproachByName(ApproachName);
-      if Approach <> nil then begin
-        AutoIncludeProfiles;      
+      if Approach <> nil then
+      begin
+        AutoIncludeProfiles;
         for I := 0 to Approach.ImportProfileCount - 1 do
           ExtensionManager.IncludeProfile(Approach.ImportProfiles[I]);
         BuildModelStrNode(Approach, Approach.RootNode, FProject);
@@ -613,9 +648,12 @@ var
   I: Integer;
   FN, PN: string;
   CurDir: string;
+  lTempDecimalSeparator: Char;
 begin
   if CloseProject then
   begin
+    lTempDecimalSeparator := DecimalSeparator;
+    DecimalSeparator := '.';
     // create ReferenceResolver
     Resolver := PReferenceResolver.Create;
     Resolver.OnResolvingProgress := ResolvingProgressHandler;
@@ -672,6 +710,7 @@ begin
       ProjectOpened;
     finally
       S.Free;
+      DecimalSeparator := lTempDecimalSeparator;
     end;
     UpdateDocuments;
   end;
@@ -728,10 +767,13 @@ begin
   AUnit.OnSaved := DocumentSaved;
   RC := PReferenceCollectionVisitor.Create;
   APackage.Accept(RC);
-  for I := 0 to RC.ReferenceCount - 1 do begin
-    if RC.References[I] is PModel then begin
+  for I := 0 to RC.ReferenceCount - 1 do
+  begin
+    if RC.References[I] is PModel then
+    begin
       M := RC.References[I] as PModel;
-      if M.IsDocumentElement then begin
+      if M.IsDocumentElement then
+      begin
         MUnit := M.Document as PUMLUnitDocument;
         if MUnit.ParentUnitDocument = D then
           MUnit.ParentUnitDocument := AUnit;
@@ -755,7 +797,8 @@ begin
   // PRECONDITION
   AUnit := APackage.Document as PUMLUnitDocument;
   ParentDoc := AUnit.ParentUnitDocument;
-  for I := AUnit.SubUnitDocumentCount - 1 downto 0 do begin
+  for I := AUnit.SubUnitDocumentCount - 1 downto 0 do
+  begin
     AUnit.SubUnitDocuments[I].ParentUnitDocument := ParentDoc;
   end;
   APackage.Document := nil;
@@ -770,11 +813,14 @@ function PProjectManager.OpenUnit(ABasePackage: PUMLPackage; AFileName: string):
 var
   AUnit, ParentUnit: PUMLUnitDocument;
   Resolver: PReferenceResolver;
+  lTempDecimalSeparator: Char;
 begin
   ParentUnit := ABasePackage.GetContainingDocument as PUMLUnitDocument;
   Resolver := PReferenceResolver.Create;
   Resolver.OnResolvingProgress := ResolvingProgressHandler;
   Resolver.Clear;
+  lTempDecimalSeparator := DecimalSeparator;
+  DecimalSeparator := '.';
   try
     AUnit := LoadUnit(ParentUnit, ABasePackage.GUID, '-1', AFileName, Resolver);
     if (AUnit <> nil) and (AUnit.DocumentElement <> nil) then
@@ -784,6 +830,7 @@ begin
     end;
   finally
     Resolver.Free;
+    DecimalSeparator := lTempDecimalSeparator;
   end;
   if Assigned(FOnUnitOpened) then
     FOnUnitOpened(Self, AUnit.DocumentElement as PUMLPackage);
@@ -794,7 +841,8 @@ procedure PProjectManager.SaveUnit(APackage: PUMLPackage);
 var
   AUnit: PUMLUnitDocument;
 begin
-  if APackage.IsDocumentElement then begin
+  if APackage.IsDocumentElement then
+  begin
     AUnit := APackage.Document as PUMLUnitDocument;
     if AUnit.Modified then
     begin
@@ -809,7 +857,8 @@ procedure PProjectManager.SaveUnitAs(APackage: PUMLPackage; AFileName: string);
 var
   AUnit: PUMLUnitDocument;
 begin
-  if APackage.IsDocumentElement then begin
+  if APackage.IsDocumentElement then
+  begin
     ChangeFileReadOnlyAttr(AFileName);
     AUnit := APackage.Document as PUMLUnitDocument;
     AUnit.FileName := AFileName;
@@ -971,5 +1020,4 @@ end;
 // PProjectManager
 ////////////////////////////////////////////////////////////////////////////////
 end.
-
 

@@ -90,12 +90,12 @@ MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=
 [Directories]
-OutputDir=c:\Program Files\StarUML
-UnitOutputDir=
-PackageDLLOutputDir=
-PackageDCPOutputDir=
-SearchPath=
-Packages=vcl;rtl;dbrtl;adortl;vcldb;vclx;bdertl;vcldbx;ibxpress;dsnap;cds;bdecds;qrpt;teeui;teedb;tee;dss;teeqr;visualclx;visualdbclx;dsnapcrba;dsnapcon;VclSmp;vclshlctrls;vclie;xmlrtl;inet;inetdbbde;inetdbxpress;inetdb;nmfast;webdsnap;websnap;dbexpress;dbxcds;indy;dclOffice2k;RationalRose;dxBarD6;dxcomnd6;dxBarDBNavD6;dxBarExtItemsD6;dxBarExtDBItemsD6;dxsbD6;dxEdtrD6;dxInsD6;dxDBEdD6;dxObjInsD6
+OutputDir=C:\Program Files\StarUML
+UnitOutputDir=$(TWEDCU)
+PackageDLLOutputDir=$(TWEBin)
+PackageDCPOutputDir=$(TWEDCP)
+SearchPath=C:\TimeWarp\staruml-src\staruml\components\plastic-components\src;C:\TimeWarp\Common\jvcl\run\;C:\TimeWarp\Common\jvcl\common\;C:\TimeWarp\Common\JCL\source\common\;C:\TimeWarp\Common\JCL\source\;C:\TimeWarp\Common\JCL\source\windows\;C:\TimeWarp\staruml-src\Toolbar 2000 2.0.15\Source;C:\TimeWarp\staruml-src\TBSkin 1.0.15\Source;C:\TimeWarp\Common\jvcl\resources\;C:\TimeWarp\staruml-src\VTSourceOnly\Source
+Packages=vcl;rtl;dbrtl;adortl;vcldb;vclx;bdertl;vcldbx;ibxpress;dsnap;cds;bdecds;qrpt;teeui;teedb;tee;dss;teeqr;visualclx;visualdbclx;dsnapcrba;dsnapcon;VclSmp;vclshlctrls;vclie;xmlrtl;inet;inetdbbde;inetdbxpress;inetdb;nmfast;webdsnap;websnap;dbexpress;dbxcds;indy;dclOffice2k;RationalRose;dxBarD6;dxcomnd6;dxBarDBNavD6;dxBarExtItemsD6;dxBarExtDBItemsD6;dxsbD6;dxEdtrD6;dxInsD6;dxDBEdD6;dxObjInsD6;VirtualTreesD7
 Conditionals=
 DebugSourceDirs=
 UsePackages=0
@@ -108,14 +108,14 @@ DebugCWD=
 [Language]
 ActiveLang=
 ProjectLang=
-RootDir=C:\Program Files\Borland\Delphi6\Bin\
+RootDir=
 [Version Info]
 IncludeVerInfo=1
 AutoIncBuild=1
 MajorVer=5
 MinorVer=0
 Release=1
-Build=1560
+Build=1575
 Debug=0
 PreRelease=0
 Special=0
@@ -126,7 +126,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=Plastic Software, Inc.
 FileDescription=
-FileVersion=5.0.1.1560
+FileVersion=5.0.1.1575
 InternalName=
 LegalCopyright=Copyright(c)1998-2005 Plastic Software, Inc. All rights reserved.
 LegalTrademarks=
@@ -135,23 +135,5 @@ ProductName=StarUML
 ProductVersion=5.0
 Comments=
 [Excluded Packages]
+c:\program files\borland\delphi7\Bin\dclindy70.bpl=Internet Direct (Indy) for D7 Property and Component Editors
 C:\Program Files\Developer Express Inc\ExpressInspector\Delphi 7\Lib\dcldxExRwD7.bpl=ExpressInspector Extended Rows
-[HistoryLists\hlDebugSourcePath]
-Count=1
-Item0=C:\PLASTIC Working\Extensions\JavaCodeGen
-[HistoryLists\hlUnitAliases]
-Count=1
-Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
-[HistoryLists\hlSearchPath]
-Count=1
-Item0=C:\PLASTIC Working\Extensions\JavaCodeGen
-[HistoryLists\hlOutputDirectorry]
-Count=8
-Item0=c:\Program Files\StarUML
-Item1=c:\Program Files\Plastic Software\Plastic
-Item2=D:\Cvs_Client\plastic\plastic\deploy\common
-Item3=C:\PLASTIC
-Item4=D:\Program Files\Plastic Software\Plastic
-Item5=C:\PLASTIC 2003
-Item6=C:\PLASTIC2003
-Item7=D:\Program Files\PLASTIC SOFTWARE\PLASTIC 2003

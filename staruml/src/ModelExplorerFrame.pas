@@ -46,21 +46,41 @@ unit ModelExplorerFrame;
 {******************************************************************************}
 
 // Note ------------------------------------------------------------------------
-// 1. while modifing to Virtual Treeview, Tree's Node is changed from TObject 
-//    to pointer of record. Because Objects in NodeHashTable must be not Object 
+// 1. while modifing to Virtual Treeview, Tree's Node is changed from TObject
+//    to pointer of record. Because Objects in NodeHashTable must be not Object
 //    but Pointer, Pointer is casted to TObject.
 // -----------------------------------------------------------------------------
 
 interface
 
 uses
-  BasicClasses, Core, UMLModels,
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, VirtualTrees, ExtCtrls, IniFiles, ImgList, dxBar, FlatPanel,
-  ActiveX, TBSkinPlus, TB2Dock, TB2Toolbar, TB2Item;
+  BasicClasses,
+  Core,
+  UMLModels,
+  Windows,
+  Messages,
+  SysUtils,
+  Variants,
+  Classes,
+  Graphics,
+  Controls,
+  Forms,
+  Dialogs,
+  VirtualTrees,
+  ExtCtrls,
+  IniFiles,
+  ImgList,
+  dxBar,
+  FlatPanel,
+  ActiveX,
+//  TBSkinPlus,
+//  TB2Dock,
+//  TB2Toolbar,
+//  TB2Item,
+  cxClasses;
 
 const
-  DEFAULT_FILTERINGSET: array [0..67] of PClass = (
+  DEFAULT_FILTERINGSET: array[0..67] of PClass = (
     PUMLModel, PUMLSubsystem, PUMLPackage, PUMLClass, PUMLInterface,
     PUMLEnumeration, PUMLSignal, PUMLException, PUMLComponent,
     PUMLComponentInstance, PUMLNode, PUMLNodeInstance, PUMLUseCase, PUMLActor,
@@ -80,7 +100,7 @@ const
     PUMLArtifact, PUMLAttributeLink, PUMLPort, PUMLCombinedFragment,
     PUMLInteractionOperand, PUMLExtensionPoint, PUMLFrame);
 
-  FULL_FILTERINGSET: array [0..78] of PClass = (
+  FULL_FILTERINGSET: array[0..79] of PClass = (
     PUMLModel, PUMLSubsystem, PUMLPackage, PUMLClass, PUMLInterface,
     PUMLEnumeration, PUMLSignal, PUMLException, PUMLComponent,
     PUMLComponentInstance, PUMLNode, PUMLNodeInstance, PUMLUseCase, PUMLActor,
@@ -92,7 +112,7 @@ const
     PUMLCallAction, PUMLSendAction, PUMLCreateAction, PUMLDestroyAction,
     PUMLReturnAction, PUMLUninterpretedAction, PUMLSignalEvent, PUMLCallEvent,
     PUMLTimeEvent, PUMLChangeEvent, PUMLClassifierRole, PUMLObject,
-    PUMLDependency, PUMLAssociation, PUMLAssociationClass, PUMLGeneralization,
+    PUMLDependency, PUMLAssociation, PUMLAssociationEnd, PUMLAssociationClass, PUMLGeneralization,
     PUMLLink, PUMLAssociationRole, PUMLStimulus, PUMLMessage, PUMLInclude,
     PUMLExtend, PUMLRealization, PUMLClassDiagram, PUMLUseCaseDiagram,
     PUMLSequenceDiagram, PUMLSequenceRoleDiagram, PUMLCollaborationDiagram,
@@ -102,7 +122,7 @@ const
     PUMLArtifact, PUMLAttributeLink, PUMLPort, PUMLConnector, PUMLCombinedFragment,
     PUMLInteractionOperand, PUMLExtensionPoint, PUMLFrame);
 
-  BASIC_FILTERINGSET: array [0..67] of PClass = (
+  BASIC_FILTERINGSET: array[0..67] of PClass = (
     PUMLModel, PUMLSubsystem, PUMLPackage, PUMLClass, PUMLInterface,
     PUMLEnumeration, PUMLSignal, PUMLException, PUMLComponent,
     PUMLComponentInstance, PUMLNode, PUMLNodeInstance, PUMLUseCase, PUMLActor,
@@ -121,23 +141,23 @@ const
     PUMLArtifact, PUMLAttributeLink, PUMLPort, PUMLConnector, PUMLCombinedFragment,
     PUMLInteractionOperand, PUMLExtensionPoint, PUMLFrame);
 
-  CLASSIFIER_FILTERINGSET: array [0..12] of PClass = (
+  CLASSIFIER_FILTERINGSET: array[0..12] of PClass = (
     PUMLModel, PUMLSubsystem, PUMLPackage, PUMLClass, PUMLInterface,
     PUMLEnumeration, PUMLSignal, PUMLException, PUMLComponent, PUMLNode,
     PUMLUseCase, PUMLActor, PUMLArtifact);
 
-  RELATION_FILTERINGSET: array [0..12] of PClass = (
-    PUMLTransition, PUMLDependency, PUMLAssociation, PUMLAssociationClass,
+  RELATION_FILTERINGSET: array[0..13] of PClass = (
+    PUMLTransition, PUMLDependency, PUMLAssociation, PUMLAssociationEnd, PUMLAssociationClass,
     PUMLGeneralization, PUMLLink, PUMLAssociationRole, PUMLStimulus, PUMLMessage,
     PUMLInclude, PUMLExtend, PUMLRealization, PUMLConnector);
 
   INSTANCE_FILTERINGSET: array[0..2] of PClass = (
-    PUMLObject, PUMLComponentInstance, PUMLNodeInstance);    
+    PUMLObject, PUMLComponentInstance, PUMLNodeInstance);
 
 type
   // Event Types
-  PElementRelocatingEvent = procedure (Source, Target: PModel) of object;
-  PModelIndexChangingEvent = procedure (Sender: TObject; Owner: PModel;
+  PElementRelocatingEvent = procedure(Source, Target: PModel) of object;
+  PModelIndexChangingEvent = procedure(Sender: TObject; Owner: PModel;
     Owned: PModel; Key: string; NewOrder: Integer) of object;
 
   // Enumeration Types
@@ -171,18 +191,17 @@ type
   TModelExplorerPanel = class(TFrame)
     ModelTree: TVirtualStringTree;
     ClientPanel: TFlatPanel;
-    TBDock: TTBDock;
-    ModelExplorerToolbar: TTBToolbar;
-    TBSkin: TTBSkin;
-    MoveDownItem: TTBItem;
-    MoveUpItem: TTBItem;
-    TBSeparatorItem1: TTBSeparatorItem;
-    FilterElementsItem: TTBItem;
-    TBSeparatorItem2: TTBSeparatorItem;
-    SortByAlphabeticOrderItem: TTBItem;
-    SortByStorageOrderItem: TTBItem;
-    ModelExplorerImageList: TTBImageList;
+    ModelExplorerImageList: TImageList;
     DragTimeTimer: TTimer;
+    dxBarManager: TdxBarManager;
+    ModelExplorerdxBar: TdxBar;
+    FilterElementsdxBarButton: TdxBarButton;
+    MoveUpdxBarButton: TdxBarButton;
+    MoveDowndxBarButton: TdxBarButton;
+    SortByAlphabeticOrderdxBarButton: TdxBarButton;
+    SortByStorageOrderdxBarButton: TdxBarButton;
+    MovedxBarGroup: TdxBarGroup;
+    SortdxBarGroup: TdxBarGroup;
     procedure ModelTreeGetText(Sender: TBaseVirtualTree;
       Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType;
       var CellText: WideString);
@@ -307,11 +326,12 @@ type
 implementation
 
 uses
-  ExtCore, ModelExpFilterFrm, LogMgr,
+  ExtCore,
+  ModelExpFilterFrm,
+  LogMgr,
   Registry;
 
 {$R *.dfm}
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // PMetaNode
@@ -378,86 +398,87 @@ end;
 procedure TModelExplorerPanel.InitializeMetaNodes;
 begin
   { Registering All Meta Nodes }
-  AddMetaNode(PUMLProject,                  'Project',                      5);
-  AddMetaNode(PUMLClassDiagram,             'Class Diagram',                91);
-  AddMetaNode(PUMLUseCaseDiagram,           'UseCase Diagram',              92);
-  AddMetaNode(PUMLSequenceDiagram,          'Sequence Diagram',             93);
-  AddMetaNode(PUMLSequenceRoleDiagram,      'Sequence Diagram (Role)',      94);
-  AddMetaNode(PUMLCollaborationDiagram,     'Collaboration Diagram',        95);
+  AddMetaNode(PUMLProject, 'Project', 5);
+  AddMetaNode(PUMLClassDiagram, 'Class Diagram', 91);
+  AddMetaNode(PUMLUseCaseDiagram, 'UseCase Diagram', 92);
+  AddMetaNode(PUMLSequenceDiagram, 'Sequence Diagram', 93);
+  AddMetaNode(PUMLSequenceRoleDiagram, 'Sequence Diagram (Role)', 94);
+  AddMetaNode(PUMLCollaborationDiagram, 'Collaboration Diagram', 95);
   AddMetaNode(PUMLCollaborationRoleDiagram, 'Collaboration Diagram (Role)', 96);
-  AddMetaNode(PUMLStatechartDiagram,        'Statechart Diagram',           97);
-  AddMetaNode(PUMLActivityDiagram,          'Activity Diagram',             98);
-  AddMetaNode(PUMLComponentDiagram,         'Component Diagram',            99);
-  AddMetaNode(PUMLDeploymentDiagram,        'Deployment Diagram',           100);
-  AddMetaNode(PUMLCompositeStructureDiagram,'Composite Structure Diagram',  179);  
-  AddMetaNode(PUMLModel,                    'Model',                        7);
-  AddMetaNode(PUMLSubsystem,                'Subsystem',                    10);
-  AddMetaNode(PUMLPackage,                  'Package',                      13);
-  AddMetaNode(PUMLClass,                    'Class',                        16);
-  AddMetaNode(PUMLInterface,                'Interface',                    17);
-  AddMetaNode(PUMLEnumeration,              'Enumeration',                  18);
-  AddMetaNode(PUMLSignal,                   'Signal',                       19);
-  AddMetaNode(PUMLException,                'Exception',                    20);
-  AddMetaNode(PUMLComponent,                'Component',                    21);
-  AddMetaNode(PUMLComponentInstance,        'ComponentInstance',            22);
-  AddMetaNode(PUMLNode,                     'Node',                         23);
-  AddMetaNode(PUMLNodeInstance,             'NodeInstance',                 24);
-  AddMetaNode(PUMLUseCase,                  'UseCase',                      25);
-  AddMetaNode(PUMLActor,                    'Actor',                        26);
-  AddMetaNode(PUMLActivityGraph,            'ActivityGraph',                27);
-  AddMetaNode(PUMLStateMachine,             'StateMachine',                 28);
-  AddMetaNode(PUMLCompositeState,           'Composite State',              29);
-  AddMetaNode(PUMLCollaboration,            'Collaboration',                30);
-  AddMetaNode(PUMLCollaborationInstanceSet, 'CollaborationInstanceSet',     31);
-  AddMetaNode(PUMLInteraction,              'Interaction',                  32);
-  AddMetaNode(PUMLInteractionInstanceSet,   'InteractionInstanceSet',       33);
-  AddMetaNode(PUMLActionState,              'ActionState',                  34);
-  AddMetaNode(PUMLSubactivityState,         'SubactivityState',             35);
-  AddMetaNode(PUMLPSeudostate,              'Pseudostate',                  37);
-  AddMetaNode(PUMLFinalState,               'FinalState',                   43);
-  AddMetaNode(PUMLPartition,                'Partition',                    44);
-  AddMetaNode(PUMLSubmachineState,          'SubmachineState',              45);
-  AddMetaNode(PUMLAttribute,                'Attribute',                    46);
-  AddMetaNode(PUMLOperation,                'Operation',                    50);
-  AddMetaNode(PUMLParameter,                'Parameter',                    54);
-  AddMetaNode(PUMLTemplateParameter,        'TemplateParameter',            55);
-  AddMetaNode(PUMLEnumerationLiteral,       'EnumerationLiteral',           56);
-  AddMetaNode(PUMLTransition,               'Transition',                   57);
-  AddMetaNode(PUMLCallAction,               'CallAction',                   59);
-  AddMetaNode(PUMLSendAction,               'SendAction',                   60);
-  AddMetaNode(PUMLCreateAction,             'CreateAction',                 61);
-  AddMetaNode(PUMLDestroyAction,            'DestroyAction',                62);
-  AddMetaNode(PUMLReturnAction,             'ReturnAction',                 63);
-  AddMetaNode(PUMLUninterpretedAction,      'UninterpretedAction',          64);
-  AddMetaNode(PUMLSignalEvent,              'SignalEvent',                  68);
-  AddMetaNode(PUMLCallEvent,                'CallEvent',                    69);
-  AddMetaNode(PUMLTimeEvent,                'TimeEvent',                    70);
-  AddMetaNode(PUMLChangeEvent,              'ChangeEvent',                  71);
-  AddMetaNode(PUMLClassifierRole,           'ClassifierRole',               72);
-  AddMetaNode(PUMLObject,                   'Object',                       73);
-  AddMetaNode(PUMLObjectFlowState,          'ObjectFlowState',              171);
-  AddMetaNode(PUMLFlowFinalState,           'FlowFinalState',               166);
-  AddMetaNode(PUMLSignalAcceptState,        'SignalAcceptState',            159);
-  AddMetaNode(PUMLSignalSendState,          'SignalSendState',              160);
-  AddMetaNode(PUMLArtifact,                 'Artifact',                     176);
-  AddMetaNode(PUMLAttributeLink,            'AttributeLink',                178);
-  AddMetaNode(PUMLPort,                     'Port',                         173);
-  AddMetaNode(PUMLCombinedFragment,         'CombinedFragment',             163);
-  AddMetaNode(PUMLInteractionOperand,       'InteractionOperand',           169);
-  AddMetaNode(PUMLExtensionPoint,           'ExtensionPoint',               177);
-  AddMetaNode(PUMLFrame,                    'Frame',                        167);
-  AddMetaNode(PUMLDependency,               'Dependency',                   74);
-  AddMetaNode(PUMLAssociation,              'Association',                  75);
-  AddMetaNode(PUMLAssociationClass,         'AssociationClass',             76);
-  AddMetaNode(PUMLGeneralization,           'Generalization',               77);
-  AddMetaNode(PUMLLink,                     'Link',                         78);
-  AddMetaNode(PUMLAssociationRole,          'AssociationRole',              80);
-  AddMetaNode(PUMLStimulus,                 'Stimulus',                     82);
-  AddMetaNode(PUMLMessage,                  'Message',                      85);
-  AddMetaNode(PUMLInclude,                  'Include',                      88);
-  AddMetaNode(PUMLExtend,                   'Extend',                       89);
-  AddMetaNode(PUMLRealization,              'Realization',                  90);
-  AddMetaNode(PUMLConnector,                'Connector',                    164);
+  AddMetaNode(PUMLStatechartDiagram, 'Statechart Diagram', 97);
+  AddMetaNode(PUMLActivityDiagram, 'Activity Diagram', 98);
+  AddMetaNode(PUMLComponentDiagram, 'Component Diagram', 99);
+  AddMetaNode(PUMLDeploymentDiagram, 'Deployment Diagram', 100);
+  AddMetaNode(PUMLCompositeStructureDiagram, 'Composite Structure Diagram', 179);
+  AddMetaNode(PUMLModel, 'Model', 7);
+  AddMetaNode(PUMLSubsystem, 'Subsystem', 10);
+  AddMetaNode(PUMLPackage, 'Package', 13);
+  AddMetaNode(PUMLClass, 'Class', 16);
+  AddMetaNode(PUMLInterface, 'Interface', 17);
+  AddMetaNode(PUMLEnumeration, 'Enumeration', 18);
+  AddMetaNode(PUMLSignal, 'Signal', 19);
+  AddMetaNode(PUMLException, 'Exception', 20);
+  AddMetaNode(PUMLComponent, 'Component', 21);
+  AddMetaNode(PUMLComponentInstance, 'ComponentInstance', 22);
+  AddMetaNode(PUMLNode, 'Node', 23);
+  AddMetaNode(PUMLNodeInstance, 'NodeInstance', 24);
+  AddMetaNode(PUMLUseCase, 'UseCase', 25);
+  AddMetaNode(PUMLActor, 'Actor', 26);
+  AddMetaNode(PUMLActivityGraph, 'ActivityGraph', 27);
+  AddMetaNode(PUMLStateMachine, 'StateMachine', 28);
+  AddMetaNode(PUMLCompositeState, 'Composite State', 29);
+  AddMetaNode(PUMLCollaboration, 'Collaboration', 30);
+  AddMetaNode(PUMLCollaborationInstanceSet, 'CollaborationInstanceSet', 31);
+  AddMetaNode(PUMLInteraction, 'Interaction', 32);
+  AddMetaNode(PUMLInteractionInstanceSet, 'InteractionInstanceSet', 33);
+  AddMetaNode(PUMLActionState, 'ActionState', 34);
+  AddMetaNode(PUMLSubactivityState, 'SubactivityState', 35);
+  AddMetaNode(PUMLPSeudostate, 'Pseudostate', 37);
+  AddMetaNode(PUMLFinalState, 'FinalState', 43);
+  AddMetaNode(PUMLPartition, 'Partition', 44);
+  AddMetaNode(PUMLSubmachineState, 'SubmachineState', 45);
+  AddMetaNode(PUMLAttribute, 'Attribute', 46);
+  AddMetaNode(PUMLOperation, 'Operation', 50);
+  AddMetaNode(PUMLParameter, 'Parameter', 54);
+  AddMetaNode(PUMLTemplateParameter, 'TemplateParameter', 55);
+  AddMetaNode(PUMLEnumerationLiteral, 'EnumerationLiteral', 56);
+  AddMetaNode(PUMLTransition, 'Transition', 57);
+  AddMetaNode(PUMLCallAction, 'CallAction', 59);
+  AddMetaNode(PUMLSendAction, 'SendAction', 60);
+  AddMetaNode(PUMLCreateAction, 'CreateAction', 61);
+  AddMetaNode(PUMLDestroyAction, 'DestroyAction', 62);
+  AddMetaNode(PUMLReturnAction, 'ReturnAction', 63);
+  AddMetaNode(PUMLUninterpretedAction, 'UninterpretedAction', 64);
+  AddMetaNode(PUMLSignalEvent, 'SignalEvent', 68);
+  AddMetaNode(PUMLCallEvent, 'CallEvent', 69);
+  AddMetaNode(PUMLTimeEvent, 'TimeEvent', 70);
+  AddMetaNode(PUMLChangeEvent, 'ChangeEvent', 71);
+  AddMetaNode(PUMLClassifierRole, 'ClassifierRole', 72);
+  AddMetaNode(PUMLObject, 'Object', 73);
+  AddMetaNode(PUMLObjectFlowState, 'ObjectFlowState', 171);
+  AddMetaNode(PUMLFlowFinalState, 'FlowFinalState', 166);
+  AddMetaNode(PUMLSignalAcceptState, 'SignalAcceptState', 159);
+  AddMetaNode(PUMLSignalSendState, 'SignalSendState', 160);
+  AddMetaNode(PUMLArtifact, 'Artifact', 176);
+  AddMetaNode(PUMLAttributeLink, 'AttributeLink', 178);
+  AddMetaNode(PUMLPort, 'Port', 173);
+  AddMetaNode(PUMLCombinedFragment, 'CombinedFragment', 163);
+  AddMetaNode(PUMLInteractionOperand, 'InteractionOperand', 169);
+  AddMetaNode(PUMLExtensionPoint, 'ExtensionPoint', 177);
+  AddMetaNode(PUMLFrame, 'Frame', 167);
+  AddMetaNode(PUMLDependency, 'Dependency', 74);
+  AddMetaNode(PUMLAssociation, 'Association', 75);
+  AddMetaNode(PUMLAssociationEnd, 'AssociationEnd', 75); //ImageIndex is wrong
+  AddMetaNode(PUMLAssociationClass, 'AssociationClass', 76);
+  AddMetaNode(PUMLGeneralization, 'Generalization', 77);
+  AddMetaNode(PUMLLink, 'Link', 78);
+  AddMetaNode(PUMLAssociationRole, 'AssociationRole', 80);
+  AddMetaNode(PUMLStimulus, 'Stimulus', 82);
+  AddMetaNode(PUMLMessage, 'Message', 85);
+  AddMetaNode(PUMLInclude, 'Include', 88);
+  AddMetaNode(PUMLExtend, 'Extend', 89);
+  AddMetaNode(PUMLRealization, 'Realization', 90);
+  AddMetaNode(PUMLConnector, 'Connector', 164);
 end;
 
 procedure TModelExplorerPanel.FinalizeMetaNodes;
@@ -465,7 +486,8 @@ var
   I: Integer;
   MetaNode: PMetaNode;
 begin
-  for I := MetaNodeCount - 1 downto 0 do begin
+  for I := MetaNodeCount - 1 downto 0 do
+  begin
     MetaNode := MetaNodes[I];
     MetaNode.Free;
   end;
@@ -534,7 +556,8 @@ begin
       NodeData.Model := Model;
       NodeData.MetaNode := MetaNode;
     end
-    else begin
+    else
+    begin
       // Create RootNode.
       Node := ModelTree.AddChild(nil);
       NodeData := ModelTree.GetNodeData(Node);
@@ -600,7 +623,8 @@ begin
       begin
         Node := CreateNode(BaseNode, Model);
       end
-      else begin
+      else
+      begin
         Node := FindNode(Model);
         if Node = nil then
           Node := CreateNode(BaseNode, Model);
@@ -609,12 +633,15 @@ begin
     end;
 
     Node := BaseNode.LastChild;
-    while Node <> nil do begin
+    while Node <> nil do
+    begin
       NodeData := ModelTree.GetNodeData(Node);
       // ASSERTIONS
-      Assert(NodeData <> nil); Assert(NodeData.Model <> nil);
+      Assert(NodeData <> nil);
+      Assert(NodeData.Model <> nil);
       // ASSERTIONS
-      if BaseModel.IndexOfVirtualOwnedModel(NodeData.Model) = -1 then begin
+      if BaseModel.IndexOfVirtualOwnedModel(NodeData.Model) = -1 then
+      begin
         N := Node.PrevSibling;
         DeleteNode(Node);
         Node := N;
@@ -630,15 +657,18 @@ var
   SourceNodeData, TargetNodeData: PNodeData;
   Msg: string;
 begin
-  if FDropTargetNode <> Value then begin
+  if FDropTargetNode <> Value then
+  begin
     Msg := '';
     FDropTargetNode := Value;
     SourceNodeData := ModelTree.GetNodeData(FDragSourceNode);
     TargetNodeData := ModelTree.GetNodeData(FDropTargetNode);
 
     // ASSERTIONS
-    Assert(SourceNodeData <> nil); Assert(SourceNodeData.Model <> nil);
-    Assert(TargetNodeData <> nil); Assert(TargetNodeData.Model <> nil);
+    Assert(SourceNodeData <> nil);
+    Assert(SourceNodeData.Model <> nil);
+    Assert(TargetNodeData <> nil);
+    Assert(TargetNodeData.Model <> nil);
     // ASSERTIONS
 
     // check avaiable to be droped
@@ -649,14 +679,15 @@ end;
 
 procedure TModelExplorerPanel.SetSortType(Value: PModelExplorerSortType);
 begin
-  if FSortType <> Value then begin
+  if FSortType <> Value then
+  begin
     FSortType := Value;
     ModelTree.SortTree(-1, sdAscending);
     if Assigned(FOnSortTypeChanged) then
     begin
       case FSortType of
-        stStorage: SortByStorageOrderItem.Checked := True;
-        stAlphabetic: SortByAlphabeticOrderItem.Checked := True;
+        stStorage: SortByStorageOrderdxBarButton.Down := True;
+        stAlphabetic: SortByAlphabeticOrderdxBarButton.Down := True;
       end;
       FOnSortTypeChanged(Self);
     end;
@@ -697,8 +728,9 @@ begin
   GetCursorPos(Pt);
   Pt := ModelTree.ScreenToClient(Pt);
   if (GetKeyState(VK_LBUTTON) < 0) and
-     (IsMousePosTopScrollZone(Pt.Y) or IsMousePosBottomScrollZone(Pt.Y))
-  then begin
+    (IsMousePosTopScrollZone(Pt.Y) or IsMousePosBottomScrollZone(Pt.Y))
+    then
+    begin
     if not DragTimeTimer.Enabled then DragTimeTimer.Enabled := True;
   end;
 end;
@@ -716,7 +748,7 @@ function TModelExplorerPanel.IsMousePosBottomScrollZone(Y: Integer): Boolean;
 begin
   Result := False;
   if ((ModelTree.Top + ModelTree.Height) - Y >= 0) and
-     ((ModelTree.Top + ModelTree.Height) - Y <= 10) then
+    ((ModelTree.Top + ModelTree.Height) - Y <= 10) then
   begin
     Result := True;
   end;
@@ -755,7 +787,8 @@ begin
     if Node = nil then
     begin
       ParentNode := FindNode(M.VirtualNamespace);
-      if ParentNode <> nil then begin
+      if ParentNode <> nil then
+      begin
         Node := CreateNode(ParentNode, M);
         if Node <> nil then
         begin
@@ -816,7 +849,8 @@ begin
       BuildNodes(FProject, RootNode);
     end;
   end
-  else begin
+  else
+  begin
     if FProject <> nil then
     begin
       RootNode := FindNode(FProject);
@@ -867,7 +901,8 @@ begin
       ModelTree.EditNode(Node, -1);
     end;
   end
-  else begin
+  else
+  begin
     if ModelTree.FocusedNode <> nil then
       ModelTree.EditNode(ModelTree.FocusedNode, -1);
   end;
@@ -961,7 +996,7 @@ begin
       for I := 0 to MetaNodeCount - 1 do
       begin
         MetaNode := MetaNodes[I];
-        Reg.WriteBool('Filter['+MetaNode.Caption+']', MetaNode.Filtered);
+        Reg.WriteBool('Filter[' + MetaNode.Caption + ']', MetaNode.Filtered);
       end;
       Reg.CloseKey;
     end;
@@ -992,7 +1027,7 @@ begin
       begin
         MetaNode := MetaNodes[I];
         try
-          MetaNode.Filtered := Reg.ReadBool('Filter['+MetaNode.Caption+']');
+          MetaNode.Filtered := Reg.ReadBool('Filter[' + MetaNode.Caption + ']');
         except
           MetaNode.Filtered := False;
         end;
@@ -1023,6 +1058,18 @@ var
     if M.Name <> '' then S := M.Name + ':';
     S := S + '(' + C1 + '-' + C2 + ')';
     Result := GetStereotypeText(M) + S;
+  end;
+
+  function GetAssociationEndText(M: PUMLAssociationEnd): string;
+  var
+    S, C1, C2: string;
+  begin
+    if M.Participant <> nil then
+      C1 := M.Participant.Name;
+    S := '';
+    if M.Name <> '' then S := M.Name + ':';
+    S := S + '(' + C1 + ')';
+    Result := S;
   end;
 
   function GetAssociationClassText(M: PUMLAssociationClass): string;
@@ -1159,7 +1206,7 @@ var
     S := S + '(' + C1 + '->' + C2 + ')';
     Result := GetStereotypeText(M) + S;
   end;
-  
+
   function GetConnectorText(M: PUMLConnector): string;
   var
     S, C1, C2: string;
@@ -1202,26 +1249,28 @@ begin
     if ModelTree.IsEditing and (ModelTree.FocusedNode = Node) then
     begin
       if Model is PUMLProject then CellText := (Model as PUMLProject).Title
-                              else CellText := GetStereotypeText(Model) + Model.Name;
+      else CellText := GetStereotypeText(Model) + Model.Name;
     end
-    else begin
-           if Model is PUMLProject          then CellText := (Model as PUMLProject).Title
-      else if Model is PUMLDiagram          then CellText := (Model as PUMLDiagram).Name
-      else if Model is PUMLOperation        then CellText := (Model as PUMLOperation).Name + '()'
-      else if Model is PUMLAssociation      then CellText := GetAssociationText(Model as PUMLAssociation)
+    else
+    begin
+      if Model is PUMLProject then CellText := (Model as PUMLProject).Title
+      else if Model is PUMLDiagram then CellText := (Model as PUMLDiagram).Name
+      else if Model is PUMLOperation then CellText := (Model as PUMLOperation).Name + '()'
+      else if Model is PUMLAssociation then CellText := GetAssociationText(Model as PUMLAssociation)
+      else if Model is PUMLAssociationEnd then CellText := GetAssociationEndText(Model as PUMLAssociationEnd)
       else if Model is PUMLAssociationClass then CellText := GetAssociationClassText(Model as PUMLAssociationClass)
-      else if Model is PUMLDependency       then CellText := GetDependencyText(Model as PUMLDependency)
-      else if Model is PUMLLink             then CellText := GetLinkText(Model as PUMLLink)
-      else if Model is PUMLGeneralization   then CellText := GetGeneralizationText(Model as PUMLGeneralization)
-      else if Model is PUMLMessage          then CellText := GetMessageText(Model as PUMLMessage)
-      else if Model is PUMLStimulus         then CellText := GetStimulusText(Model as PUMLStimulus)
-      else if Model is PUMLInclude          then CellText := GetIncludeText(Model as PUMLInclude)
-      else if Model is PUMLExtend           then CellText := GetExtendText(Model as PUMLExtend)
-      else if Model is PUMLTransition       then CellText := GetTransitionText(Model as PUMLTransition)
-      else if Model is PUMLConnector        then CellText := GetConnectorText(Model as PUMLConnector)
-      else if Model is PUMLInstance         then CellText := GetInstanceText(Model as PUMLInstance)
-      else if Model is PUMLClassifierRole   then CellText := GetClassifierRoleText(Model as PUMLClassifierRole)
-                                            else CellText := GetStereotypeText(Model) + Model.Name;
+      else if Model is PUMLDependency then CellText := GetDependencyText(Model as PUMLDependency)
+      else if Model is PUMLLink then CellText := GetLinkText(Model as PUMLLink)
+      else if Model is PUMLGeneralization then CellText := GetGeneralizationText(Model as PUMLGeneralization)
+      else if Model is PUMLMessage then CellText := GetMessageText(Model as PUMLMessage)
+      else if Model is PUMLStimulus then CellText := GetStimulusText(Model as PUMLStimulus)
+      else if Model is PUMLInclude then CellText := GetIncludeText(Model as PUMLInclude)
+      else if Model is PUMLExtend then CellText := GetExtendText(Model as PUMLExtend)
+      else if Model is PUMLTransition then CellText := GetTransitionText(Model as PUMLTransition)
+      else if Model is PUMLConnector then CellText := GetConnectorText(Model as PUMLConnector)
+      else if Model is PUMLInstance then CellText := GetInstanceText(Model as PUMLInstance)
+      else if Model is PUMLClassifierRole then CellText := GetClassifierRoleText(Model as PUMLClassifierRole)
+      else CellText := GetStereotypeText(Model) + Model.Name;
     end;
   end;
 end;
@@ -1236,20 +1285,20 @@ var
   function GetAttributeImageIndex(M: PUMLAttribute): Integer;
   begin
     case M.Visibility of
-      vkPackage:   Result := 49;
-      vkPrivate:   Result := 48;
+      vkPackage: Result := 49;
+      vkPrivate: Result := 48;
       vkProtected: Result := 47;
-      vkPublic:    Result := 46;
+      vkPublic: Result := 46;
     end;
   end;
 
   function GetOperationImageIndex(M: PUMLOperation): Integer;
   begin
     case M.Visibility of
-      vkPackage:   Result := 53;
-      vkPrivate:   Result := 52;
+      vkPackage: Result := 53;
+      vkPrivate: Result := 52;
       vkProtected: Result := 51;
-      vkPublic:    Result := 50;
+      vkPublic: Result := 50;
     end;
   end;
 
@@ -1268,10 +1317,10 @@ var
 
   function GetUninterpretedActionImageIndex(M: PUMLUninterpretedAction): Integer;
   begin
-         if M.EntryState <> nil      then Result := 65
+    if M.EntryState <> nil then Result := 65
     else if M.DoActivityState <> nil then Result := 66
-    else if M.ExitState <> nil       then Result := 67
-                                     else Result := 64;
+    else if M.ExitState <> nil then Result := 67
+    else Result := 64;
   end;
 
   function GetExtensibleModelImageIndex(M: PExtensibleModel; DefaultImageIndex: Integer): Integer;
@@ -1298,26 +1347,28 @@ begin
   if Model <> nil then
   begin
     case Kind of
-      ikState: begin
-        ImageIndex := GetStateImageIndex(Model);
-      end;
-      ikNormal, ikSelected: begin
-             if Model is PUMLAttribute           then ImageIndex := GetAttributeImageIndex(Model as PUMLAttribute)
-        else if Model is PUMLOperation           then ImageIndex := GetOperationImageIndex(Model as PUMLOperation)
-        else if Model is PUMLPseudostate         then ImageIndex := GetPseudostateImageIndex(Model as PUMLPseudostate)
-        else if Model is PUMLUninterpretedAction then ImageIndex := GetUninterpretedActionImageIndex(Model as PUMLUninterpretedAction)
-        else if Model is PExtensibleModel        then ImageIndex := GetExtensibleModelImageIndex(Model as PExtensibleModel, NodeData.MetaNode.ImageIndex)
-                                                 else ImageIndex := NodeData.MetaNode.ImageIndex;
-      end;
+      ikState:
+        begin
+          ImageIndex := GetStateImageIndex(Model);
+        end;
+      ikNormal, ikSelected:
+        begin
+          if Model is PUMLAttribute then ImageIndex := GetAttributeImageIndex(Model as PUMLAttribute)
+          else if Model is PUMLOperation then ImageIndex := GetOperationImageIndex(Model as PUMLOperation)
+          else if Model is PUMLPseudostate then ImageIndex := GetPseudostateImageIndex(Model as PUMLPseudostate)
+          else if Model is PUMLUninterpretedAction then ImageIndex := GetUninterpretedActionImageIndex(Model as PUMLUninterpretedAction)
+          else if Model is PExtensibleModel then ImageIndex := GetExtensibleModelImageIndex(Model as PExtensibleModel, NodeData.MetaNode.ImageIndex)
+          else ImageIndex := NodeData.MetaNode.ImageIndex;
+        end;
     end;
   end;
 end;
 
 procedure TModelExplorerPanel.SortItemClick(Sender: TObject);
 begin
-  if Sender = SortByStorageOrderItem then
+  if Sender = SortByStorageOrderdxBarButton then
     SortType := stStorage
-  else if Sender = SortByAlphabeticOrderItem then
+  else if Sender = SortByAlphabeticOrderdxBarButton then
     SortType := stAlphabetic
   else
     SortType := stStorage;
@@ -1361,9 +1412,11 @@ procedure TModelExplorerPanel.MoveItemClick(Sender: TObject);
   begin
     ElemType := AModel.MetaClass.Name;
     Result := -1;
-    for I := AOwner.MOF_IndexOfCollectionItem(ColName, AModel) - 1 downto 0 do begin
+    for I := AOwner.MOF_IndexOfCollectionItem(ColName, AModel) - 1 downto 0 do
+    begin
       E := AOwner.MOF_GetCollectionItem(ColName, I);
-      if E.MetaClass.Name = ElemType then begin
+      if E.MetaClass.Name = ElemType then
+      begin
         Result := I;
         Exit;
       end;
@@ -1378,9 +1431,11 @@ procedure TModelExplorerPanel.MoveItemClick(Sender: TObject);
   begin
     ElemType := AModel.MetaClass.Name;
     Result := -1;
-    for I := AOwner.MOF_IndexOfCollectionItem(ColName, AModel) + 1 to AOwner.MOF_GetCollectionCount(ColName) - 1 do begin
+    for I := AOwner.MOF_IndexOfCollectionItem(ColName, AModel) + 1 to AOwner.MOF_GetCollectionCount(ColName) - 1 do
+    begin
       E := AOwner.MOF_GetCollectionItem(ColName, I);
-      if E.MetaClass.Name = ElemType then begin
+      if E.MetaClass.Name = ElemType then
+      begin
         Result := I;
         Exit;
       end;
@@ -1407,9 +1462,9 @@ begin
       if ColNameStr = '' then Exit;
 
       Idx := -1;
-      if Sender = MoveUpItem then
+      if Sender = MoveUpdxBarButton then
         Idx := GetPrevItemIndex(AOwner, AModel, ColNameStr)
-      else if Sender = MoveDownItem then
+      else if Sender = MoveDowndxBarButton then
         Idx := GetNextItemIndex(AOwner, AModel, ColNameStr);
 
       if (Idx <> -1) and Assigned(FOnModelIndexChanging) then
@@ -1427,7 +1482,8 @@ var
   Node: PVirtualNode;
   NodeData: PNodeData;
 begin
-  if FCollapsedTimeFlag then begin
+  if FCollapsedTimeFlag then
+  begin
     FCollapsedTimeFlag := False;
     Exit;
   end;
@@ -1457,8 +1513,10 @@ begin
     end;
   // popup menu showing
   end
-  else if Button = mbRight then begin
-    if Node <> nil then begin
+  else if Button = mbRight then
+  begin
+    if Node <> nil then
+    begin
       if Assigned(FPopupMenu) then FPopupMenu.PopupFromCursorPos;
     end;
   end;
@@ -1469,7 +1527,8 @@ var
   NodeData: PNodeData;
 begin
   // in case of diagram node, activate diagram
-  if ModelTree.FocusedNode <> nil then begin
+  if ModelTree.FocusedNode <> nil then
+  begin
     NodeData := ModelTree.GetNodeData(ModelTree.FocusedNode);
     if Assigned(NodeData) and (NodeData.Model is PDiagram) then
       if Assigned(FOnBrowseDiagram) then FOnBrowseDiagram(Self, NodeData.Model as PDiagram);
@@ -1479,7 +1538,8 @@ end;
 procedure TModelExplorerPanel.ModelTreeMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  if DragTimeTimer.Enabled then begin
+  if DragTimeTimer.Enabled then
+  begin
     ModelTree.Perform(wm_vscroll, SB_ENDSCROLL, 0);
     DragTimeTimer.Enabled := False;
   end;
@@ -1546,7 +1606,7 @@ procedure TModelExplorerPanel.ModelTreeNewText(Sender: TBaseVirtualTree;
   Node: PVirtualNode; Column: TColumnIndex; NewText: WideString);
 var
   NodeData: PNodeData;
-  ElemName: String;
+  ElemName: string;
 begin
   NodeData := ModelTree.GetNodeData(Node);
   if NodeData <> nil then
@@ -1593,7 +1653,8 @@ var
     AE1, AE2: PMetaAssociationEnd;
     Idx1, Idx2: Integer;
   begin
-    Idx1 := 0; Idx2 := 0;
+    Idx1 := 0;
+    Idx2 := 0;
     P1 := Model1.VirtualNamespace;
     P2 := Model2.VirtualNamespace;
     AE1 := Model1.GetContainerRelation(P1);
@@ -1612,22 +1673,24 @@ begin
   NodeData1 := ModelTree.GetNodeData(Node1);
   NodeData2 := ModelTree.GetNodeData(Node2);
   case FSortType of
-    stStorage: begin
-      I1 := NodeData1.MetaNode.Index;
-      I2 := NodeData2.MetaNode.Index;
-      if I1 < I2 then R := -1
-      else if I1 > I2 then R := 1
-      else R := CompareIndex(NodeData1.Model, NodeData2.Model);
-      Result := R;
-    end;
-    stAlphabetic: begin
-      I1 := NodeData1.MetaNode.Index;
-      I2 := NodeData2.MetaNode.Index;
-      if I1 < I2 then R := -1
-      else if I1 > I2 then R := 1
-      else R := CompareText(NodeData1.Model.Name, NodeData2.Model.Name);
-      Result := R;
-    end;
+    stStorage:
+      begin
+        I1 := NodeData1.MetaNode.Index;
+        I2 := NodeData2.MetaNode.Index;
+        if I1 < I2 then R := -1
+        else if I1 > I2 then R := 1
+        else R := CompareIndex(NodeData1.Model, NodeData2.Model);
+        Result := R;
+      end;
+    stAlphabetic:
+      begin
+        I1 := NodeData1.MetaNode.Index;
+        I2 := NodeData2.MetaNode.Index;
+        if I1 < I2 then R := -1
+        else if I1 > I2 then R := 1
+        else R := CompareText(NodeData1.Model.Name, NodeData2.Model.Name);
+        Result := R;
+      end;
   end;
 end;
 

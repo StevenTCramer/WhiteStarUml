@@ -269,21 +269,20 @@ object NewProjectForm: TNewProjectForm
         Left = 404
         Top = 0
         Width = 46
-        Height = 25
+        Height = 23
         Align = alNone
         Anchors = [akTop, akRight]
         AutoSize = True
         ButtonHeight = 23
         Caption = 'ToolBar'
         Customizable = True
-        EdgeBorders = []
         Images = ToolbarImageList
         ParentShowHint = False
         ShowHint = False
         TabOrder = 3
         object LargeIconButton: TToolButton
           Left = 0
-          Top = 2
+          Top = 0
           Hint = 'Large Icon'
           AutoSize = True
           Caption = 'Large Icon'
@@ -296,7 +295,7 @@ object NewProjectForm: TNewProjectForm
         end
         object SmallIconButton: TToolButton
           Left = 23
-          Top = 2
+          Top = 0
           Hint = 'Small Icon'
           AutoSize = True
           Caption = 'Small Icon'

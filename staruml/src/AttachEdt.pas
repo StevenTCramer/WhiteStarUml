@@ -49,9 +49,21 @@ interface
 
 uses
   Core,
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  ComCtrls, TBSkinPlus, TB2Item, TB2Dock, TB2Toolbar, ImgList, dxBar,
-  ExtCtrls, FlatPanel;
+  Windows,
+  Messages,
+  SysUtils,
+  Classes,
+  Graphics,
+  Controls,
+  Forms,
+  Dialogs,
+  ComCtrls,
+  ImgList,
+  dxBar,
+  ExtCtrls,
+  FlatPanel,
+  cxClasses;
+  //TBSkinPlus, TB2Item, TB2Dock, TB2Toolbar,
 
 type
   // Enumeration Types
@@ -63,7 +75,7 @@ type
   PAttachmentDeleteEvent = procedure(Sender: TObject; AModel: PModel; Index: Integer) of object;
   PAttachmentChangeEvent = procedure(Sender: TObject; AModel: PModel; Index: Integer; Attachment: string) of object;
   PAttachmentOrderChangeEvent = procedure(Sender: TObject; AModel: PModel; Index: Integer; NewIndex: Integer) of object;
-  PAttachmentSelectedEvent = procedure (Sender: TObject; SelectedIndex: Integer) of object;
+  PAttachmentSelectedEvent = procedure(Sender: TObject; SelectedIndex: Integer) of object;
 
   // TAttachmentEditor
   TAttachmentEditor = class(TFrame)
@@ -71,17 +83,16 @@ type
     SysFileIconImageList: TImageList;
     ListViewFileIconImageList: TImageList;
     AttachmentsImageList: TImageList;
-    AttachmentsToolbar: TTBToolbar;
-    OpenAttachmentItem: TTBItem;
-    AddAttachmentItem: TTBItem;
-    DeleteAttachmentItem: TTBItem;
-    EditAttachmentItem: TTBItem;
-    MoveAttachmentUpItem: TTBItem;
-    MoveAttachmentDownItem: TTBItem;
-    TBSkin: TTBSkin;
-    TBDock: TTBDock;
     ClientPanel: TFlatPanel;
     BasicFileIconImageList: TImageList;
+    dxBarManager: TdxBarManager;
+    AttachementsDxBar: TdxBar;
+    AddAttachmentDxBarButton: TdxBarButton;
+    DeleteAttachmentDxBarButton: TdxBarButton;
+    MoveAttachmentDownDxBarButton: TdxBarButton;
+    MoveAttachmentUpDxBarButton: TdxBarButton;
+    OpenAttachmentDxBarButton: TdxBarButton;
+    EditAttachmentDxBarButton: TdxBarButton;
     procedure OpenAttachmentItemClick(Sender: TObject);
     procedure AddAttachmentItemClick(Sender: TObject);
     procedure DeleteAttachmentItemClick(Sender: TObject);
@@ -142,8 +153,10 @@ implementation
 {$R *.dfm}
 
 uses
-  MainFrm, AttachItemEdtFrm,
-  ShellAPI, StarUMLApp;
+  MainFrm,
+  AttachItemEdtFrm,
+  ShellAPI,
+  StarUMLApp;
 
 const
   APPENDED_ICON_COUNT = 3;
@@ -167,10 +180,10 @@ var
   ImageListHandle: THandle;
 begin
   ImageListHandle := SHGetFileInfo('',
-                           0,
-                           FileInfo,
-                           SizeOf(FileInfo),
-                           SHGFI_SYSICONINDEX or SHGFI_SMALLICON);
+    0,
+    FileInfo,
+    SizeOf(FileInfo),
+    SHGFI_SYSICONINDEX or SHGFI_SMALLICON);
   SysFileIconImageList.Handle := ImageListHandle;
   SysFileIconImageList.Width := GetSystemMetrics(SM_CXSMICON);
   SysFileIconImageList.Height := GetSystemMetrics(SM_CYSMICON);
@@ -192,7 +205,8 @@ var
 begin
   Result := -1;
   for I := 0 to AttachmentListView.Items.Count - 1 do
-    if AttachmentListView.Items[I].SubItems[0] = Value then begin
+    if AttachmentListView.Items[I].SubItems[0] = Value then
+    begin
       Result := I;
       Exit;
     end;
@@ -215,28 +229,33 @@ var
   M: PModel;
 begin
   ListItem := AttachmentListView.Items.Add;
-  if IsElement(Value) then begin
+  if IsElement(Value) then
+  begin
     M := StarUMLApplication.Project.FindByRelativePathname(Copy(Value, 11, Length(Value) - 10));
     if M <> nil then
     begin
       ListItem.Caption := M.Name + ' (' + M.MetaClass.Name + ')';
       ListItem.ImageIndex := ICON_IDX_ELEMENT;
     end
-    else begin
+    else
+    begin
       ListItem.Caption := '(element not exist)';
       ListItem.ImageIndex := ICON_IDX_ELEMENT;
     end;
   end
-  else if IsURL(Value) then begin
+  else if IsURL(Value) then
+  begin
     ListItem.Caption := Value;
     ListItem.ImageIndex := ICON_IDX_URL;
   end
-  else if FileExists(Value) then begin
+  else if FileExists(Value) then
+  begin
     ListItem.Caption := ExtractFileName(Value);
     SHGetFileInfo(PChar(Value), 0, FileInfo, SizeOf(FileInfo), SHGFI_SYSICONINDEX or SHGFI_SMALLICON);
     ListItem.ImageIndex := FileInfo.iIcon + APPENDED_ICON_COUNT;
   end
-  else begin
+  else
+  begin
     ListItem.Caption := Value;
     ListItem.ImageIndex := ICON_IDX_UNKNOWN;
   end;
@@ -306,16 +325,16 @@ begin
   C := 0;
   if TargetModel <> nil then
     C := TargetModel.Attachments.Count;
-  AttachmentsToolbar.BeginUpdate;
+//  AttachementsDxBar.BeginUpdate;
   Openable := (AttachmentListView.Selected <> nil)
     and (IsURL(AttachmentListView.Selected.Caption) or FileExists(AttachmentListView.Selected.Caption));
-  OpenAttachmentItem.Enabled := Enabled and S and Openable;
-  AddAttachmentItem.Enabled := Enabled and (not ReadOnly) and M;
-  EditAttachmentItem.Enabled := Enabled and (not ReadOnly) and M and S;
-  DeleteAttachmentItem.Enabled := Enabled and (not ReadOnly) and M and S;
-  MoveAttachmentUpItem.Enabled := Enabled and (not ReadOnly) and M and S and (SelectedIndex > 0);
-  MoveAttachmentDownItem.Enabled := Enabled and (not ReadOnly) and M and S and (SelectedIndex < C - 1);
-  AttachmentsToolbar.EndUpdate;
+  OpenAttachmentDxBarButton.Enabled := Enabled and S and Openable;
+  AddAttachmentDxBarButton.Enabled := Enabled and (not ReadOnly) and M;
+  EditAttachmentDxBarButton.Enabled := Enabled and (not ReadOnly) and M and S;
+  DeleteAttachmentDxBarButton.Enabled := Enabled and (not ReadOnly) and M and S;
+  MoveAttachmentUpDxBarButton.Enabled := Enabled and (not ReadOnly) and M and S and (SelectedIndex > 0);
+  MoveAttachmentDownDxBarButton.Enabled := Enabled and (not ReadOnly) and M and S and (SelectedIndex < C - 1);
+//  AttachementsDxBar.EndUpdate;
   if Enabled then
     AttachmentListView.Color := clWindow
   else
@@ -354,9 +373,11 @@ var
   Attachment: string;
   Kind: PAttachmentKind;
 begin
-  if AttachmentListView.ItemIndex <> -1 then begin
+  if AttachmentListView.ItemIndex <> -1 then
+  begin
     Attachment := AttachmentListView.Selected.SubItems[0];
-    if IsElement(Attachment) then begin
+    if IsElement(Attachment) then
+    begin
       Kind := akElement;
       Attachment := Copy(Attachment, 11, Length(Attachment) - 10);
     end
@@ -372,7 +393,8 @@ end;
 procedure TAttachmentEditor.AddAttachment;
 begin
   AttachmentItemEditForm.Location := 'http://';
-  if AttachmentItemEditForm.Execute then begin
+  if AttachmentItemEditForm.Execute then
+  begin
     if AttachmentListView.Visible then
       AttachmentListView.SetFocus;
     if Assigned(FOnAttachmentAdd) then
@@ -385,7 +407,8 @@ procedure TAttachmentEditor.DeleteAttachment;
 var
   I: Integer;
 begin
-  if AttachmentListView.ItemIndex <> -1 then begin
+  if AttachmentListView.ItemIndex <> -1 then
+  begin
     I := AttachmentListView.ItemIndex;
     AttachmentListView.DeleteSelected;
     if Assigned(FOnAttachmentDelete) then
@@ -403,11 +426,13 @@ var
   N: string;
   I: Integer;
 begin
-  if AttachmentListView.ItemIndex <> -1 then begin
+  if AttachmentListView.ItemIndex <> -1 then
+  begin
     I := AttachmentListView.ItemIndex;
     ListItem := AttachmentListView.Selected;
     AttachmentItemEditForm.Location := ListItem.SubItems[0];
-    if AttachmentItemEditForm.Execute then begin
+    if AttachmentItemEditForm.Execute then
+    begin
       N := AttachmentItemEditForm.Location;
       if Assigned(FOnAttachmentChange) then
         FOnAttachmentChange(Self, FTargetModel, I, N);
@@ -420,7 +445,8 @@ procedure TAttachmentEditor.MoveUpItem;
 var
   I: Integer;
 begin
-  if AttachmentListView.ItemIndex <> -1 then begin
+  if AttachmentListView.ItemIndex <> -1 then
+  begin
     I := AttachmentListView.ItemIndex;
     if (I >= 1) and (I <= AttachmentListView.Items.Count - 1) then
       if Assigned(FOnAttachmentOrderChange) then
@@ -433,7 +459,8 @@ procedure TAttachmentEditor.MoveDownItem;
 var
   I: Integer;
 begin
-  if AttachmentListView.ItemIndex <> -1 then begin
+  if AttachmentListView.ItemIndex <> -1 then
+  begin
     I := AttachmentListView.ItemIndex;
     if (I >= 0) and (I <= AttachmentListView.Items.Count - 2) then
       if Assigned(FOnAttachmentOrderChange) then
@@ -443,6 +470,7 @@ begin
 end;
 
 // Toolbar Event Handlers
+
 procedure TAttachmentEditor.OpenAttachmentItemClick(Sender: TObject);
 begin
   OpenAttachment;
@@ -474,6 +502,7 @@ begin
 end;
 
 // ListView Event handlers
+
 procedure TAttachmentEditor.AttachmentListViewContextPopup(Sender: TObject;
   MousePos: TPoint; var Handled: Boolean);
 begin
@@ -483,13 +512,14 @@ end;
 
 procedure TAttachmentEditor.AttachmentListViewDblClick(Sender: TObject);
 begin
-  if AttachmentListView.Selected <> nil then begin
+  if AttachmentListView.Selected <> nil then
+  begin
     OpenAttachment;
   end;
 end;
-
 
 // TAttachmentEditor
 ////////////////////////////////////////////////////////////////////////////////
 
 end.
+

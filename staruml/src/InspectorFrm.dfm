@@ -52,13 +52,19 @@ object InspectorFrame: TInspectorFrame
       Font.Style = []
       ParentFont = False
       TabOrder = 2
+      ExplicitTop = 21
+      ExplicitWidth = 338
+      ExplicitHeight = 342
       inherited ClientPanel: TFlatPanel
         Width = 338
         Height = 342
-        inherited Inspector: TdxInspector
+        ExplicitWidth = 338
+        ExplicitHeight = 342
+        inherited Inspector: TcxVerticalGrid
           Width = 336
           Height = 340
-          DividerPos = 168
+          ExplicitWidth = 336
+          ExplicitHeight = 340
         end
       end
     end
@@ -82,6 +88,8 @@ object InspectorFrame: TInspectorFrame
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
+        ExplicitWidth = 108
+        ExplicitHeight = 13
       end
     end
   end

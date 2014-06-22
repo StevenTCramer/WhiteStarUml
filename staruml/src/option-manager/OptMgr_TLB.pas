@@ -11,11 +11,11 @@ unit OptMgr_TLB;
 // manual modifications will be lost.                                         
 // ************************************************************************ //
 
-// PASTLWTR : 1.2
-// File generated on 2005-10-21 ¿ÀÈÄ 2:52:43 from Type Library described below.
+// $Rev: 8291 $
+// File generated on 2008-06-23 10:44:10 PM from Type Library described below.
 
 // ************************************************************************  //
-// Type Lib: D:\PLASTIC_CVS\plastic\plastic\src\option-manager\OptMgr.tlb (1)
+// Type Lib: C:\TimeWarp\staruml-src\staruml\src\option-manager\OptMgr.tlb (1)
 // LIBID: {C5EF8E94-B2FE-4709-A92A-D9A50940AE9C}
 // LCID: 0
 // Helpfile: 

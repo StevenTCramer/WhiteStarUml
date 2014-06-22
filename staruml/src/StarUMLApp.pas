@@ -48,9 +48,25 @@ unit StarUMLApp;
 interface
 
 uses
-  BasicClasses, GraphicClasses, Core, ExtCore, ViewCore, ProjectMgr, UMLModels, UMLAux,
-  UMLViews, UMLFacto, SelectionMgr, CmdExec, ClipboardMgr,
-  Types, Classes, Graphics, SysUtils, Forms, Messages;
+  BasicClasses, //No Leak
+  GraphicClasses,
+  Core,// No Leak
+  ExtCore, // No Leak
+  ViewCore, // No Leak
+  ProjectMgr,// No Leak
+  UMLModels, // No Leak
+  UMLAux,// No Leak
+  UMLViews, // No Leak
+  UMLFacto,// No Leak
+  SelectionMgr,// No Leak
+  CmdExec, //Leak
+  ClipboardMgr, //No Leak
+  Types,
+  Classes,
+  Graphics,
+  SysUtils,
+  Forms,
+  Messages;
 
 type
   // Exceptions
@@ -409,9 +425,13 @@ var
 implementation
 
 uses
-  Dialogs, LogMgr, UMLVerify, NLS_StarUML,
-  Windows, Jpeg, ShellAPI;
-
+  Dialogs,
+  LogMgr,
+  UMLVerify,
+  NLS_StarUML,
+  Windows,
+  Jpeg,
+  ShellAPI;
 
 ////////////////////////////////////////////////////////////////////////////////
 // PStarUMLApplication
@@ -539,7 +559,7 @@ begin
       FEventArgModels.Add(SelectionManager.SelectedModels[I]);
     FEventArgViews.Clear;
     for I := 0 to SelectionManager.SelectedViewCount - 1 do
-      FEventArgViews.Add(SelectionManager.SelectedViews[I]);    
+      FEventArgViews.Add(SelectionManager.SelectedViews[I]);
     FOnSelectionChanged(Self);
   end;
 end;
@@ -922,8 +942,8 @@ var
     begin
       V := ViewSet.Items[I] as PView;
       if (V is PUMLColMessageView) or (V is PUMLColStimulusView) or
-         (V is PUMLSeqMessageView) or (V is PUMLSeqStimulusView) or
-         (V is PUMLInteractionOperandView) then
+        (V is PUMLSeqMessageView) or (V is PUMLSeqStimulusView) or
+        (V is PUMLInteractionOperandView) then
       begin
         ModelSet.Add(V.Model);
       end;
@@ -998,7 +1018,8 @@ var
     for I := 0 to AModel.ViewCount - 1 do
       ViewSet.Add(AModel.Views[I]);
     // 모델이 PDiagram인 경우 그것의 DiagramView와 모든 OwnedView들을 추가한다.
-    if AModel is PDiagram then begin
+    if AModel is PDiagram then
+    begin
       ViewSet.Add((AModel as PDiagram).DiagramView);
       for I := 0 to (AModel as PDiagram).DiagramView.OwnedViewCount - 1 do
         ViewSet.Add((AModel as PDiagram).DiagramView.OwnedViews[I]);
@@ -1017,11 +1038,13 @@ var
   begin
     C := ViewSet.Count;
     DV := AView.GetDiagramView;
-    if DV <> nil then begin
+    if DV <> nil then
+    begin
       for I := 0 to DV.OwnedViewCount - 1 do
       begin
         V := DV.OwnedViews[I];
-        if V is PEdgeView then begin
+        if V is PEdgeView then
+        begin
           if ((V as PEdgeView).Head = AView) or ((V as PEdgeView).Tail = AView) then
             ViewSet.Add(V);
         end;
@@ -1045,7 +1068,7 @@ var
       begin
         V := AView.GetDiagramView.OwnedViews[I];
         if (V is PUMLColStimulusView) and
-           ((V as PUMLColStimulusView).HostEdge = AView) then ViewSet.Add(V);
+          ((V as PUMLColStimulusView).HostEdge = AView) then ViewSet.Add(V);
       end;
     end
     else if AView is PUMLAssociationRoleView then
@@ -1054,7 +1077,7 @@ var
       begin
         V := AView.GetDiagramView.OwnedViews[I];
         if (V is PUMLColMessageView) and
-           ((V as PUMLColMessageView).HostEdge = AView) then ViewSet.Add(V);
+          ((V as PUMLColMessageView).HostEdge = AView) then ViewSet.Add(V);
       end;
     end;
     Result := (ViewSet.Count <> C);
@@ -1082,7 +1105,8 @@ var
   begin
     Result := False;
     Doc := AView.GetContainingDocument;
-    if (Doc <> nil) and (Doc.ReadOnly) then begin
+    if (Doc <> nil) and (Doc.ReadOnly) then
+    begin
       ViewSet.Remove(AView);
       Result := True;
     end;
@@ -1090,22 +1114,24 @@ var
 
 begin
   repeat
-     Changed := False;
-     for I := 0 to Models.Count - 1 do begin
-       Changed := Changed or ExcludeUndeletableModel(Models.Items[I] as PModel, Models, Views);
-       Changed := Changed or IncludeModelsOwnedBy(Models.Items[I] as PModel, Models, Views);
-       Changed := Changed or IncludeRelationsOf(Models.Items[I] as PModel, Models);
-       Changed := Changed or IncludeViewsOf(Models.Items[I] as PModel, Models, Views);
-     end;
+    Changed := False;
+    for I := 0 to Models.Count - 1 do
+    begin
+      Changed := Changed or ExcludeUndeletableModel(Models.Items[I] as PModel, Models, Views);
+      Changed := Changed or IncludeModelsOwnedBy(Models.Items[I] as PModel, Models, Views);
+      Changed := Changed or IncludeRelationsOf(Models.Items[I] as PModel, Models);
+      Changed := Changed or IncludeViewsOf(Models.Items[I] as PModel, Models, Views);
+    end;
   until (not Changed);
   repeat
-     Changed := False;
-     for I := 0 to Views.Count - 1 do begin
-       Changed := Changed or IncludeSubViews(Views.Items[I] as PView, Models, Views);
-       Changed := Changed or IncludeEdgeViews(Views.Items[I] as PView, Models, Views);
-       Changed := Changed or IncludeRelatedViews(Views.Items[I] as PView, Models, Views);
-       Changed := Changed or ExcludeReadOnlyView(Views.Items[I] as PView, Models, Views);
-     end;
+    Changed := False;
+    for I := 0 to Views.Count - 1 do
+    begin
+      Changed := Changed or IncludeSubViews(Views.Items[I] as PView, Models, Views);
+      Changed := Changed or IncludeEdgeViews(Views.Items[I] as PView, Models, Views);
+      Changed := Changed or IncludeRelatedViews(Views.Items[I] as PView, Models, Views);
+      Changed := Changed or ExcludeReadOnlyView(Views.Items[I] as PView, Models, Views);
+    end;
   until (not Changed);
   DetermineModelsThatShouldBeDeletedWithView(Models, Views);
 end;
@@ -1167,9 +1193,11 @@ procedure PStarUMLApplication.CheckUnmovableViews(Views: POrderedSet);
   begin
     Result := False;
     if AContainerView = nil then Exit;
-    for I := 0 to ASet.Count - 1 do begin
+    for I := 0 to ASet.Count - 1 do
+    begin
       SetElement := ASet.Items[I] as PView;
-      if SetElement = AContainerView then begin
+      if SetElement = AContainerView then
+      begin
         Result := True;
         Exit;
       end else Result := ContaierViewExistInSet(AContainerView.ContainerView, ASet);
@@ -1179,17 +1207,22 @@ var
   I, J: Integer;
   AView, SetElement: PView;
 begin
-  for I := Views.Count - 1 downto 0 do begin
+  for I := Views.Count - 1 downto 0 do
+  begin
     AView := Views.Items[I] as PView;
     if AView.ContainerView = nil then Continue;
-    for J := 0 to Views.Count - 1 do begin
+    for J := 0 to Views.Count - 1 do
+    begin
       SetElement := Views.Items[J] as PView;
       if SetElement = AView then Continue;
-      if AView.ContainerView = SetElement then begin
+      if AView.ContainerView = SetElement then
+      begin
         Views.Delete(I);
         Break;
-      end else begin
-        if ContaierViewExistInSet(AView.ContainerView, Views) then begin
+      end else
+      begin
+        if ContaierViewExistInSet(AView.ContainerView, Views) then
+        begin
           Views.Delete(I);
           Break;
         end;
@@ -1245,9 +1278,11 @@ procedure PStarUMLApplication.ElementModified(Element: PElement);
 var
   Doc: PDocument;
 begin
-  if Element <> nil then begin
+  if Element <> nil then
+  begin
     Doc := Element.GetContainingDocument;
-    if Doc <> nil then begin
+    if Doc <> nil then
+    begin
       Doc.Modified := True;
     end;
   end;
@@ -1511,7 +1546,8 @@ end;
 function PStarUMLApplication.Cut: Boolean;
 begin
   Result := Copy;
-  if Result then begin
+  if Result then
+  begin
     if SelectedViewCount > 0 then DeleteSelectedViews
     else DeleteSelectedModels;
   end;
@@ -1531,7 +1567,8 @@ end;
 
 procedure PStarUMLApplication.CopyActiveDiagram;
 begin
-  if (ActiveDiagram <> nil) and (ActiveDiagram.OwnedViewCount > 0) then begin
+  if (ActiveDiagram <> nil) and (ActiveDiagram.OwnedViewCount > 0) then
+  begin
     if ClipboardManager.SetViewsData(ActiveDiagram, False) then SelectAll;
   end;
 end;
@@ -1550,16 +1587,20 @@ var
   AModel, AnOwnerModel: PModel;
 begin
   ClipbrdDataKind := ClipboardManager.ClipboardDataKind;
-  if ClipbrdDataKind = ckView then begin
-    if ActiveDiagram <> nil then begin
+  if ClipbrdDataKind = ckView then
+  begin
+    if ActiveDiagram <> nil then
+    begin
       AnOwnerDiagram := ActiveDiagram;
       Views := ClipboardManager.GetViewsData;
       if (Views <> nil) and (Views.Count > 0) then
         NewViewsByCopyPaste(Views, AnOwnerDiagram);
       Views.Free;
     end;
-  end else if ClipbrdDataKind = ckModel then begin
-    if SelectedModelCount = 1 then begin
+  end else if ClipbrdDataKind = ckModel then
+  begin
+    if SelectedModelCount = 1 then
+    begin
       AnOwnerModel := SelectedModels[0];
       AModel := ClipboardManager.GetModelData;
       if AModel <> nil then
@@ -1695,7 +1736,8 @@ begin
   CheckReadOnly(DiagramView);
   V := CommandExecutor.NewElement(DiagramView, ElementKind, Argument, End1, End2);
   ElementModified(DiagramView);
-  if V <> nil then begin
+  if V <> nil then
+  begin
     if V.Model <> nil then SelectModelInExplorer(V.Model);
     ElementModified(V.Model);
     if V.Model <> nil then ElementModified(V.Model.VirtualNamespace);
@@ -1713,12 +1755,14 @@ begin
   CheckReadOnly(DiagramView);
   V := CommandExecutor.NewElement(DiagramView, X1, Y1, X2, Y2, ElementKind, Argument);
   ElementModified(DiagramView);
-  if V <> nil then begin
+  if V <> nil then
+  begin
     if V.Model <> nil then SelectModelInExplorer(V.Model);
     ElementModified(V.Model);
     if V.Model <> nil then ElementModified(V.Model.VirtualNamespace);
   end;
-  if V is PEdgeView then begin
+  if V is PEdgeView then
+  begin
     if (V as PEdgeView).Head <> nil then
       ElementModified((V as PEdgeView).Head.Model);
     if (V as PEdgeView).Tail <> nil then
@@ -1735,7 +1779,8 @@ begin
   CheckReadOnly(DiagramView);
   V := CommandExecutor.NewExtendedElement(DiagramView, Profile, ElementPrototype, End1, End2);
   ElementModified(DiagramView);
-  if V <> nil then begin
+  if V <> nil then
+  begin
     if V.Model <> nil then SelectModelInExplorer(V.Model);
     ElementModified(V.Model);
     if V.Model <> nil then ElementModified(V.Model.VirtualNamespace);
@@ -1753,12 +1798,14 @@ begin
   CheckReadOnly(DiagramView);
   V := CommandExecutor.NewExtendedElement(DiagramView, X1, Y1, X2, Y2, Profile, ElementPrototype);
   ElementModified(DiagramView);
-  if V <> nil then begin
+  if V <> nil then
+  begin
     if V.Model <> nil then SelectModelInExplorer(V.Model);
     ElementModified(V.Model);
     if V.Model <> nil then ElementModified(V.Model.VirtualNamespace);
   end;
-  if V is PEdgeView then begin
+  if V is PEdgeView then
+  begin
     if (V as PEdgeView).Head <> nil then
       ElementModified((V as PEdgeView).Head.Model);
     if (V as PEdgeView).Tail <> nil then
@@ -2225,7 +2272,8 @@ begin
   ViewSet.Clear;
   SelectionManager.CollectSelectedViews(ViewSet);
   // Filter views that is not decendent of PEdgeView.
-  for I := ViewSet.Count - 1 downto 0 do begin
+  for I := ViewSet.Count - 1 downto 0 do
+  begin
     V := ViewSet.Items[I] as PView;
     if not (V is PEdgeView) then ViewSet.Remove(V);
   end;
@@ -2253,10 +2301,12 @@ procedure PStarUMLApplication.ChangeNoteViewStrings(AView: PUMLCustomTextView; S
 begin
   ViewSet.Clear;
   ViewSet.Add(AView);
-  if Strs = '' then begin
+  if Strs = '' then
+  begin
     // DeleteView(AView);
   end
-  else if AdjustLineBreaks(AView.Text, tlbsLF) <> AdjustLineBreaks(Strs, tlbsLF) then begin
+  else if AdjustLineBreaks(AView.Text, tlbsLF) <> AdjustLineBreaks(Strs, tlbsLF) then
+  begin
     CheckReadOnly(AView);
     CommandExecutor.ChangeNoteViewStrings(ViewSet, Strs);
     ElementModified(AView);
@@ -2404,7 +2454,7 @@ begin
 end;
 
 function PStarUMLApplication.SaveDiagramImageToMetafile(ADiagramView: PDiagramView;
-    FileName: string; Enhanced: Boolean = False): Boolean;
+  FileName: string; Enhanced: Boolean = False): Boolean;
 var
   AMetafile: TMetafile;
 begin
@@ -2440,7 +2490,7 @@ begin
   ModelSet.Clear;
   ModelSet.Add(AExtensibleModel);
   if DifferentAttributeExists(ModelSet, 'StereotypeName', Stereotype) or
-     DifferentAttributeExists(ModelSet, 'StereotypeProfile', Profile) then
+    DifferentAttributeExists(ModelSet, 'StereotypeProfile', Profile) then
   begin
     CheckReadOnly(AExtensibleModel);
     CommandExecutor.ChangeModelsStereotype(ModelSet, Profile, Stereotype);
@@ -2550,7 +2600,7 @@ end;
 procedure PStarUMLApplication.ChangeTypeExpression(AModel: PModel; TypeExpr: string; TypeRef: PModel);
 begin
   if (AModel.MOF_GetAttribute('TypeExpression') <> TypeExpr) or
-     (AModel.MOF_GetReference('Type_') <> TypeRef) then
+    (AModel.MOF_GetReference('Type_') <> TypeRef) then
   begin
     CheckReadOnly(AModel);
     CommandExecutor.ChangeTypeExpression(AModel, TypeExpr, TypeRef);
@@ -2561,7 +2611,7 @@ end;
 procedure PStarUMLApplication.ChangeValueExpression(AModel: PModel; ValueExpr: string; ValueRef: PModel);
 begin
   if (AModel.MOF_GetAttribute('ValueExpression') <> ValueExpr) or
-     (AModel.MOF_GetReference('Value') <> ValueRef) then
+    (AModel.MOF_GetReference('Value') <> ValueRef) then
   begin
     CheckReadOnly(AModel);
     CommandExecutor.ChangeValueExpression(AModel, ValueExpr, ValueRef);
@@ -2613,7 +2663,7 @@ begin
   ModelSet.Clear;
   SelectionManager.CollectSelectedModels(ModelSet);
   if DifferentAttributeExists(ModelSet, 'StereotypeName', Stereotype) or
-     DifferentAttributeExists(ModelSet, 'StereotypeProfile', StereotypeProfile) then
+    DifferentAttributeExists(ModelSet, 'StereotypeProfile', StereotypeProfile) then
   begin
     CheckReadOnly(ModelSet);
     CommandExecutor.ChangeModelsStereotype(ModelSet, StereotypeProfile, Stereotype);
@@ -2673,7 +2723,7 @@ end;
 procedure PStarUMLApplication.ChangeConstraint(AExtensibleModel: PExtensibleModel; AConstraint: PConstraint; AName: string; ABody: string);
 begin
   if (AExtensibleModel.IndexOfConstraint(AConstraint) > -1) and
-     ((AConstraint.Name <> AName) or (AConstraint.Body <> ABody)) then
+    ((AConstraint.Name <> AName) or (AConstraint.Body <> ABody)) then
   begin
     CheckReadOnly(AExtensibleModel);
     CommandExecutor.ChangeConstraint(AExtensibleModel, AConstraint, AName, ABody);
@@ -2693,7 +2743,8 @@ end;
 
 procedure PStarUMLApplication.SetDataTaggedValue(AExtensibleModel: PExtensibleModel; AProfile, ATagDefinitionSet, AName, AValue: string);
 begin
-  if AdjustLineBreaks(AExtensibleModel.QueryDataTaggedValue(AProfile, ATagDefinitionSet, AName), tlbsLF) <> AdjustLineBreaks(AValue, tlbsLF) then begin
+  if AdjustLineBreaks(AExtensibleModel.QueryDataTaggedValue(AProfile, ATagDefinitionSet, AName), tlbsLF) <> AdjustLineBreaks(AValue, tlbsLF) then
+  begin
     CheckReadOnly(AExtensibleModel);
     CommandExecutor.SetDataTaggedValue(AExtensibleModel, AProfile, ATagDefinitionSet, AName, AValue);
     ElementModified(AExtensibleModel);
@@ -2853,8 +2904,9 @@ begin
   CheckReadOnly(AModel);
   if CommandExecutor.ApplyGeneralNameExpression(ModelSet, Value, Msg) then
     ElementModified(AModel)
-  else begin
-    if Msg <> '' then Raise EExpressionInvalid.Create(Msg);
+  else
+  begin
+    if Msg <> '' then raise EExpressionInvalid.Create(Msg);
   end;
 end;
 
@@ -2868,8 +2920,9 @@ begin
   CheckReadOnly(AModel);
   if CommandExecutor.ApplyClassifierRoleExpression(ModelSet, Value, Msg) then
     ElementModified(AModel)
-  else begin
-    if Msg <> '' then Raise EExpressionInvalid.Create(Msg);
+  else
+  begin
+    if Msg <> '' then raise EExpressionInvalid.Create(Msg);
   end;
 end;
 
@@ -2883,8 +2936,9 @@ begin
   CheckReadOnly(AModel);
   if CommandExecutor.ApplyObjectExpression(ModelSet, Value, Msg) then
     ElementModified(AModel)
-  else begin
-    if Msg <> '' then Raise EExpressionInvalid.Create(Msg);
+  else
+  begin
+    if Msg <> '' then raise EExpressionInvalid.Create(Msg);
   end;
 end;
 
@@ -2898,8 +2952,9 @@ begin
   CheckReadOnly(AModel);
   if CommandExecutor.ApplyAttributeExpression(ModelSet, Value, Msg) then
     ElementModified(AModel)
-  else begin
-    if Msg <> '' then Raise EExpressionInvalid.Create(Msg);
+  else
+  begin
+    if Msg <> '' then raise EExpressionInvalid.Create(Msg);
   end;
 end;
 
@@ -2913,8 +2968,9 @@ begin
   CheckReadOnly(AModel);
   if CommandExecutor.ApplyOperationExpression(ModelSet, Value, Msg) then
     ElementModified(AModel)
-  else begin
-    if Msg <> '' then Raise EExpressionInvalid.Create(Msg);
+  else
+  begin
+    if Msg <> '' then raise EExpressionInvalid.Create(Msg);
   end;
 end;
 
@@ -2928,8 +2984,9 @@ begin
   CheckReadOnly(AModel);
   if CommandExecutor.ApplyMessageExpression(ModelSet, Value, Msg) then
     ElementModified(AModel)
-  else begin
-    if Msg <> '' then Raise EExpressionInvalid.Create(Msg);
+  else
+  begin
+    if Msg <> '' then raise EExpressionInvalid.Create(Msg);
   end;
 end;
 
@@ -2937,7 +2994,8 @@ procedure PStarUMLApplication.ChangeModelReferenceWithNamedModelCreating(AModel:
 begin
   CheckReadOnly(Owner);
   CheckReadOnly(AModel);
-  if IsClassifier and (Owner is PUMLNamespace) then begin
+  if IsClassifier and (Owner is PUMLNamespace) then
+  begin
     PreinspectClassifierNameConflict(Owner as PUMLNamespace, Name);
     CheckNameValidity(Name);
   end;

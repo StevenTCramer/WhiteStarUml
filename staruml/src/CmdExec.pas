@@ -48,8 +48,16 @@ unit CmdExec;
 interface
 
 uses
-  BasicClasses, GraphicClasses, Core, ExtCore, ViewCore, UMLModels, UMLFacto,
-  Classes, Types, Graphics;
+  BasicClasses, // No Leak
+  GraphicClasses, //No Leak
+  Core, // No Leak
+  ExtCore,// No Leak
+  ViewCore,//No Leak
+  UMLModels,//No
+  UMLFacto,//No
+  Classes,
+  Types,
+  Graphics;
 
 type
   // Enumeration Types
@@ -189,8 +197,12 @@ type
 implementation
 
 uses
-  UMLViews, UMLAux, ExprParsers, LayoutDgm,
-  SysUtils, NLS_StarUML;
+  UMLViews,
+  UMLAux,
+  ExprParsers,
+  LayoutDgm,
+  SysUtils,
+  NLS_StarUML;
 
 type
   // PAbstractChangeCommand
@@ -583,7 +595,7 @@ type
     Element: PElement;
     Key: string;
     Value: PElement;
-    Index: Integer;
+      Index: Integer;
   protected
     function Precondition: Boolean; override;
   public
@@ -600,7 +612,7 @@ type
   private
     Element: PElement;
     Key: string;
-    Index: Integer;
+      Index: Integer;
     Value: PElement;
   protected
     function Precondition: Boolean; override;
@@ -932,7 +944,7 @@ type
     TaggedValue: PTaggedValue;
     ReferenceValue: PExtensibleModel;
     NeedToCreate: Boolean;
-    Index: Integer;
+      Index: Integer;
   protected
     function Precondition: Boolean; override;
     procedure Preprocess; override;
@@ -957,7 +969,7 @@ type
     TagName: string;
     TaggedValue: PTaggedValue;
     ReferenceValue: PExtensibleModel;
-    Index: Integer;
+      Index: Integer;
   protected
     function Precondition: Boolean; override;
   public
@@ -1013,7 +1025,7 @@ type
   private
     Model: PModel;
     Attachment: string;
-    Index: Integer;
+      Index: Integer;
   protected
     function Precondition: Boolean; override;
   public
@@ -1031,7 +1043,7 @@ type
   private
     Model: PModel;
     Attachment: string;
-    Index: Integer;
+      Index: Integer;
   protected
     function Precondition: Boolean; override;
   public
@@ -1048,7 +1060,7 @@ type
   private
     Model: PModel;
     Attachment: string;
-    Index: Integer;
+      Index: Integer;
   protected
     function Precondition: Boolean; override;
   public
@@ -1065,7 +1077,7 @@ type
   private
     Model: PModel;
     Attachment: string;
-    Index: Integer;
+      Index: Integer;
     OldAttachment: string;
   protected
     function Precondition: Boolean; override;
@@ -1669,7 +1681,6 @@ type
     procedure Unexecute; override;
   end;
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // PCommandExecutor
 
@@ -1723,7 +1734,7 @@ end;
 
 function PCommandExecutor.GetUndoLevel: Integer;
 begin
- Result := Engine.Capacity;
+  Result := Engine.Capacity;
 end;
 
 procedure PCommandExecutor.SetUndoLevel(Value: Integer);
@@ -1801,10 +1812,12 @@ begin
   Cmd.OnElementsCreated := ElementsCreated;
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
     Result := Cmd.ModelSet.Items[0] as PModel;
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Result := nil;
   end;
@@ -1821,10 +1834,12 @@ begin
   Cmd.OnElementsCreated := ElementsCreated;
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
     Result := Cmd.ModelSet.Items[0] as PModel;
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Result := nil;
   end;
@@ -1839,10 +1854,12 @@ begin
   Cmd.OnElementsCreated := ElementsCreated;
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
     Result := Cmd.ModelSet.Items[0] as PModel;
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Result := nil;
   end;
@@ -1858,10 +1875,12 @@ begin
   Cmd.OnElementsCreated := ElementsCreated;
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
     Result := Cmd.ViewSet.Items[0] as PView;
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Result := nil;
   end;
@@ -1877,10 +1896,12 @@ begin
   Cmd.OnElementsCreated := ElementsCreated;
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
     Result := Cmd.ViewSet.Items[0] as PView;
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Result := nil;
   end;
@@ -1895,10 +1916,12 @@ begin
   Cmd.OnElementsCreated := ElementsCreated;
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
     Result := Cmd.Diagram;
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Result := nil;
   end;
@@ -1913,10 +1936,12 @@ begin
   Cmd.OnElementsCreated := ElementsCreated;
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
     Result := Cmd.Diagram;
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Result := nil;
   end;
@@ -1932,10 +1957,12 @@ begin
   Cmd.OnElementsCreated := ElementsCreated;
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
     Result := Cmd.ViewSet.Items[0] as PView;
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Result := nil;
   end;
@@ -1951,10 +1978,12 @@ begin
   Cmd.OnElementsCreated := ElementsCreated;
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
     Result := Cmd.ViewSet.Items[0] as PView;
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Result := nil;
   end;
@@ -1970,10 +1999,12 @@ begin
   Cmd.OnElementsCreated := ElementsCreated;
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
     Result := Cmd.ViewSet.Items[0] as PView;
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Result := nil;
   end;
@@ -1989,10 +2020,12 @@ begin
   Cmd.OnElementsCreated := ElementsCreated;
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
     Result := Cmd.ViewSet.Items[0] as PView;
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Result := nil;
   end;
@@ -2008,10 +2041,12 @@ begin
   Cmd.OnElementsCreated := ElementsCreated;
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
     Result := Cmd.ViewSet.Items[0] as PView;
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Result := nil;
   end;
@@ -2026,10 +2061,12 @@ begin
   Cmd.OnElementsCreated := ElementsCreated;
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2043,10 +2080,12 @@ begin
   Cmd.OnElementsCreated := ElementsCreated;
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2060,10 +2099,12 @@ begin
   Cmd.OnElementsCreated := ElementsCreated;
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2075,10 +2116,12 @@ begin
   Cmd := PChangeModelsAttributeCommand.Create;
   Cmd.SetParameter(Models, Key, Value);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2090,10 +2133,12 @@ begin
   Cmd := PChangeModelsReferenceCommand.Create;
   Cmd.SetParameter(Models, Key, Value);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2105,14 +2150,15 @@ begin
   Cmd := PClearCollectionCommand.Create;
   Cmd.SetParameter(AElement, Key);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
     // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
-
 
 procedure PCommandExecutor.AddCollectionItem(AElement: PElement; Key: string; Value: PElement);
 var
@@ -2121,10 +2167,12 @@ begin
   Cmd := PAddCollectionItemCommand.Create;
   Cmd.SetParameter(AElement, Key, Value);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2136,10 +2184,12 @@ begin
   Cmd := PRemoveCollectionItemCommand.Create;
   Cmd.SetParameter(AElement, Key, Value);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2151,10 +2201,12 @@ begin
   Cmd := PInsertCollectionItemCommand.Create;
   Cmd.SetParameter(AElement, Key, Index, Value);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2166,10 +2218,12 @@ begin
   Cmd := PDeleteCollectionItemCommand.Create;
   Cmd.SetParameter(AElement, Key, Index);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2181,10 +2235,12 @@ begin
   Cmd := PChangeCollectionItemOrderCommand.Create;
   Cmd.SetParameter(AElement, ACollectionItem, Key, NewIndex);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2196,10 +2252,12 @@ begin
   Cmd := PChangeTypeExpressionCommand.Create;
   Cmd.SetParameter(AModel, TypeExpr, TypeRef);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2211,10 +2269,12 @@ begin
   Cmd := PChangeValueExpressionCommand.Create;
   Cmd.SetParameter(AModel, ValueExpr, ValueRef);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2228,10 +2288,12 @@ begin
   Cmd.OnElementsCreated := ElementsCreated;
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2243,10 +2305,12 @@ begin
   Cmd := PChangeDocumentationCommand.Create;
   Cmd.SetParameter(AModel, Documentation);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2260,10 +2324,12 @@ begin
   Cmd.OnElementsCreated := ElementsCreated;
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2275,10 +2341,12 @@ begin
   Cmd := PChangeModelsStereotypeCommand.Create;
   Cmd.SetParameter(Models, AStereotypeProfile, AStereotype);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2294,10 +2362,12 @@ begin
   C.Body := ABody;
   Cmd.SetParameter(AExtensibleModel, C);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
     Result := Cmd.Constraint;
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Result := nil;
   end;
@@ -2310,10 +2380,12 @@ begin
   Cmd := PDeleteConstraintCommand.Create;
   Cmd.SetParameter(AExtensibleModel, AConstraint);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2325,10 +2397,12 @@ begin
   Cmd := PChangeConstraintCommand.Create;
   Cmd.SetParameter(AExtensibleModel, AConstraint, AName, ABody);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2341,10 +2415,12 @@ begin
   Cmd := PSetDataTaggedValueCommand.Create;
   Cmd.SetParameter(AExtensibleModel, Profile, TagDefinitionSet, Name, Value);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2356,10 +2432,12 @@ begin
   Cmd := PSetReferenceTaggedValueCommand.Create;
   Cmd.SetParameter(AExtensibleModel, Profile, TagDefinitionSet, Name, Value);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2371,10 +2449,12 @@ begin
   Cmd := PAddCollectionTaggedValueCommand.Create;
   Cmd.SetParameter(AExtensibleModel, Profile, TagDefinitionSet, Name, Value);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2386,10 +2466,12 @@ begin
   Cmd := PRemoveCollectionTaggedValueCommand.Create;
   Cmd.SetParameter(AExtensibleModel, Profile, TagDefinitionSet, Name, Value);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2401,10 +2483,12 @@ begin
   Cmd := PInsertCollectionTaggedValueCommand.Create;
   Cmd.SetParameter(AExtensibleModel, Profile, TagDefinitionSet, Name, Idx, Value);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2416,10 +2500,12 @@ begin
   Cmd := PDeleteCollectionTaggedValueCommand.Create;
   Cmd.SetParameter(AExtensibleModel, Profile, TagDefinitionSet, Name, Idx);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2431,10 +2517,12 @@ begin
   Cmd := PSetTaggedValueAsDefaultCommand.Create;
   Cmd.SetParameter(AExtensibleModel, Profile, TagDefinitionSet, Name);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2446,10 +2534,12 @@ begin
   Cmd := PChangeCollectionTaggedValueOrderCommand.Create;
   Cmd.SetParameter(AExtensibleModel, Profile, TagDefinitionSet, Name, Value, NewIdx);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2461,10 +2551,12 @@ begin
   Cmd := PClearAttachmentsCommand.Create;
   Cmd.SetParameter(AModel);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2476,10 +2568,12 @@ begin
   Cmd := PAddAttachmentCommand.Create;
   Cmd.SetParameter(AModel, Attach);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2491,10 +2585,12 @@ begin
   Cmd := PInsertAttachmentCommand.Create;
   Cmd.SetParameter(AModel, Attach, Index);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2506,10 +2602,12 @@ begin
   Cmd := PDeleteAttachmentCommand.Create;
   Cmd.SetParameter(AModel, Index);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2521,10 +2619,12 @@ begin
   Cmd := PChangeAttachmentCommand.Create;
   Cmd.SetParameter(AModel, Index, Attach);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2536,10 +2636,12 @@ begin
   Cmd := PChangeAttachmentOrderCommand.Create;
   Cmd.SetParameter(AModel, Index, NewIndex);
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2552,7 +2654,8 @@ begin
   Cmd.SetParameter(Models, Value);
   Cmd.OnModelsChanged := ModelsChanged;
   if Engine.Execute(Cmd) then Result := True
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Msg := Engine.ErrorMessage;
     Result := False;
@@ -2567,7 +2670,8 @@ begin
   Cmd.SetParameter(Models, Value);
   Cmd.OnModelsChanged := ModelsChanged;
   if Engine.Execute(Cmd) then Result := True
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Msg := Engine.ErrorMessage;
     Result := False;
@@ -2582,7 +2686,8 @@ begin
   Cmd.SetParameter(Models, Value);
   Cmd.OnModelsChanged := ModelsChanged;
   if Engine.Execute(Cmd) then Result := True
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Msg := Engine.ErrorMessage;
     Result := False;
@@ -2597,7 +2702,8 @@ begin
   Cmd.SetParameter(Models, Value);
   Cmd.OnModelsChanged := ModelsChanged;
   if Engine.Execute(Cmd) then Result := True
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Msg := Engine.ErrorMessage;
     Result := False;
@@ -2615,7 +2721,8 @@ begin
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
   if Engine.Execute(Cmd) then Result := True
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Msg := Engine.ErrorMessage;
     Result := False;
@@ -2630,7 +2737,8 @@ begin
   Cmd.SetParameter(Models, Value);
   Cmd.OnModelsChanged := ModelsChanged;
   if Engine.Execute(Cmd) then Result := True
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
     Msg := Engine.ErrorMessage;
     Result := False;
@@ -2647,10 +2755,12 @@ begin
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
   Cmd.OnModelsChanged := ModelsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
     // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2662,10 +2772,12 @@ begin
   Cmd := PMoveViewsCommand.Create;
   Cmd.SetParameter(ADiagramView, Views, DX, DY);
   Cmd.OnViewsChanged := ViewsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2677,10 +2789,12 @@ begin
   Cmd := PMoveParasiticViewCommand.Create;
   Cmd.SetParameter(AParasiticView, Alpha, Distance);
   Cmd.OnViewsChanged := ViewsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2692,10 +2806,12 @@ begin
   Cmd := PResizeNodeCommand.Create;
   Cmd.SetParameter(ANode, ARect);
   Cmd.OnViewsChanged := ViewsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2707,10 +2823,12 @@ begin
   Cmd := PResizeFragmentedNodeCommand.Create;
   Cmd.SetParameter(ANode, ARect);
   Cmd.OnViewsChanged := ViewsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2722,10 +2840,12 @@ begin
   Cmd := PReshapeEdgeCommand.Create;
   Cmd.SetParameter(AEdge, APoints);
   Cmd.OnViewsChanged := ViewsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2741,10 +2861,12 @@ begin
   Cmd.OnElementsCreated := ElementsCreated;
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2756,10 +2878,12 @@ begin
   Cmd := PChangeViewsAttributeCommand.Create;
   Cmd.SetParameter(Views, Key, Value);
   Cmd.OnViewsChanged := ViewsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2771,10 +2895,12 @@ begin
   Cmd := PChangeViewsLineColorCommand.Create;
   Cmd.SetParameter(Views, LineColor);
   Cmd.OnViewsChanged := ViewsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2786,10 +2912,12 @@ begin
   Cmd := PChangeViewsFillColorCommand.Create;
   Cmd.SetParameter(Views, FillColor);
   Cmd.OnViewsChanged := ViewsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2801,10 +2929,12 @@ begin
   Cmd := PChangeViewsFontCommand.Create;
   Cmd.SetParameter(Views, Font, AChangedFontItems);
   Cmd.OnViewsChanged := ViewsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2816,10 +2946,12 @@ begin
   Cmd := PChangeEdgesLineStyleCommand.Create;
   Cmd.SetParameter(Views, LineStyle);
   Cmd.OnViewsChanged := ViewsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2831,10 +2963,12 @@ begin
   Cmd := PChangeNoteViewStringsCommand.Create;
   Cmd.SetParameter(Views, Strs);
   Cmd.OnViewsChanged := ViewsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2846,10 +2980,12 @@ begin
   Cmd := PSendToBackViewsCommand.Create;
   Cmd.SetParameter(Views);
   Cmd.OnViewsChanged := ViewsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2861,10 +2997,12 @@ begin
   Cmd := PBringToFrontViewsCommand.Create;
   Cmd.SetParameter(Views);
   Cmd.OnViewsChanged := ViewsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2876,10 +3014,12 @@ begin
   Cmd := PAlignViewsCommand.Create;
   Cmd.SetParameter(Views, AlignmentKind);
   Cmd.OnViewsChanged := ViewsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2891,10 +3031,12 @@ begin
   Cmd := PLayoutDiagramCommand.Create;
   Cmd.SetParameter(ADiagramView);
   Cmd.OnViewsChanged := ViewsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -2924,10 +3066,12 @@ begin
   Cmd.OnElementsDeleting := ElementsDeleting;
   Cmd.OnElementsDeleted := ElementsDeleted;
   Cmd.OnViewsChanged := ViewsChanged;
-  if Engine.Execute(Cmd) then begin
+  if Engine.Execute(Cmd) then
+  begin
    // Nothing to do.
   end
-  else begin
+  else
+  begin
     ErrorOccurred(Self, Engine.ErrorMessage);
   end;
 end;
@@ -3009,7 +3153,7 @@ begin
   // Remove from list if the view is not NodeView or is a subview of something.
   for I := FSizePreservingViews.Count - 1 downto 0 do
     if (not (FSizePreservingViews.Items[I] is PNodeView)) or
-       ((FSizePreservingViews.Items[I] as PView).OwnerDiagramView = nil) then
+      ((FSizePreservingViews.Items[I] as PView).OwnerDiagramView = nil) then
       FSizePreservingViews.Delete(I);
   // Store all sizes of size-preserving views.
   FWidthArray.Clear;
@@ -3107,12 +3251,14 @@ begin
   FViewSet.Free;
   FModelReferences.Free;
   FViewReferences.Free;
-  for I := FModelMementos.Count - 1 downto 0 do begin
+  for I := FModelMementos.Count - 1 downto 0 do
+  begin
     AMemento := FModelMementos.Items[I];
     AMemento.Free;
   end;
   FModelMementos.Free;
-  for I := FViewMementos.Count - 1 downto 0 do begin
+  for I := FViewMementos.Count - 1 downto 0 do
+  begin
     AMemento := FViewMementos.Items[I];
     AMemento.Free;
   end;
@@ -3139,7 +3285,8 @@ begin
   RC := PReferenceCollectionVisitor.Create;
   // Collecting references and mementos of all Model (including Diagram) objects.
   RC.Clear;
-  for I := 0 to FModelSet.Count - 1 do begin
+  for I := 0 to FModelSet.Count - 1 do
+  begin
     AElement := FModelSet.Items[I] as PElement;
     AElement.Accept(RC);
   end;
@@ -3385,11 +3532,14 @@ begin
   ModelSet.Clear;
   ViewSet.Clear;
   MP := ExtensionManager.FindModelPrototype(Profile, ModelPrototype);
-  if MP <> nil then begin
+  if MP <> nil then
+  begin
     // Maybe Argument must be removing or attribute value of MP
     M := UMLFactory.CreateModel(Owner, MP.BaseModel, MP.Name, MP.Argument, End1, End2, InsertIndex, AuxArg);
-    if M <> nil then begin
-      if MP.StereotypeName <> '' then begin
+    if M <> nil then
+    begin
+      if MP.StereotypeName <> '' then
+      begin
         M.MOF_SetAttribute('StereotypeProfile', MP.Profile.Name);
         M.MOF_SetAttribute('StereotypeName', MP.StereotypeName);
       end;
@@ -3416,7 +3566,8 @@ begin
   M := UMLFactory.CreateModel(Owner, ModelKind, 0, nil, nil, -1, nil);
   ModelSet.Clear;
   ViewSet.Clear;
-  if M <> nil then begin
+  if M <> nil then
+  begin
     if Name <> '' then M.Name := Name;
     ModelSet.Add(M);
   end;
@@ -3482,7 +3633,8 @@ begin
   ModelSet.Clear;
   ViewSet.Clear;
   DT := ExtensionManager.FindDiagramType(Profile, DiagramType);
-  if DT <> nil then begin
+  if DT <> nil then
+  begin
     M := nil;
     D := UMLFactory.CreateDiagram(Owner, DT.BaseDiagram, DT.Name, M);
     D.DiagramType := DiagramType;
@@ -3519,15 +3671,17 @@ begin
 
   if not Assigned(AView) or not Assigned(AView.Model) then Exit;
   if (DiagramView is PUMLSequenceDiagramView) or
-     (DiagramView is PUMLSequenceRoleDiagramView)
-  then Exit; 
+    (DiagramView is PUMLSequenceRoleDiagramView)
+    then Exit;
   M := AView.Model;
 
   ASet := POrderedSet.Create;
   try
     // Transition
-    if M is PUMLStateVertex then begin
-      for I := 0 to (M as PUMLStateVertex).OutgoingCount - 1 do begin
+    if M is PUMLStateVertex then
+    begin
+      for I := 0 to (M as PUMLStateVertex).OutgoingCount - 1 do
+      begin
 
         // get outgoing transition
         ATransition := (M as PUMLStateVertex).Outgoings[I];
@@ -3536,17 +3690,20 @@ begin
         // get all view elements of target state vertex in diagram
         FindViewByModel(DiagramView, TempModel, ASet);
         // create transition view among created view element and all target vertex
-        for J := 0 to ASet.Count - 1 do begin
+        for J := 0 to ASet.Count - 1 do
+        begin
           if (ASet.Items[J] <> AView) and ((ASet.Items[J] as PView).Model = M) then Continue;
           V := UMLFactory.CreateView(DiagramView, ATransition, '', AView, ASet.Items[J] as PView);
           if Assigned(V) then ViewSet.Add(V);
         end;
       end;
-      for I := 0 to (M as PUMLStateVertex).IncomingCount - 1 do begin
+      for I := 0 to (M as PUMLStateVertex).IncomingCount - 1 do
+      begin
         ATransition := (M as PUMLStateVertex).Incomings[I];
         TempModel := ATransition.Source;
         FindViewByModel(DiagramView, TempModel, ASet);
-        for J := 0 to ASet.Count - 1 do begin
+        for J := 0 to ASet.Count - 1 do
+        begin
           if (ASet.Items[J] <> AView) and ((ASet.Items[J] as PView).Model = M) then Continue;
           if ASet.Items[J] = AView then Continue;
           V := UMLFactory.CreateView(DiagramView, ATransition, '', ASet.Items[J] as PView, AView);
@@ -3555,22 +3712,27 @@ begin
       end;
     end;
     // Dependency, Realization
-    if M is PUMLModelElement then begin
-      for I := 0 to (M as PUMLModelElement).SupplierDependencyCount - 1 do begin
+    if M is PUMLModelElement then
+    begin
+      for I := 0 to (M as PUMLModelElement).SupplierDependencyCount - 1 do
+      begin
         ADependency := (M as PUMLModelElement).SupplierDependencies[I];
         TempModel := ADependency.Client;
         FindViewByModel(DiagramView, TempModel, ASet);
-        for J := 0 to ASet.Count - 1 do begin
+        for J := 0 to ASet.Count - 1 do
+        begin
           if (ASet.Items[J] <> AView) and ((ASet.Items[J] as PView).Model = M) then Continue;
           V := UMLFactory.CreateView(DiagramView, ADependency, '', ASet.Items[J] as PView, AView);
           if Assigned(V) then ViewSet.Add(V);
         end;
       end;
-      for I := 0 to (M as PUMLModelElement).ClientDependencyCount - 1 do begin
+      for I := 0 to (M as PUMLModelElement).ClientDependencyCount - 1 do
+      begin
         ADependency := (M as PUMLModelElement).ClientDependencies[I];
         TempModel := ADependency.Supplier;
         FindViewByModel(DiagramView, TempModel, ASet);
-        for J := 0 to ASet.Count - 1 do begin
+        for J := 0 to ASet.Count - 1 do
+        begin
           if (ASet.Items[J] <> AView) and ((ASet.Items[J] as PView).Model = M) then Continue;
           if ASet.Items[J] = AView then Continue;
           V := UMLFactory.CreateView(DiagramView, ADependency, '', AView, ASet.Items[J] as PView);
@@ -3580,37 +3742,54 @@ begin
     end;
     // Association
     TempModel := nil;
-    if M is PUMLClassifier then begin
+    if M is PUMLClassifier then
+    begin
       IsDuplicated := False;
-      for I := 0 to (M as PUMLClassifier).AssociationCount - 1 do begin
+      for I := 0 to (M as PUMLClassifier).AssociationCount - 1 do
+      begin
         TempModel := (M as PUMLClassifier).Associations[I];
         AAssociation := (TempModel as PUMLAssociationEnd).Association;
         // Case M is Tail
         TempModel := AAssociation.Connections[0];
         //if TempModel = AAssociation.Connections[0] then Continue;
-        if (TempModel as PUMLAssociationEnd).Participant = M then begin
+        if (TempModel as PUMLAssociationEnd).Participant = M then
+        begin
           TempModel := AAssociation.Connections[1];
           FindViewByModel(DiagramView, (TempModel as PUMLAssociationEnd).Participant, ASet);
-          for J := 0 to ASet.Count - 1 do begin
+          for J := 0 to ASet.Count - 1 do
+          begin
             if (ASet.Items[J] <> AView) and ((ASet.Items[J] as PView).Model = M) then Continue;
-            if ASet.Items[J] = AView then begin
+            if ASet.Items[J] = AView then
+            begin
               if not IsDuplicated then IsDuplicated := True
-              else begin IsDuplicated := False; Continue; end;
+              else
+              begin
+                IsDuplicated := False;
+                Continue;
+              end;
             end;
             V := UMLFactory.CreateView(DiagramView, AAssociation, '', AView, ASet.Items[J] as PView);
             if Assigned(V) then ViewSet.Add(V);
           end;
-        end else begin
+        end else
+        begin
         // Case M is Head
           TempModel := AAssociation.Connections[1];
-          if (TempModel as PUMLAssociationEnd).Participant = M then begin
+          if (TempModel as PUMLAssociationEnd).Participant = M then
+          begin
             TempModel := AAssociation.Connections[0];
             FindViewByModel(DiagramView, (TempModel as PUMLAssociationEnd).Participant, ASet);
-            for J := 0 to ASet.Count - 1 do begin
-            if (ASet.Items[J] <> AView) and ((ASet.Items[J] as PView).Model = M) then Continue;
-              if ASet.Items[J] = AView then begin
+            for J := 0 to ASet.Count - 1 do
+            begin
+              if (ASet.Items[J] <> AView) and ((ASet.Items[J] as PView).Model = M) then Continue;
+              if ASet.Items[J] = AView then
+              begin
                 if not IsDuplicated then IsDuplicated := True
-                else begin IsDuplicated := False; Continue; end;
+                else
+                begin
+                  IsDuplicated := False;
+                  Continue;
+                end;
               end;
               V := UMLFactory.CreateView(DiagramView, AAssociation, '', ASet.Items[J] as PView, AView);
               if Assigned(V) then ViewSet.Add(V);
@@ -3620,30 +3799,35 @@ begin
       end;
     end;
     // Generalization
-    if M is PUMLGeneralizableElement then begin
+    if M is PUMLGeneralizableElement then
+    begin
       // Case M is Child
-      for I := 0 to (M as PUMLGeneralizableElement).GeneralizationCount - 1 do begin
+      for I := 0 to (M as PUMLGeneralizableElement).GeneralizationCount - 1 do
+      begin
         AGeneralization := (M as PUMLGeneralizableElement).Generalizations[I];
         // ASSERTION
         Assert(AGeneralization.Child = M);
         // ASSERTION
         TempModel := AGeneralization.Parent;
         FindViewByModel(DiagramView, TempModel, ASet);
-        for J := 0 to ASet.Count - 1 do begin
+        for J := 0 to ASet.Count - 1 do
+        begin
           if (ASet.Items[J] <> AView) and ((ASet.Items[J] as PView).Model = M) then Continue;
           V := UMLFactory.CreateView(DiagramView, AGeneralization, '', AView, ASet.Items[J] as PView);
           if Assigned(V) then ViewSet.Add(V);
         end;
       end;
       // Case M is Parent
-      for I := 0 to (M as PUMLGeneralizableElement).SpecializationCount - 1 do begin
+      for I := 0 to (M as PUMLGeneralizableElement).SpecializationCount - 1 do
+      begin
         AGeneralization := (M as PUMLGeneralizableElement).Specializations[I];
         // ASSERTION
         Assert(AGeneralization.Parent = M);
         // ASSERTION
         TempModel := AGeneralization.Child;
         FindViewByModel(DiagramView, TempModel, ASet);
-        for J := 0 to ASet.Count - 1 do begin
+        for J := 0 to ASet.Count - 1 do
+        begin
           if (ASet.Items[J] <> AView) and ((ASet.Items[J] as PView).Model = M) then Continue;
           if ASet.Items[J] = AView then Continue;
           V := UMLFactory.CreateView(DiagramView, AGeneralization, '', ASet.Items[J] as PView, AView);
@@ -3653,37 +3837,54 @@ begin
     end;
     // Link, Stimulus
     TempModel := nil;
-    if M is PUMLInstance then begin
+    if M is PUMLInstance then
+    begin
       IsDuplicated := False;
-      for I := 0 to (M as PUMLInstance).LinkEndCount - 1 do begin
+      for I := 0 to (M as PUMLInstance).LinkEndCount - 1 do
+      begin
         TempModel := (M as PUMLInstance).LinkEnds[I];
         ALink := (TempModel as PUMLLinkEnd).Link;
         // Case M is Tail
         //if TempModel = ALink.Connections[0] then Continue;
         TempModel := ALink.Connections[0];
-        if (TempModel as PUMLLinkEnd).Instance = M then begin
+        if (TempModel as PUMLLinkEnd).Instance = M then
+        begin
           TempModel := ALink.Connections[1];
           FindViewByModel(DiagramView, (TempModel as PUMLLinkEnd).Instance, ASet);
-          for J := 0 to ASet.Count - 1 do begin
+          for J := 0 to ASet.Count - 1 do
+          begin
             if (ASet.Items[J] <> AView) and ((ASet.Items[J] as PView).Model = M) then Continue;
-            if ASet.Items[J] = AView then begin
+            if ASet.Items[J] = AView then
+            begin
               if not IsDuplicated then IsDuplicated := True
-              else begin IsDuplicated := False; Continue; end;
+              else
+              begin
+                IsDuplicated := False;
+                Continue;
+              end;
             end;
             V := UMLFactory.CreateView(DiagramView, ALink, '', AView, ASet.Items[J] as PView);
             if Assigned(V) then ViewSet.Add(V);
           end;
-        end else begin
+        end else
+        begin
         // Case M is Head
           TempModel := ALink.Connections[1];
-          if (TempModel as PUMLLinkEnd).Instance = M then begin
+          if (TempModel as PUMLLinkEnd).Instance = M then
+          begin
             TempModel := ALink.Connections[0];
             FindViewByModel(DiagramView, (TempModel as PUMLLinkEnd).Instance, ASet);
-            for J := 0 to ASet.Count - 1 do begin
+            for J := 0 to ASet.Count - 1 do
+            begin
               if (ASet.Items[J] <> AView) and ((ASet.Items[J] as PView).Model = M) then Continue;
-              if ASet.Items[J] = AView then begin
+              if ASet.Items[J] = AView then
+              begin
                 if not IsDuplicated then IsDuplicated := True
-                else begin IsDuplicated := False; Continue; end;
+                else
+                begin
+                  IsDuplicated := False;
+                  Continue;
+                end;
               end;
               V := UMLFactory.CreateView(DiagramView, ALink, '', ASet.Items[J] as PView, AView);
               if Assigned(V) then ViewSet.Add(V);
@@ -3693,24 +3894,29 @@ begin
       end;
     end;
     // Include, Extend
-    if M is PUMLUseCase then begin
+    if M is PUMLUseCase then
+    begin
       // (Include) Case M is Base
-      for I := 0 to (M as PUMLUseCase).IncludeCount - 1 do begin
+      for I := 0 to (M as PUMLUseCase).IncludeCount - 1 do
+      begin
         AInclude := (M as PUMLUseCase).Includes[I];
         TempModel := AInclude.Addition;
         FindViewByModel(DiagramView, TempModel, ASet);
-        for J := 0 to ASet.Count - 1 do begin
+        for J := 0 to ASet.Count - 1 do
+        begin
           if (ASet.Items[J] <> AView) and ((ASet.Items[J] as PView).Model = M) then Continue;
           V := UMLFactory.CreateView(DiagramView, AInclude, '', AView, ASet.Items[J] as PView);
           if Assigned(V) then ViewSet.Add(V);
         end;
       end;
       // (Include) Case M is Addition
-      for I := 0 to (M as PUMLUseCase).IncluderCount - 1 do begin
+      for I := 0 to (M as PUMLUseCase).IncluderCount - 1 do
+      begin
         AInclude := (M as PUMLUseCase).Includers[I];
         TempModel := AInclude.Base;
         FindViewByModel(DiagramView, TempModel, ASet);
-        for J := 0 to ASet.Count - 1 do begin
+        for J := 0 to ASet.Count - 1 do
+        begin
           if (ASet.Items[J] <> AView) and ((ASet.Items[J] as PView).Model = M) then Continue;
           if ASet.Items[J] = AView then Continue;
           V := UMLFactory.CreateView(DiagramView, AInclude, '', ASet.Items[J] as PView, AView);
@@ -3718,22 +3924,26 @@ begin
         end;
       end;
       // (Extend) Case M is Base
-      for I := 0 to (M as PUMLUseCase).ExtenderCount - 1 do begin
+      for I := 0 to (M as PUMLUseCase).ExtenderCount - 1 do
+      begin
         AExtend := (M as PUMLUseCase).Extenders[I];
         TempModel := AExtend.Extension;
         FindViewByModel(DiagramView, TempModel, ASet);
-        for J := 0 to ASet.Count - 1 do begin
+        for J := 0 to ASet.Count - 1 do
+        begin
           if (ASet.Items[J] <> AView) and ((ASet.Items[J] as PView).Model = M) then Continue;
           V := UMLFactory.CreateView(DiagramView, AExtend, '', ASet.Items[J] as PView, AView);
           if Assigned(V) then ViewSet.Add(V);
         end;
       end;
       // (Extend) Case M is Extension
-      for I := 0 to (M as PUMLUseCase).ExtendCount - 1 do begin
+      for I := 0 to (M as PUMLUseCase).ExtendCount - 1 do
+      begin
         AExtend := (M as PUMLUseCase).Extends[I];
         TempModel := AExtend.Base;
         FindViewByModel(DiagramView, TempModel, ASet);
-        for J := 0 to ASet.Count - 1 do begin
+        for J := 0 to ASet.Count - 1 do
+        begin
           if (ASet.Items[J] <> AView) and ((ASet.Items[J] as PView).Model = M) then Continue;
           if ASet.Items[J] = AView then Continue;
           V := UMLFactory.CreateView(DiagramView, AExtend, '', AView, ASet.Items[J] as PView);
@@ -3742,11 +3952,14 @@ begin
       end;
     end;
     // AssociationClass
-    if M is PUMLClass then begin
+    if M is PUMLClass then
+    begin
       AAssociationClass := (M as PUMLClass).AssociationClass;
-      if Assigned(AAssociationClass) then begin
+      if Assigned(AAssociationClass) then
+      begin
         FindViewByModel(DiagramView, AAssociationClass.AssociationSide, ASet);
-        for I := 0 to ASet.Count - 1 do begin
+        for I := 0 to ASet.Count - 1 do
+        begin
           V := UMLFactory.CreateView(DiagramView, AAssociationClass, '', ASet.Items[I] as PView, AView);
           if Assigned(V) then ViewSet.Add(V);
         end;
@@ -3763,7 +3976,8 @@ var
   AView: PView;
 begin
   ASet.Clear;
-  for I := 0 to DiagramView.OwnedViewCount - 1 do begin
+  for I := 0 to DiagramView.OwnedViewCount - 1 do
+  begin
     AView := DiagramView.OwnedViews[I];
     if (AView.Model = AModel) then ASet.Add(AView);
   end;
@@ -3845,7 +4059,8 @@ procedure PCreateExtendedElementCommand.SetModelProperties(M: PModel; EP: PEleme
 var
   I: Integer;
 begin
-  if (M is PExtensibleModel) and (EP.StereotypeName <> '') then begin
+  if (M is PExtensibleModel) and (EP.StereotypeName <> '') then
+  begin
     M.MOF_SetAttribute('StereotypeProfile', EP.Profile.Name);
     M.MOF_SetAttribute('StereotypeName', EP.StereotypeName);
   end;
@@ -3857,10 +4072,13 @@ procedure PCreateExtendedElementCommand.SetViewProperties(V: PView; EP: PElement
 var
   I: Integer;
 begin
-  if (V is PUMLGeneralNodeView) and (EP.StereotypeDisplay <> '') then begin
+  if (V is PUMLGeneralNodeView) and (EP.StereotypeDisplay <> '') then
+  begin
     V.MOF_SetAttribute('StereotypeDisplay', EP.StereotypeDisplay);
-    if EP.StereotypeDisplay = 'sdkIcon' then begin
-      if V is PUMLClassifierView then begin
+    if EP.StereotypeDisplay = 'sdkIcon' then
+    begin
+      if V is PUMLClassifierView then
+      begin
         V.MOF_SetAttribute('SuppressAttributes', 'True');
         V.MOF_SetAttribute('SuppressOperations', 'True');
       end
@@ -3890,11 +4108,14 @@ begin
   ModelSet.Clear;
   ViewSet.Clear;
   EP := ExtensionManager.FindElementPrototype(Profile, ElementPrototype);
-  if EP <> nil then begin
+  if EP <> nil then
+  begin
     V := UMLFactory.CreateElement(DiagramView, EP.BaseElement, EP.Argument, End1, End2);
-    if V <> nil then begin
+    if V <> nil then
+    begin
       M := V.Model;
-      if M <> nil then begin
+      if M <> nil then
+      begin
         SetModelProperties(M, EP);
         ModelSet.Add(M);
       end;
@@ -3914,11 +4135,14 @@ begin
   ModelSet.Clear;
   ViewSet.Clear;
   EP := ExtensionManager.FindElementPrototype(Profile, ElementPrototype);
-  if EP <> nil then begin
+  if EP <> nil then
+  begin
     V := UMLFactory.CreateElement(DiagramView, X1, Y1, X2, Y2, EP.BaseElement, EP.Name, EP.Argument);
-    if V <> nil then begin
+    if V <> nil then
+    begin
       M := V.Model;
-      if M <> nil then begin
+      if M <> nil then
+      begin
         SetModelProperties(M, EP);
         ModelSet.Add(M);
       end;
@@ -3940,14 +4164,17 @@ var
   I: Integer;
 begin
   Result := nil;
-  for I := 0 to ContainerView.ContainedViewCount - 1 do begin
+  for I := 0 to ContainerView.ContainedViewCount - 1 do
+  begin
     V := ContainerView.ContainedViews[I];
-    if V.Model = Model then begin
+    if V.Model = Model then
+    begin
       Result := ContainerView.ContainedViews[I];
       Exit;
     end;
     V := FindContainedView(V, Model);
-    if V <> nil then begin
+    if V <> nil then
+    begin
       Result := V;
       Exit;
     end;
@@ -3961,18 +4188,22 @@ var
 begin
   Result := nil;
   V := DiagramView.GetViewAt(DiagramView.Canvas, X, Y);
-  if (V <> nil) and (V.Model = Model) then begin
+  if (V <> nil) and (V.Model = Model) then
+  begin
     Result := V;
     Exit;
   end;
-  for I := 0 to DiagramView.OwnedViewCount - 1 do begin
+  for I := 0 to DiagramView.OwnedViewCount - 1 do
+  begin
     V := DiagramView.OwnedViews[I];
-    if V.Model = Model then begin
+    if V.Model = Model then
+    begin
       Result := DiagramView.OwnedViews[I];
       Exit;
     end;
     V := FindContainedView(V, Model);
-    if V <> nil then begin
+    if V <> nil then
+    begin
       Result := V;
       Exit;
     end;
@@ -4002,11 +4233,13 @@ begin
   { When a statemachine model element is dropped on a statechart-diagram }
   if Model is PUMLStatemachine then
   begin
-    if DiagramView is PUMLStatechartDiagramView then begin
+    if DiagramView is PUMLStatechartDiagramView then
+    begin
       V := UMLFactory.CreateElement(DiagramView, X, Y, X, Y, 'SubmachineState');
       M := V.Model;
       if M <> nil then (M as PUMLSubmachineState).Submachine := Model as PUMLStatemachine;
-    end else if DiagramView is PUMLActivityDiagramView then begin
+    end else if DiagramView is PUMLActivityDiagramView then
+    begin
       V := UMLFactory.CreateElement(DiagramView, X, Y, X, Y, 'SubactivityState');
       M := V.Model;
       if M <> nil then (M as PUMLSubactivityState).Submachine := Model as PUMLStatemachine;
@@ -4014,11 +4247,12 @@ begin
   end
   { When a class|actor|component|node model element is dropped on an instance-type diagram }
   else if ((DiagramView is PUMLSequenceDiagramView) or (DiagramView is PUMLCollaborationDiagramView)) and
-          (Model is PUMLClassifier) then
+    (Model is PUMLClassifier) then
   begin
     V := UMLFactory.CreateElement(DiagramView, X, Y, X, Y, 'Object');
     M := V.Model;
-    if M <> nil then begin
+    if M <> nil then
+    begin
       (M as PUMLObject).Classifier := Model as PUMLClassifier;
       (M as PUMLObject).Name := '';
       S := (Model as PUMLClassifier).GetStereotype;
@@ -4028,11 +4262,12 @@ begin
   end
   { When a class|actor|component|node model element is dropped on an role-type diagram }
   else if ((DiagramView is PUMLSequenceRoleDiagramView) or (DiagramView is PUMLCollaborationRoleDiagramView)) and
-          (Model is PUMLClassifier) and not (Model is PUMLClassifierRole) then
+    (Model is PUMLClassifier) and not (Model is PUMLClassifierRole) then
   begin
     V := UMLFactory.CreateElement(DiagramView, X, Y, X, Y, 'ClassifierRole');
     M := V.Model;
-    if M <> nil then begin
+    if M <> nil then
+    begin
       (M as PUMLClassifierRole).Base := Model as PUMLClassifier;
       (M as PUMLClassifierRole).Name := '';
       S := (Model as PUMLClassifier).GetStereotype;
@@ -4044,14 +4279,16 @@ begin
   else if Model is PUMLPort then
   begin
     ContainerView := FindViewInDiagramView(DiagramView, (Model as PUMLPort).Owner, X, Y);
-    if ContainerView = nil then begin
+    if ContainerView = nil then
+    begin
       ContainerView := UMLFactory.CreateView(DiagramView, X, Y, X, Y, (Model as PUMLPort).Owner);
       ViewSet.Add(ContainerView);
     end;
     R := ContainerView.GetBoundingBox(DiagramView.Canvas);
     if PointInRect(R, Point(X, Y)) then
       V := UMLFactory.CreateView(DiagramView, X, Y, X, Y, Model)
-    else begin
+    else
+    begin
       C := GetCenter(R);
       V := UMLFactory.CreateView(DiagramView, C.X, C.Y, C.X, C.Y, Model);
     end;
@@ -4059,20 +4296,23 @@ begin
   else if Model is PUMLAttribute then
   begin
     ContainerView := FindViewInDiagramView(DiagramView, (Model as PUMLAttribute).Owner, X, Y);
-    if ContainerView = nil then begin
+    if ContainerView = nil then
+    begin
       ContainerView := UMLFactory.CreateView(DiagramView, X, Y, X, Y, (Model as PUMLAttribute).Owner);
-      ViewSet.Add(ContainerView);      
+      ViewSet.Add(ContainerView);
     end;
     R := ContainerView.GetBoundingBox(DiagramView.Canvas);
     if PointInRect(R, Point(X, Y)) then
       V := UMLFactory.CreateView(DiagramView, X, Y, X, Y, Model)
-    else begin
+    else
+    begin
       C := GetCenter(R);
       V := UMLFactory.CreateView(DiagramView, C.X, C.Y, C.X, C.Y, Model);
     end;
   end
   { When a general-type model element is dropped on a diagram }
-  else begin
+  else
+  begin
     V := UMLFactory.CreateView(DiagramView, X, Y, X, Y, Model);
   end;
   if M <> nil then ModelSet.Add(M);
@@ -4099,23 +4339,29 @@ procedure PNewViewByDragDropCommand.SetParameterEdgeTypeElem(DiagramView: PDiagr
     try
       FindViewByModel(DiagramView, Tail, TailViewSet);
       FindViewByModel(DiagramView, Head, HeadViewSet);
-      for I := 0 to TailViewSet.Count - 1 do begin
+      for I := 0 to TailViewSet.Count - 1 do
+      begin
         TailView := TailViewSet.Items[I] as PView;
-        for J := 0 to HeadViewSet.Count - 1 do begin
+        for J := 0 to HeadViewSet.Count - 1 do
+        begin
           HeadView := HeadViewSet.Items[J] as PView;
           B := True;
-          for K := 0 to Model.ViewCount - 1 do begin
+          for K := 0 to Model.ViewCount - 1 do
+          begin
             AView := Model.Views[K];
-            if AView is ElemKind then begin
+            if AView is ElemKind then
+            begin
               TempTailView := (AView as PEdgeView).Tail;
               TempHeadView := (AView as PEdgeView).Head;
-              if (TempTailView = TailView) and (TempHeadView = HeadView) then begin
+              if (TempTailView = TailView) and (TempHeadView = HeadView) then
+              begin
                 B := False;
                 Break;
               end;
             end;
           end;
-          if B then begin
+          if B then
+          begin
             V := nil;
             V := UMLFactory.CreateView(DiagramView, Model, '', TailView, HeadView);
             if Assigned(V) then ViewSet.Add(V);
@@ -4134,66 +4380,77 @@ begin
   ViewSet.Clear;
 
   // UMLRealization
-  if Model is PUMLRealization then begin
+  if Model is PUMLRealization then
+  begin
     Tail := (Model as PUMLRealization).Client;
     Head := (Model as PUMLRealization).Supplier;
     CreateEdgeTypeView(PUMLRealizationView, Tail, Head);
   end
   // UMLDependency
-  else if Model is PUMLDependency then begin
+  else if Model is PUMLDependency then
+  begin
     Tail := (Model as PUMLDependency).Client;
     Head := (Model as PUMLDependency).Supplier;
     CreateEdgeTypeView(PUMLDependencyView, Tail, Head);
   end
   // UMLGeneralization
-  else if Model is PUMLGeneralization then begin
+  else if Model is PUMLGeneralization then
+  begin
     Tail := (Model as PUMLGeneralization).Child;
     Head := (Model as PUMLGeneralization).Parent;
     CreateEdgeTypeView(PUMLGeneralizationView, Tail, Head);
   end
   // UMLAssociationClass
-  else if Model is PUMLAssociationClass then begin
+  else if Model is PUMLAssociationClass then
+  begin
     Tail := (Model as PUMLAssociationClass).AssociationSide;
     Head := (Model as PUMLAssociationClass).ClassSide;
     CreateEdgeTypeView(PUMLAssociationClassView, Tail, Head);
   end
   // UMLAssociation
-  else if Model is PUMLAssociation then begin
+  else if Model is PUMLAssociation then
+  begin
     Tail := (Model as PUMLAssociation).Connections[0].Participant;
     Head := (Model as PUMLAssociation).Connections[1].Participant;
     CreateEdgeTypeView(PUMLAssociationView, Tail, Head);
   end
   // UMLLink
-  else if Model is PUMLLink then begin
+  else if Model is PUMLLink then
+  begin
     Tail := (Model as PUMLLink).Connections[0].Instance;
     Head := (Model as PUMLLink).Connections[1].Instance;
     CreateEdgeTypeView(PUMLLinkView, Tail, Head);
   end
   // UMLAssociationRole
-  else if Model is PUMLAssociationRole then begin
+  else if Model is PUMLAssociationRole then
+  begin
     Tail := (Model as PUMLAssociationRole).Connections[0].Participant;
     Head := (Model as PUMLAssociationRole).Connections[1].Participant;
     CreateEdgeTypeView(PUMLAssociationRoleView, Tail, Head);
   end
   // UMLInclude
-  else if Model is PUMLInclude then begin
+  else if Model is PUMLInclude then
+  begin
     Tail := (Model as PUMLInclude).Base;
     Head := (Model as PUMLInclude).Addition;
     CreateEdgeTypeView(PUMLIncludeView, Tail, Head);
   end
   // UMLExtend
-  else if Model is PUMLExtend then begin
+  else if Model is PUMLExtend then
+  begin
     Tail := (Model as PUMLExtend).Extension;
     Head := (Model as PUMLExtend).Base;
     CreateEdgeTypeView(PUMLExtendView, Tail, Head);
   end
   // UMLTransition
-  else if Model is PUMLTransition then begin
+  else if Model is PUMLTransition then
+  begin
     Tail := (Model as PUMLTransition).Source;
     Head := (Model as PUMLTransition).Target;
     CreateEdgeTypeView(PUMLTransitionView, Tail, Head);
   end
-  else if Model is PUMLConnector then begin
+  else if Model is PUMLConnector then
+  begin
     Tail := (Model as PUMLConnector).Ends[0];
     Head := (Model as PUMLConnector).Ends[1];
     CreateEdgeTypeView(PUMLConnectorView, Tail, Head);
@@ -4205,12 +4462,12 @@ end;
 procedure PNewViewByDragDropCommand.SetParameter(DiagramView: PDiagramView; Model: PModel; X, Y: Integer);
 begin
   if (Model is PUMLDependency) or (Model is PUMLGeneralization) or
-     (Model is PUMLAssociation) or (Model is PUMLAssociationClass) or
-     (Model is PUMLLink) or (Model is PUMLAssociationRole) or
-     (Model is PUMLStimulus) or (Model is PUMLMessage) or
-     (Model is PUMLInclude) or (Model is PUMLExtend) or
-     (Model is PUMLRealization) or (Model is PUMLTransition) or
-     (Model is PUMLConnector) then
+    (Model is PUMLAssociation) or (Model is PUMLAssociationClass) or
+    (Model is PUMLLink) or (Model is PUMLAssociationRole) or
+    (Model is PUMLStimulus) or (Model is PUMLMessage) or
+    (Model is PUMLInclude) or (Model is PUMLExtend) or
+    (Model is PUMLRealization) or (Model is PUMLTransition) or
+    (Model is PUMLConnector) then
   begin
     SetParameterEdgeTypeElem(DiagramView, Model, X, Y);
   end else
@@ -4241,15 +4498,19 @@ begin
   ModelSet.Clear;
   ViewSet.Clear;
   Target.DeselectAll;
-  for I := 0 to Views.Count - 1 do begin
+  for I := 0 to Views.Count - 1 do
+  begin
     AView := Views.Items[I] as PView;
-    if AView is PNodeView then begin
+    if AView is PNodeView then
+    begin
       ANodeView := AView as PNodeView;
       ANodeView.Left := ANodeView.Left + 10;
       ANodeView.Top := ANodeView.Top + 10;
-    end else if AView is PEdgeView then begin
+    end else if AView is PEdgeView then
+    begin
       AEdgeView := AView as PEdgeView;
-      for J := 0 to AEdgeView.Points.Count - 1 do begin
+      for J := 0 to AEdgeView.Points.Count - 1 do
+      begin
         Point := AEdgeView.Points.Points[J];
         Point.X := Point.X + 10;
         Point.Y := Point.Y + 10;
@@ -4526,7 +4787,8 @@ procedure PChangeModelsReferenceCommand.Unexecute;
 var
   I: Integer;
 begin
-  for I := 0 to ModelSet.Count - 1 do begin
+  for I := 0 to ModelSet.Count - 1 do
+  begin
     (ModelSet.Items[I] as PModel).MOF_SetReference(Key, OldValues[I]);
   end;
   // Restore sizes of views
@@ -4803,11 +5065,13 @@ end;
 
 procedure PChangeTypeExpressionCommand.Reexecute;
 begin
-  if Model is PUMLStructuralFeature then begin
+  if Model is PUMLStructuralFeature then
+  begin
     (Model as PUMLStructuralFeature).TypeExpression := NewTypeExpr;
     (Model as PUMLStructuralFeature).Type_ := NewTypeRef as PUMLClassifier;
   end
-  else if Model is PUMLParameter then begin
+  else if Model is PUMLParameter then
+  begin
     (Model as PUMLParameter).TypeExpression := NewTypeExpr;
     (Model as PUMLParameter).Type_ := NewTypeRef as PUMLClassifier;
   end;
@@ -4817,11 +5081,13 @@ end;
 
 procedure PChangeTypeExpressionCommand.Unexecute;
 begin
-  if Model is PUMLStructuralFeature then begin
+  if Model is PUMLStructuralFeature then
+  begin
     (Model as PUMLStructuralFeature).TypeExpression := OldTypeExpr;
     (Model as PUMLStructuralFeature).Type_ := OldTypeRef as PUMLClassifier;
   end
-  else if Model is PUMLParameter then begin
+  else if Model is PUMLParameter then
+  begin
     (Model as PUMLParameter).TypeExpression := OldTypeExpr;
     (Model as PUMLParameter).Type_ := OldTypeRef as PUMLClassifier;
   end;
@@ -4836,21 +5102,26 @@ begin
   ModelSet.Clear;
   ModelSet.Add(AModel);
   Model := AModel;
-  if AModel is PUMLStructuralFeature then begin
+  if AModel is PUMLStructuralFeature then
+  begin
     OldTypeExpr := (AModel as PUMLStructuralFeature).TypeExpression;
     OldTypeRef := (AModel as PUMLStructuralFeature).Type_;
   end
-  else if AModel is PUMLParameter then begin
+  else if AModel is PUMLParameter then
+  begin
     OldTypeExpr := (AModel as PUMLParameter).TypeExpression;
     OldTypeRef := (AModel as PUMLParameter).Type_;
   end;
   NewTypeExpr := TypeExpr;
   NewTypeRef := TypeRef;
-  if NewTypeRef <> nil then begin
+  if NewTypeRef <> nil then
+  begin
     NewTypeExpr := NewTypeRef.Name;
   end
-  else begin
-    if TypeExpr <> '' then begin
+  else
+  begin
+    if TypeExpr <> '' then
+    begin
       NewTypeRef := SearchElement(AModel as PUMLElement, NewTypeExpr);
       if not (NewTypeRef is PUMLClassifier) then NewTypeRef := nil;
       if NewTypeRef <> nil then NewTypeExpr := NewTypeRef.Name;
@@ -4901,17 +5172,21 @@ begin
   ModelSet.Clear;
   ModelSet.Add(AModel);
   Model := AModel;
-  if AModel is PUMLAttributeLink then begin
+  if AModel is PUMLAttributeLink then
+  begin
     OldValueExpr := (AModel as PUMLAttributeLink).ValueExpression;
     OldValueRef := (AModel as PUMLAttributeLink).Value_;
   end;
   NewValueExpr := ValueExpr;
   NewValueRef := ValueRef;
-  if NewValueRef <> nil then begin
+  if NewValueRef <> nil then
+  begin
     NewValueExpr := NewValueRef.Name;
   end
-  else begin
-    if ValueExpr <> '' then begin
+  else
+  begin
+    if ValueExpr <> '' then
+    begin
       NewValueRef := SearchElement(AModel as PUMLElement, NewValueExpr);
       if not (NewValueRef is PUMLInstance) then NewValueRef := nil;
       if NewValueRef <> nil then NewValueExpr := NewValueRef.Name;
@@ -5022,7 +5297,8 @@ end;
 
 function PMoveViewsCommand.Precondition: Boolean;
 begin
-  if FViewSet.Count <= 0 then begin
+  if FViewSet.Count <= 0 then
+  begin
     Result := False;
     Exit;
   end;
@@ -5040,13 +5316,15 @@ begin
   DX := ADX;
   DY := ADY;
   // Include Self-EdgeView in ViewSet
-  for I := ViewSet.Count - 1 downto 0 do begin
+  for I := ViewSet.Count - 1 downto 0 do
+  begin
     V := ViewSet.Items[I] as PView;
     if V is PNodeView then
       for J := 0 to ADiagramView.OwnedViewCount - 1 do
-        if ADiagramView.OwnedViews[J] is PEdgeView then begin
+        if ADiagramView.OwnedViews[J] is PEdgeView then
+        begin
           E := ADiagramView.OwnedViews[J] as PEdgeView;
-          if (E.Head = V) and (E.Tail = V) and not(ViewSet.Contains(E)) then
+          if (E.Head = V) and (E.Tail = V) and not (ViewSet.Contains(E)) then
             ViewSet.Add(E);
         end;
   end;
@@ -5319,7 +5597,8 @@ var
   I: Integer;
   V: PView;
 begin
-  for I := 0 to ViewSet.Count - 1 do begin
+  for I := 0 to ViewSet.Count - 1 do
+  begin
     V := ViewSet.Items[I] as PView;
     V.LineColor := NewLineColor;
   end;
@@ -5332,7 +5611,8 @@ var
   I: Integer;
   V: PView;
 begin
-  for I := 0 to ViewSet.Count - 1 do begin
+  for I := 0 to ViewSet.Count - 1 do
+  begin
     V := FViewSet.Items[I] as PView;
     V.LineColor := StringToColor(OldLineColors[I]);
   end;
@@ -5413,7 +5693,8 @@ var
   I: Integer;
   F: TFont;
 begin
-  for I := 0 to OldFonts.Count - 1 do begin
+  for I := 0 to OldFonts.Count - 1 do
+  begin
     F := OldFonts.Items[I];
     F.Free;
   end;
@@ -5429,7 +5710,8 @@ var
   V: PView;
 begin
   OldFonts.Clear;
-  for I := 0 to AViewSet.Count - 1 do begin
+  for I := 0 to AViewSet.Count - 1 do
+  begin
     V := AViewSet.Items[I] as PView;
     F := TFont.Create;
     F.Color := V.FontColor;
@@ -5467,17 +5749,20 @@ var
   I: Integer;
   V: PView;
 begin
-  for I := 0 to ViewSet.Count - 1 do begin
+  for I := 0 to ViewSet.Count - 1 do
+  begin
     V := ViewSet.Items[I] as PView;
     if fiName in ChangedFontItems then
       V.FontFace := NewFont.Name;
     if fiSize in ChangedFontItems then
       V.FontSize := NewFont.Size;
-    if fiStyle in ChangedFontItems then begin
+    if fiStyle in ChangedFontItems then
+    begin
       V.FontStyle := V.FontStyle - [fsBold, fsItalic];
       V.FontStyle := V.FontStyle + NewFont.Style;
     end;
-    if fiEffect in ChangedFontItems then begin
+    if fiEffect in ChangedFontItems then
+    begin
       V.FontStyle := V.FontStyle - [fsUnderline, fsStrikeOut];
       V.FontStyle := V.FontStyle + NewFont.Style;
     end;
@@ -5494,7 +5779,8 @@ var
   F: TFont;
   V: PView;
 begin
-  for I := 0 to ViewSet.Count - 1 do begin
+  for I := 0 to ViewSet.Count - 1 do
+  begin
     V := ViewSet.Items[I] as PView;
     F := OldFonts.Items[I];
     if fiName in ChangedFontItems then
@@ -5531,7 +5817,8 @@ var
   P: PPoints;
 begin
   OldLineStyles.Free;
-  for I := 0 to OldPoints.Count - 1 do begin
+  for I := 0 to OldPoints.Count - 1 do
+  begin
     P := OldPoints.Items[I];
     P.Free;
   end;
@@ -5554,13 +5841,14 @@ begin
   NewLineStyle := ANewLineStyle;
   OldPoints.Clear;
   OldLineStyles.Clear;
-  for I := 0 to ViewSet.Count - 1 do begin
+  for I := 0 to ViewSet.Count - 1 do
+  begin
     E := ViewSet.Items[I] as PEdgeView;
     P := PPoints.Create;
     P.Assign(E.Points);
     OldPoints.Add(P);
     if E.LineStyle = lsRectilinear then OldLineStyles.Add('R')
-                                   else OldLineStyles.Add('O');
+    else OldLineStyles.Add('O');
   end;
 end;
 
@@ -5569,7 +5857,8 @@ var
   I: Integer;
   E: PEdgeView;
 begin
-  for I := 0 to ViewSet.Count - 1 do begin
+  for I := 0 to ViewSet.Count - 1 do
+  begin
     E := ViewSet.Items[I] as PEdgeView;
     E.LineStyle := NewLineStyle;
   end;
@@ -5583,10 +5872,11 @@ var
   E: PEdgeView;
   P: PPoints;
 begin
-  for I := 0 to ViewSet.Count - 1 do begin
+  for I := 0 to ViewSet.Count - 1 do
+  begin
     E := ViewSet.Items[I] as PEdgeView;
     if OldLineStyles.Strings[I] = 'R' then E.LineStyle := lsRectilinear
-                                      else E.LineStyle := lsOblique;
+    else E.LineStyle := lsOblique;
     P := OldPoints.Items[I];
     E.Points.Assign(P);
   end;
@@ -5622,7 +5912,8 @@ begin
   // PRECONDITION
 
   // Error protection code
-  if Views.Count <> 1 then begin
+  if Views.Count <> 1 then
+  begin
     Views.Clear;
     FErrorMessage := 'Internal Error';
     Exit;
@@ -5631,7 +5922,7 @@ begin
   ViewSet.Assign(Views);
   AView := ViewSet.Items[0] as PUMLCustomTextView;
   OldText := AView.Text;
-  NewText := StringReplace(Strs, #9, '        '{8 indention}, [rfReplaceAll]);
+  NewText := StringReplace(Strs, #9, '        ' {8 indention}, [rfReplaceAll]);
 
   SizePreservingViews.Clear;
   CollectSizesFromViewSet(Views);
@@ -5687,12 +5978,14 @@ end;
 // - declares this function in global
 // - to use this function in POrderedSet.Sort's Compare function
 // -----------------------------------------------------------------------------
+
 function CompareIndex(Item1, Item2: Pointer): Integer;
 var
   V1, V2: PView;
   VI1, VI2: Integer;
 begin
-  V1 := Item1; V2 := Item2;
+  V1 := Item1;
+  V2 := Item2;
   VI1 := V1.OwnerDiagramView.IndexOfOwnedView(V1);
   VI2 := V2.OwnerDiagramView.IndexOfOwnedView(V2);
   if VI1 < VI2 then
@@ -5710,14 +6003,16 @@ var
 begin
   // gather the views which are contained in DiagramView directly
   ViewSet.Clear;
-  for I := 0 to Views.Count - 1 do begin
+  for I := 0 to Views.Count - 1 do
+  begin
     V := Views.Items[I] as PView;
     if V.OwnerDiagramView <> nil then ViewSet.Add(V);
   end;
   ViewSet.Sort(CompareIndex);
   // preserve indices of views
   OldIndices.Clear;
-  for I := 0 to ViewSet.Count - 1 do begin
+  for I := 0 to ViewSet.Count - 1 do
+  begin
     V := ViewSet.Items[I] as PView;
     OldIndices.Add(IntToStr(V.OwnerDiagramView.IndexOfOwnedView(V)));
   end;
@@ -5728,7 +6023,8 @@ var
   I: Integer;
   V: PView;
 begin
-  for I := ViewSet.Count - 1 downto 0 do begin
+  for I := ViewSet.Count - 1 downto 0 do
+  begin
     V := ViewSet.Items[I] as PView;
     V.SendToBack;
   end;
@@ -5743,7 +6039,8 @@ var
   Owner: PDiagramView;
   V: PView;
 begin
-  for I := ViewSet.Count - 1 downto 0 do begin
+  for I := ViewSet.Count - 1 downto 0 do
+  begin
     V := ViewSet.Items[I] as PView;
     Idx := StrToInt(OldIndices.Strings[I]);
     Owner := V.OwnerDiagramView;
@@ -5784,14 +6081,16 @@ var
 begin
   // gather the views which are contained in DiagramView directly
   ViewSet.Clear;
-  for I := 0 to Views.Count - 1 do begin
+  for I := 0 to Views.Count - 1 do
+  begin
     V := Views.Items[I] as PView;
     if V.OwnerDiagramView <> nil then ViewSet.Add(V);
   end;
   ViewSet.Sort(CompareIndex);
   // preserve views indices
   OldIndices.Clear;
-  for I := 0 to ViewSet.Count - 1 do begin
+  for I := 0 to ViewSet.Count - 1 do
+  begin
     V := ViewSet.Items[I] as PView;
     OldIndices.Add(IntToStr(V.OwnerDiagramView.IndexOfOwnedView(V)));
   end;
@@ -5802,7 +6101,8 @@ var
   I: Integer;
   V: PView;
 begin
-  for I := 0 to ViewSet.Count - 1 do begin
+  for I := 0 to ViewSet.Count - 1 do
+  begin
     V := ViewSet.Items[I] as PView;
     V.BringToFront;
   end;
@@ -5817,7 +6117,8 @@ var
   Owner: PDiagramView;
   V: PView;
 begin
-  for I := 0 to ViewSet.Count - 1 do begin
+  for I := 0 to ViewSet.Count - 1 do
+  begin
     V := ViewSet.Items[I] as PView;
     Idx := StrToInt(OldIndices.Strings[I]);
     Owner := V.OwnerDiagramView;
@@ -5858,9 +6159,11 @@ var
 begin
   ViewSet.Clear;
   OldPositions.Clear;
-  for I := 0 to Views.Count - 1 do begin
+  for I := 0 to Views.Count - 1 do
+  begin
     V := Views.Items[I] as PView;
-    if V is PNodeView then begin
+    if V is PNodeView then
+    begin
       ViewSet.Add(V);
       OldPositions.Add(Point((V as PNodeView).Left, (V as PNodeView).Top));
     end;
@@ -5873,11 +6176,13 @@ end;
 // - declare this function for global function to use for comapre function
 // - in POrderedSet.Sort
 // -----------------------------------------------------------------------------
+
 function CompareXPosition(Item1, Item2: Pointer): Integer;
 var
   N1, N2: PNodeView;
 begin
-  N1 := Item1; N2 := Item2;
+  N1 := Item1;
+  N2 := Item2;
   if N1.Left < N2.Left then
     Result := -1
   else if N1.Left > N2.Left then
@@ -5891,11 +6196,13 @@ end;
 // - declare this function for global function to use for comapre function
 // - in POrderedSet.Sort
 // -----------------------------------------------------------------------------
+
 function CompareYPosition(Item1, Item2: Pointer): Integer;
 var
   N1, N2: PNodeView;
 begin
-  N1 := Item1; N2 := Item2;
+  N1 := Item1;
+  N2 := Item2;
   if N1.Top < N2.Top then
     Result := -1
   else if N1.Top > N2.Top then
@@ -5915,7 +6222,8 @@ var
     I, R: Integer;
   begin
     R := 0;
-    if Nodes.Count > 0 then begin
+    if Nodes.Count > 0 then
+    begin
       R := (Nodes.Items[0] as PNodeView).Left;
       for I := 1 to Nodes.Count - 1 do
         if (Nodes.Items[I] as PNodeView).Left < R then
@@ -5929,7 +6237,8 @@ var
     I, R: Integer;
   begin
     R := 0;
-    if Nodes.Count > 0 then begin
+    if Nodes.Count > 0 then
+    begin
       R := (Nodes.Items[0] as PNodeView).Right;
       for I := 1 to Nodes.Count - 1 do
         if (Nodes.Items[I] as PNodeView).Right > R then
@@ -5943,7 +6252,8 @@ var
     I, R: Integer;
   begin
     R := 0;
-    if Nodes.Count > 0 then begin
+    if Nodes.Count > 0 then
+    begin
       R := (Nodes.Items[0] as PNodeView).Top;
       for I := 1 to Nodes.Count - 1 do
         if (Nodes.Items[I] as PNodeView).Top < R then
@@ -5957,7 +6267,8 @@ var
     I, R: Integer;
   begin
     R := 0;
-    if Nodes.Count > 0 then begin
+    if Nodes.Count > 0 then
+    begin
       R := (Nodes.Items[0] as PNodeView).Bottom;
       for I := 1 to Nodes.Count - 1 do
         if (Nodes.Items[I] as PNodeView).Bottom > R then
@@ -5988,70 +6299,86 @@ var
 
 begin
   case AlignmentKind of
-    akLeft: begin
-      V := GetLeftMost(ViewSet);
-      for I := 0 to ViewSet.Count - 1 do begin
-        Node := (ViewSet.Items[I] as PNodeView);
-        Node.Left := V;
+    akLeft:
+      begin
+        V := GetLeftMost(ViewSet);
+        for I := 0 to ViewSet.Count - 1 do
+        begin
+          Node := (ViewSet.Items[I] as PNodeView);
+          Node.Left := V;
+        end;
       end;
-    end;
-    akRight: begin
-      V := GetRightMost(ViewSet);
-      for I := 0 to ViewSet.Count - 1 do begin
-        Node := (ViewSet.Items[I] as PNodeView);
-        Node.Left := V - Node.Width;
+    akRight:
+      begin
+        V := GetRightMost(ViewSet);
+        for I := 0 to ViewSet.Count - 1 do
+        begin
+          Node := (ViewSet.Items[I] as PNodeView);
+          Node.Left := V - Node.Width;
+        end;
       end;
-    end;
-    akMiddle: begin
-      V := (GetLeftMost(ViewSet) + GetRightMost(ViewSet)) div 2;
-      for I := 0 to ViewSet.Count - 1 do begin
-        Node := (ViewSet.Items[I] as PNodeView);
-        Node.Left := V - (Node.Width div 2);
+    akMiddle:
+      begin
+        V := (GetLeftMost(ViewSet) + GetRightMost(ViewSet)) div 2;
+        for I := 0 to ViewSet.Count - 1 do
+        begin
+          Node := (ViewSet.Items[I] as PNodeView);
+          Node.Left := V - (Node.Width div 2);
+        end;
       end;
-    end;
-    akTop: begin
-      V := GetTopMost(ViewSet);
-      for I := 0 to ViewSet.Count - 1 do begin
-        Node := (ViewSet.Items[I] as PNodeView);
-        Node.Top := V;
+    akTop:
+      begin
+        V := GetTopMost(ViewSet);
+        for I := 0 to ViewSet.Count - 1 do
+        begin
+          Node := (ViewSet.Items[I] as PNodeView);
+          Node.Top := V;
+        end;
       end;
-    end;
-    akBottom: begin
-      V := GetBottomMost(ViewSet);
-      for I := 0 to ViewSet.Count - 1 do begin
-        Node := (ViewSet.Items[I] as PNodeView);
-        Node.Top := V - Node.Height;
+    akBottom:
+      begin
+        V := GetBottomMost(ViewSet);
+        for I := 0 to ViewSet.Count - 1 do
+        begin
+          Node := (ViewSet.Items[I] as PNodeView);
+          Node.Top := V - Node.Height;
+        end;
       end;
-    end;
-    akCenter: begin
-      V := (GetTopMost(ViewSet) + GetBottomMost(ViewSet)) div 2;
-      for I := 0 to ViewSet.Count - 1 do begin
-        Node := (ViewSet.Items[I] as PNodeView);
-        Node.Top := V - (Node.Height div 2);
+    akCenter:
+      begin
+        V := (GetTopMost(ViewSet) + GetBottomMost(ViewSet)) div 2;
+        for I := 0 to ViewSet.Count - 1 do
+        begin
+          Node := (ViewSet.Items[I] as PNodeView);
+          Node.Top := V - (Node.Height div 2);
+        end;
       end;
-    end;
-    akSpaceEvenlyHorizontally: begin
-      TempSet := POrderedSet.Create;
-      TempSet.Assign(ViewSet);
-      TempSet.Sort(CompareXPosition);
-      V := GetHorzInterval(TempSet);
-      for I := 1 to TempSet.Count - 1 do begin
-        Node := TempSet.Items[I] as PNodeView;
-        Node.Left := (TempSet.Items[I-1] as PNodeView).Right + V;
+    akSpaceEvenlyHorizontally:
+      begin
+        TempSet := POrderedSet.Create;
+        TempSet.Assign(ViewSet);
+        TempSet.Sort(CompareXPosition);
+        V := GetHorzInterval(TempSet);
+        for I := 1 to TempSet.Count - 1 do
+        begin
+          Node := TempSet.Items[I] as PNodeView;
+          Node.Left := (TempSet.Items[I - 1] as PNodeView).Right + V;
+        end;
+        TempSet.Free;
       end;
-      TempSet.Free;
-    end;
-    akSpaceEvenlyVertically: begin
-      TempSet := POrderedSet.Create;
-      TempSet.Assign(ViewSet);
-      TempSet.Sort(CompareYPosition);
-      V := GetVertInterval(TempSet);
-      for I := 1 to TempSet.Count - 1 do begin
-        Node := TempSet.Items[I] as PNodeView;
-        Node.Top := (TempSet.Items[I-1] as PNodeView).Bottom + V;
+    akSpaceEvenlyVertically:
+      begin
+        TempSet := POrderedSet.Create;
+        TempSet.Assign(ViewSet);
+        TempSet.Sort(CompareYPosition);
+        V := GetVertInterval(TempSet);
+        for I := 1 to TempSet.Count - 1 do
+        begin
+          Node := TempSet.Items[I] as PNodeView;
+          Node.Top := (TempSet.Items[I - 1] as PNodeView).Bottom + V;
+        end;
+        TempSet.Free;
       end;
-      TempSet.Free;
-    end;
   end;
   // fire view change event
   ViewsChanged;
@@ -6062,7 +6389,8 @@ var
   I: Integer;
   Node: PNodeView;
 begin
-  for I := 0 to ViewSet.Count - 1 do begin
+  for I := 0 to ViewSet.Count - 1 do
+  begin
     Node := ViewSet.Items[I] as PNodeView;
     Node.Left := OldPositions.Points[I].X;
     Node.Top := OldPositions.Points[I].Y;
@@ -6122,20 +6450,23 @@ begin
   OldNodePositions.Clear;
   OldEdgePoints.Clear;
   // Storing Nodes
-  for I := 0 to ADiagramView.OwnedViewCount - 1 do begin
+  for I := 0 to ADiagramView.OwnedViewCount - 1 do
+  begin
     V := ADiagramView.OwnedViews[I];
-    if V is PNodeView then begin
+    if V is PNodeView then
+    begin
       Nodes.Add(V);
       OldNodePositions.Add(Point((V as PNodeView).Left, (V as PNodeView).Top));
       ViewSet.Add(V);
     end;
   end;
   // Storing Edges
-  for I := 0 to ADiagramView.OwnedViewCount - 1 do begin
+  for I := 0 to ADiagramView.OwnedViewCount - 1 do
+  begin
     V := ADiagramView.OwnedViews[I];
     if (V is PEdgeView) and
-       ((V as PEdgeView).Tail is PNodeView) and
-       ((V as PEdgeView).Head is PNodeView) then
+      ((V as PEdgeView).Tail is PNodeView) and
+      ((V as PEdgeView).Head is PNodeView) then
     begin
       Edges.Add(V);
       OldEdgeLineStyles.Add(V.MOF_GetAttribute('LineStyle'));
@@ -6180,12 +6511,14 @@ var
   E: PEdgeView;
   Ps: PPoints;
 begin
-  for I := 0 to Nodes.Count - 1 do begin
+  for I := 0 to Nodes.Count - 1 do
+  begin
     N := Nodes.Items[I] as PNodeView;
     N.Left := OldNodePositions.Points[I].X;
     N.Top := OldNodePositions.Points[I].Y;
   end;
-  for I := 0 to Edges.Count - 1 do begin
+  for I := 0 to Edges.Count - 1 do
+  begin
     E := Edges.Items[I] as PEdgeView;
     E.MOF_SetAttribute('LineStyle', OldEdgeLineStyles.Strings[I]);
     Ps := OldEdgePoints.Items[I];
@@ -6206,11 +6539,12 @@ var
   B: Boolean;
 begin
   B := not ModelSet.IsEmpty;
-  if B then begin
+  if B then
+  begin
     if (FOldStereotype = FNewStereotype) and
-       (FOldVisibility = FNewVisibility) and
-       (FOldName = FNewName) 
-    then B := False;
+      (FOldVisibility = FNewVisibility) and
+      (FOldName = FNewName)
+      then B := False;
   end;
   Result := B;
 end;
@@ -6235,7 +6569,8 @@ var
   S: PStereotype;
 begin
   Result := '';
-  if StreotypeStr <> '' then begin
+  if StreotypeStr <> '' then
+  begin
     S := ExtensionManager.FindFirstStereotype(StreotypeStr, M.MetaClass.Name);
     if S <> nil then Result := S.Profile.Name;
   end;
@@ -6249,7 +6584,8 @@ begin
   // Error protection code
   if AModelSet.Count <> 1 then B := False;
   if B then B := AModelSet.Items[0] is PUMLModelElement;
-  if not B then begin
+  if not B then
+  begin
     ModelSet.Clear;
     FErrorMessage := 'Internal Error';
     Exit;
@@ -6299,7 +6635,8 @@ begin
   AParser := PGeneralNameExpressionParser.Create;
   try
     R := AParser.Parse(Value);
-    if (R <> psNotIntialized) and (R <> psError) then begin
+    if (R <> psNotIntialized) and (R <> psError) then
+    begin
       try
         FNewStereotype := AParser.StereoType;
         FNewName := AParser.Name;
@@ -6311,12 +6648,14 @@ begin
         if FNewName <> FOldName then CheckNameConflict(FModel, FNewName);
         CheckNameValidity(FNewName);
       except
-        on E: Exception do begin
+        on E: Exception do
+        begin
           ModelSet.Clear;
           FErrorMessage := E.Message;
         end;
       end;
-    end else begin
+    end else
+    begin
       ModelSet.Clear;
       FErrorMessage := ERR_CMD_EXPRESSION_PARSING;
     end;
@@ -6349,8 +6688,9 @@ var
   B: Boolean;
 begin
   B := inherited Precondition;
-  if not B then begin
-    if not(ModelSet.IsEmpty) and (FOldBase <> FNewBase) then B := True;
+  if not B then
+  begin
+    if not (ModelSet.IsEmpty) and (FOldBase <> FNewBase) then B := True;
   end;
   Result := B;
 end;
@@ -6363,7 +6703,8 @@ var
   R: PParseStatus;
 begin
   inherited;
-  if not(FModel is PUMLClassifierRole) then begin
+  if not (FModel is PUMLClassifierRole) then
+  begin
     ModelSet.Clear;
     FErrorMessage := 'Internal Error';
     Exit;
@@ -6374,7 +6715,8 @@ begin
   AParser := PClassifierRoleExpressionParser.Create;
   try
     R := AParser.Parse(Value);
-    if (R <> psNotIntialized) and (R <> psError) then begin
+    if (R <> psNotIntialized) and (R <> psError) then
+    begin
       try
         FNewStereotype := AParser.StereoType;
         FNewName := AParser.RoleName;
@@ -6384,27 +6726,32 @@ begin
         BaseName := AParser.ClassifierName;
         CheckNameValidity(FNewStereotype);
         FNewProfile := GetProfile(FModel, FNewStereotype);
-        if FNewName <> FOldName then begin
+        if FNewName <> FOldName then
+        begin
           CheckNameValidity(FNewName);
           CheckNameConflict(FModel, FNewName);
         end;
-        if BaseName <> '' then begin
+        if BaseName <> '' then
+        begin
           CheckNameValidity(BaseName);
           if (FOldBase <> nil) and (FOldBase.Name = BaseName) then
             FNewBase := FOldBase
-          else begin
+          else
+          begin
             TempModel := SearchElement(FModel, BaseName);
             if TempModel <> nil then FNewBase := TempModel as PUMLClassifier
             else raise Exception.Create(ERR_CMD_CANNOT_FIND_BASEELEMENT);
           end;
         end else FNewBase := nil;
       except
-        on E: Exception do begin
+        on E: Exception do
+        begin
           ModelSet.Clear;
           FErrorMessage := E.Message;
         end;
       end;
-    end else begin
+    end else
+    begin
       ModelSet.Clear;
       FErrorMessage := ERR_CMD_EXPRESSION_PARSING;
     end;
@@ -6439,8 +6786,9 @@ var
   B: Boolean;
 begin
   B := inherited Precondition;
-  if not B then begin
-    if not(ModelSet.IsEmpty) and (FOldClassifier <> FNewClassifier) then B := True;
+  if not B then
+  begin
+    if not (ModelSet.IsEmpty) and (FOldClassifier <> FNewClassifier) then B := True;
   end;
   Result := B;
 end;
@@ -6453,7 +6801,8 @@ var
   R: PParseStatus;
 begin
   inherited;
-  if not(FModel is PUMLObject) then begin
+  if not (FModel is PUMLObject) then
+  begin
     ModelSet.Clear;
     FErrorMessage := 'Internal Error';
     Exit;
@@ -6464,7 +6813,8 @@ begin
   AParser := PObjectExpressionParser.Create;
   try
     R := AParser.Parse(Value);
-    if (R <> psNotIntialized) and (R <> psError) then begin
+    if (R <> psNotIntialized) and (R <> psError) then
+    begin
       FNewStereotype := AParser.StereoType;
       FNewName := AParser.ObjectName;
       if AParser.Visibility <> '' then
@@ -6474,27 +6824,32 @@ begin
       try
         CheckNameValidity(FNewStereotype);
         FNewProfile := GetProfile(FModel, FNewStereotype);
-        if FNewName <> FOldName then begin
+        if FNewName <> FOldName then
+        begin
           CheckNameValidity(FNewName);
           CheckNameConflict(FModel, FNewName);
         end;
-        if ClassifierName <> '' then begin
+        if ClassifierName <> '' then
+        begin
           CheckNameValidity(ClassifierName);
           if (FOldClassifier <> nil) and (FOldClassifier.Name = ClassifierName) then
             FNewClassifier := FOldClassifier
-          else begin
+          else
+          begin
             TempModel := SearchElement(FModel, ClassifierName);
             if TempModel <> nil then FNewClassifier := TempModel as PUMLClassifier
-            else Raise Exception.Create(ERR_CMD_CANNOT_FIND_CLASSIFIER);
+            else raise Exception.Create(ERR_CMD_CANNOT_FIND_CLASSIFIER);
           end;
         end else FNewClassifier := nil;
       except
-        on E: Exception do begin
+        on E: Exception do
+        begin
           ModelSet.Clear;
           FErrorMessage := E.Message;
         end;
       end;
-    end else begin
+    end else
+    begin
       ModelSet.Clear;
       FErrorMessage := ERR_CMD_EXPRESSION_PARSING;
     end;
@@ -6531,14 +6886,16 @@ var
   B: Boolean;
 begin
   B := inherited Precondition;
-  if not B then begin
-    if not(ModelSet.IsEmpty) then begin
+  if not B then
+  begin
+    if not (ModelSet.IsEmpty) then
+    begin
       if (FOldMultiplicity <> FNewMultiplicity) or
-         (FOldOrdering <> FNewOrdering) or
-         (FOldInitialValue <> FNewInitialValue) or
-         (FOldTypeExpression <> FNewTypeExpression) or
-         (FOldType <> FNewType)
-      then B := True;
+        (FOldOrdering <> FNewOrdering) or
+        (FOldInitialValue <> FNewInitialValue) or
+        (FOldTypeExpression <> FNewTypeExpression) or
+        (FOldType <> FNewType)
+        then B := True;
     end;
   end;
   Result := B;
@@ -6552,7 +6909,8 @@ var
   TempModel: PModel;
 begin
   inherited;
-  if not(FModel is PUMLAttribute) then begin
+  if not (FModel is PUMLAttribute) then
+  begin
     ModelSet.Clear;
     FErrorMessage := 'Internal Error';
     Exit;
@@ -6567,7 +6925,8 @@ begin
   AParser := PAttributeExpressionParser.Create;
   try
     R := AParser.Parse(Value);
-    if (R <> psNotIntialized) and (R <> psError) then begin
+    if (R <> psNotIntialized) and (R <> psError) then
+    begin
       try
         FNewStereotype := AParser.Stereotype;
         FNewName := AParser.Name;
@@ -6584,30 +6943,36 @@ begin
         TypeExpression := AParser.TypeExpression;
         CheckNameValidity(FNewStereotype);
         FNewProfile := GetProfile(FModel, FNewStereotype);
-        if FNewName <> FOldName then begin
+        if FNewName <> FOldName then
+        begin
           CheckNameValidity(FNewName);
           CheckNameConflict(FModel, FNewName);
         end;
-        if TypeExpression = FOldTypeExpression then begin
+        if TypeExpression = FOldTypeExpression then
+        begin
           FNewTypeExpression := FOldTypeExpression;
           FNewType := FOldType;
-        end else if TypeExpression <> '' then begin
+        end else if TypeExpression <> '' then
+        begin
           CheckNameValidity(TypeExpression);
           FNewTypeExpression := TypeExpression;
           TempModel := SearchElement(FModel, TypeExpression);
           if TempModel <> nil then FNewType := TempModel as PUMLClassifier
           else FNewType := nil;
-        end else begin
+        end else
+        begin
           FNewTypeExpression := '';
           FNewType := nil;
         end;
       except
-        on E: Exception do begin
+        on E: Exception do
+        begin
           ModelSet.Clear;
           FErrorMessage := E.Message;
         end;
       end;
-    end else begin
+    end else
+    begin
       ModelSet.Clear;
       FErrorMessage := ERR_CMD_EXPRESSION_PARSING;
     end;
@@ -6621,7 +6986,8 @@ begin
   inherited;
   if FNewMultiplicity <> FOldMultiplicity then
     FModel.MOF_SetAttribute('Multiplicity', FNewMultiplicity);
-  if FNewOrdering <> FOldOrdering then begin
+  if FNewOrdering <> FOldOrdering then
+  begin
     if FNewOrdering = okUnordered then FModel.MOF_SetAttribute('Ordering', 'okUnordered')
     else if FNewOrdering = okOrdered then FModel.MOF_SetAttribute('Ordering', 'okOrdered');
   end;
@@ -6640,7 +7006,8 @@ begin
   inherited;
   if FNewMultiplicity <> FOldMultiplicity then
     FModel.MOF_SetAttribute('Multiplicity', FOldMultiplicity);
-  if FNewOrdering <> FOldOrdering then begin
+  if FNewOrdering <> FOldOrdering then
+  begin
     if FOldOrdering = okUnordered then FModel.MOF_SetAttribute('Ordering', 'okUnordered')
     else if FOldOrdering = okOrdered then FModel.MOF_SetAttribute('Orderring', 'okrdered');
   end;
@@ -6694,7 +7061,8 @@ begin
   // Name
   Param.Name := AName;
   // Type or TypeExpression
-  if AType <> '' then begin
+  if AType <> '' then
+  begin
     TempModel := SearchElement(AModel, AType);
     if TempModel <> nil then Param.Type_ := TempModel as PUMLClassifier
     else Param.TypeExpression := AType;
@@ -6712,7 +7080,8 @@ begin
   Result := False;
   AModel := ModelSet.Items[0] as PUMLOperation;
   for I := 0 to AModel.VirtualOwnedModelCount - 1 do
-    if AModel.VirtualOwnedModels[I].Name = Value then begin
+    if AModel.VirtualOwnedModels[I].Name = Value then
+    begin
       Result := True;
       Exit;
     end;
@@ -6725,7 +7094,8 @@ var
 begin
   I := 1;
   Name := 'parameter' + IntToStr(I);
-  while CheckNameExisting(Name) do begin
+  while CheckNameExisting(Name) do
+  begin
     Inc(I);
     Name := 'parameter' + IntToStr(I);
   end;
@@ -6737,7 +7107,8 @@ var
   S: PStereotype;
 begin
   Result := '';
-  if StreotypeStr <> '' then begin
+  if StreotypeStr <> '' then
+  begin
     S := ExtensionManager.FindFirstStereotype(StreotypeStr, M.MetaClass.Name);
     if S <> nil then Result := S.Profile.Name;
   end;
@@ -6745,7 +7116,7 @@ end;
 
 function PApplyOperationExpressionCommnad.Precondition: Boolean;
 begin
-  Result := not(ModelSet.IsEmpty);
+  Result := not (ModelSet.IsEmpty);
 end;
 
 procedure PApplyOperationExpressionCommnad.Preprocess;
@@ -6762,7 +7133,8 @@ end;
 
 procedure PApplyOperationExpressionCommnad.ElementsCreated(IsUnexecuting: Boolean);
 begin
-  if Assigned(FOnElementsCreated) then begin
+  if Assigned(FOnElementsCreated) then
+  begin
     if not IsUnexecuting then FOnElementsCreated(Self, FNewParameters, FViewSet)
     else FOnElementsCreated(Self, FOldParameters, FViewSet)
   end;
@@ -6770,7 +7142,8 @@ end;
 
 procedure PApplyOperationExpressionCommnad.ElementsDeleting(IsUnexecuting: Boolean);
 begin
-  if Assigned(FOnElementsDeleting) then begin
+  if Assigned(FOnElementsDeleting) then
+  begin
     if not IsUnexecuting then FOnElementsDeleting(Self, FOldParameters, FViewSet)
     else FOnElementsDeleting(Self, FNewParameters, FViewSet)
   end;
@@ -6799,7 +7172,8 @@ begin
   // PRECONDITION
 
   // Error protection code
-  if AModelSet.Count <> 1 then begin
+  if AModelSet.Count <> 1 then
+  begin
     ModelSet.Clear;
     FErrorMessage := 'Internal Error';
     Exit;
@@ -6812,7 +7186,8 @@ begin
   // ASSERTION
 
   // Error protection code
-  if not(AModel is PUMLOperation) then begin
+  if not (AModel is PUMLOperation) then
+  begin
     ModelSet.Clear;
     FErrorMessage := 'Internal Error';
     Exit;
@@ -6831,7 +7206,8 @@ begin
   try
     R := AParser.Parse(Value);
     // Parsing completed: Fill the FNewParamters set
-    if (R <> psNotIntialized) and (R <> psError) then begin
+    if (R <> psNotIntialized) and (R <> psError) then
+    begin
       try
         if Aparser.Visibility = '+' then FNewVisibility := vkPublic
         else if Aparser.Visibility = '-' then FNewVisibility := vkPrivate
@@ -6844,13 +7220,15 @@ begin
         CheckNameValidity(FNewStereotype);
         if FNewStereotype <> FOldStereotype then
           FNewProfile := GetProfile(AModel as PExtensibleModel, FNewStereotype);
-        if FNewName <> FOldName then begin
+        if FNewName <> FOldName then
+        begin
           CheckNameValidity(FNewName);
           CheckNameConflict(AModel, FNewName);
         end;
         // Return parameter
         ParamType := AParser.ReturnTypeExpression;
-        if ParamType <> '' then begin
+        if ParamType <> '' then
+        begin
           CheckNameValidity(ParamType);
           ParamName := '';
           ParamKind := 'return';
@@ -6858,7 +7236,8 @@ begin
           if TempModel <> nil then FNewParameters.Add(TempModel);
         end;
         // General parameters
-        for I := 0 to AParser.ParameterCount - 1 do begin
+        for I := 0 to AParser.ParameterCount - 1 do
+        begin
           ParamKind := AParser.ParameterKinds[I];
           ParamName := AParser.ParameterNames[I];
           CheckNameValidity(ParamName);
@@ -6869,13 +7248,15 @@ begin
           if TempModel <> nil then FNewParameters.Add(TempModel);
         end;
       except
-        on E: Exception do begin
+        on E: Exception do
+        begin
           ModelSet.Clear;
           FErrorMessage := E.Message;
         end;
       end;
     // Parsing Error
-    end else begin
+    end else
+    begin
       ModelSet.Clear;
       FErrorMessage := ERR_CMD_EXPRESSION_PARSING;
     end;
@@ -6902,13 +7283,15 @@ begin
     AModel.MOF_SetAttribute('StereotypeName', FNewStereotype);
   if FNewName <> FOldName then
     AModel.MOF_SetAttribute('Name', FNewName);
-  if FOldParameters.Count > 0 then begin
+  if FOldParameters.Count > 0 then
+  begin
     ElementsDeleting(False);
     AModel.ClearParameters;
     ElementsDeleted;
   end;
 
-  for I := 0 to FNewParameters.Count - 1 do begin
+  for I := 0 to FNewParameters.Count - 1 do
+  begin
     Param := FNewParameters.Items[I] as PUMLParameter;
     AModel.AddParameter(Param);
     //AModel.MOF_AddCollectionItem('Parameters', Param);
@@ -6934,13 +7317,15 @@ begin
     AModel.MOF_SetAttribute('StereotypeName', FOldStereotype);
   if FNewName <> FOldName then
     AModel.MOF_SetAttribute('Name', FOldName);
-  if FNewParameters.Count > 0 then begin
+  if FNewParameters.Count > 0 then
+  begin
     ElementsDeleting(True);
     AModel.ClearParameters;
     ElementsDeleted;
   end;
 
-  for I := 0 to FOldParameters.Count - 1 do begin
+  for I := 0 to FOldParameters.Count - 1 do
+  begin
     Param := FOldParameters.Items[I] as PUMLParameter;
     //AModel.MOF_AddCollectionItem('Parameters', Param);
     AModel.AddParameter(Param);
@@ -6965,10 +7350,12 @@ var
   AnIns: PUMLInstance;
 begin
   Result := nil;
-  if AModel is PUMLMessage then begin
+  if AModel is PUMLMessage then
+  begin
     ARole := (AModel as PUMLMessage).Receiver;
     if Assigned(ARole) then Result := ARole.Base;
-  end else if AModel is PUMLStimulus then begin
+  end else if AModel is PUMLStimulus then
+  begin
     AnIns := (AModel as PUMLStimulus).Receiver;
     if Assigned(AnIns) then Result := AnIns.Classifier;
   end;
@@ -6979,16 +7366,18 @@ var
   B: Boolean;
 begin
   B := inherited Precondition;
-  if not B then begin
-    if not(ModelSet.IsEmpty) then begin
+  if not B then
+  begin
+    if not (ModelSet.IsEmpty) then
+    begin
       if (FOldIteration <> FNewIteration) or
-         (FOldBranch <> FNewBranch) or
-         (FOldReturn <> FNewReturn) or
-         (FOldArguments <> FNewArguments) or
-         (FOldOperation <> FNewOperation) or
-         (FOldSignal <> FNewSignal) or
-         (FOldInstantiation <> FNewInstantiation)
-      then B := True;
+        (FOldBranch <> FNewBranch) or
+        (FOldReturn <> FNewReturn) or
+        (FOldArguments <> FNewArguments) or
+        (FOldOperation <> FNewOperation) or
+        (FOldSignal <> FNewSignal) or
+        (FOldInstantiation <> FNewInstantiation)
+        then B := True;
     end;
   end;
   Result := B;
@@ -7009,7 +7398,8 @@ var
   I: Integer;
 begin
   inherited;
-  if not(FModel is PUMLMessage) and not(FModel is PUMLStimulus) then begin
+  if not (FModel is PUMLMessage) and not (FModel is PUMLStimulus) then
+  begin
     ModelSet.Clear;
     FErrorMessage := 'Internal Error';
     Exit;
@@ -7018,26 +7408,30 @@ begin
   FOldOperation := nil;
   FOldSignal := nil;
   FOldInstantiation := nil;
-  if FModel is PUMLMessage then begin
+  if FModel is PUMLMessage then
+  begin
     AMessage := FModel as PUMLMessage;
     FOldIteration := AMessage.Iteration;
     FOldBranch := AMessage.Branch;
     FOldReturn := AMessage.Return;
     FOldArguments := AMessage.Arguments;
     AAction := AMessage.Action;
-    if Assigned(AAction) then begin
+    if Assigned(AAction) then
+    begin
       if AAction is PUMLCallAction then FOldOperation := (AAction as PUMLCallAction).Operation
       else if AAction is PUMLSendAction then FOldSignal := (AAction as PUMLSendAction).Signal
       else if AAction is PUMLCreateAction then FOldInstantiation := (AAction as PUMLCreateAction).Instantiation;
     end;
-  end else begin
+  end else
+  begin
     AStimulus := FModel as PUMLStimulus;
     FOldIteration := AStimulus.Iteration;
     FOldBranch := AStimulus.Branch;
     FOldReturn := AStimulus.Return;
     FOldArguments := AStimulus.Arguments;
     AAction := AStimulus.Action;
-    if Assigned(AAction) then begin
+    if Assigned(AAction) then
+    begin
       if AAction is PUMLCallAction then FOldOperation := (AAction as PUMLCallAction).Operation
       else if AAction is PUMLSendAction then FOldSignal := (AAction as PUMLSendAction).Signal
       else if AAction is PUMLCreateAction then FOldInstantiation := (AAction as PUMLCreateAction).Instantiation;
@@ -7047,7 +7441,8 @@ begin
   AParser := PMessageExpressionParser.Create;
   try
     R := AParser.Parse(Value);
-    if (R <> psNotIntialized) and (R <> psError) then begin
+    if (R <> psNotIntialized) and (R <> psError) then
+    begin
       try
         FNewStereotype := AParser.Stereotype;
         NameStr := AParser.MessageName;
@@ -7060,21 +7455,28 @@ begin
         FNewReturn := AParser.Return;
         FNewArguments := AParser.Arguments;
         B := False;
-        if (NameStr <> '') and (Assigned(AAction)) then begin
-          if AAction is PUMLCallAction then begin
+        if (NameStr <> '') and (Assigned(AAction)) then
+        begin
+          if AAction is PUMLCallAction then
+          begin
             AClassifier := GetTargetClassifierModel(FModel);
-            if Assigned(AClassifier) then begin
-              if Assigned(FOldOperation) and (NameStr = FOldOperation.Name) then begin
+            if Assigned(AClassifier) then
+            begin
+              if Assigned(FOldOperation) and (NameStr = FOldOperation.Name) then
+              begin
                 FNewOperation := FOldOperation;
                 B := True;
-              end else begin
+              end else
+              begin
                 OpList := POrderedSet.Create;
                 try
                   OpList.Clear;
                   UMLAux.CollectAllInheritedItems(AClassifier, 'Operations', OpList);
-                  for I := 0 to OpList.Count - 1 do begin
+                  for I := 0 to OpList.Count - 1 do
+                  begin
                     AModel := OpList.Items[I] as PModel;
-                    if AModel.Name = NameStr then begin
+                    if AModel.Name = NameStr then
+                    begin
                       FNewOperation := AModel as PUMLOperation;
                       B := True;
                       Break;
@@ -7085,24 +7487,32 @@ begin
                 end;
               end;
             end;
-          end else if AAction is PUMLSendAction then begin
-            if Assigned(FOldSignal) and (FOldSignal.Name = NameStr) then begin
+          end else if AAction is PUMLSendAction then
+          begin
+            if Assigned(FOldSignal) and (FOldSignal.Name = NameStr) then
+            begin
               FNewSignal := FOldSignal;
               B := True;
-            end else begin
+            end else
+            begin
               AModel := SearchElement(FModel, NameStr, 'UMLSignal');
-              if AModel <> nil then begin
+              if AModel <> nil then
+              begin
                 FNewSignal := AModel as PUMLSignal;
                 B := True;
               end;
             end;
-          end else if AAction is PUMLCreateAction then begin
-            if Assigned(FOldInstantiation) and (FOldInstantiation.Name = NameStr) then begin
+          end else if AAction is PUMLCreateAction then
+          begin
+            if Assigned(FOldInstantiation) and (FOldInstantiation.Name = NameStr) then
+            begin
               FNewInstantiation := FOldInstantiation;
               B := True;
-            end else begin
+            end else
+            begin
               AModel := SearchElement(FModel, NameStr);
-              if AModel <> nil then begin
+              if AModel <> nil then
+              begin
                 FNewInstantiation := AModel as PUMLClassifier;
                 B := True;
               end;
@@ -7116,12 +7526,14 @@ begin
         FNewProfile := GetProfile(FModel, FNewStereotype);
         if FNewName <> FOldName then CheckNameValidity(FNewName);
       except
-        on E: Exception do begin
+        on E: Exception do
+        begin
           ModelSet.Clear;
           FErrorMessage := E.Message;
         end;
       end;
-    end else begin
+    end else
+    begin
       ModelSet.Clear;
       FErrorMessage := ERR_CMD_EXPRESSION_PARSING;
     end;
@@ -7137,37 +7549,48 @@ var
   AAction: PUMLAction;
 begin
   inherited;
-  with FModel do begin
+  with FModel do
+  begin
     if FOldIteration <> FNewIteration then MOF_SetAttribute('Iteration', FNewIteration);
     if FOldBranch <> FNewBranch then MOF_SetAttribute('Branch', FNewBranch);
     if FOldReturn <> FNewReturn then MOF_SetAttribute('Return', FNewReturn);
     if FOldArguments <> FNewArguments then MOF_SetAttribute('Arguments', FNewArguments);
-    if FModel is PUMLMessage then begin
+    if FModel is PUMLMessage then
+    begin
       AMessage := FModel as PUMLMessage;
       AAction := AMessage.Action;
-      if Assigned(AAction) then begin
-        if AAction is PUMLCallAction then begin
+      if Assigned(AAction) then
+      begin
+        if AAction is PUMLCallAction then
+        begin
           if FOldOperation <> FNewOperation then
             AAction.MOF_SetReference('Operation', FNewOperation);
-        end else if AAction is PUMLSendAction then begin
+        end else if AAction is PUMLSendAction then
+        begin
           if FOldSignal <> FNewSignal then
             AAction.MOF_SetReference('Signal', FNewSignal);
-        end else if AAction is PUMLCreateAction then begin
+        end else if AAction is PUMLCreateAction then
+        begin
           if FOldInstantiation <> FNewInstantiation then
             AAction.MOF_SetReference('Instantiation', FNewInstantiation);
         end;
       end;
-    end else begin
+    end else
+    begin
       AStimulus := FModel as PUMLStimulus;
       AAction := AStimulus.Action;
-      if Assigned(AAction) then begin
-        if AAction is PUMLCallAction then begin
+      if Assigned(AAction) then
+      begin
+        if AAction is PUMLCallAction then
+        begin
           if FOldOperation <> FNewOperation then
             AAction.MOF_SetReference('Operation', FNewOperation);
-        end else if AAction is PUMLSendAction then begin
+        end else if AAction is PUMLSendAction then
+        begin
           if FOldSignal <> FNewSignal then
             AAction.MOF_SetReference('Signal', FNewSignal);
-        end else if AAction is PUMLCreateAction then begin
+        end else if AAction is PUMLCreateAction then
+        begin
           if FOldInstantiation <> FNewInstantiation then
             AAction.MOF_SetReference('Instantiation', FNewInstantiation);
         end;
@@ -7184,37 +7607,48 @@ var
   AAction: PUMLAction;
 begin
   inherited;
-  with FModel do begin
+  with FModel do
+  begin
     if FOldIteration <> FNewIteration then MOF_SetAttribute('Iteration', FOldIteration);
     if FOldBranch <> FNewBranch then MOF_SetAttribute('Branch', FOldBranch);
     if FOldReturn <> FNewReturn then MOF_SetAttribute('Return', FOldReturn);
     if FOldArguments <> FNewArguments then MOF_SetAttribute('Arguments', FOldArguments);
-    if FModel is PUMLMessage then begin
+    if FModel is PUMLMessage then
+    begin
       AMessage := FModel as PUMLMessage;
       AAction := AMessage.Action;
-      if Assigned(AAction) then begin
-        if AAction is PUMLCallAction then begin
+      if Assigned(AAction) then
+      begin
+        if AAction is PUMLCallAction then
+        begin
           if FOldOperation <> FNewOperation then
             AAction.MOF_SetReference('Operation', FOldOperation);
-        end else if AAction is PUMLSendAction then begin
+        end else if AAction is PUMLSendAction then
+        begin
           if FOldSignal <> FNewSignal then
             AAction.MOF_SetReference('Signal', FOldSignal);
-        end else if AAction is PUMLCreateAction then begin
+        end else if AAction is PUMLCreateAction then
+        begin
           if FOldInstantiation <> FNewInstantiation then
             AAction.MOF_SetReference('Instantiation', FOldInstantiation);
         end;
       end;
-    end else begin
+    end else
+    begin
       AStimulus := FModel as PUMLStimulus;
       AAction := AStimulus.Action;
-      if Assigned(AAction) then begin
-        if AAction is PUMLCallAction then begin
+      if Assigned(AAction) then
+      begin
+        if AAction is PUMLCallAction then
+        begin
           if FOldOperation <> FNewOperation then
             AAction.MOF_SetReference('Operation', FOldOperation);
-        end else if AAction is PUMLSendAction then begin
+        end else if AAction is PUMLSendAction then
+        begin
           if FOldSignal <> FNewSignal then
             AAction.MOF_SetReference('Signal', FOldSignal);
-        end else if AAction is PUMLCreateAction then begin
+        end else if AAction is PUMLCreateAction then
+        begin
           if FOldInstantiation <> FNewInstantiation then
             AAction.MOF_SetReference('Instantiation', FOldInstantiation);
         end;
@@ -7327,7 +7761,8 @@ begin
       OldCollection := R.GetOtherSideEnd.Name;
       OldIdx := OldOwner.MOF_IndexOfCollectionItem(OldCollection, M);
     end
-    else begin
+    else
+    begin
       OldCollection := '';
       OldIdx := 0;
     end;
@@ -7336,7 +7771,7 @@ begin
     if (R <> nil) and (R.GetOtherSideEnd <> nil) then
       NewCollection := R.GetOtherSideEnd.Name;
     ContainmentTable.AddRow(['', '', '', OldCollection, NewCollection, IntToStr(OldIdx), OldName, NewName],
-                            [M, OldOwner, NewOwner, nil, nil, nil, nil, nil]);
+      [M, OldOwner, NewOwner, nil, nil, nil, nil, nil]);
     CollectSizesFromModel(OldOwner);
     CollectSizesFromModel(NewOwner);
   end;
@@ -7569,7 +8004,8 @@ end;
 
 destructor PSetDataTaggedValueCommand.Destroy;
 begin
-  if (CommandPos = cpReexecuteStack) and NeedToCreate then begin
+  if (CommandPos = cpReexecuteStack) and NeedToCreate then
+  begin
     TaggedValue.Free;
     TaggedValue := nil;
   end;
@@ -7594,8 +8030,10 @@ end;
 
 procedure PSetDataTaggedValueCommand.Reexecute;
 begin
-  if NeedToCreate then begin
-    if TaggedValue = nil then begin
+  if NeedToCreate then
+  begin
+    if TaggedValue = nil then
+    begin
       TaggedValue := MetaModel.CreateInstance('TaggedValue') as PTaggedValue;
       TaggedValue.Name := TagName;
       TaggedValue.ProfileName := ProfileName;
@@ -7629,11 +8067,13 @@ begin
   TagDefinitionSetName := ATagDefinitionSet;
   TagName := AName;
   TaggedValue := ExtensibleModel.FindTaggedValue(ProfileName, TagDefinitionSetName, TagName);
-  if TaggedValue <> nil then begin
+  if TaggedValue <> nil then
+  begin
     OldDataValue := TaggedValue.DataValue;
     NeedToCreate := False;
   end
-  else begin
+  else
+  begin
     OldDataValue := '';
     NeedToCreate := True;
   end;
@@ -7656,7 +8096,8 @@ end;
 
 destructor PSetReferenceTaggedValueCommand.Destroy;
 begin
-  if (CommandPos = cpReexecuteStack) and NeedToCreate then begin
+  if (CommandPos = cpReexecuteStack) and NeedToCreate then
+  begin
     TaggedValue.Free;
     TaggedValue := nil;
   end;
@@ -7681,8 +8122,10 @@ end;
 
 procedure PSetReferenceTaggedValueCommand.Reexecute;
 begin
-  if NeedToCreate then begin
-    if TaggedValue = nil then begin
+  if NeedToCreate then
+  begin
+    if TaggedValue = nil then
+    begin
       TaggedValue := MetaModel.CreateInstance('TaggedValue') as PTaggedValue;
       TaggedValue.Name := TagName;
       TaggedValue.ProfileName := ProfileName;
@@ -7799,7 +8242,8 @@ begin
   ModelSet.Add(ExtensibleModel);
   Items.Clear;
   if (TaggedValue <> nil) and (TaggedValue.ReferenceValueCount > 0) then
-    for I := 0 to TaggedValue.ReferenceValueCount - 1 do begin
+    for I := 0 to TaggedValue.ReferenceValueCount - 1 do
+    begin
       Items.Add(TaggedValue.ReferenceValues[I]);
       ModelSet.Add(TaggedValue.ReferenceValues[I]);
     end;
@@ -7819,7 +8263,8 @@ end;
 
 destructor PAddCollectionTaggedValueCommand.Destroy;
 begin
-  if (CommandPos = cpReexecuteStack) and NeedToCreate then begin
+  if (CommandPos = cpReexecuteStack) and NeedToCreate then
+  begin
     TaggedValue.Free;
     TaggedValue := nil;
   end;
@@ -7844,8 +8289,10 @@ end;
 
 procedure PAddCollectionTaggedValueCommand.Reexecute;
 begin
-  if NeedToCreate then begin
-    if TaggedValue = nil then begin
+  if NeedToCreate then
+  begin
+    if TaggedValue = nil then
+    begin
       TaggedValue := MetaModel.CreateInstance('TaggedValue') as PTaggedValue;
       TaggedValue.Name := TagName;
       TaggedValue.ProfileName := ProfileName;
@@ -7941,7 +8388,8 @@ end;
 
 destructor PInsertCollectionTaggedValueCommand.Destroy;
 begin
-  if (CommandPos = cpReexecuteStack) and NeedToCreate then begin
+  if (CommandPos = cpReexecuteStack) and NeedToCreate then
+  begin
     TaggedValue.Free;
     TaggedValue := nil;
   end;
@@ -7966,8 +8414,10 @@ end;
 
 procedure PInsertCollectionTaggedValueCommand.Reexecute;
 begin
-  if NeedToCreate then begin
-    if TaggedValue = nil then begin
+  if NeedToCreate then
+  begin
+    if TaggedValue = nil then
+    begin
       TaggedValue := MetaModel.CreateInstance('TaggedValue') as PTaggedValue;
       TaggedValue.Name := TagName;
       TaggedValue.ProfileName := ProfileName;
@@ -8384,7 +8834,8 @@ begin
   end;
   // Setting Views to be contained in new ContainerView.
   ViewSet.Assign(AViewSet);
-  DX := ADX; DY := ADY;
+  DX := ADX;
+  DY := ADY;
   DiagramView := ADiagramView;
   for I := 0 to ViewSet.Count - 1 do
   begin
@@ -8398,7 +8849,7 @@ begin
     OldLeft := (V as PNodeView).Left;
     OldTop := (V as PNodeView).Top;
     ViewTable.AddRow(['', '', IntToStr(OldIdx), IntToStr(OldLeft), IntToStr(OldTop), ''],
-                     [V, OldContainer, nil, nil, nil, NewContainer])
+      [V, OldContainer, nil, nil, nil, NewContainer])
   end;
   ViewSet.Add(AContainerView);
   ViewTable.SortByColumn('OldIdx', True);
@@ -8486,11 +8937,13 @@ var
 begin
   if ModelSet.IsEmpty then
     Result := False
-  else begin
+  else
+  begin
     Result := True;
     MClass := (ModelSet.Items[0] as PExtensibleModel).MetaClass.Name;
     for I := 1 to ModelSet.Count - 1 do
-      if (ModelSet.Items[I] as PExtensibleModel).MetaClass.Name <> MClass then begin
+      if (ModelSet.Items[I] as PExtensibleModel).MetaClass.Name <> MClass then
+      begin
         Result := False;
         Exit;
       end;
@@ -8515,11 +8968,13 @@ begin
     S := ExtensionManager.FindFirstStereotype(ANewStereotype, (AModelSet.Items[0] as PExtensibleModel).MetaClass.Name)
   else
     S := ExtensionManager.FindStereotype(ANewProfile, ANewStereotype, (AModelSet.Items[0] as PExtensibleModel).MetaClass.Name);
-  if S <> nil then begin
+  if S <> nil then
+  begin
     NewProfile := S.Profile.Name;
     NewStereotype := S.Name;
   end
-  else begin
+  else
+  begin
     NewProfile := '';
     NewStereotype := ANewStereotype;
   end;
@@ -8543,7 +8998,8 @@ var
   M: PExtensibleModel;
   I: Integer;
 begin
-  for I := 0 to ModelSet.Count - 1 do begin
+  for I := 0 to ModelSet.Count - 1 do
+  begin
     M := ModelSet.Items[I] as PExtensibleModel;
     M.StereotypeProfile := NewProfile;
     M.StereotypeName := NewStereotype;
@@ -8556,7 +9012,8 @@ var
   M: PExtensibleModel;
   I: Integer;
 begin
-  for I := 0 to ModelSet.Count - 1 do begin
+  for I := 0 to ModelSet.Count - 1 do
+  begin
     M := ModelSet.Items[I] as PUMLModelElement;
     M.StereotypeProfile := OldProfiles[I];
     M.StereotypeName := OldStereotypes[I];
@@ -8678,12 +9135,14 @@ begin
   NewPartView := ANewParicipant;
   OldLineStyle := Edge.LineStyle;
   NewLineStyle := Edge.LineStyle;
-  if IsTailSide then begin
+  if IsTailSide then
+  begin
     OldPartView := Edge.Tail;
     if Edge.Head = NewPartView then
       NewLineStyle := lsRectilinear;
   end
-  else begin
+  else
+  begin
     OldPartView := Edge.Head;
     if Edge.Tail = NewPartView then
       NewLineStyle := lsRectilinear;
@@ -8691,7 +9150,8 @@ begin
 
   // set models set and views set
   FChangingViews.Add(Edge);
-  if Edge.Model <> nil then begin
+  if Edge.Model <> nil then
+  begin
     FChangingModels.Add(Edge.Model);
     if Edge.Model is PUMLLink then
       for I := 0 to (Edge.Model as PUMLLink).StimulusCount - 1 do
@@ -8699,7 +9159,8 @@ begin
     else if Edge.Model is PUMLAssociationRole then
       for I := 0 to (Edge.Model as PUMLAssociationRole).MessageCount - 1 do
         FChangingModels.Add((Edge.Model as PUMLAssociationRole).Messages[I]);
-    for I := 0 to Edge.Model.ViewCount - 1 do begin
+    for I := 0 to Edge.Model.ViewCount - 1 do
+    begin
       V := Edge.Model.Views[I];
       // if V.MetaClass <> Edge.MetaClass ?
       if (V.MetaClass = Edge.MetaClass) and (V <> Edge) then
@@ -8709,10 +9170,12 @@ begin
 
   // store index of each view object.
   ViewTable.Clear;
-  for I := 0 to ViewSet.Count - 1 do begin
+  for I := 0 to ViewSet.Count - 1 do
+  begin
     V := ViewSet.Items[I] as PView;
     Dgm := V.OwnerDiagramView;
-    if Dgm <> nil then begin
+    if Dgm <> nil then
+    begin
       Idx := Dgm.IndexOfOwnedView(V);
       ViewTable.AddRow(['', '', IntToStr(Idx)], [V, Dgm, nil]);
     end;
@@ -8734,9 +9197,12 @@ begin
   ElementsDeleted;
 
   // set participant-related property
-  if Edge is PUMLAssociationRoleView then begin
-    if IsTailSide then begin
-      for I := 0 to (Edge.Model as PUMLAssociationRole).MessageCount - 1 do begin
+  if Edge is PUMLAssociationRoleView then
+  begin
+    if IsTailSide then
+    begin
+      for I := 0 to (Edge.Model as PUMLAssociationRole).MessageCount - 1 do
+      begin
         UM := (Edge.Model as PUMLAssociationRole).Messages[I];
         if UM.Sender = (Edge.Model as PUMLAssociationRole).Connections[0].Participant then // forward
           UM.Sender := (NewPartView.Model as PUMLClassifierRole)
@@ -8745,8 +9211,10 @@ begin
       end;
       (Edge.Model as PUMLAssociationRole).Connections[0].Participant := (NewPartView.Model as PUMLClassifierRole);
     end
-    else begin
-      for I := 0 to (Edge.Model as PUMLAssociationRole).MessageCount - 1 do begin
+    else
+    begin
+      for I := 0 to (Edge.Model as PUMLAssociationRole).MessageCount - 1 do
+      begin
         UM := (Edge.Model as PUMLAssociationRole).Messages[I];
         if UM.Sender = (Edge.Model as PUMLAssociationRole).Connections[1].Participant then // forward
           UM.Sender := (NewPartView.Model as PUMLClassifierRole)
@@ -8756,45 +9224,54 @@ begin
       (Edge.Model as PUMLAssociationRole).Connections[1].Participant := (NewPartView.Model as PUMLClassifierRole);
     end;
   end
-  else if Edge is PUMLAssociationView then begin
+  else if Edge is PUMLAssociationView then
+  begin
     if IsTailSide then
       (Edge.Model as PUMLAssociation).Connections[0].Participant := (NewPartView.Model as PUMLClassifier)
     else
       (Edge.Model as PUMLAssociation).Connections[1].Participant := (NewPartView.Model as PUMLClassifier);
   end
-  else if Edge is PUMLAssociationClassView then begin
+  else if Edge is PUMLAssociationClassView then
+  begin
     if NewPartView.Model is PUMLClass then
       (Edge.Model as PUMLAssociationClass).ClassSide := (NewPartView.Model as PUMLClass)
     else if NewPartView.Model is PUMLAssociation then
       (Edge.Model as PUMLAssociationClass).AssociationSide := (NewPartView.Model as PUMLAssociation);
   end
-  else if (Edge is PUMLDependencyView) or (Edge is PUMLRealizationView) then begin
+  else if (Edge is PUMLDependencyView) or (Edge is PUMLRealizationView) then
+  begin
     if IsTailSide then
       (Edge.Model as PUMLDependency).Client := (NewPartView.Model as PUMLModelElement)
     else
       (Edge.Model as PUMLDependency).Supplier := (NewPartView.Model as PUMLModelElement);
   end
-  else if Edge is PUMLExtendView then begin
+  else if Edge is PUMLExtendView then
+  begin
     if IsTailSide then
       (Edge.Model as PUMLExtend).Extension := (NewPartView.Model as PUMLUseCase)
     else
       (Edge.Model as PUMLExtend).Base := (NewPartView.Model as PUMLUseCase);
   end
-  else if Edge is PUMLGeneralizationView then begin
+  else if Edge is PUMLGeneralizationView then
+  begin
     if IsTailSide then
       (Edge.Model as PUMLGeneralization).Child := (NewPartView.Model as PUMLGeneralizableElement)
     else
       (Edge.Model as PUMLGeneralization).Parent := (NewPartView.Model as PUMLGeneralizableElement);
   end
-  else if Edge is PUMLIncludeView then begin
+  else if Edge is PUMLIncludeView then
+  begin
     if IsTailSide then
       (Edge.Model as PUMLInclude).Base := (NewPartView.Model as PUMLUseCase)
     else
       (Edge.Model as PUMLInclude).Addition := (NewPartView.Model as PUMLUseCase);
   end
-  else if Edge is PUMLLinkView then begin
-    if IsTailSide then begin
-      for I := 0 to (Edge.Model as PUMLLink).StimulusCount - 1 do begin
+  else if Edge is PUMLLinkView then
+  begin
+    if IsTailSide then
+    begin
+      for I := 0 to (Edge.Model as PUMLLink).StimulusCount - 1 do
+      begin
         US := (Edge.Model as PUMLLink).Stimuli[I];
         if US.Sender = (Edge.Model as PUMLLink).Connections[0].Instance then // forward
           US.Sender := (NewPartView.Model as PUMLInstance)
@@ -8803,8 +9280,10 @@ begin
       end;
       (Edge.Model as PUMLLink).Connections[0].Instance := (NewPartView.Model as PUMLInstance);
     end
-    else begin
-      for I := 0 to (Edge.Model as PUMLLink).StimulusCount - 1 do begin
+    else
+    begin
+      for I := 0 to (Edge.Model as PUMLLink).StimulusCount - 1 do
+      begin
         US := (Edge.Model as PUMLLink).Stimuli[I];
         if US.Sender = (Edge.Model as PUMLLink).Connections[1].Instance then // forward
           US.Sender := (NewPartView.Model as PUMLInstance)
@@ -8814,25 +9293,29 @@ begin
       (Edge.Model as PUMLLink).Connections[1].Instance := (NewPartView.Model as PUMLInstance);
     end;
   end
-  else if Edge is PUMLSeqMessageView then begin
+  else if Edge is PUMLSeqMessageView then
+  begin
     if IsTailSide then
       (Edge.Model as PUMLMessage).Sender := (NewPartView.Model as PUMLClassifierRole)
     else
       (Edge.Model as PUMLMessage).Receiver := (NewPartView.Model as PUMLClassifierRole)
   end
-  else if Edge is PUMLSeqStimulusView then begin
+  else if Edge is PUMLSeqStimulusView then
+  begin
     if IsTailSide then
       (Edge.Model as PUMLStimulus).Sender := (NewPartView.Model as PUMLInstance)
     else
       (Edge.Model as PUMLStimulus).Receiver := (NewPartView.Model as PUMLInstance)
   end
-  else if Edge is PUMLTransitionView then begin
+  else if Edge is PUMLTransitionView then
+  begin
     if IsTailSide then
       (Edge.Model as PUMLTransition).Source := (NewPartView.Model as PUMLStateVertex)
     else
       (Edge.Model as PUMLTransition).Target := (NewPartView.Model as PUMLStateVertex);
   end
-  else if Edge is PUMLConnectorView then begin
+  else if Edge is PUMLConnectorView then
+  begin
     if IsTailSide then
       (Edge.Model as PUMLConnector).Ends[0].Role := (NewPartView.Model as PUMLFeature)
     else
@@ -8870,9 +9353,12 @@ begin
   Edge.LineStyle := OldLineStyle;
 
   // restore participant-related property
-  if Edge is PUMLAssociationRoleView then begin
-    if IsTailSide then begin
-      for I := 0 to (Edge.Model as PUMLAssociationRole).MessageCount - 1 do begin
+  if Edge is PUMLAssociationRoleView then
+  begin
+    if IsTailSide then
+    begin
+      for I := 0 to (Edge.Model as PUMLAssociationRole).MessageCount - 1 do
+      begin
         UM := (Edge.Model as PUMLAssociationRole).Messages[I];
         if UM.Sender = (Edge.Model as PUMLAssociationRole).Connections[0].Participant then // forward
           UM.Sender := (OldPartView.Model as PUMLClassifierRole)
@@ -8881,8 +9367,10 @@ begin
       end;
       (Edge.Model as PUMLAssociationRole).Connections[0].Participant := (OldPartView.Model as PUMLClassifierRole);
     end
-    else begin
-      for I := 0 to (Edge.Model as PUMLAssociationRole).MessageCount - 1 do begin
+    else
+    begin
+      for I := 0 to (Edge.Model as PUMLAssociationRole).MessageCount - 1 do
+      begin
         UM := (Edge.Model as PUMLAssociationRole).Messages[I];
         if UM.Sender = (Edge.Model as PUMLAssociationRole).Connections[1].Participant then // forward
           UM.Sender := (OldPartView.Model as PUMLClassifierRole)
@@ -8892,45 +9380,54 @@ begin
       (Edge.Model as PUMLAssociationRole).Connections[1].Participant := (OldPartView.Model as PUMLClassifierRole);
     end;
   end
-  else if Edge is PUMLAssociationView then begin
+  else if Edge is PUMLAssociationView then
+  begin
     if IsTailSide then
       (Edge.Model as PUMLAssociation).Connections[0].Participant := (OldPartView.Model as PUMLClassifier)
     else
       (Edge.Model as PUMLAssociation).Connections[1].Participant := (OldPartView.Model as PUMLClassifier);
   end
-  else if Edge is PUMLAssociationClassView then begin
+  else if Edge is PUMLAssociationClassView then
+  begin
     if OldPartView.Model is PUMLClass then
       (Edge.Model as PUMLAssociationClass).ClassSide := (OldPartView.Model as PUMLClass)
     else if OldPartView.Model is PUMLAssociation then
       (Edge.Model as PUMLAssociationClass).AssociationSide := (OldPartView.Model as PUMLAssociation);
   end
-  else if (Edge is PUMLDependencyView) or (Edge is PUMLRealizationView) then begin
+  else if (Edge is PUMLDependencyView) or (Edge is PUMLRealizationView) then
+  begin
     if IsTailSide then
       (Edge.Model as PUMLDependency).Client := (OldPartView.Model as PUMLModelElement)
     else
       (Edge.Model as PUMLDependency).Supplier := (OldPartView.Model as PUMLModelElement);
   end
-  else if Edge is PUMLExtendView then begin
+  else if Edge is PUMLExtendView then
+  begin
     if IsTailSide then
       (Edge.Model as PUMLExtend).Extension := (OldPartView.Model as PUMLUseCase)
     else
       (Edge.Model as PUMLExtend).Base := (OldPartView.Model as PUMLUseCase);
   end
-  else if Edge is PUMLGeneralizationView then begin
+  else if Edge is PUMLGeneralizationView then
+  begin
     if IsTailSide then
       (Edge.Model as PUMLGeneralization).Child := (OldPartView.Model as PUMLGeneralizableElement)
     else
       (Edge.Model as PUMLGeneralization).Parent := (OldPartView.Model as PUMLGeneralizableElement);
   end
-  else if Edge is PUMLIncludeView then begin
+  else if Edge is PUMLIncludeView then
+  begin
     if IsTailSide then
       (Edge.Model as PUMLInclude).Base := (OldPartView.Model as PUMLUseCase)
     else
       (Edge.Model as PUMLInclude).Addition := (OldPartView.Model as PUMLUseCase);
   end
-  else if Edge is PUMLLinkView then begin
-    if IsTailSide then begin
-      for I := 0 to (Edge.Model as PUMLLink).StimulusCount - 1 do begin
+  else if Edge is PUMLLinkView then
+  begin
+    if IsTailSide then
+    begin
+      for I := 0 to (Edge.Model as PUMLLink).StimulusCount - 1 do
+      begin
         US := (Edge.Model as PUMLLink).Stimuli[I];
         if US.Sender = (Edge.Model as PUMLLink).Connections[0].Instance then // forward
           US.Sender := (OldPartView.Model as PUMLInstance)
@@ -8939,8 +9436,10 @@ begin
       end;
       (Edge.Model as PUMLLink).Connections[0].Instance := (OldPartView.Model as PUMLInstance);
     end
-    else begin
-      for I := 0 to (Edge.Model as PUMLLink).StimulusCount - 1 do begin
+    else
+    begin
+      for I := 0 to (Edge.Model as PUMLLink).StimulusCount - 1 do
+      begin
         US := (Edge.Model as PUMLLink).Stimuli[I];
         if US.Sender = (Edge.Model as PUMLLink).Connections[1].Instance then // forward
           US.Sender := (OldPartView.Model as PUMLInstance)
@@ -8950,19 +9449,22 @@ begin
       (Edge.Model as PUMLLink).Connections[1].Instance := (OldPartView.Model as PUMLInstance);
     end;
   end
-  else if Edge is PUMLSeqMessageView then begin
+  else if Edge is PUMLSeqMessageView then
+  begin
     if IsTailSide then
       (Edge.Model as PUMLMessage).Sender := (OldPartView.Model as PUMLClassifierRole)
     else
       (Edge.Model as PUMLMessage).Receiver := (OldPartView.Model as PUMLClassifierRole)
   end
-  else if Edge is PUMLSeqStimulusView then begin
+  else if Edge is PUMLSeqStimulusView then
+  begin
     if IsTailSide then
       (Edge.Model as PUMLStimulus).Sender := (OldPartView.Model as PUMLInstance)
     else
       (Edge.Model as PUMLStimulus).Receiver := (OldPartView.Model as PUMLInstance)
   end
-  else if Edge is PUMLTransitionView then begin
+  else if Edge is PUMLTransitionView then
+  begin
     if IsTailSide then
       (Edge.Model as PUMLTransition).Source := (OldPartView.Model as PUMLStateVertex)
     else
@@ -8977,13 +9479,15 @@ begin
     (FViewReferences.Items[I] as PElement).SetMemento(FViewMementos.Items[I]);
 
   // restore index of each view object.
-  for I := 0 to ViewTable.RowCount - 1 do begin
+  for I := 0 to ViewTable.RowCount - 1 do
+  begin
     V := ViewTable.GetObjectAt(I, 'VIEW') as PView;
     Dgm := ViewTable.GetObjectAt(I, 'DIAGRAM') as PDiagramView;
     if Dgm <> nil then Dgm.RemoveOwnedView(V);
   end;
   ViewTable.SortByColumn('IDX', True);
-  for I := 0 to ViewTable.RowCount - 1 do begin
+  for I := 0 to ViewTable.RowCount - 1 do
+  begin
     V := ViewTable.GetObjectAt(I, 'VIEW') as PView;
     Dgm := ViewTable.GetObjectAt(I, 'DIAGRAM') as PDiagramView;
     Idx := StrToInt(ViewTable.GetValueAt(I, 'IDX'));
@@ -9015,7 +9519,8 @@ begin
   ViewSet.Clear;
 
   M := UMLFactory.CreateModel(Owner, ModelKind);
-  if M <> nil then begin
+  if M <> nil then
+  begin
     M.Name := Name;
     ModelSet.Add(M);
   end;
@@ -9072,9 +9577,11 @@ begin
   MaxBottom := Low(Integer);
   LowestView := nil;
   for I := 0 to AContainerView.ContainedViewCount - 1 do
-    if AContainerView.ContainedViews[I] is PNodeView then begin
+    if AContainerView.ContainedViews[I] is PNodeView then
+    begin
       V := AContainerView.ContainedViews[I] as PNodeView;
-      if V.Bottom > MaxBottom then begin
+      if V.Bottom > MaxBottom then
+      begin
         LowestView := V;
         MaxBottom := V.Bottom;
       end;
@@ -9133,6 +9640,4 @@ end;
 ////////////////////////////////////////////////////////////////////////////////
 
 end.
-
-
 

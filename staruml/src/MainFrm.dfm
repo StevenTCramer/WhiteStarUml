@@ -1,9 +1,9 @@
 object MainForm: TMainForm
   Left = 79
   Top = 95
-  Width = 945
-  Height = 645
   Caption = 'StarUML'
+  ClientHeight = 607
+  ClientWidth = 937
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -23,20 +23,20 @@ object MainForm: TMainForm
   TextHeight = 13
   object DockSite: TdxDockSite
     Left = 0
-    Top = 75
+    Top = 80
     Width = 937
-    Height = 523
+    Height = 504
     ManagerFont = False
     ParentFont = True
     Align = alClient
     DockType = 0
     OriginalWidth = 937
-    OriginalHeight = 523
+    OriginalHeight = 504
     object dxLayoutDockSite1: TdxLayoutDockSite
       Left = 0
       Top = 0
       Width = 669
-      Height = 523
+      Height = 504
       ManagerFont = False
       ParentFont = True
       DockType = 1
@@ -46,7 +46,7 @@ object MainForm: TMainForm
         Left = 0
         Top = 0
         Width = 669
-        Height = 381
+        Height = 362
         ManagerFont = False
         ParentFont = True
         DockType = 1
@@ -56,7 +56,7 @@ object MainForm: TMainForm
           Left = 173
           Top = 0
           Width = 496
-          Height = 381
+          Height = 362
           ManagerFont = False
           ParentFont = True
           DockType = 1
@@ -66,7 +66,7 @@ object MainForm: TMainForm
             Left = 0
             Top = 0
             Width = 496
-            Height = 381
+            Height = 362
             ManagerFont = False
             ParentFont = True
             DockType = 1
@@ -77,7 +77,7 @@ object MainForm: TMainForm
             Left = 0
             Top = 0
             Width = 496
-            Height = 381
+            Height = 362
             ManagerFont = False
             ParentFont = True
             AllowDockClients = []
@@ -93,7 +93,7 @@ object MainForm: TMainForm
               Left = 0
               Top = 0
               Width = 492
-              Height = 357
+              Height = 338
               Align = alClient
               Font.Charset = ANSI_CHARSET
               Font.Color = clWindowText
@@ -102,12 +102,20 @@ object MainForm: TMainForm
               Font.Style = []
               ParentFont = False
               TabOrder = 0
+              ExplicitWidth = 492
+              ExplicitHeight = 338
               inherited ClientPanel: TFlatPanel
                 Width = 492
-                Height = 357
-                inherited DiagramPageControl: TdxPageControl
+                Height = 338
+                ExplicitWidth = 492
+                ExplicitHeight = 338
+                inherited DiagramPageControl: TcxPageControl
                   Width = 490
-                  Height = 355
+                  Height = 336
+                  ExplicitWidth = 490
+                  ExplicitHeight = 336
+                  ClientRectBottom = 336
+                  ClientRectRight = 490
                 end
               end
             end
@@ -117,7 +125,7 @@ object MainForm: TMainForm
           Left = 0
           Top = 0
           Width = 173
-          Height = 381
+          Height = 362
           ManagerFont = False
           ParentFont = True
           OnVisibleChanged = DockPanelVisibleChanged
@@ -131,177 +139,171 @@ object MainForm: TMainForm
             Left = 0
             Top = 0
             Width = 169
-            Height = 357
+            Height = 338
             Align = alClient
             ActiveGroupIndex = 2
-            AllowSelectLinks = True
-            DefaultStyles.Background.BackColor = clBtnFace
-            DefaultStyles.Background.BackColor2 = clBtnFace
-            DefaultStyles.Background.Font.Charset = ANSI_CHARSET
-            DefaultStyles.Background.Font.Color = clWindowText
-            DefaultStyles.Background.Font.Height = -11
-            DefaultStyles.Background.Font.Name = 'Tahoma'
-            DefaultStyles.Background.Font.Style = []
-            DefaultStyles.Background.HAlignment = haLeft
-            DefaultStyles.Button.BackColor = clBtnFace
-            DefaultStyles.Button.BackColor2 = clBtnFace
-            DefaultStyles.Button.Font.Charset = ANSI_CHARSET
-            DefaultStyles.Button.Font.Color = clWindowText
-            DefaultStyles.Button.Font.Height = -11
-            DefaultStyles.Button.Font.Name = 'Tahoma'
-            DefaultStyles.Button.Font.Style = []
-            DefaultStyles.Button.HAlignment = haLeft
-            DefaultStyles.ButtonPressed.BackColor = clBtnFace
-            DefaultStyles.ButtonPressed.BackColor2 = clBtnFace
-            DefaultStyles.ButtonPressed.Font.Charset = ANSI_CHARSET
-            DefaultStyles.ButtonPressed.Font.Color = clWindowText
-            DefaultStyles.ButtonPressed.Font.Height = -11
-            DefaultStyles.ButtonPressed.Font.Name = 'Tahoma'
-            DefaultStyles.ButtonPressed.Font.Style = []
-            DefaultStyles.ButtonPressed.HAlignment = haLeft
-            DefaultStyles.ButtonHotTracked.BackColor = clBtnFace
-            DefaultStyles.ButtonHotTracked.BackColor2 = clBtnFace
-            DefaultStyles.ButtonHotTracked.Font.Charset = ANSI_CHARSET
-            DefaultStyles.ButtonHotTracked.Font.Color = clWindowText
-            DefaultStyles.ButtonHotTracked.Font.Height = -11
-            DefaultStyles.ButtonHotTracked.Font.Name = 'Tahoma'
-            DefaultStyles.ButtonHotTracked.Font.Style = []
-            DefaultStyles.ButtonHotTracked.HAlignment = haLeft
-            DefaultStyles.GroupBackground.BackColor = clBtnFace
-            DefaultStyles.GroupBackground.BackColor2 = clBtnFace
-            DefaultStyles.GroupBackground.Font.Charset = ANSI_CHARSET
-            DefaultStyles.GroupBackground.Font.Color = clWindowText
-            DefaultStyles.GroupBackground.Font.Height = -11
-            DefaultStyles.GroupBackground.Font.Name = 'Tahoma'
-            DefaultStyles.GroupBackground.Font.Style = []
-            DefaultStyles.GroupBackground.HAlignment = haLeft
-            DefaultStyles.GroupControl.BackColor = clNone
-            DefaultStyles.GroupControl.BackColor2 = clNone
-            DefaultStyles.GroupControl.Font.Charset = ANSI_CHARSET
-            DefaultStyles.GroupControl.Font.Color = clWindowText
-            DefaultStyles.GroupControl.Font.Height = -11
-            DefaultStyles.GroupControl.Font.Name = 'Tahoma'
-            DefaultStyles.GroupControl.Font.Style = []
-            DefaultStyles.GroupControl.HAlignment = haLeft
-            DefaultStyles.GroupHeader.BackColor = clBtnFace
-            DefaultStyles.GroupHeader.BackColor2 = clBtnFace
-            DefaultStyles.GroupHeader.Font.Charset = ANSI_CHARSET
-            DefaultStyles.GroupHeader.Font.Color = clWindowText
-            DefaultStyles.GroupHeader.Font.Height = -11
-            DefaultStyles.GroupHeader.Font.Name = 'Tahoma'
-            DefaultStyles.GroupHeader.Font.Style = []
-            DefaultStyles.GroupHeader.HAlignment = haLeft
-            DefaultStyles.GroupHeaderActive.BackColor = clBtnFace
-            DefaultStyles.GroupHeaderActive.BackColor2 = clBtnFace
-            DefaultStyles.GroupHeaderActive.Font.Charset = ANSI_CHARSET
-            DefaultStyles.GroupHeaderActive.Font.Color = clWindowText
-            DefaultStyles.GroupHeaderActive.Font.Height = -11
-            DefaultStyles.GroupHeaderActive.Font.Name = 'Tahoma'
-            DefaultStyles.GroupHeaderActive.Font.Style = []
-            DefaultStyles.GroupHeaderActive.HAlignment = haLeft
-            DefaultStyles.GroupHeaderActiveHotTracked.BackColor = clBtnFace
-            DefaultStyles.GroupHeaderActiveHotTracked.BackColor2 = clBtnFace
-            DefaultStyles.GroupHeaderActiveHotTracked.Font.Charset = ANSI_CHARSET
-            DefaultStyles.GroupHeaderActiveHotTracked.Font.Color = clWindowText
-            DefaultStyles.GroupHeaderActiveHotTracked.Font.Height = -11
-            DefaultStyles.GroupHeaderActiveHotTracked.Font.Name = 'Tahoma'
-            DefaultStyles.GroupHeaderActiveHotTracked.Font.Style = []
-            DefaultStyles.GroupHeaderActiveHotTracked.HAlignment = haLeft
-            DefaultStyles.GroupHeaderActivePressed.BackColor = clBtnFace
-            DefaultStyles.GroupHeaderActivePressed.BackColor2 = clBtnFace
-            DefaultStyles.GroupHeaderActivePressed.Font.Charset = ANSI_CHARSET
-            DefaultStyles.GroupHeaderActivePressed.Font.Color = clWindowText
-            DefaultStyles.GroupHeaderActivePressed.Font.Height = -11
-            DefaultStyles.GroupHeaderActivePressed.Font.Name = 'Tahoma'
-            DefaultStyles.GroupHeaderActivePressed.Font.Style = []
-            DefaultStyles.GroupHeaderActivePressed.HAlignment = haLeft
-            DefaultStyles.GroupHeaderHotTracked.BackColor = clBtnFace
-            DefaultStyles.GroupHeaderHotTracked.BackColor2 = clBtnFace
-            DefaultStyles.GroupHeaderHotTracked.Font.Charset = ANSI_CHARSET
-            DefaultStyles.GroupHeaderHotTracked.Font.Color = clWindowText
-            DefaultStyles.GroupHeaderHotTracked.Font.Height = -11
-            DefaultStyles.GroupHeaderHotTracked.Font.Name = 'Tahoma'
-            DefaultStyles.GroupHeaderHotTracked.Font.Style = []
-            DefaultStyles.GroupHeaderHotTracked.HAlignment = haLeft
-            DefaultStyles.GroupHeaderPressed.BackColor = clBtnFace
-            DefaultStyles.GroupHeaderPressed.BackColor2 = clBtnFace
-            DefaultStyles.GroupHeaderPressed.Font.Charset = ANSI_CHARSET
-            DefaultStyles.GroupHeaderPressed.Font.Color = clWindowText
-            DefaultStyles.GroupHeaderPressed.Font.Height = -11
-            DefaultStyles.GroupHeaderPressed.Font.Name = 'Tahoma'
-            DefaultStyles.GroupHeaderPressed.Font.Style = []
-            DefaultStyles.GroupHeaderPressed.HAlignment = haLeft
-            DefaultStyles.Hint.BackColor = clInfoBk
-            DefaultStyles.Hint.BackColor2 = clInfoBk
-            DefaultStyles.Hint.Font.Charset = ANSI_CHARSET
-            DefaultStyles.Hint.Font.Color = clWindowText
-            DefaultStyles.Hint.Font.Height = -11
-            DefaultStyles.Hint.Font.Name = 'Tahoma'
-            DefaultStyles.Hint.Font.Style = []
-            DefaultStyles.Item.BackColor = clWhite
-            DefaultStyles.Item.BackColor2 = clWhite
-            DefaultStyles.Item.Font.Charset = ANSI_CHARSET
-            DefaultStyles.Item.Font.Color = clWindowText
-            DefaultStyles.Item.Font.Height = -11
-            DefaultStyles.Item.Font.Name = 'Tahoma'
-            DefaultStyles.Item.Font.Style = []
-            DefaultStyles.ItemDisabled.BackColor = clWhite
-            DefaultStyles.ItemDisabled.BackColor2 = clWhite
-            DefaultStyles.ItemDisabled.Font.Charset = ANSI_CHARSET
-            DefaultStyles.ItemDisabled.Font.Color = clWindowText
-            DefaultStyles.ItemDisabled.Font.Height = -11
-            DefaultStyles.ItemDisabled.Font.Name = 'Tahoma'
-            DefaultStyles.ItemDisabled.Font.Style = []
-            DefaultStyles.ItemHotTracked.BackColor = clWhite
-            DefaultStyles.ItemHotTracked.BackColor2 = clWhite
-            DefaultStyles.ItemHotTracked.Font.Charset = ANSI_CHARSET
-            DefaultStyles.ItemHotTracked.Font.Color = clWindowText
-            DefaultStyles.ItemHotTracked.Font.Height = -11
-            DefaultStyles.ItemHotTracked.Font.Name = 'Tahoma'
-            DefaultStyles.ItemHotTracked.Font.Style = []
-            DefaultStyles.ItemPressed.BackColor = clWhite
-            DefaultStyles.ItemPressed.BackColor2 = clWhite
-            DefaultStyles.ItemPressed.Font.Charset = ANSI_CHARSET
-            DefaultStyles.ItemPressed.Font.Color = clWindowText
-            DefaultStyles.ItemPressed.Font.Height = -11
-            DefaultStyles.ItemPressed.Font.Name = 'Tahoma'
-            DefaultStyles.ItemPressed.Font.Style = []
-            DefaultStyles.DropTargetGroup.AlphaBlending = 60
-            DefaultStyles.DropTargetGroup.AlphaBlending2 = 60
-            DefaultStyles.DropTargetGroup.BackColor = clHighlight
-            DefaultStyles.DropTargetGroup.BackColor2 = clHighlight
-            DefaultStyles.DropTargetGroup.Font.Charset = ANSI_CHARSET
-            DefaultStyles.DropTargetGroup.Font.Color = clWindowText
-            DefaultStyles.DropTargetGroup.Font.Height = -11
-            DefaultStyles.DropTargetGroup.Font.Name = 'Tahoma'
-            DefaultStyles.DropTargetGroup.Font.Style = []
-            DefaultStyles.DropTargetGroup.HAlignment = haLeft
-            DefaultStyles.DropTargetLink.BackColor = clBlack
-            DefaultStyles.DropTargetLink.BackColor2 = clWhite
-            DefaultStyles.DropTargetLink.Font.Charset = ANSI_CHARSET
-            DefaultStyles.DropTargetLink.Font.Color = clWindowText
-            DefaultStyles.DropTargetLink.Font.Height = -11
-            DefaultStyles.DropTargetLink.Font.Name = 'Tahoma'
-            DefaultStyles.DropTargetLink.Font.Style = []
-            DefaultStyles.DropTargetLink.HAlignment = haLeft
-            DragCopyCursor = -1141
-            DragCursor = -1140
-            DragDropFlags = []
-            HotTrackedGroupCursor = crDefault
-            HotTrackedLinkCursor = crDefault
-            SmallImages = TotalImageList
+            TabOrder = 0
+            Cursors.DragCursor = -1140
+            Cursors.DragCopyCursor = -1141
+            Cursors.HotTrackedLinkCursor = crDefault
             View = 5
-            OnCustomDrawLink = PaletteNavBarCustomDrawLink
+            OptionsBehavior.Common.DragDropFlags = []
+            OptionsBehavior.SideBar.AllowSelectLinks = True
+            OptionsImage.SmallImages = TotalImageList
+            OptionsStyle.DefaultStyles.Background.BackColor = clBtnFace
+            OptionsStyle.DefaultStyles.Background.BackColor2 = clBtnFace
+            OptionsStyle.DefaultStyles.Background.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.Background.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.Background.Font.Height = -11
+            OptionsStyle.DefaultStyles.Background.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.Background.Font.Style = []
+            OptionsStyle.DefaultStyles.Background.HAlignment = haLeft
+            OptionsStyle.DefaultStyles.Button.BackColor = clBtnFace
+            OptionsStyle.DefaultStyles.Button.BackColor2 = clBtnFace
+            OptionsStyle.DefaultStyles.Button.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.Button.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.Button.Font.Height = -11
+            OptionsStyle.DefaultStyles.Button.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.Button.Font.Style = []
+            OptionsStyle.DefaultStyles.Button.HAlignment = haLeft
+            OptionsStyle.DefaultStyles.ButtonPressed.BackColor = clBtnFace
+            OptionsStyle.DefaultStyles.ButtonPressed.BackColor2 = clBtnFace
+            OptionsStyle.DefaultStyles.ButtonPressed.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.ButtonPressed.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.ButtonPressed.Font.Height = -11
+            OptionsStyle.DefaultStyles.ButtonPressed.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.ButtonPressed.Font.Style = []
+            OptionsStyle.DefaultStyles.ButtonPressed.HAlignment = haLeft
+            OptionsStyle.DefaultStyles.ButtonHotTracked.BackColor = clBtnFace
+            OptionsStyle.DefaultStyles.ButtonHotTracked.BackColor2 = clBtnFace
+            OptionsStyle.DefaultStyles.ButtonHotTracked.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.ButtonHotTracked.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.ButtonHotTracked.Font.Height = -11
+            OptionsStyle.DefaultStyles.ButtonHotTracked.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.ButtonHotTracked.Font.Style = []
+            OptionsStyle.DefaultStyles.ButtonHotTracked.HAlignment = haLeft
+            OptionsStyle.DefaultStyles.GroupBackground.BackColor = clBtnFace
+            OptionsStyle.DefaultStyles.GroupBackground.BackColor2 = clBtnFace
+            OptionsStyle.DefaultStyles.GroupBackground.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.GroupBackground.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.GroupBackground.Font.Height = -11
+            OptionsStyle.DefaultStyles.GroupBackground.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.GroupBackground.Font.Style = []
+            OptionsStyle.DefaultStyles.GroupBackground.HAlignment = haLeft
+            OptionsStyle.DefaultStyles.GroupControl.BackColor = clNone
+            OptionsStyle.DefaultStyles.GroupControl.BackColor2 = clNone
+            OptionsStyle.DefaultStyles.GroupControl.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.GroupControl.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.GroupControl.Font.Height = -11
+            OptionsStyle.DefaultStyles.GroupControl.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.GroupControl.Font.Style = []
+            OptionsStyle.DefaultStyles.GroupControl.HAlignment = haLeft
+            OptionsStyle.DefaultStyles.GroupHeader.BackColor = clBtnFace
+            OptionsStyle.DefaultStyles.GroupHeader.BackColor2 = clBtnFace
+            OptionsStyle.DefaultStyles.GroupHeader.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.GroupHeader.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.GroupHeader.Font.Height = -11
+            OptionsStyle.DefaultStyles.GroupHeader.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.GroupHeader.Font.Style = []
+            OptionsStyle.DefaultStyles.GroupHeader.HAlignment = haLeft
+            OptionsStyle.DefaultStyles.GroupHeaderActive.BackColor = clBtnFace
+            OptionsStyle.DefaultStyles.GroupHeaderActive.BackColor2 = clBtnFace
+            OptionsStyle.DefaultStyles.GroupHeaderActive.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.GroupHeaderActive.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.GroupHeaderActive.Font.Height = -11
+            OptionsStyle.DefaultStyles.GroupHeaderActive.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.GroupHeaderActive.Font.Style = []
+            OptionsStyle.DefaultStyles.GroupHeaderActive.HAlignment = haLeft
+            OptionsStyle.DefaultStyles.GroupHeaderActiveHotTracked.BackColor = clBtnFace
+            OptionsStyle.DefaultStyles.GroupHeaderActiveHotTracked.BackColor2 = clBtnFace
+            OptionsStyle.DefaultStyles.GroupHeaderActiveHotTracked.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.GroupHeaderActiveHotTracked.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.GroupHeaderActiveHotTracked.Font.Height = -11
+            OptionsStyle.DefaultStyles.GroupHeaderActiveHotTracked.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.GroupHeaderActiveHotTracked.Font.Style = []
+            OptionsStyle.DefaultStyles.GroupHeaderActiveHotTracked.HAlignment = haLeft
+            OptionsStyle.DefaultStyles.GroupHeaderActivePressed.BackColor = clBtnFace
+            OptionsStyle.DefaultStyles.GroupHeaderActivePressed.BackColor2 = clBtnFace
+            OptionsStyle.DefaultStyles.GroupHeaderActivePressed.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.GroupHeaderActivePressed.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.GroupHeaderActivePressed.Font.Height = -11
+            OptionsStyle.DefaultStyles.GroupHeaderActivePressed.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.GroupHeaderActivePressed.Font.Style = []
+            OptionsStyle.DefaultStyles.GroupHeaderActivePressed.HAlignment = haLeft
+            OptionsStyle.DefaultStyles.GroupHeaderHotTracked.BackColor = clBtnFace
+            OptionsStyle.DefaultStyles.GroupHeaderHotTracked.BackColor2 = clBtnFace
+            OptionsStyle.DefaultStyles.GroupHeaderHotTracked.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.GroupHeaderHotTracked.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.GroupHeaderHotTracked.Font.Height = -11
+            OptionsStyle.DefaultStyles.GroupHeaderHotTracked.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.GroupHeaderHotTracked.Font.Style = []
+            OptionsStyle.DefaultStyles.GroupHeaderHotTracked.HAlignment = haLeft
+            OptionsStyle.DefaultStyles.GroupHeaderPressed.BackColor = clBtnFace
+            OptionsStyle.DefaultStyles.GroupHeaderPressed.BackColor2 = clBtnFace
+            OptionsStyle.DefaultStyles.GroupHeaderPressed.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.GroupHeaderPressed.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.GroupHeaderPressed.Font.Height = -11
+            OptionsStyle.DefaultStyles.GroupHeaderPressed.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.GroupHeaderPressed.Font.Style = []
+            OptionsStyle.DefaultStyles.GroupHeaderPressed.HAlignment = haLeft
+            OptionsStyle.DefaultStyles.Hint.BackColor = clInfoBk
+            OptionsStyle.DefaultStyles.Hint.BackColor2 = clInfoBk
+            OptionsStyle.DefaultStyles.Hint.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.Hint.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.Hint.Font.Height = -11
+            OptionsStyle.DefaultStyles.Hint.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.Hint.Font.Style = []
+            OptionsStyle.DefaultStyles.Item.BackColor = clWhite
+            OptionsStyle.DefaultStyles.Item.BackColor2 = clWhite
+            OptionsStyle.DefaultStyles.Item.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.Item.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.Item.Font.Height = -11
+            OptionsStyle.DefaultStyles.Item.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.Item.Font.Style = []
+            OptionsStyle.DefaultStyles.ItemDisabled.BackColor = clWhite
+            OptionsStyle.DefaultStyles.ItemDisabled.BackColor2 = clWhite
+            OptionsStyle.DefaultStyles.ItemDisabled.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.ItemDisabled.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.ItemDisabled.Font.Height = -11
+            OptionsStyle.DefaultStyles.ItemDisabled.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.ItemDisabled.Font.Style = []
+            OptionsStyle.DefaultStyles.ItemHotTracked.BackColor = clWhite
+            OptionsStyle.DefaultStyles.ItemHotTracked.BackColor2 = clWhite
+            OptionsStyle.DefaultStyles.ItemHotTracked.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.ItemHotTracked.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.ItemHotTracked.Font.Height = -11
+            OptionsStyle.DefaultStyles.ItemHotTracked.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.ItemHotTracked.Font.Style = []
+            OptionsStyle.DefaultStyles.ItemPressed.BackColor = clWhite
+            OptionsStyle.DefaultStyles.ItemPressed.BackColor2 = clWhite
+            OptionsStyle.DefaultStyles.ItemPressed.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.ItemPressed.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.ItemPressed.Font.Height = -11
+            OptionsStyle.DefaultStyles.ItemPressed.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.ItemPressed.Font.Style = []
+            OptionsStyle.DefaultStyles.DropTargetGroup.AlphaBlending = 60
+            OptionsStyle.DefaultStyles.DropTargetGroup.AlphaBlending2 = 60
+            OptionsStyle.DefaultStyles.DropTargetGroup.BackColor = clHighlight
+            OptionsStyle.DefaultStyles.DropTargetGroup.BackColor2 = clHighlight
+            OptionsStyle.DefaultStyles.DropTargetGroup.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.DropTargetGroup.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.DropTargetGroup.Font.Height = -11
+            OptionsStyle.DefaultStyles.DropTargetGroup.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.DropTargetGroup.Font.Style = []
+            OptionsStyle.DefaultStyles.DropTargetGroup.HAlignment = haLeft
+            OptionsStyle.DefaultStyles.DropTargetLink.BackColor = clBlack
+            OptionsStyle.DefaultStyles.DropTargetLink.BackColor2 = clWhite
+            OptionsStyle.DefaultStyles.DropTargetLink.Font.Charset = ANSI_CHARSET
+            OptionsStyle.DefaultStyles.DropTargetLink.Font.Color = clWindowText
+            OptionsStyle.DefaultStyles.DropTargetLink.Font.Height = -11
+            OptionsStyle.DefaultStyles.DropTargetLink.Font.Name = 'Tahoma'
+            OptionsStyle.DefaultStyles.DropTargetLink.Font.Style = []
+            OptionsStyle.DefaultStyles.DropTargetLink.HAlignment = haLeft
+            OnCustomDraw.Link = PaletteNavBarCustomDrawLink
             object AnnotationNavBarGroup: TdxNavBarGroup
               Caption = 'Annotation'
-              LinksUseSmallImages = True
               SelectedLinkIndex = -1
-              ShowAsIconView = False
-              ShowControl = False
               TopVisibleLinkIndex = 0
-              UseControl = False
-              UseSmallImages = True
-              Visible = True
               Links = <
                 item
                   Item = SelectNavBarItem
@@ -332,14 +334,9 @@ object MainForm: TMainForm
                 end>
             end
             object BuiltInItemsNavBarGroup: TdxNavBarGroup
-              Caption = #47784#46304' '#50836#49548
-              LinksUseSmallImages = True
+              Caption = '?? ??'
               SelectedLinkIndex = -1
-              ShowAsIconView = False
-              ShowControl = False
               TopVisibleLinkIndex = 0
-              UseControl = False
-              UseSmallImages = True
               Visible = False
               Links = <
                 item
@@ -558,14 +555,8 @@ object MainForm: TMainForm
             end
             object ClassDiagramNavBarGroup: TdxNavBarGroup
               Caption = 'Class'
-              LinksUseSmallImages = True
               SelectedLinkIndex = -1
-              ShowAsIconView = False
-              ShowControl = False
               TopVisibleLinkIndex = 0
-              UseControl = False
-              UseSmallImages = True
-              Visible = True
               Links = <
                 item
                   Item = SelectNavBarItem
@@ -633,14 +624,8 @@ object MainForm: TMainForm
             end
             object UseCaseDiagramNavBarGroup: TdxNavBarGroup
               Caption = 'UseCase'
-              LinksUseSmallImages = True
               SelectedLinkIndex = -1
-              ShowAsIconView = False
-              ShowControl = False
               TopVisibleLinkIndex = 0
-              UseControl = False
-              UseSmallImages = True
-              Visible = True
               Links = <
                 item
                   Item = SelectNavBarItem
@@ -678,14 +663,8 @@ object MainForm: TMainForm
             end
             object ComponentDiagramNavBarGroup: TdxNavBarGroup
               Caption = 'Component'
-              LinksUseSmallImages = True
               SelectedLinkIndex = -1
-              ShowAsIconView = False
-              ShowControl = False
               TopVisibleLinkIndex = 0
-              UseControl = False
-              UseSmallImages = True
-              Visible = True
               Links = <
                 item
                   Item = SelectNavBarItem
@@ -729,14 +708,8 @@ object MainForm: TMainForm
             end
             object DeploymentDiagramNavBarGroup: TdxNavBarGroup
               Caption = 'Deployment'
-              LinksUseSmallImages = True
               SelectedLinkIndex = -1
-              ShowAsIconView = False
-              ShowControl = False
               TopVisibleLinkIndex = 0
-              UseControl = False
-              UseSmallImages = True
-              Visible = True
               Links = <
                 item
                   Item = SelectNavBarItem
@@ -777,14 +750,8 @@ object MainForm: TMainForm
             end
             object SequenceDiagramNavBarGroup: TdxNavBarGroup
               Caption = 'Sequence'
-              LinksUseSmallImages = True
               SelectedLinkIndex = -1
-              ShowAsIconView = False
-              ShowControl = False
               TopVisibleLinkIndex = 0
-              UseControl = False
-              UseSmallImages = True
-              Visible = True
               Links = <
                 item
                   Item = SelectNavBarItem
@@ -810,14 +777,8 @@ object MainForm: TMainForm
             end
             object SequenceRoleDiagramNavBarGroup: TdxNavBarGroup
               Caption = 'Sequence (Role)'
-              LinksUseSmallImages = True
               SelectedLinkIndex = -1
-              ShowAsIconView = False
-              ShowControl = False
               TopVisibleLinkIndex = 0
-              UseControl = False
-              UseSmallImages = True
-              Visible = True
               Links = <
                 item
                   Item = SelectNavBarItem
@@ -843,14 +804,8 @@ object MainForm: TMainForm
             end
             object CollaborationDiagramNavBarGroup: TdxNavBarGroup
               Caption = 'Collaboration'
-              LinksUseSmallImages = True
               SelectedLinkIndex = -1
-              ShowAsIconView = False
-              ShowControl = False
               TopVisibleLinkIndex = 0
-              UseControl = False
-              UseSmallImages = True
-              Visible = True
               Links = <
                 item
                   Item = SelectNavBarItem
@@ -876,14 +831,8 @@ object MainForm: TMainForm
             end
             object CollaborationRoleDiagramNavBarGroup: TdxNavBarGroup
               Caption = 'Collaboration (Role)'
-              LinksUseSmallImages = True
               SelectedLinkIndex = -1
-              ShowAsIconView = False
-              ShowControl = False
               TopVisibleLinkIndex = 0
-              UseControl = False
-              UseSmallImages = True
-              Visible = True
               Links = <
                 item
                   Item = SelectNavBarItem
@@ -909,14 +858,8 @@ object MainForm: TMainForm
             end
             object StatechartDiagramNavBarGroup: TdxNavBarGroup
               Caption = 'Statechart'
-              LinksUseSmallImages = True
               SelectedLinkIndex = -1
-              ShowAsIconView = False
-              ShowControl = False
               TopVisibleLinkIndex = 0
-              UseControl = False
-              UseSmallImages = True
-              Visible = True
               Links = <
                 item
                   Item = SelectNavBarItem
@@ -960,14 +903,8 @@ object MainForm: TMainForm
             end
             object ActivityDiagramNavBarGroup: TdxNavBarGroup
               Caption = 'Activity'
-              LinksUseSmallImages = True
               SelectedLinkIndex = -1
-              ShowAsIconView = False
-              ShowControl = False
               TopVisibleLinkIndex = 0
-              UseControl = False
-              UseSmallImages = True
-              Visible = True
               Links = <
                 item
                   Item = SelectNavBarItem
@@ -1017,14 +954,8 @@ object MainForm: TMainForm
             end
             object CompositeStructureDiagramNavBarGroup: TdxNavBarGroup
               Caption = 'Composite Structure'
-              LinksUseSmallImages = True
               SelectedLinkIndex = -1
-              ShowAsIconView = False
-              ShowControl = False
               TopVisibleLinkIndex = 0
-              UseControl = False
-              UseSmallImages = True
-              Visible = True
               Links = <
                 item
                   Item = SelectNavBarItem
@@ -1053,594 +984,374 @@ object MainForm: TMainForm
             end
             object SelectNavBarItem: TdxNavBarItem
               Caption = 'Select'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 0
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object TextNavBarItem: TdxNavBarItem
               Caption = 'Text'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 4
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object NoteNavBarItem: TdxNavBarItem
               Caption = 'Note'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 2
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object NoteLinkNavBarItem: TdxNavBarItem
               Caption = 'NoteLink'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 3
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object SubsystemNavBarItem: TdxNavBarItem
               Caption = 'Subsystem'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 10
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object PackageNavBarItem: TdxNavBarItem
               Caption = 'Package'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 13
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object ActorNavBarItem: TdxNavBarItem
               Caption = 'Actor'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 26
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object UseCaseNavBarItem: TdxNavBarItem
               Caption = 'UseCase'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 25
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object ClassNavBarItem: TdxNavBarItem
               Caption = 'Class'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 16
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object InterfaceNavBarItem: TdxNavBarItem
               Caption = 'Interface'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 17
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object EnumerationNavBarItem: TdxNavBarItem
               Caption = 'Enumeration'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 18
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object SignalNavBarItem: TdxNavBarItem
               Caption = 'Signal'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 19
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object ExceptionNavBarItem: TdxNavBarItem
               Caption = 'Exception'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 20
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object ComponentNavBarItem: TdxNavBarItem
               Caption = 'Component'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 21
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object ComponentInstanceNavBarItem: TdxNavBarItem
               Caption = 'ComponentInstance'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 22
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object NodeNavBarItem: TdxNavBarItem
               Caption = 'Node'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 23
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object NodeInstanceNavBarItem: TdxNavBarItem
               Caption = 'NodeInstance'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 24
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object AssociationNavBarItem: TdxNavBarItem
               Caption = 'Association'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 75
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object DirectedAssociationNavBarItem: TdxNavBarItem
               Caption = 'DirectedAssociation'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 154
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object AggregationNavBarItem: TdxNavBarItem
               Caption = 'Aggregation'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 155
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object CompositionNavBarItem: TdxNavBarItem
               Caption = 'Composition'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 156
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object GeneralizationNavBarItem: TdxNavBarItem
               Caption = 'Generalization'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 77
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object DependencyNavBarItem: TdxNavBarItem
               Caption = 'Dependency'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 74
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object RealizationNavBarItem: TdxNavBarItem
               Caption = 'Realization'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 90
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object AssociationClassNavBarItem: TdxNavBarItem
               Caption = 'AssociationClass'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 76
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object IncludeNavBarItem: TdxNavBarItem
               Caption = 'Include'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 88
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object ExtendNavBarItem: TdxNavBarItem
               Caption = 'Extend'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 89
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object ObjectNavBarItem: TdxNavBarItem
               Caption = 'Object'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 73
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object ClassifierRoleNavBarItem: TdxNavBarItem
               Caption = 'ClassifierRole'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 72
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object AssociationRoleNavBarItem: TdxNavBarItem
               Caption = 'AssociationRole'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 80
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object SelfAssociationRoleNavBarItem: TdxNavBarItem
               Caption = 'SelfAssociationRole'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 81
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object LinkNavBarItem: TdxNavBarItem
               Caption = 'Link'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 78
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object SelfLinkNavBarItem: TdxNavBarItem
               Caption = 'SelfLink'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 79
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object MessageNavBarItem: TdxNavBarItem
               Caption = 'Message'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 85
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object ForwardMessageNavBarItem: TdxNavBarItem
               Caption = 'ForwardMessage'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 85
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object ReverseMessageNavBarItem: TdxNavBarItem
               Caption = 'ReverseMessage'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 86
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object SelfMessageNavBarItem: TdxNavBarItem
               Caption = 'SelfMessage'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 87
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object StimulusNavBarItem: TdxNavBarItem
               Caption = 'Stimulus'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 82
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object ForwardStimulusNavBarItem: TdxNavBarItem
               Caption = 'ForwardStimulus'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 82
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object ReverseStimulusNavBarItem: TdxNavBarItem
               Caption = 'ReverseStimulus'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 83
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object SelfStimulusNavBarItem: TdxNavBarItem
               Caption = 'SelfStimulus'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 84
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object StateNavBarItem: TdxNavBarItem
               Caption = 'State'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 29
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object SubmachineStateNavBarItem: TdxNavBarItem
               Caption = 'SubmachineState'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 45
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object ActionStateNavBarItem: TdxNavBarItem
               Caption = 'ActionState'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 34
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object SubactivityStateNavBarItem: TdxNavBarItem
               Caption = 'SubactivityState'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 35
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object InitialStateNavBarItem: TdxNavBarItem
               Caption = 'InitialState'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 37
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object FinalStateNavBarItem: TdxNavBarItem
               Caption = 'FinalState'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 43
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object JunctionPointNavBarItem: TdxNavBarItem
               Caption = 'JunctionPoint'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 39
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object ChoicePointNavBarItem: TdxNavBarItem
               Caption = 'ChoicePoint'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 40
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object ShallowHistoryNavBarItem: TdxNavBarItem
               Caption = 'ShallowHistory'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 41
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object DeepHistoryNavBarItem: TdxNavBarItem
               Caption = 'DeepHistory'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 42
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object SynchronizationNavBarItem: TdxNavBarItem
               Caption = 'Synchronization'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 38
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object DecisionNavBarItem: TdxNavBarItem
               Caption = 'Decision'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 36
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object TransitionNavBarItem: TdxNavBarItem
               Caption = 'Transition'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 57
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object SelfTransitionNavBarItem: TdxNavBarItem
               Caption = 'SelfTransition'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 58
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object HorizontalSwimlaneNavBarItem: TdxNavBarItem
               Caption = 'Swimlane(Horizontal)'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 161
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object VerticalSwimlaneNavBarItem: TdxNavBarItem
               Caption = 'Swimlane(Vertical)'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 44
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object ObjectFlowStateNavBarItem: TdxNavBarItem
               Caption = 'Object Flow'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 171
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object FlowFinalStateNavBarItem: TdxNavBarItem
               Caption = 'Flow Final'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 166
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object SystemBoundaryNavBarItem: TdxNavBarItem
               Caption = 'System Boundary'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 162
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object SignalAcceptStateNavBarItem: TdxNavBarItem
               Caption = 'Signal Accept State'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 159
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object SignalSendStateNavBarItem: TdxNavBarItem
               Caption = 'Signal Send State'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 160
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object ArtifactNavBarItem: TdxNavBarItem
               Caption = 'Artifact'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 176
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object PortNavBarItem: TdxNavBarItem
               Caption = 'Port'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 173
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object PartNavBarItem: TdxNavBarItem
               Caption = 'Part'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 172
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object ConnectorNavBarItem: TdxNavBarItem
               Caption = 'Connector'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 164
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object CombinedFragmentNavBarItem: TdxNavBarItem
               Caption = 'Combined Fragment'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 163
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object InteractionOperandNavBarItem: TdxNavBarItem
               Caption = 'Interaction Operand'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 169
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object RectangleNavBarItem: TdxNavBarItem
               Caption = 'Rectangle'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 174
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object EllipseNavBarItem: TdxNavBarItem
               Caption = 'Ellipse'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 165
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object RoundRectNavBarItem: TdxNavBarItem
               Caption = 'Rounded Rectangle'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 175
-              Visible = True
               OnClick = HandlerButtonClick
             end
             object LineNavBarItem: TdxNavBarItem
               Caption = 'Line'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 170
               Visible = False
               OnClick = HandlerButtonClick
             end
             object ImageNavBarItem: TdxNavBarItem
               Caption = 'Image'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 168
               Visible = False
               OnClick = HandlerButtonClick
             end
             object FrameNavBarItem: TdxNavBarItem
               Caption = 'Frame'
-              Enabled = True
-              LargeImageIndex = -1
               SmallImageIndex = 167
-              Visible = True
               OnClick = HandlerButtonClick
             end
           end
@@ -1648,7 +1359,7 @@ object MainForm: TMainForm
       end
       object dxTabContainerDockSite2: TdxTabContainerDockSite
         Left = 0
-        Top = 381
+        Top = 362
         Width = 669
         Height = 142
         ManagerFont = False
@@ -1687,12 +1398,18 @@ object MainForm: TMainForm
             Font.Style = []
             ParentFont = False
             TabOrder = 0
+            ExplicitWidth = 665
+            ExplicitHeight = 94
             inherited ClientPanel: TFlatPanel
               Width = 665
               Height = 94
+              ExplicitWidth = 665
+              ExplicitHeight = 94
               inherited OutputMemo: TMemo
                 Width = 663
                 Height = 92
+                ExplicitWidth = 663
+                ExplicitHeight = 92
               end
             end
           end
@@ -1725,12 +1442,18 @@ object MainForm: TMainForm
             Font.Style = []
             ParentFont = False
             TabOrder = 0
+            ExplicitWidth = 665
+            ExplicitHeight = 94
             inherited ClientPanel: TFlatPanel
               Width = 665
               Height = 94
+              ExplicitWidth = 665
+              ExplicitHeight = 94
               inherited MessageListView: TListView
                 Width = 663
                 Height = 92
+                ExplicitWidth = 663
+                ExplicitHeight = 92
               end
             end
           end
@@ -1741,7 +1464,7 @@ object MainForm: TMainForm
       Left = 669
       Top = 0
       Width = 268
-      Height = 523
+      Height = 504
       ManagerFont = False
       ParentFont = True
       ActiveChildIndex = -1
@@ -1754,7 +1477,7 @@ object MainForm: TMainForm
         Left = 0
         Top = 0
         Width = 268
-        Height = 238
+        Height = 230
         ManagerFont = False
         ParentFont = True
         ActiveChildIndex = 0
@@ -1762,12 +1485,12 @@ object MainForm: TMainForm
         AutoHide = False
         DockType = 3
         OriginalWidth = 268
-        OriginalHeight = 238
+        OriginalHeight = 230
         object ModelExplorerDockPanel: TdxDockPanel
           Left = 0
           Top = 0
           Width = 264
-          Height = 190
+          Height = 182
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -1781,12 +1504,12 @@ object MainForm: TMainForm
           ImageIndex = 0
           DockType = 1
           OriginalWidth = 268
-          OriginalHeight = 238
+          OriginalHeight = 230
           inline ModelExplorer: TModelExplorerPanel
             Left = 0
             Top = 0
             Width = 264
-            Height = 190
+            Height = 182
             Align = alClient
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -1795,16 +1518,30 @@ object MainForm: TMainForm
             Font.Style = []
             ParentFont = False
             TabOrder = 0
+            ExplicitWidth = 264
+            ExplicitHeight = 182
             inherited ClientPanel: TFlatPanel
               Width = 264
-              Height = 164
+              Height = 156
+              ExplicitWidth = 264
+              ExplicitHeight = 156
               inherited ModelTree: TVirtualStringTree
                 Width = 262
-                Height = 162
+                Height = 154
+                ExplicitWidth = 262
+                ExplicitHeight = 154
               end
             end
-            inherited TBDock: TTBDock
-              Width = 264
+            inherited dxBarManager: TdxBarManager
+              Categories.ItemsVisibles = (
+                2)
+              Categories.Visibles = (
+                True)
+              DockControlHeights = (
+                0
+                0
+                26
+                0)
             end
           end
         end
@@ -1812,7 +1549,7 @@ object MainForm: TMainForm
           Left = 0
           Top = 0
           Width = 264
-          Height = 190
+          Height = 182
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -1826,12 +1563,12 @@ object MainForm: TMainForm
           ImageIndex = 1
           DockType = 1
           OriginalWidth = 268
-          OriginalHeight = 238
+          OriginalHeight = 230
           inline DiagramExplorer: TDiagramExplorerPanel
             Left = 0
             Top = 0
             Width = 264
-            Height = 190
+            Height = 182
             Align = alClient
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -1840,12 +1577,18 @@ object MainForm: TMainForm
             Font.Style = []
             ParentFont = False
             TabOrder = 0
+            ExplicitWidth = 264
+            ExplicitHeight = 182
             inherited ClientPanel: TFlatPanel
               Width = 264
-              Height = 190
+              Height = 182
+              ExplicitWidth = 264
+              ExplicitHeight = 182
               inherited DiagramTree: TVirtualStringTree
                 Width = 262
-                Height = 188
+                Height = 180
+                ExplicitWidth = 262
+                ExplicitHeight = 180
               end
             end
           end
@@ -1853,9 +1596,9 @@ object MainForm: TMainForm
       end
       object dxTabContainerDockSite3: TdxTabContainerDockSite
         Left = 0
-        Top = 238
+        Top = 230
         Width = 268
-        Height = 285
+        Height = 274
         ManagerFont = False
         ParentFont = True
         ActiveChildIndex = 0
@@ -1863,12 +1606,12 @@ object MainForm: TMainForm
         AutoHide = False
         DockType = 3
         OriginalWidth = 268
-        OriginalHeight = 285
+        OriginalHeight = 274
         object PropertiesDockPanel: TdxDockPanel
           Left = 0
           Top = 0
           Width = 264
-          Height = 237
+          Height = 226
           ManagerFont = False
           ParentFont = True
           OnVisibleChanged = DockPanelVisibleChanged
@@ -1878,12 +1621,12 @@ object MainForm: TMainForm
           ImageIndex = 2
           DockType = 1
           OriginalWidth = 268
-          OriginalHeight = 285
+          OriginalHeight = 274
           inline InspectorFrame: TInspectorFrame
             Left = 0
             Top = 0
             Width = 264
-            Height = 237
+            Height = 226
             Align = alClient
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -1892,29 +1635,45 @@ object MainForm: TMainForm
             Font.Style = []
             ParentFont = False
             TabOrder = 0
+            ExplicitWidth = 264
+            ExplicitHeight = 226
             inherited ClientPanel: TPanel
               Width = 264
-              Height = 237
+              Height = 226
+              ExplicitWidth = 264
+              ExplicitHeight = 226
               inherited InspectorTitleBarGapPanel: TPanel
                 Width = 264
-              end
-              inherited SelectionText: TStaticText
-                Width = 264
+                ExplicitWidth = 264
               end
               inherited SelectionTextGapPanel: TPanel
                 Width = 264
+                ExplicitWidth = 264
               end
               inherited PropertyEditor: TPropertyEditor
                 Width = 264
-                Height = 216
+                Height = 205
+                ExplicitWidth = 264
+                ExplicitHeight = 205
                 inherited ClientPanel: TFlatPanel
                   Width = 264
-                  Height = 216
-                  inherited Inspector: TdxInspector
+                  Height = 205
+                  ExplicitWidth = 264
+                  ExplicitHeight = 205
+                  inherited Inspector: TcxVerticalGrid
                     Width = 262
-                    Height = 214
-                    DividerPos = 130
+                    Height = 203
+                    ExplicitWidth = 262
+                    ExplicitHeight = 203
                   end
+                end
+              end
+              inherited SelectionTextPanel: TFlatPanel
+                Width = 264
+                ExplicitWidth = 264
+                inherited SelectionText: TLabel
+                  Width = 262
+                  Height = 15
                 end
               end
             end
@@ -1924,7 +1683,7 @@ object MainForm: TMainForm
           Left = 0
           Top = 0
           Width = 264
-          Height = 237
+          Height = 226
           ManagerFont = False
           ParentFont = True
           OnVisibleChanged = DockPanelVisibleChanged
@@ -1934,12 +1693,12 @@ object MainForm: TMainForm
           ImageIndex = 3
           DockType = 1
           OriginalWidth = 268
-          OriginalHeight = 285
+          OriginalHeight = 274
           inline DocumentationEditor: TDocumentationEditor
             Left = 0
             Top = 0
             Width = 264
-            Height = 237
+            Height = 226
             Align = alClient
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -1948,12 +1707,18 @@ object MainForm: TMainForm
             Font.Style = []
             ParentFont = False
             TabOrder = 0
+            ExplicitWidth = 264
+            ExplicitHeight = 226
             inherited ClientPanel: TFlatPanel
               Width = 264
-              Height = 237
+              Height = 226
+              ExplicitWidth = 264
+              ExplicitHeight = 226
               inherited DocumentationMemo: TMemo
                 Width = 262
-                Height = 235
+                Height = 224
+                ExplicitWidth = 262
+                ExplicitHeight = 224
               end
             end
           end
@@ -1962,7 +1727,7 @@ object MainForm: TMainForm
           Left = 0
           Top = 0
           Width = 264
-          Height = 237
+          Height = 226
           ManagerFont = False
           ParentFont = True
           OnVisibleChanged = DockPanelVisibleChanged
@@ -1972,12 +1737,12 @@ object MainForm: TMainForm
           ImageIndex = 4
           DockType = 1
           OriginalWidth = 268
-          OriginalHeight = 285
+          OriginalHeight = 274
           inline AttachmentEditor: TAttachmentEditor
             Left = 0
             Top = 0
             Width = 264
-            Height = 237
+            Height = 226
             Align = alClient
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -1986,16 +1751,30 @@ object MainForm: TMainForm
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            inherited TBDock: TTBDock
-              Width = 264
-            end
+            ExplicitWidth = 264
+            ExplicitHeight = 226
             inherited ClientPanel: TFlatPanel
               Width = 264
-              Height = 211
+              Height = 200
+              ExplicitWidth = 264
+              ExplicitHeight = 200
               inherited AttachmentListView: TListView
                 Width = 262
-                Height = 209
+                Height = 198
+                ExplicitWidth = 262
+                ExplicitHeight = 198
               end
+            end
+            inherited dxBarManager: TdxBarManager
+              Categories.ItemsVisibles = (
+                2)
+              Categories.Visibles = (
+                True)
+              DockControlHeights = (
+                0
+                0
+                26
+                0)
             end
           end
         end
@@ -2007,378 +1786,9 @@ object MainForm: TMainForm
     AutoHideEmptyBars = True
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -11
+    Font.Height = -13
     Font.Name = 'Tahoma'
     Font.Style = []
-    Bars = <
-      item
-        Caption = 'Main Menu'
-        DockedDockingStyle = dsTop
-        DockedLeft = 0
-        DockedTop = 0
-        DockingStyle = dsTop
-        FloatLeft = 0
-        FloatTop = 0
-        FloatClientWidth = 0
-        FloatClientHeight = 0
-        IsMainMenu = True
-        ItemLinks = <
-          item
-            Item = FileMenu
-            Visible = True
-          end
-          item
-            Item = EditMenu
-            Visible = True
-          end
-          item
-            Item = FormatMenu
-            Visible = True
-          end
-          item
-            Item = ModelMenu
-            Visible = True
-          end
-          item
-            Item = ViewMenu
-            Visible = True
-          end
-          item
-            Item = ToolsMenu
-            Visible = True
-          end
-          item
-            Item = HelpMenu
-            Visible = True
-          end>
-        MultiLine = True
-        Name = 'Main Menu'
-        OneOnRow = True
-        Row = 0
-        UseOwnFont = False
-        Visible = True
-        WholeRow = True
-      end
-      item
-        Caption = 'Standard'
-        DockedDockingStyle = dsTop
-        DockedLeft = 0
-        DockedTop = 23
-        DockingStyle = dsTop
-        FloatLeft = 766
-        FloatTop = 351
-        FloatClientWidth = 240
-        FloatClientHeight = 22
-        ItemLinks = <
-          item
-            Item = FileNew
-            Visible = True
-          end
-          item
-            Item = FileOpen
-            Visible = True
-          end
-          item
-            Item = FileSave
-            Visible = True
-          end
-          item
-            Item = FilePrint
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = EditCut
-            Visible = True
-          end
-          item
-            Item = EditCopy
-            Visible = True
-          end
-          item
-            Item = EditPaste
-            Visible = True
-          end
-          item
-            Item = EditDelete
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = EditUndo
-            Visible = True
-          end
-          item
-            Item = EditRedo
-            Visible = True
-          end
-          item
-            Item = EditFind
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = ModelCollectionEditor
-            Visible = True
-          end
-          item
-            Item = ModelConstraints
-            Visible = True
-          end
-          item
-            Item = ModelTaggedValues
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = ModelProfiles
-            Visible = True
-          end
-          item
-            Item = ModelModelVerification
-            Visible = True
-          end>
-        Name = 'StandardToolbar'
-        OneOnRow = False
-        Row = 1
-        UseOwnFont = False
-        Visible = True
-        WholeRow = False
-      end
-      item
-        Caption = 'Format'
-        DockedDockingStyle = dsTop
-        DockedLeft = 0
-        DockedTop = 49
-        DockingStyle = dsTop
-        FloatLeft = 404
-        FloatTop = 344
-        FloatClientWidth = 23
-        FloatClientHeight = 22
-        ItemLinks = <
-          item
-            Item = FormatFontNameCombo
-            Visible = True
-          end
-          item
-            Item = FormatFontSizeCombo
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = FormatFont
-            Visible = True
-          end
-          item
-            Item = FormatLineColor
-            Visible = True
-          end
-          item
-            Item = FormatFillColor
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = FormatAutoResize
-            Visible = True
-          end
-          item
-            Item = FormatStereotypeDisplay
-            Visible = True
-          end
-          item
-            Item = FormatShowExtendedNotation
-            Visible = True
-          end
-          item
-            Item = FormatLineStyle
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = FormatSuppressAttributes
-            Visible = True
-          end
-          item
-            Item = FormatSuppressOperations
-            Visible = True
-          end
-          item
-            Item = FormatSuppressEnumerationLiterals
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = FormatWordWrap
-            Visible = True
-          end
-          item
-            Item = FormatShowParentName
-            Visible = True
-          end
-          item
-            Item = FormatShowOperationSignature
-            Visible = True
-          end
-          item
-            Item = FormatShowProperty
-            Visible = True
-          end
-          item
-            Item = FormatShowCompartmentVisibility
-            Visible = True
-          end
-          item
-            Item = FormatShowCompartmentStereotype
-            Visible = True
-          end>
-        Name = 'Format'
-        OneOnRow = False
-        Row = 2
-        UseOwnFont = False
-        Visible = True
-        WholeRow = False
-      end
-      item
-        Caption = 'View'
-        DockedDockingStyle = dsTop
-        DockedLeft = 419
-        DockedTop = 23
-        DockingStyle = dsTop
-        FloatLeft = 404
-        FloatTop = 344
-        FloatClientWidth = 23
-        FloatClientHeight = 22
-        ItemLinks = <
-          item
-            Item = ViewZoomCombo
-            Visible = True
-          end
-          item
-            Item = ViewZoomZoomIn
-            Visible = True
-          end
-          item
-            Item = ViewZoomZoomOut
-            Visible = True
-          end
-          item
-            Item = ViewZoomFitInWindow
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = ViewRefresh
-            Visible = True
-          end>
-        Name = 'View'
-        OneOnRow = False
-        Row = 1
-        UseOwnFont = False
-        Visible = True
-        WholeRow = False
-      end
-      item
-        Caption = 'Alignment'
-        DockedDockingStyle = dsTop
-        DockedLeft = 637
-        DockedTop = 49
-        DockingStyle = dsTop
-        FloatLeft = 404
-        FloatTop = 344
-        FloatClientWidth = 23
-        FloatClientHeight = 22
-        ItemLinks = <
-          item
-            Item = FormatLayoutDiagram
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = FormatAlignmentBringToFront
-            Visible = True
-          end
-          item
-            Item = FormatAlignmentSendToBack
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = FormatAlignmentLeft
-            Visible = True
-          end
-          item
-            Item = FormatAlignmentRight
-            Visible = True
-          end
-          item
-            Item = FormatAlignmentMiddle
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = FormatAlignmentTop
-            Visible = True
-          end
-          item
-            Item = FormatAlignmentBottom
-            Visible = True
-          end
-          item
-            Item = FormatAlignmentCenter
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = FormatAlignmentSpaceEvenlyHorizontally
-            Visible = True
-          end
-          item
-            Item = FormatAlignmentSpaceEvenlyVertically
-            Visible = True
-          end>
-        Name = 'Alignment'
-        OneOnRow = False
-        Row = 2
-        UseOwnFont = False
-        Visible = True
-        WholeRow = False
-      end
-      item
-        AllowClose = False
-        AllowCustomizing = False
-        AllowQuickCustomizing = False
-        BorderStyle = bbsNone
-        Caption = 'Status Bar'
-        DockedDockingStyle = dsBottom
-        DockedLeft = 0
-        DockedTop = 0
-        DockingStyle = dsBottom
-        FloatLeft = 404
-        FloatTop = 344
-        FloatClientWidth = 23
-        FloatClientHeight = 22
-        ItemLinks = <
-          item
-            Item = StatusBarModifiedInfo
-            Visible = True
-          end
-          item
-            Item = StatusBarProgress
-            Visible = True
-          end
-          item
-            Item = StatusBarInfo
-            Visible = True
-          end>
-        Name = 'StatusBar'
-        OneOnRow = True
-        Row = 0
-        UseOwnFont = False
-        UseRestSpace = True
-        Visible = True
-        WholeRow = True
-      end>
     CanCustomize = False
     Categories.Strings = (
       'Default'
@@ -2419,7 +1829,7 @@ object MainForm: TMainForm
       True
       True
       True)
-    Images = TotalImageList
+    ImageOptions.Images = TotalImageList
     MenusShowRecentItemsFirst = False
     PopupMenuLinks = <>
     Style = bmsFlat
@@ -2431,8 +1841,382 @@ object MainForm: TMainForm
     DockControlHeights = (
       0
       0
-      75
-      20)
+      80
+      23)
+    object BarManagerBar1: TdxBar
+      Caption = 'Main Menu'
+      CaptionButtons = <>
+      DockedDockingStyle = dsTop
+      DockedLeft = 0
+      DockedTop = 0
+      DockingStyle = dsTop
+      FloatLeft = 0
+      FloatTop = 0
+      FloatClientWidth = 0
+      FloatClientHeight = 0
+      IsMainMenu = True
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'FileMenu'
+        end
+        item
+          Visible = True
+          ItemName = 'EditMenu'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatMenu'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelMenu'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewMenu'
+        end
+        item
+          Visible = True
+          ItemName = 'ToolsMenu'
+        end
+        item
+          Visible = True
+          ItemName = 'HelpMenu'
+        end>
+      MultiLine = True
+      OldName = 'Main Menu'
+      OneOnRow = True
+      Row = 0
+      UseOwnFont = False
+      Visible = True
+      WholeRow = True
+    end
+    object BarManagerBar2: TdxBar
+      Caption = 'Standard'
+      CaptionButtons = <>
+      DockedDockingStyle = dsTop
+      DockedLeft = 0
+      DockedTop = 26
+      DockingStyle = dsTop
+      FloatLeft = 766
+      FloatTop = 351
+      FloatClientWidth = 240
+      FloatClientHeight = 22
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'FileNew'
+        end
+        item
+          Visible = True
+          ItemName = 'FileOpen'
+        end
+        item
+          Visible = True
+          ItemName = 'FileSave'
+        end
+        item
+          Visible = True
+          ItemName = 'FilePrint'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'EditCut'
+        end
+        item
+          Visible = True
+          ItemName = 'EditCopy'
+        end
+        item
+          Visible = True
+          ItemName = 'EditPaste'
+        end
+        item
+          Visible = True
+          ItemName = 'EditDelete'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'EditUndo'
+        end
+        item
+          Visible = True
+          ItemName = 'EditRedo'
+        end
+        item
+          Visible = True
+          ItemName = 'EditFind'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'ModelCollectionEditor'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelConstraints'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelTaggedValues'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'ModelProfiles'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelModelVerification'
+        end>
+      OldName = 'StandardToolbar'
+      OneOnRow = False
+      Row = 1
+      UseOwnFont = False
+      Visible = True
+      WholeRow = False
+    end
+    object BarManagerBar3: TdxBar
+      Caption = 'Format'
+      CaptionButtons = <>
+      DockedDockingStyle = dsTop
+      DockedLeft = 0
+      DockedTop = 53
+      DockingStyle = dsTop
+      FloatLeft = 404
+      FloatTop = 344
+      FloatClientWidth = 23
+      FloatClientHeight = 22
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'FormatFontNameCombo'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatFontSizeCombo'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'FormatFont'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatLineColor'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatFillColor'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'FormatAutoResize'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatStereotypeDisplay'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatShowExtendedNotation'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatLineStyle'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'FormatSuppressAttributes'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatSuppressOperations'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatSuppressEnumerationLiterals'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'FormatWordWrap'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatShowParentName'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatShowOperationSignature'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatShowProperty'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatShowCompartmentVisibility'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatShowCompartmentStereotype'
+        end>
+      OldName = 'Format'
+      OneOnRow = False
+      Row = 2
+      UseOwnFont = False
+      Visible = True
+      WholeRow = False
+    end
+    object BarManagerBar4: TdxBar
+      Caption = 'View'
+      CaptionButtons = <>
+      DockedDockingStyle = dsTop
+      DockedLeft = 419
+      DockedTop = 26
+      DockingStyle = dsTop
+      FloatLeft = 404
+      FloatTop = 344
+      FloatClientWidth = 23
+      FloatClientHeight = 22
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'ViewZoomCombo'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewZoomZoomIn'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewZoomZoomOut'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewZoomFitInWindow'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'ViewRefresh'
+        end>
+      OldName = 'View'
+      OneOnRow = False
+      Row = 1
+      UseOwnFont = False
+      Visible = True
+      WholeRow = False
+    end
+    object BarManagerBar5: TdxBar
+      Caption = 'Alignment'
+      CaptionButtons = <>
+      DockedDockingStyle = dsTop
+      DockedLeft = 641
+      DockedTop = 53
+      DockingStyle = dsTop
+      FloatLeft = 404
+      FloatTop = 344
+      FloatClientWidth = 23
+      FloatClientHeight = 22
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'FormatLayoutDiagram'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'FormatAlignmentBringToFront'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatAlignmentSendToBack'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'FormatAlignmentLeft'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatAlignmentRight'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatAlignmentMiddle'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'FormatAlignmentTop'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatAlignmentBottom'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatAlignmentCenter'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'FormatAlignmentSpaceEvenlyHorizontally'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatAlignmentSpaceEvenlyVertically'
+        end>
+      OldName = 'Alignment'
+      OneOnRow = False
+      Row = 2
+      UseOwnFont = False
+      Visible = True
+      WholeRow = False
+    end
+    object BarManagerBar6: TdxBar
+      AllowClose = False
+      AllowCustomizing = False
+      AllowQuickCustomizing = False
+      BorderStyle = bbsNone
+      Caption = 'Status Bar'
+      CaptionButtons = <>
+      DockedDockingStyle = dsBottom
+      DockedLeft = 0
+      DockedTop = 0
+      DockingStyle = dsBottom
+      FloatLeft = 404
+      FloatTop = 344
+      FloatClientWidth = 23
+      FloatClientHeight = 22
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'StatusBarModifiedInfo'
+        end
+        item
+          Visible = True
+          ItemName = 'StatusBarProgress'
+        end
+        item
+          Visible = True
+          ItemName = 'StatusBarInfo'
+        end>
+      OldName = 'StatusBar'
+      OneOnRow = True
+      Row = 0
+      UseOwnFont = False
+      UseRestSpace = True
+      Visible = True
+      WholeRow = True
+    end
     object FileMenu: TdxBarSubItem
       Caption = '&File'
       Category = 1
@@ -2440,65 +2224,346 @@ object MainForm: TMainForm
       Visible = ivAlways
       ItemLinks = <
         item
-          Item = FileNew
           Visible = True
+          ItemName = 'FileNew'
         end
         item
-          Item = FileSelectProject
           Visible = True
+          ItemName = 'FileSelectProject'
         end
         item
-          Item = FileOpen
           Visible = True
+          ItemName = 'FileOpen'
         end
         item
-          Item = FileSave
           Visible = True
+          ItemName = 'FileSave'
         end
         item
-          Item = FileSaveAs
           Visible = True
+          ItemName = 'FileSaveAs'
         end
         item
-          Item = FileClose
           Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = FileUnits
-          Visible = True
+          ItemName = 'FileClose'
         end
         item
           BeginGroup = True
-          Item = FileImport
           Visible = True
-        end
-        item
-          Item = FileExport
-          Visible = True
-        end
-        item
-          Item = FileExportDiagram
-          Visible = True
+          ItemName = 'FileUnits'
         end
         item
           BeginGroup = True
-          Item = FilePageSetup
           Visible = True
+          ItemName = 'FileImport'
         end
         item
-          Item = FilePrint
           Visible = True
+          ItemName = 'FileExport'
+        end
+        item
+          Visible = True
+          ItemName = 'FileExportDiagram'
         end
         item
           BeginGroup = True
-          Item = FileRecentFiles
           Visible = True
+          ItemName = 'FilePageSetup'
+        end
+        item
+          Visible = True
+          ItemName = 'FilePrint'
         end
         item
           BeginGroup = True
-          Item = FileExit
           Visible = True
+          ItemName = 'FileRecentFiles'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'FileExit'
+        end>
+    end
+    object EditMenu: TdxBarSubItem
+      Caption = '&Edit'
+      Category = 1
+      Hint = 'Edit'
+      Visible = ivAlways
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'EditUndo'
+        end
+        item
+          Visible = True
+          ItemName = 'EditRedo'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'EditCut'
+        end
+        item
+          Visible = True
+          ItemName = 'EditCopy'
+        end
+        item
+          Visible = True
+          ItemName = 'EditCopyDiagram'
+        end
+        item
+          Visible = True
+          ItemName = 'EditCopyDiagramAsBitmap'
+        end
+        item
+          Visible = True
+          ItemName = 'EditPaste'
+        end
+        item
+          Visible = True
+          ItemName = 'EditDelete'
+        end
+        item
+          Visible = True
+          ItemName = 'EditDeleteFromModel'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'EditFind'
+        end
+        item
+          Visible = True
+          ItemName = 'EditGoTo'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'EditSelectAll'
+        end>
+    end
+    object FormatMenu: TdxBarSubItem
+      Caption = 'F&ormat'
+      Category = 1
+      Hint = 'Format'
+      Visible = ivAlways
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'FormatFont'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatLineColor'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatFillColor'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'FormatLineStyle'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'FormatStereotypeDisplay'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'FormatSuppressAttributes'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatSuppressOperations'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatSuppressEnumerationLiterals'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'FormatWordWrap'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatShowParentName'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatShowOperationSignature'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatShowProperty'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatShowCompartmentVisibility'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatShowCompartmentStereotype'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'FormatAutoResize'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'FormatAlignment'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatLayoutDiagram'
+        end>
+    end
+    object ModelMenu: TdxBarSubItem
+      Caption = '&Model'
+      Category = 1
+      Hint = 'Model'
+      Visible = ivAlways
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'ModelAdd'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddDiagram'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'ModelCollectionEditor'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelConstraints'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelTaggedValues'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'ModelProfiles'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'ModelModelVerification'
+        end>
+    end
+    object ViewMenu: TdxBarSubItem
+      Caption = '&View'
+      Category = 1
+      Hint = 'View'
+      Visible = ivAlways
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'ViewCloseDiagram'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewCloseAllDiagrams'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'ViewSelectInModelExplorer'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'ViewRefresh'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'ViewModelExplorer'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewDiagramExplorer'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewPropertyEditor'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewDocumentationEditor'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewAttachmentEditor'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewOutputWindow'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewMessageWindow'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewToolbox'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'ViewZoom'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'ViewToolbars'
+        end>
+    end
+    object ToolsMenu: TdxBarSubItem
+      Caption = '&Tools'
+      Category = 1
+      Hint = 'Tools'
+      Visible = ivAlways
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'ToolsOptions'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'ToolsAddInManager'
+        end>
+    end
+    object HelpMenu: TdxBarSubItem
+      Caption = '&Help'
+      Category = 1
+      Hint = 'Help'
+      Visible = ivAlways
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'HelpContents'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'HelpStarUMLOnTheWeb'
+        end
+        item
+          Visible = True
+          ItemName = 'HelpAbout'
         end>
     end
     object FileNew: TdxBarButton
@@ -2518,82 +2583,6 @@ object MainForm: TMainForm
       ImageIndex = 102
       ShortCut = 16463
       OnClick = FileMenuClick
-    end
-    object EditMenu: TdxBarSubItem
-      Caption = '&Edit'
-      Category = 1
-      Hint = 'Edit'
-      Visible = ivAlways
-      ItemLinks = <
-        item
-          Item = EditUndo
-          Visible = True
-        end
-        item
-          Item = EditRedo
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = EditCut
-          Visible = True
-        end
-        item
-          Item = EditCopy
-          Visible = True
-        end
-        item
-          Item = EditCopyDiagram
-          Visible = True
-        end
-        item
-          Item = EditCopyDiagramAsBitmap
-          Visible = True
-        end
-        item
-          Item = EditPaste
-          Visible = True
-        end
-        item
-          Item = EditDelete
-          Visible = True
-        end
-        item
-          Item = EditDeleteFromModel
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = EditFind
-          Visible = True
-        end
-        item
-          Item = EditGoTo
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = EditSelectAll
-          Visible = True
-        end>
-    end
-    object EditUndo: TdxBarButton
-      Caption = '&Undo'
-      Category = 3
-      Hint = 'Undo'
-      Visible = ivAlways
-      ImageIndex = 109
-      ShortCut = 16474
-      OnClick = EditMenuClick
-    end
-    object EditRedo: TdxBarButton
-      Caption = '&Redo'
-      Category = 3
-      Hint = 'Redo'
-      Visible = ivAlways
-      ImageIndex = 110
-      ShortCut = 16473
-      OnClick = EditMenuClick
     end
     object FileSave: TdxBarButton
       Caption = '&Save'
@@ -2626,26 +2615,192 @@ object MainForm: TMainForm
       Visible = ivAlways
       ItemLinks = <
         item
-          Item = FileUnitsSeparateUnit
           Visible = True
+          ItemName = 'FileUnitsSeparateUnit'
         end
         item
-          Item = FileUnitsMergeUnit
           Visible = True
+          ItemName = 'FileUnitsMergeUnit'
         end
         item
           BeginGroup = True
-          Item = FileUnitsDeleteUnit
           Visible = True
+          ItemName = 'FileUnitsDeleteUnit'
         end
         item
-          Item = FileUnitsSave
           Visible = True
+          ItemName = 'FileUnitsSave'
         end
         item
-          Item = FileUnitsSaveAs
           Visible = True
+          ItemName = 'FileUnitsSaveAs'
         end>
+    end
+    object FileUnitsSeparateUnit: TdxBarButton
+      Caption = '&Control Unit...'
+      Category = 2
+      Hint = 'Control Unit'
+      Visible = ivAlways
+      OnClick = FileMenuClick
+    end
+    object FileUnitsMergeUnit: TdxBarButton
+      Caption = '&Uncontrol Unit'
+      Category = 2
+      Hint = 'Uncontrol Unit'
+      Visible = ivAlways
+      OnClick = FileMenuClick
+    end
+    object FileUnitsDeleteUnit: TdxBarButton
+      Caption = '&Delete Unit'
+      Category = 2
+      Hint = 'Delete Unit'
+      Visible = ivAlways
+      OnClick = FileMenuClick
+    end
+    object FileUnitsSave: TdxBarButton
+      Caption = '&Save Unit...'
+      Category = 2
+      Hint = 'Save Unit'
+      Visible = ivAlways
+      OnClick = FileMenuClick
+    end
+    object FileUnitsSaveAs: TdxBarButton
+      Caption = 'Save Unit &As...'
+      Category = 2
+      Hint = 'Save Unit As'
+      Visible = ivAlways
+      OnClick = FileMenuClick
+    end
+    object FileImport: TdxBarSubItem
+      Caption = '&Import'
+      Category = 2
+      Hint = 'Import'
+      Visible = ivAlways
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'FileImportFramework'
+        end
+        item
+          Visible = True
+          ItemName = 'FileImportModelFragment'
+        end>
+    end
+    object FileImportModelFragment: TdxBarButton
+      Caption = '&Model Fragment...'
+      Category = 2
+      Hint = 'Model Fragment'
+      Visible = ivAlways
+      OnClick = FileMenuClick
+    end
+    object FileImportFramework: TdxBarButton
+      Caption = '&Framework...'
+      Category = 2
+      Hint = 'Framework'
+      Visible = ivAlways
+      OnClick = FileMenuClick
+    end
+    object FileExport: TdxBarSubItem
+      Caption = '&Export'
+      Category = 2
+      Hint = 'Export'
+      Visible = ivAlways
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'FileExportModelFragment'
+        end>
+    end
+    object FileExportModelFragment: TdxBarButton
+      Caption = '&Model Fragment...'
+      Category = 2
+      Hint = 'Model Fragment'
+      Visible = ivAlways
+      OnClick = FileMenuClick
+    end
+    object FileExportDiagram: TdxBarButton
+      Caption = 'Export &Diagram...'
+      Category = 2
+      Hint = 'Export Diagram'
+      Visible = ivAlways
+      ShortCut = 24644
+      OnClick = FileMenuClick
+    end
+    object FilePrint: TdxBarButton
+      Caption = '&Print...'
+      Category = 2
+      Hint = 'Print'
+      Visible = ivAlways
+      ImageIndex = 104
+      ShortCut = 16464
+      OnClick = FileMenuClick
+    end
+    object FilePageSetup: TdxBarButton
+      Caption = 'Page Set&up...'
+      Category = 2
+      Hint = 'Page Setup'
+      Visible = ivAlways
+      OnClick = FileMenuClick
+    end
+    object FileRecentFiles: TdxBarSubItem
+      Caption = '&Recent Files'
+      Category = 2
+      Hint = 'Recent Files'
+      Visible = ivAlways
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'FileRecentFilesMRU'
+        end>
+    end
+    object FileRecentFilesMRU: TdxBarMRUListItem
+      Caption = 'Recent Files'
+      Category = 2
+      Visible = ivAlways
+      OnClick = FileRecentFilesMRUClick
+    end
+    object FileExit: TdxBarButton
+      Caption = 'E&xit'
+      Category = 2
+      Hint = 'Exit'
+      Visible = ivAlways
+      OnClick = FileMenuClick
+    end
+    object FileCreate: TdxBarButton
+      Caption = 'New'
+      Category = 2
+      Hint = 'New'
+      Visible = ivAlways
+      ButtonStyle = bsDropDown
+      DropDownMenu = FileCreatePopupMenu
+      ImageIndex = 101
+      OnClick = FileMenuClick
+    end
+    object FileSelectProject: TdxBarButton
+      Caption = 'New Project By Approach...'
+      Category = 2
+      Hint = 'New Project By Approach'
+      Visible = ivAlways
+      ShortCut = 16457
+      OnClick = FileMenuClick
+    end
+    object EditUndo: TdxBarButton
+      Caption = '&Undo'
+      Category = 3
+      Hint = 'Undo'
+      Visible = ivAlways
+      ImageIndex = 109
+      ShortCut = 16474
+      OnClick = EditMenuClick
+    end
+    object EditRedo: TdxBarButton
+      Caption = '&Redo'
+      Category = 3
+      Hint = 'Redo'
+      Visible = ivAlways
+      ImageIndex = 110
+      ShortCut = 16473
+      OnClick = EditMenuClick
     end
     object EditCut: TdxBarButton
       Caption = 'Cu&t'
@@ -2681,232 +2836,6 @@ object MainForm: TMainForm
       ShortCut = 24642
       OnClick = EditMenuClick
     end
-    object FormatMenu: TdxBarSubItem
-      Caption = 'F&ormat'
-      Category = 1
-      Hint = 'Format'
-      Visible = ivAlways
-      ItemLinks = <
-        item
-          Item = FormatFont
-          Visible = True
-        end
-        item
-          Item = FormatLineColor
-          Visible = True
-        end
-        item
-          Item = FormatFillColor
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = FormatLineStyle
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = FormatStereotypeDisplay
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = FormatSuppressAttributes
-          Visible = True
-        end
-        item
-          Item = FormatSuppressOperations
-          Visible = True
-        end
-        item
-          Item = FormatSuppressEnumerationLiterals
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = FormatWordWrap
-          Visible = True
-        end
-        item
-          Item = FormatShowParentName
-          Visible = True
-        end
-        item
-          Item = FormatShowOperationSignature
-          Visible = True
-        end
-        item
-          Item = FormatShowProperty
-          Visible = True
-        end
-        item
-          Item = FormatShowCompartmentVisibility
-          Visible = True
-        end
-        item
-          Item = FormatShowCompartmentStereotype
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = FormatAutoResize
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = FormatAlignment
-          Visible = True
-        end
-        item
-          Item = FormatLayoutDiagram
-          Visible = True
-        end>
-    end
-    object ViewCloseDiagram: TdxBarButton
-      Caption = '&Close Diagram'
-      Category = 5
-      Hint = 'Close Diagram'
-      Visible = ivAlways
-      ShortCut = 16499
-      OnClick = ViewMenuClick
-    end
-    object ViewCloseAllDiagrams: TdxBarButton
-      Caption = 'Close &All Diagrams'
-      Category = 5
-      Hint = 'Close All Diagrams'
-      Visible = ivAlways
-      ShortCut = 24691
-      OnClick = ViewMenuClick
-    end
-    object HelpContents: TdxBarButton
-      Caption = '&Contents...'
-      Category = 7
-      Hint = 'Contents'
-      Visible = ivAlways
-      ImageIndex = 143
-      ShortCut = 112
-      OnClick = HelpMenuClick
-    end
-    object ModelMenu: TdxBarSubItem
-      Caption = '&Model'
-      Category = 1
-      Hint = 'Model'
-      Visible = ivAlways
-      ItemLinks = <
-        item
-          Item = ModelAdd
-          Visible = True
-        end
-        item
-          Item = ModelAddDiagram
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = ModelCollectionEditor
-          Visible = True
-        end
-        item
-          Item = ModelConstraints
-          Visible = True
-        end
-        item
-          Item = ModelTaggedValues
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = ModelProfiles
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = ModelModelVerification
-          Visible = True
-        end>
-    end
-    object ViewMenu: TdxBarSubItem
-      Caption = '&View'
-      Category = 1
-      Hint = 'View'
-      Visible = ivAlways
-      ItemLinks = <
-        item
-          Item = ViewCloseDiagram
-          Visible = True
-        end
-        item
-          Item = ViewCloseAllDiagrams
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = ViewSelectInModelExplorer
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = ViewRefresh
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = ViewModelExplorer
-          Visible = True
-        end
-        item
-          Item = ViewDiagramExplorer
-          Visible = True
-        end
-        item
-          Item = ViewPropertyEditor
-          Visible = True
-        end
-        item
-          Item = ViewDocumentationEditor
-          Visible = True
-        end
-        item
-          Item = ViewAttachmentEditor
-          Visible = True
-        end
-        item
-          Item = ViewOutputWindow
-          Visible = True
-        end
-        item
-          Item = ViewMessageWindow
-          Visible = True
-        end
-        item
-          Item = ViewToolbox
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = ViewZoom
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = ViewToolbars
-          Visible = True
-        end>
-    end
-    object FileUnitsSeparateUnit: TdxBarButton
-      Caption = '&Control Unit...'
-      Category = 2
-      Hint = 'Control Unit'
-      Visible = ivAlways
-      OnClick = FileMenuClick
-    end
-    object FileUnitsMergeUnit: TdxBarButton
-      Caption = '&Uncontrol Unit'
-      Category = 2
-      Hint = 'Uncontrol Unit'
-      Visible = ivAlways
-      OnClick = FileMenuClick
-    end
     object EditPaste: TdxBarButton
       Caption = '&Paste'
       Category = 3
@@ -2925,72 +2854,46 @@ object MainForm: TMainForm
       ShortCut = 46
       OnClick = EditMenuClick
     end
-    object ToolsOptions: TdxBarButton
-      Caption = '&Options...'
-      Category = 6
-      Hint = 'Options'
+    object EditDeleteFromModel: TdxBarButton
+      Caption = 'Delete From &Model'
+      Category = 3
+      Hint = 'Delete From Model'
       Visible = ivAlways
-      OnClick = ToolsMenuClick
+      ShortCut = 16430
+      OnClick = EditMenuClick
     end
-    object FileUnitsDeleteUnit: TdxBarButton
-      Caption = '&Delete Unit'
-      Category = 2
-      Hint = 'Delete Unit'
+    object EditFind: TdxBarButton
+      Caption = '&Find...'
+      Category = 3
+      Hint = 'Find'
       Visible = ivAlways
-      OnClick = FileMenuClick
+      ImageIndex = 111
+      ShortCut = 16454
+      OnClick = EditMenuClick
     end
-    object ToolsMenu: TdxBarSubItem
-      Caption = '&Tools'
-      Category = 1
-      Hint = 'Tools'
+    object EditSelectAll: TdxBarButton
+      Caption = 'Select &All'
+      Category = 3
+      Hint = 'Select All'
       Visible = ivAlways
+      ShortCut = 16449
+      OnClick = EditMenuClick
+    end
+    object EditGoTo: TdxBarSubItem
+      Caption = 'G&o To'
+      Category = 3
+      Hint = 'Go To'
+      Visible = ivNever
       ItemLinks = <
         item
-          Item = ToolsOptions
           Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = ToolsAddInManager
-          Visible = True
+          ItemName = 'EditGoToItemList'
         end>
     end
-    object ViewSelectInModelExplorer: TdxBarButton
-      Caption = '&Select In Model Explorer'
-      Category = 5
-      Hint = 'Select In Model Explorer'
+    object EditGoToItemList: TdxBarListItem
+      Caption = 'Go To Items'
+      Category = 3
       Visible = ivAlways
-      ShortCut = 16461
-      OnClick = ViewMenuClick
-    end
-    object ViewRefresh: TdxBarButton
-      Caption = '&Refresh'
-      Category = 5
-      Hint = 'Refresh'
-      Visible = ivAlways
-      ImageIndex = 136
-      ShortCut = 116
-      OnClick = ViewMenuClick
-    end
-    object HelpMenu: TdxBarSubItem
-      Caption = '&Help'
-      Category = 1
-      Hint = 'Help'
-      Visible = ivAlways
-      ItemLinks = <
-        item
-          Item = HelpContents
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = HelpStarUMLOnTheWeb
-          Visible = True
-        end
-        item
-          Item = HelpAbout
-          Visible = True
-        end>
     end
     object ModelAdd: TdxBarSubItem
       Caption = '&Add'
@@ -2999,249 +2902,249 @@ object MainForm: TMainForm
       Visible = ivAlways
       ItemLinks = <
         item
-          Item = ModelAddAttribute
           Visible = True
+          ItemName = 'ModelAddAttribute'
         end
         item
-          Item = ModelAddOperation
           Visible = True
+          ItemName = 'ModelAddOperation'
         end
         item
-          Item = ModelAddParameter
           Visible = True
+          ItemName = 'ModelAddParameter'
         end
         item
-          Item = ModelAddEnumerationLiteral
           Visible = True
+          ItemName = 'ModelAddEnumerationLiteral'
         end
         item
-          Item = ModelAddTemplateParameter
           Visible = True
+          ItemName = 'ModelAddTemplateParameter'
         end
         item
-          Item = ModelAddAttributeLink
           Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = ModelAddEntryAction
-          Visible = True
-        end
-        item
-          Item = ModelAddDoAction
-          Visible = True
-        end
-        item
-          Item = ModelAddExitAction
-          Visible = True
+          ItemName = 'ModelAddAttributeLink'
         end
         item
           BeginGroup = True
-          Item = ModelAddSignalEvent
           Visible = True
+          ItemName = 'ModelAddEntryAction'
         end
         item
-          Item = ModelAddCallEvent
           Visible = True
+          ItemName = 'ModelAddDoAction'
         end
         item
-          Item = ModelAddTimeEvent
           Visible = True
-        end
-        item
-          Item = ModelAddChangeEvent
-          Visible = True
+          ItemName = 'ModelAddExitAction'
         end
         item
           BeginGroup = True
-          Item = ModelAddEffect
           Visible = True
+          ItemName = 'ModelAddSignalEvent'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddCallEvent'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddTimeEvent'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddChangeEvent'
         end
         item
           BeginGroup = True
-          Item = ModelAddModel
           Visible = True
-        end
-        item
-          Item = ModelAddSubsystem
-          Visible = True
-        end
-        item
-          Item = ModelAddPackage
-          Visible = True
+          ItemName = 'ModelAddEffect'
         end
         item
           BeginGroup = True
-          Item = ModelAddClass
           Visible = True
+          ItemName = 'ModelAddModel'
         end
         item
-          Item = ModelAddInterface
           Visible = True
+          ItemName = 'ModelAddSubsystem'
         end
         item
-          Item = ModelAddUseCase
           Visible = True
-        end
-        item
-          Item = ModelAddActor
-          Visible = True
-        end
-        item
-          Item = ModelAddSignal
-          Visible = True
-        end
-        item
-          Item = ModelAddException
-          Visible = True
-        end
-        item
-          Item = ModelAddObject
-          Visible = True
-        end
-        item
-          Item = ModelAddEnumeration
-          Visible = True
-        end
-        item
-          Item = ModelAddComponent
-          Visible = True
-        end
-        item
-          Item = ModelAddComponentInstance
-          Visible = True
-        end
-        item
-          Item = ModelAddNode
-          Visible = True
-        end
-        item
-          Item = ModelAddNodeInstance
-          Visible = True
-        end
-        item
-          Item = ModelAddArtifact
-          Visible = True
-        end
-        item
-          Item = ModelAddPort
-          Visible = True
-        end
-        item
-          Item = ModelAddExtensionPoint
-          Visible = True
+          ItemName = 'ModelAddPackage'
         end
         item
           BeginGroup = True
-          Item = ModelAddCollaboration
           Visible = True
+          ItemName = 'ModelAddClass'
         end
         item
-          Item = ModelAddCollaborationInstanceSet
           Visible = True
+          ItemName = 'ModelAddInterface'
         end
         item
-          Item = ModelAddClassifierRole
           Visible = True
+          ItemName = 'ModelAddUseCase'
         end
         item
-          Item = ModelAddInteraction
           Visible = True
+          ItemName = 'ModelAddActor'
         end
         item
-          Item = ModelAddInteractionInstanceSet
           Visible = True
+          ItemName = 'ModelAddSignal'
         end
         item
-          Item = ModelAddStateMachine
           Visible = True
+          ItemName = 'ModelAddException'
         end
         item
-          Item = ModelAddActivityGraph
           Visible = True
+          ItemName = 'ModelAddObject'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddEnumeration'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddComponent'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddComponentInstance'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddNode'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddNodeInstance'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddArtifact'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddPort'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddExtensionPoint'
         end
         item
           BeginGroup = True
-          Item = ModelAddCombinedFragment
           Visible = True
+          ItemName = 'ModelAddCollaboration'
         end
         item
-          Item = ModelAddInteractionOperand
           Visible = True
+          ItemName = 'ModelAddCollaborationInstanceSet'
         end
         item
-          Item = ModelAddFrame
           Visible = True
+          ItemName = 'ModelAddClassifierRole'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddInteraction'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddInteractionInstanceSet'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddStateMachine'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddActivityGraph'
         end
         item
           BeginGroup = True
-          Item = ModelAddState
           Visible = True
+          ItemName = 'ModelAddCombinedFragment'
         end
         item
-          Item = ModelAddSubmachineState
           Visible = True
+          ItemName = 'ModelAddInteractionOperand'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddFrame'
         end
         item
           BeginGroup = True
-          Item = ModelAddActionState
           Visible = True
+          ItemName = 'ModelAddState'
         end
         item
-          Item = ModelAddSubactivityState
           Visible = True
+          ItemName = 'ModelAddSubmachineState'
         end
         item
-          Item = ModelAddInitialState
+          BeginGroup = True
           Visible = True
+          ItemName = 'ModelAddActionState'
         end
         item
-          Item = ModelAddFinalState
           Visible = True
+          ItemName = 'ModelAddSubactivityState'
         end
         item
-          Item = ModelAddDecision
           Visible = True
+          ItemName = 'ModelAddInitialState'
         end
         item
-          Item = ModelAddJunctionPoint
           Visible = True
+          ItemName = 'ModelAddFinalState'
         end
         item
-          Item = ModelAddChoicePoint
           Visible = True
+          ItemName = 'ModelAddDecision'
         end
         item
-          Item = ModelAddObjectFlowState
           Visible = True
+          ItemName = 'ModelAddJunctionPoint'
         end
         item
-          Item = ModelAddFlowFinalState
           Visible = True
+          ItemName = 'ModelAddChoicePoint'
         end
         item
-          Item = ModelAddSignalAcceptState
           Visible = True
+          ItemName = 'ModelAddObjectFlowState'
         end
         item
-          Item = ModelAddSignalSendState
           Visible = True
+          ItemName = 'ModelAddFlowFinalState'
         end
         item
-          Item = ModelAddShallowHistory
           Visible = True
+          ItemName = 'ModelAddSignalAcceptState'
         end
         item
-          Item = ModelAddDeepHistory
           Visible = True
+          ItemName = 'ModelAddSignalSendState'
         end
         item
-          Item = ModelAddSynchronization
           Visible = True
+          ItemName = 'ModelAddShallowHistory'
         end
         item
-          Item = ModelAddSwimlane
           Visible = True
+          ItemName = 'ModelAddDeepHistory'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddSynchronization'
+        end
+        item
+          Visible = True
+          ItemName = 'ModelAddSwimlane'
         end>
     end
     object ModelAddDiagram: TdxBarSubItem
@@ -3251,48 +3154,48 @@ object MainForm: TMainForm
       Visible = ivAlways
       ItemLinks = <
         item
-          Item = ModelAddDiagramClassDiagram
           Visible = True
+          ItemName = 'ModelAddDiagramClassDiagram'
         end
         item
-          Item = ModelAddDiagramUsecaseDiagram
           Visible = True
+          ItemName = 'ModelAddDiagramUsecaseDiagram'
         end
         item
-          Item = ModelAddDiagramSequenceDiagram
           Visible = True
+          ItemName = 'ModelAddDiagramSequenceDiagram'
         end
         item
-          Item = ModelAddDiagramSequenceRoleDiagram
           Visible = True
+          ItemName = 'ModelAddDiagramSequenceRoleDiagram'
         end
         item
-          Item = ModelAddDiagramCollaborationDiagram
           Visible = True
+          ItemName = 'ModelAddDiagramCollaborationDiagram'
         end
         item
-          Item = ModelAddDiagramCollaborationRoleDiagram
           Visible = True
+          ItemName = 'ModelAddDiagramCollaborationRoleDiagram'
         end
         item
-          Item = ModelAddDiagramStatechartDiagram
           Visible = True
+          ItemName = 'ModelAddDiagramStatechartDiagram'
         end
         item
-          Item = ModelAddDiagramActivityDiagram
           Visible = True
+          ItemName = 'ModelAddDiagramActivityDiagram'
         end
         item
-          Item = ModelAddDiagramComponentDiagram
           Visible = True
+          ItemName = 'ModelAddDiagramComponentDiagram'
         end
         item
-          Item = ModelAddDiagramDeploymentDiagram
           Visible = True
+          ItemName = 'ModelAddDiagramDeploymentDiagram'
         end
         item
-          Item = ModelAddDiagramCompositeStructureDiagram
           Visible = True
+          ItemName = 'ModelAddDiagramCompositeStructureDiagram'
         end>
     end
     object ModelAddModel: TdxBarButton
@@ -3334,77 +3237,6 @@ object MainForm: TMainForm
       Visible = ivAlways
       ImageIndex = 17
       OnClick = ModelAddMenuClick
-    end
-    object FormatFont: TdxBarButton
-      Caption = '&Font...'
-      Category = 11
-      Hint = 'Font'
-      Visible = ivAlways
-      ImageIndex = 112
-      OnClick = FormatMenuClick
-    end
-    object FormatLineColor: TdxBarButton
-      Caption = 'Lin&e Color...'
-      Category = 11
-      Hint = 'Line Color'
-      Visible = ivAlways
-      ImageIndex = 113
-      OnClick = FormatMenuClick
-    end
-    object FormatFillColor: TdxBarButton
-      Caption = 'Fill &Color...'
-      Category = 11
-      Hint = 'Fill Color'
-      Visible = ivAlways
-      ImageIndex = 114
-      OnClick = FormatMenuClick
-    end
-    object EditDeleteFromModel: TdxBarButton
-      Caption = 'Delete From &Model'
-      Category = 3
-      Hint = 'Delete From Model'
-      Visible = ivAlways
-      ShortCut = 16430
-      OnClick = EditMenuClick
-    end
-    object FormatLineStyle: TdxBarSubItem
-      Caption = 'Line &Style'
-      Category = 11
-      Hint = 'Line Style'
-      Visible = ivAlways
-      ImageIndex = 115
-      ShowCaption = False
-      ItemLinks = <
-        item
-          Item = FormatLineStyleRectilinear
-          Visible = True
-        end
-        item
-          Item = FormatLineStyleOblique
-          Visible = True
-        end>
-    end
-    object FormatLineStyleRectilinear: TdxBarButton
-      Caption = '&Rectlinear'
-      Category = 11
-      Hint = 'Rectlinear'
-      Visible = ivAlways
-      AllowAllUp = True
-      ButtonStyle = bsChecked
-      GroupIndex = 9
-      ShortCut = 16460
-      OnClick = FormatMenuClick
-    end
-    object FormatLineStyleOblique: TdxBarButton
-      Caption = '&Oblique'
-      Category = 11
-      Hint = 'Oblique'
-      Visible = ivAlways
-      AllowAllUp = True
-      ButtonStyle = bsChecked
-      GroupIndex = 9
-      ShortCut = 16450
-      OnClick = FormatMenuClick
     end
     object ModelAddEnumeration: TdxBarButton
       Caption = 'Enumeration'
@@ -3550,91 +3382,6 @@ object MainForm: TMainForm
       ImageIndex = 32
       OnClick = ModelAddMenuClick
     end
-    object FileUnitsSave: TdxBarButton
-      Caption = '&Save Unit...'
-      Category = 2
-      Hint = 'Save Unit'
-      Visible = ivAlways
-      OnClick = FileMenuClick
-    end
-    object FileUnitsSaveAs: TdxBarButton
-      Caption = 'Save Unit &As...'
-      Category = 2
-      Hint = 'Save Unit As'
-      Visible = ivAlways
-      OnClick = FileMenuClick
-    end
-    object FileImport: TdxBarSubItem
-      Caption = '&Import'
-      Category = 2
-      Hint = 'Import'
-      Visible = ivAlways
-      ItemLinks = <
-        item
-          Item = FileImportFramework
-          Visible = True
-        end
-        item
-          Item = FileImportModelFragment
-          Visible = True
-        end>
-    end
-    object ViewZoom: TdxBarSubItem
-      Caption = '&Zoom'
-      Category = 5
-      Hint = 'Zoom'
-      Visible = ivAlways
-      ItemLinks = <
-        item
-          Item = ViewZoomZoomIn
-          Visible = True
-        end
-        item
-          Item = ViewZoomZoomOut
-          Visible = True
-        end
-        item
-          Item = ViewZoomFitInWindow
-          Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = ViewZoom50
-          Visible = True
-        end
-        item
-          Item = ViewZoom75
-          Visible = True
-        end
-        item
-          Item = ViewZoom100
-          Visible = True
-        end
-        item
-          Item = ViewZoom125
-          Visible = True
-        end
-        item
-          Item = ViewZoom150
-          Visible = True
-        end
-        item
-          Item = ViewZoom175
-          Visible = True
-        end
-        item
-          Item = ViewZoom200
-          Visible = True
-        end>
-    end
-    object ViewZoomZoomIn: TdxBarButton
-      Caption = 'Zoom &In'
-      Category = 5
-      Hint = 'Zoom In'
-      Visible = ivAlways
-      ImageIndex = 133
-      OnClick = ViewMenuClick
-    end
     object ModelAddInteractionInstanceSet: TdxBarButton
       Caption = 'Interaction Instance Set'
       Category = 4
@@ -3642,58 +3389,6 @@ object MainForm: TMainForm
       Visible = ivAlways
       ImageIndex = 33
       OnClick = ModelAddMenuClick
-    end
-    object FormatStereotypeDisplay: TdxBarSubItem
-      Caption = 'Stereotype &Display'
-      Category = 11
-      Hint = 'Stereotype Display'
-      Visible = ivAlways
-      ImageIndex = 153
-      ShowCaption = False
-      ItemLinks = <
-        item
-          Item = FormatStereotypeDisplayNone
-          Visible = True
-        end
-        item
-          Item = FormatStereotypeDisplayText
-          Visible = True
-        end
-        item
-          Item = FormatStereotypeDisplayIcon
-          Visible = True
-        end
-        item
-          Item = FormatStereotypeDisplayDecoration
-          Visible = True
-        end>
-    end
-    object FormatStereotypeDisplayNone: TdxBarButton
-      Caption = '&None'
-      Category = 11
-      Hint = 'None'
-      Visible = ivAlways
-      ButtonStyle = bsChecked
-      ShortCut = 24654
-      OnClick = FormatMenuClick
-    end
-    object FormatStereotypeDisplayText: TdxBarButton
-      Caption = '&Textual'
-      Category = 11
-      Hint = 'Textual'
-      Visible = ivAlways
-      ButtonStyle = bsChecked
-      ShortCut = 24660
-      OnClick = FormatMenuClick
-    end
-    object FormatStereotypeDisplayIcon: TdxBarButton
-      Caption = '&Iconic'
-      Category = 11
-      Hint = 'Iconic'
-      Visible = ivAlways
-      ButtonStyle = bsChecked
-      ShortCut = 24649
-      OnClick = FormatMenuClick
     end
     object ModelAddStateMachine: TdxBarButton
       Caption = 'State Machine'
@@ -3927,21 +3622,760 @@ object MainForm: TMainForm
       ImageIndex = 176
       OnClick = ModelAddMenuClick
     end
-    object FileImportModelFragment: TdxBarButton
-      Caption = '&Model Fragment...'
-      Category = 2
-      Hint = 'Model Fragment'
+    object ModelAddAttributeLink: TdxBarButton
+      Caption = 'Attribute Link'
+      Category = 4
+      Hint = 'Attribute Link'
       Visible = ivAlways
-      OnClick = FileMenuClick
+      ImageIndex = 178
+      OnClick = ModelAddMenuClick
     end
-    object EditFind: TdxBarButton
-      Caption = '&Find...'
-      Category = 3
-      Hint = 'Find'
+    object ModelAddPort: TdxBarButton
+      Caption = 'Port'
+      Category = 4
+      Hint = 'Port'
       Visible = ivAlways
-      ImageIndex = 111
-      ShortCut = 16454
-      OnClick = EditMenuClick
+      ImageIndex = 173
+      OnClick = ModelAddMenuClick
+    end
+    object ModelAddExtensionPoint: TdxBarButton
+      Caption = 'Extension Point'
+      Category = 4
+      Hint = 'Extension Point'
+      Visible = ivAlways
+      ImageIndex = 177
+      OnClick = ModelAddMenuClick
+    end
+    object ModelAddCombinedFragment: TdxBarButton
+      Caption = 'Combined Fragment'
+      Category = 4
+      Hint = 'Combined Fragment'
+      Visible = ivAlways
+      ImageIndex = 163
+      OnClick = ModelAddMenuClick
+    end
+    object ModelAddInteractionOperand: TdxBarButton
+      Caption = 'Interaction Operand'
+      Category = 4
+      Hint = 'Interaction Operand'
+      Visible = ivAlways
+      ImageIndex = 169
+      OnClick = ModelAddMenuClick
+    end
+    object ModelAddFrame: TdxBarButton
+      Caption = 'Frame'
+      Category = 4
+      Hint = 'Frame'
+      Visible = ivAlways
+      ImageIndex = 167
+      OnClick = ModelAddMenuClick
+    end
+    object ModelAddDiagramUsecaseDiagram: TdxBarButton
+      Tag = 1
+      Caption = 'Use Case Diagram'
+      Category = 4
+      Hint = 'Use Case Diagram'
+      Visible = ivAlways
+      ImageIndex = 92
+      OnClick = ModelAddDiagramMenuClick
+    end
+    object ModelAddDiagramClassDiagram: TdxBarButton
+      Tag = 2
+      Caption = 'Class Diagram'
+      Category = 4
+      Hint = 'Class Diagram'
+      Visible = ivAlways
+      ImageIndex = 91
+      OnClick = ModelAddDiagramMenuClick
+    end
+    object ModelAddDiagramSequenceRoleDiagram: TdxBarButton
+      Caption = 'Sequence Diagram (Role)'
+      Category = 4
+      Hint = 'Sequence Diagram (Role)'
+      Visible = ivAlways
+      ImageIndex = 94
+      OnClick = ModelAddDiagramMenuClick
+    end
+    object ModelAddDiagramSequenceDiagram: TdxBarButton
+      Tag = 3
+      Caption = 'Sequence Diagram'
+      Category = 4
+      Hint = 'Sequence Diagram'
+      Visible = ivAlways
+      ImageIndex = 93
+      OnClick = ModelAddDiagramMenuClick
+    end
+    object ModelAddDiagramCollaborationRoleDiagram: TdxBarButton
+      Caption = 'Collaboration Diagram (Role)'
+      Category = 4
+      Hint = 'Collaboration Diagram (Role)'
+      Visible = ivAlways
+      ImageIndex = 96
+      OnClick = ModelAddDiagramMenuClick
+    end
+    object ModelAddDiagramCollaborationDiagram: TdxBarButton
+      Tag = 4
+      Caption = 'Collaboration Diagram'
+      Category = 4
+      Hint = 'Collaboration Diagram'
+      Visible = ivAlways
+      ImageIndex = 95
+      OnClick = ModelAddDiagramMenuClick
+    end
+    object ModelAddDiagramStatechartDiagram: TdxBarButton
+      Tag = 5
+      Caption = 'Statechart Diagram'
+      Category = 4
+      Hint = 'Statechart Diagram'
+      Visible = ivAlways
+      ImageIndex = 97
+      OnClick = ModelAddDiagramMenuClick
+    end
+    object ModelAddDiagramActivityDiagram: TdxBarButton
+      Tag = 6
+      Caption = 'Activity Diagram'
+      Category = 4
+      Hint = 'Activity Diagram'
+      Visible = ivAlways
+      ImageIndex = 98
+      OnClick = ModelAddDiagramMenuClick
+    end
+    object ModelAddDiagramComponentDiagram: TdxBarButton
+      Tag = 7
+      Caption = 'Component Diagram'
+      Category = 4
+      Hint = 'Component Diagram'
+      Visible = ivAlways
+      ImageIndex = 99
+      OnClick = ModelAddDiagramMenuClick
+    end
+    object ModelAddDiagramDeploymentDiagram: TdxBarButton
+      Tag = 8
+      Caption = 'Deployment Diagram'
+      Category = 4
+      Hint = 'Deployment Diagram'
+      Visible = ivAlways
+      ImageIndex = 100
+      OnClick = ModelAddDiagramMenuClick
+    end
+    object ModelAddDiagramCompositeStructureDiagram: TdxBarButton
+      Tag = 9
+      Caption = 'Composite Structure Diagram'
+      Category = 4
+      Hint = 'Composite Structure Diagram'
+      Visible = ivAlways
+      ImageIndex = 179
+      OnClick = ModelAddDiagramMenuClick
+    end
+    object ModelCollectionEditor: TdxBarButton
+      Caption = 'C&ollection Editor...'
+      Category = 4
+      Hint = 'Collection Editor'
+      Visible = ivAlways
+      ImageIndex = 148
+      ShortCut = 16500
+      OnClick = ModelMenuClick
+    end
+    object ModelConstraints: TdxBarButton
+      Caption = '&Constraints...'
+      Category = 4
+      Hint = 'Constraints'
+      Visible = ivAlways
+      ImageIndex = 149
+      ShortCut = 16501
+      OnClick = ModelMenuClick
+    end
+    object ModelTaggedValues: TdxBarButton
+      Caption = '&Tagged Values...'
+      Category = 4
+      Hint = 'Tagged Values'
+      Visible = ivAlways
+      ImageIndex = 150
+      ShortCut = 16502
+      OnClick = ModelMenuClick
+    end
+    object ModelProfiles: TdxBarButton
+      Caption = '&Profiles...'
+      Category = 4
+      Hint = 'Profiles'
+      Visible = ivAlways
+      ImageIndex = 146
+      ShortCut = 16503
+      OnClick = ModelMenuClick
+    end
+    object ModelModelVerification: TdxBarButton
+      Caption = '&Verify Model...'
+      Category = 4
+      Hint = 'Verify Model'
+      Visible = ivAlways
+      ImageIndex = 145
+      ShortCut = 120
+      OnClick = ModelMenuClick
+    end
+    object ModelProperty: TdxBarButton
+      Caption = 'Properties'
+      Category = 4
+      Hint = 'Properties'
+      Visible = ivAlways
+      ShortCut = 121
+      OnClick = ModelMenuClick
+    end
+    object ViewCloseDiagram: TdxBarButton
+      Caption = '&Close Diagram'
+      Category = 5
+      Hint = 'Close Diagram'
+      Visible = ivAlways
+      ShortCut = 16499
+      OnClick = ViewMenuClick
+    end
+    object ViewCloseAllDiagrams: TdxBarButton
+      Caption = 'Close &All Diagrams'
+      Category = 5
+      Hint = 'Close All Diagrams'
+      Visible = ivAlways
+      ShortCut = 24691
+      OnClick = ViewMenuClick
+    end
+    object ViewSelectInModelExplorer: TdxBarButton
+      Caption = '&Select In Model Explorer'
+      Category = 5
+      Hint = 'Select In Model Explorer'
+      Visible = ivAlways
+      ShortCut = 16461
+      OnClick = ViewMenuClick
+    end
+    object ViewRefresh: TdxBarButton
+      Caption = '&Refresh'
+      Category = 5
+      Hint = 'Refresh'
+      Visible = ivAlways
+      ImageIndex = 136
+      ShortCut = 116
+      OnClick = ViewMenuClick
+    end
+    object ViewZoom: TdxBarSubItem
+      Caption = '&Zoom'
+      Category = 5
+      Hint = 'Zoom'
+      Visible = ivAlways
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'ViewZoomZoomIn'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewZoomZoomOut'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewZoomFitInWindow'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'ViewZoom50'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewZoom75'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewZoom100'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewZoom125'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewZoom150'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewZoom175'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewZoom200'
+        end>
+    end
+    object ViewZoomZoomIn: TdxBarButton
+      Caption = 'Zoom &In'
+      Category = 5
+      Hint = 'Zoom In'
+      Visible = ivAlways
+      ImageIndex = 133
+      OnClick = ViewMenuClick
+    end
+    object ViewZoomZoomOut: TdxBarButton
+      Caption = 'Zoom &Out'
+      Category = 5
+      Hint = 'Zoom Out'
+      Visible = ivAlways
+      ImageIndex = 134
+      OnClick = ViewMenuClick
+    end
+    object ViewZoomFitInWindow: TdxBarButton
+      Caption = '&Fit To Window'
+      Category = 5
+      Hint = 'Fit To Window'
+      Visible = ivAlways
+      ImageIndex = 135
+      OnClick = ViewMenuClick
+    end
+    object ViewZoom50: TdxBarButton
+      Caption = '50%'
+      Category = 5
+      Hint = '50%'
+      Visible = ivAlways
+      OnClick = ViewZoomMenuClick
+    end
+    object ViewZoom75: TdxBarButton
+      Caption = '75%'
+      Category = 5
+      Hint = '75%'
+      Visible = ivAlways
+      OnClick = ViewZoomMenuClick
+    end
+    object ViewZoom100: TdxBarButton
+      Caption = '100%'
+      Category = 5
+      Visible = ivAlways
+      OnClick = ViewZoomMenuClick
+    end
+    object ViewZoom125: TdxBarButton
+      Caption = '125%'
+      Category = 5
+      Hint = '125%'
+      Visible = ivAlways
+      OnClick = ViewZoomMenuClick
+    end
+    object ViewZoom150: TdxBarButton
+      Caption = '150%'
+      Category = 5
+      Hint = '150%'
+      Visible = ivAlways
+      OnClick = ViewZoomMenuClick
+    end
+    object ViewZoom175: TdxBarButton
+      Caption = '175%'
+      Category = 5
+      Hint = '175%'
+      Visible = ivAlways
+      OnClick = ViewZoomMenuClick
+    end
+    object ViewZoom200: TdxBarButton
+      Caption = '200%'
+      Category = 5
+      Hint = '200%'
+      Visible = ivAlways
+      OnClick = ViewZoomMenuClick
+    end
+    object ViewToolbars: TdxBarSubItem
+      Caption = '&Toolbars'
+      Category = 5
+      Hint = 'Toolbars'
+      Visible = ivAlways
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'ViewToolbarsStandard'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewToolbarsFormat'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewToolbarsView'
+        end
+        item
+          Visible = True
+          ItemName = 'ViewToolbarsAlignment'
+        end>
+    end
+    object ViewToolbarsStandard: TdxBarButton
+      Caption = '&Standard'
+      Category = 5
+      Hint = 'Standard'
+      Visible = ivAlways
+      ButtonStyle = bsChecked
+      OnClick = ViewCheckTypeMenuMainFormOnlyClick
+    end
+    object ViewToolbarsFormat: TdxBarButton
+      Caption = '&Format'
+      Category = 5
+      Hint = 'Format'
+      Visible = ivAlways
+      ButtonStyle = bsChecked
+      OnClick = ViewCheckTypeMenuMainFormOnlyClick
+    end
+    object ViewToolbarsView: TdxBarButton
+      Caption = '&View'
+      Category = 5
+      Hint = 'View'
+      Visible = ivAlways
+      ButtonStyle = bsChecked
+      OnClick = ViewCheckTypeMenuMainFormOnlyClick
+    end
+    object ViewToolbarsAlignment: TdxBarButton
+      Caption = '&Alignment'
+      Category = 5
+      Hint = 'Alignment'
+      Visible = ivAlways
+      ButtonStyle = bsChecked
+      OnClick = ViewCheckTypeMenuMainFormOnlyClick
+    end
+    object ViewZoomCombo: TdxBarCombo
+      Caption = 'Zoom'
+      Category = 5
+      Hint = 'Zoom'
+      Visible = ivAlways
+      OnChange = ViewZoomComboChange
+      Width = 100
+      Items.Strings = (
+        '50%'
+        '75%'
+        '100%'
+        '125%'
+        '150%'
+        '175%'
+        '200%')
+      ItemIndex = -1
+    end
+    object ViewModelExplorer: TdxBarButton
+      Caption = 'Model Explorer'
+      Category = 5
+      Hint = 'Model Explorer'
+      Visible = ivAlways
+      ButtonStyle = bsChecked
+      OnClick = ViewCheckTypeMenuClick
+    end
+    object ViewDiagramExplorer: TdxBarButton
+      Caption = 'Diagram Explorer'
+      Category = 5
+      Hint = 'Diagram Explorer'
+      Visible = ivAlways
+      ButtonStyle = bsChecked
+      OnClick = ViewCheckTypeMenuClick
+    end
+    object ViewPropertyEditor: TdxBarButton
+      Caption = 'Properties'
+      Category = 5
+      Hint = 'Properties'
+      Visible = ivAlways
+      ButtonStyle = bsChecked
+      OnClick = ViewCheckTypeMenuClick
+    end
+    object ViewDocumentationEditor: TdxBarButton
+      Caption = 'Documentations'
+      Category = 5
+      Hint = 'Documentations'
+      Visible = ivAlways
+      ButtonStyle = bsChecked
+      OnClick = ViewCheckTypeMenuClick
+    end
+    object ViewAttachmentEditor: TdxBarButton
+      Caption = 'Attachments'
+      Category = 5
+      Hint = 'Attachments'
+      Visible = ivAlways
+      ButtonStyle = bsChecked
+      OnClick = ViewCheckTypeMenuClick
+    end
+    object ViewOutputWindow: TdxBarButton
+      Caption = 'Output'
+      Category = 5
+      Hint = 'Output'
+      Visible = ivAlways
+      ButtonStyle = bsChecked
+      OnClick = ViewCheckTypeMenuClick
+    end
+    object ViewMessageWindow: TdxBarButton
+      Caption = 'Messages'
+      Category = 5
+      Hint = 'Messages'
+      Visible = ivAlways
+      ButtonStyle = bsChecked
+      OnClick = ViewCheckTypeMenuClick
+    end
+    object ViewToolbox: TdxBarButton
+      Caption = 'Toolbox'
+      Category = 5
+      Hint = 'Toolbox'
+      Visible = ivAlways
+      ButtonStyle = bsChecked
+      OnClick = ViewCheckTypeMenuClick
+    end
+    object ViewDiagramPages: TdxBarSubItem
+      Caption = 'Pages'
+      Category = 5
+      Hint = 'Pages'
+      Visible = ivAlways
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'ViewDiagramPageList'
+        end>
+    end
+    object ViewDiagramPageList: TdxBarListItem
+      Caption = 'Diagram Page List'
+      Category = 5
+      Visible = ivAlways
+      OnClick = ViewMenuClick
+      ShowCheck = True
+      ShowNumbers = False
+    end
+    object ToolsOptions: TdxBarButton
+      Caption = '&Options...'
+      Category = 6
+      Hint = 'Options'
+      Visible = ivAlways
+      OnClick = ToolsMenuClick
+    end
+    object ToolsAddInManager: TdxBarButton
+      Caption = '&Add-In Manager...'
+      Category = 6
+      Hint = 'Add-In Manager'
+      Visible = ivAlways
+      OnClick = ToolsMenuClick
+    end
+    object HelpContents: TdxBarButton
+      Caption = '&Contents...'
+      Category = 7
+      Hint = 'Contents'
+      Visible = ivAlways
+      ImageIndex = 143
+      ShortCut = 112
+      OnClick = HelpMenuClick
+    end
+    object HelpStarUMLOnTheWeb: TdxBarButton
+      Caption = 'StarUML on the &Web'
+      Category = 7
+      Hint = 'StarUML on the Web'
+      Visible = ivAlways
+      OnClick = HelpMenuClick
+    end
+    object HelpAbout: TdxBarButton
+      Caption = '&About...'
+      Category = 7
+      Hint = 'About'
+      Visible = ivAlways
+      OnClick = HelpMenuClick
+    end
+    object StatusBarInfo: TdxBarStatic
+      Align = iaClient
+      Category = 8
+      Visible = ivAlways
+      Alignment = taLeftJustify
+      BorderStyle = sbsLowered
+    end
+    object StatusBarProgress: TdxBarProgressItem
+      Category = 8
+      Visible = ivAlways
+      RightIndent = 2
+      ShowCaption = False
+      Width = 100
+    end
+    object StatusBarModifiedInfo: TdxBarStatic
+      Category = 8
+      Visible = ivAlways
+      BorderStyle = sbsLowered
+      RightIndent = 2
+      Width = 70
+    end
+    object InspectorAttachmentOpen: TdxBarButton
+      Caption = '&Open'
+      Category = 9
+      Hint = 'Open'
+      Visible = ivAlways
+      ImageIndex = 137
+      OnClick = InspectorAttachmentButtonClick
+    end
+    object InspectorAttachmentAdd: TdxBarButton
+      Caption = '&Add...'
+      Category = 9
+      Hint = 'Add'
+      Visible = ivAlways
+      ImageIndex = 138
+      OnClick = InspectorAttachmentButtonClick
+    end
+    object InspectorAttachmentDelete: TdxBarButton
+      Caption = '&Delete'
+      Category = 9
+      Hint = 'Delete'
+      Visible = ivAlways
+      ImageIndex = 139
+      OnClick = InspectorAttachmentButtonClick
+    end
+    object InspectorAttachmentEdit: TdxBarButton
+      Caption = '&Edit...'
+      Category = 9
+      Hint = 'Edit'
+      Visible = ivAlways
+      ImageIndex = 140
+      OnClick = InspectorAttachmentButtonClick
+    end
+    object InspectorAttachmentMoveUp: TdxBarButton
+      Caption = 'Move &Up'
+      Category = 9
+      Hint = 'Move Up'
+      Visible = ivAlways
+      ImageIndex = 141
+      OnClick = InspectorAttachmentButtonClick
+    end
+    object InspectorAttachmentMoveDown: TdxBarButton
+      Caption = 'Move &Down'
+      Category = 9
+      Hint = 'Move Down'
+      Visible = ivAlways
+      ImageIndex = 142
+      OnClick = InspectorAttachmentButtonClick
+    end
+    object MessagesClearAll: TdxBarButton
+      Caption = '&Clear Messages'
+      Category = 10
+      Hint = 'Clear Messages'
+      Visible = ivAlways
+      OnClick = InformationMessagesButtonClick
+    end
+    object MessagesClearFindResults: TdxBarButton
+      Caption = 'Clear &Search Results'
+      Category = 10
+      Hint = 'Clear Search Results'
+      Visible = ivAlways
+      OnClick = InformationMessagesButtonClick
+    end
+    object MessagesClearVerificationResults: TdxBarButton
+      Caption = 'Clear &Verification Results'
+      Category = 10
+      Hint = 'Clear Verification Results'
+      Visible = ivAlways
+      OnClick = InformationMessagesButtonClick
+    end
+    object MessagesSaveMessages: TdxBarButton
+      Caption = '&Save Messages...'
+      Category = 10
+      Hint = 'Save Messages'
+      Visible = ivAlways
+      OnClick = InformationMessagesButtonClick
+    end
+    object FormatFont: TdxBarButton
+      Caption = '&Font...'
+      Category = 11
+      Hint = 'Font'
+      Visible = ivAlways
+      ImageIndex = 112
+      OnClick = FormatMenuClick
+    end
+    object FormatLineColor: TdxBarButton
+      Caption = 'Lin&e Color...'
+      Category = 11
+      Hint = 'Line Color'
+      Visible = ivAlways
+      ImageIndex = 113
+      OnClick = FormatMenuClick
+    end
+    object FormatFillColor: TdxBarButton
+      Caption = 'Fill &Color...'
+      Category = 11
+      Hint = 'Fill Color'
+      Visible = ivAlways
+      ImageIndex = 114
+      OnClick = FormatMenuClick
+    end
+    object FormatLineStyle: TdxBarSubItem
+      Caption = 'Line &Style'
+      Category = 11
+      Hint = 'Line Style'
+      Visible = ivAlways
+      ImageIndex = 115
+      ShowCaption = False
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'FormatLineStyleRectilinear'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatLineStyleOblique'
+        end>
+    end
+    object FormatLineStyleRectilinear: TdxBarButton
+      Caption = '&Rectlinear'
+      Category = 11
+      Hint = 'Rectlinear'
+      Visible = ivAlways
+      AllowAllUp = True
+      ButtonStyle = bsChecked
+      GroupIndex = 9
+      ShortCut = 16460
+      OnClick = FormatMenuClick
+    end
+    object FormatLineStyleOblique: TdxBarButton
+      Caption = '&Oblique'
+      Category = 11
+      Hint = 'Oblique'
+      Visible = ivAlways
+      AllowAllUp = True
+      ButtonStyle = bsChecked
+      GroupIndex = 9
+      ShortCut = 16450
+      OnClick = FormatMenuClick
+    end
+    object FormatStereotypeDisplay: TdxBarSubItem
+      Caption = 'Stereotype &Display'
+      Category = 11
+      Hint = 'Stereotype Display'
+      Visible = ivAlways
+      ImageIndex = 153
+      ShowCaption = False
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'FormatStereotypeDisplayNone'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatStereotypeDisplayText'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatStereotypeDisplayIcon'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatStereotypeDisplayDecoration'
+        end>
+    end
+    object FormatStereotypeDisplayNone: TdxBarButton
+      Caption = '&None'
+      Category = 11
+      Hint = 'None'
+      Visible = ivAlways
+      ButtonStyle = bsChecked
+      ShortCut = 24654
+      OnClick = FormatMenuClick
+    end
+    object FormatStereotypeDisplayText: TdxBarButton
+      Caption = '&Textual'
+      Category = 11
+      Hint = 'Textual'
+      Visible = ivAlways
+      ButtonStyle = bsChecked
+      ShortCut = 24660
+      OnClick = FormatMenuClick
+    end
+    object FormatStereotypeDisplayIcon: TdxBarButton
+      Caption = '&Iconic'
+      Category = 11
+      Hint = 'Iconic'
+      Visible = ivAlways
+      ButtonStyle = bsChecked
+      ShortCut = 24649
+      OnClick = FormatMenuClick
     end
     object FormatStereotypeDisplayDecoration: TdxBarButton
       Caption = 'D&ecoration'
@@ -4061,47 +4495,47 @@ object MainForm: TMainForm
       Visible = ivAlways
       ItemLinks = <
         item
-          Item = FormatAlignmentBringToFront
           Visible = True
+          ItemName = 'FormatAlignmentBringToFront'
         end
         item
-          Item = FormatAlignmentSendToBack
           Visible = True
-        end
-        item
-          BeginGroup = True
-          Item = FormatAlignmentLeft
-          Visible = True
-        end
-        item
-          Item = FormatAlignmentRight
-          Visible = True
-        end
-        item
-          Item = FormatAlignmentMiddle
-          Visible = True
+          ItemName = 'FormatAlignmentSendToBack'
         end
         item
           BeginGroup = True
-          Item = FormatAlignmentTop
           Visible = True
+          ItemName = 'FormatAlignmentLeft'
         end
         item
-          Item = FormatAlignmentBottom
           Visible = True
+          ItemName = 'FormatAlignmentRight'
         end
         item
-          Item = FormatAlignmentCenter
           Visible = True
+          ItemName = 'FormatAlignmentMiddle'
         end
         item
           BeginGroup = True
-          Item = FormatAlignmentSpaceEvenlyHorizontally
           Visible = True
+          ItemName = 'FormatAlignmentTop'
         end
         item
-          Item = FormatAlignmentSpaceEvenlyVertically
           Visible = True
+          ItemName = 'FormatAlignmentBottom'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatAlignmentCenter'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'FormatAlignmentSpaceEvenlyHorizontally'
+        end
+        item
+          Visible = True
+          ItemName = 'FormatAlignmentSpaceEvenlyVertically'
         end>
     end
     object FormatAlignmentSendToBack: TdxBarButton
@@ -4119,52 +4553,6 @@ object MainForm: TMainForm
       Visible = ivAlways
       ImageIndex = 123
       OnClick = FormatMenuClick
-    end
-    object ModelAddAttributeLink: TdxBarButton
-      Caption = 'Attribute Link'
-      Category = 4
-      Hint = 'Attribute Link'
-      Visible = ivAlways
-      ImageIndex = 178
-      OnClick = ModelAddMenuClick
-    end
-    object ModelAddPort: TdxBarButton
-      Caption = 'Port'
-      Category = 4
-      Hint = 'Port'
-      Visible = ivAlways
-      ImageIndex = 173
-      OnClick = ModelAddMenuClick
-    end
-    object ViewZoomZoomOut: TdxBarButton
-      Caption = 'Zoom &Out'
-      Category = 5
-      Hint = 'Zoom Out'
-      Visible = ivAlways
-      ImageIndex = 134
-      OnClick = ViewMenuClick
-    end
-    object ViewZoomFitInWindow: TdxBarButton
-      Caption = '&Fit To Window'
-      Category = 5
-      Hint = 'Fit To Window'
-      Visible = ivAlways
-      ImageIndex = 135
-      OnClick = ViewMenuClick
-    end
-    object ViewZoom50: TdxBarButton
-      Caption = '50%'
-      Category = 5
-      Hint = '50%'
-      Visible = ivAlways
-      OnClick = ViewZoomMenuClick
-    end
-    object ViewZoom75: TdxBarButton
-      Caption = '75%'
-      Category = 5
-      Hint = '75%'
-      Visible = ivAlways
-      OnClick = ViewZoomMenuClick
     end
     object FormatAlignmentLeft: TdxBarButton
       Caption = 'Align &Left'
@@ -4198,22 +4586,6 @@ object MainForm: TMainForm
       ImageIndex = 128
       OnClick = FormatMenuClick
     end
-    object ModelAddExtensionPoint: TdxBarButton
-      Caption = 'Extension Point'
-      Category = 4
-      Hint = 'Extension Point'
-      Visible = ivAlways
-      ImageIndex = 177
-      OnClick = ModelAddMenuClick
-    end
-    object ModelAddCombinedFragment: TdxBarButton
-      Caption = 'Combined Fragment'
-      Category = 4
-      Hint = 'Combined Fragment'
-      Visible = ivAlways
-      ImageIndex = 163
-      OnClick = ModelAddMenuClick
-    end
     object FormatAlignmentBottom: TdxBarButton
       Caption = 'Align &Bottom'
       Category = 11
@@ -4221,273 +4593,6 @@ object MainForm: TMainForm
       Visible = ivAlways
       ImageIndex = 129
       OnClick = FormatMenuClick
-    end
-    object ViewZoom100: TdxBarButton
-      Caption = '100%'
-      Category = 5
-      Visible = ivAlways
-      OnClick = ViewZoomMenuClick
-    end
-    object ModelAddInteractionOperand: TdxBarButton
-      Caption = 'Interaction Operand'
-      Category = 4
-      Hint = 'Interaction Operand'
-      Visible = ivAlways
-      ImageIndex = 169
-      OnClick = ModelAddMenuClick
-    end
-    object ModelAddFrame: TdxBarButton
-      Caption = 'Frame'
-      Category = 4
-      Hint = 'Frame'
-      Visible = ivAlways
-      ImageIndex = 167
-      OnClick = ModelAddMenuClick
-    end
-    object ViewZoom125: TdxBarButton
-      Caption = '125%'
-      Category = 5
-      Hint = '125%'
-      Visible = ivAlways
-      OnClick = ViewZoomMenuClick
-    end
-    object ViewZoom150: TdxBarButton
-      Caption = '150%'
-      Category = 5
-      Hint = '150%'
-      Visible = ivAlways
-      OnClick = ViewZoomMenuClick
-    end
-    object ViewZoom175: TdxBarButton
-      Caption = '175%'
-      Category = 5
-      Hint = '175%'
-      Visible = ivAlways
-      OnClick = ViewZoomMenuClick
-    end
-    object ViewZoom200: TdxBarButton
-      Caption = '200%'
-      Category = 5
-      Hint = '200%'
-      Visible = ivAlways
-      OnClick = ViewZoomMenuClick
-    end
-    object ToolsAddInManager: TdxBarButton
-      Caption = '&Add-In Manager...'
-      Category = 6
-      Hint = 'Add-In Manager'
-      Visible = ivAlways
-      OnClick = ToolsMenuClick
-    end
-    object HelpStarUMLOnTheWeb: TdxBarButton
-      Caption = 'StarUML on the &Web'
-      Category = 7
-      Hint = 'StarUML on the Web'
-      Visible = ivAlways
-      OnClick = HelpMenuClick
-    end
-    object FileImportFramework: TdxBarButton
-      Caption = '&Framework...'
-      Category = 2
-      Hint = 'Framework'
-      Visible = ivAlways
-      OnClick = FileMenuClick
-    end
-    object FileExport: TdxBarSubItem
-      Caption = '&Export'
-      Category = 2
-      Hint = 'Export'
-      Visible = ivAlways
-      ItemLinks = <
-        item
-          Item = FileExportModelFragment
-          Visible = True
-        end>
-    end
-    object FileExportModelFragment: TdxBarButton
-      Caption = '&Model Fragment...'
-      Category = 2
-      Hint = 'Model Fragment'
-      Visible = ivAlways
-      OnClick = FileMenuClick
-    end
-    object FileExportDiagram: TdxBarButton
-      Caption = 'Export &Diagram...'
-      Category = 2
-      Hint = 'Export Diagram'
-      Visible = ivAlways
-      ShortCut = 24644
-      OnClick = FileMenuClick
-    end
-    object ModelAddDiagramUsecaseDiagram: TdxBarButton
-      Tag = 1
-      Caption = 'Use Case Diagram'
-      Category = 4
-      Hint = 'Use Case Diagram'
-      Visible = ivAlways
-      ImageIndex = 92
-      OnClick = ModelAddDiagramMenuClick
-    end
-    object ViewToolbars: TdxBarSubItem
-      Caption = '&Toolbars'
-      Category = 5
-      Hint = 'Toolbars'
-      Visible = ivAlways
-      ItemLinks = <
-        item
-          Item = ViewToolbarsStandard
-          Visible = True
-        end
-        item
-          Item = ViewToolbarsFormat
-          Visible = True
-        end
-        item
-          Item = ViewToolbarsView
-          Visible = True
-        end
-        item
-          Item = ViewToolbarsAlignment
-          Visible = True
-        end>
-    end
-    object ViewToolbarsStandard: TdxBarButton
-      Caption = '&Standard'
-      Category = 5
-      Hint = 'Standard'
-      Visible = ivAlways
-      ButtonStyle = bsChecked
-      OnClick = ViewCheckTypeMenuMainFormOnlyClick
-    end
-    object ViewToolbarsFormat: TdxBarButton
-      Caption = '&Format'
-      Category = 5
-      Hint = 'Format'
-      Visible = ivAlways
-      ButtonStyle = bsChecked
-      OnClick = ViewCheckTypeMenuMainFormOnlyClick
-    end
-    object ViewToolbarsView: TdxBarButton
-      Caption = '&View'
-      Category = 5
-      Hint = 'View'
-      Visible = ivAlways
-      ButtonStyle = bsChecked
-      OnClick = ViewCheckTypeMenuMainFormOnlyClick
-    end
-    object FilePrint: TdxBarButton
-      Caption = '&Print...'
-      Category = 2
-      Hint = 'Print'
-      Visible = ivAlways
-      ImageIndex = 104
-      ShortCut = 16464
-      OnClick = FileMenuClick
-    end
-    object StatusBarInfo: TdxBarStatic
-      Align = iaClient
-      Category = 8
-      Visible = ivAlways
-      Alignment = taLeftJustify
-      BorderStyle = sbsLowered
-    end
-    object StatusBarProgress: TdxBarProgressItem
-      Category = 8
-      Visible = ivAlways
-      RightIndent = 2
-      ShowCaption = False
-      Width = 100
-    end
-    object StatusBarModifiedInfo: TdxBarStatic
-      Category = 8
-      Visible = ivAlways
-      BorderStyle = sbsLowered
-      RightIndent = 2
-      Width = 70
-    end
-    object InspectorAttachmentOpen: TdxBarButton
-      Caption = '&Open'
-      Category = 9
-      Hint = 'Open'
-      Visible = ivAlways
-      ImageIndex = 137
-      OnClick = InspectorAttachmentButtonClick
-    end
-    object InspectorAttachmentAdd: TdxBarButton
-      Caption = '&Add...'
-      Category = 9
-      Hint = 'Add'
-      Visible = ivAlways
-      ImageIndex = 138
-      OnClick = InspectorAttachmentButtonClick
-    end
-    object InspectorAttachmentDelete: TdxBarButton
-      Caption = '&Delete'
-      Category = 9
-      Hint = 'Delete'
-      Visible = ivAlways
-      ImageIndex = 139
-      OnClick = InspectorAttachmentButtonClick
-    end
-    object InspectorAttachmentEdit: TdxBarButton
-      Caption = '&Edit...'
-      Category = 9
-      Hint = 'Edit'
-      Visible = ivAlways
-      ImageIndex = 140
-      OnClick = InspectorAttachmentButtonClick
-    end
-    object InspectorAttachmentMoveUp: TdxBarButton
-      Caption = 'Move &Up'
-      Category = 9
-      Hint = 'Move Up'
-      Visible = ivAlways
-      ImageIndex = 141
-      OnClick = InspectorAttachmentButtonClick
-    end
-    object InspectorAttachmentMoveDown: TdxBarButton
-      Caption = 'Move &Down'
-      Category = 9
-      Hint = 'Move Down'
-      Visible = ivAlways
-      ImageIndex = 142
-      OnClick = InspectorAttachmentButtonClick
-    end
-    object MessagesClearAll: TdxBarButton
-      Caption = '&Clear Messages'
-      Category = 10
-      Hint = 'Clear Messages'
-      Visible = ivAlways
-      OnClick = InformationMessagesButtonClick
-    end
-    object MessagesClearFindResults: TdxBarButton
-      Caption = 'Clear &Search Results'
-      Category = 10
-      Hint = 'Clear Search Results'
-      Visible = ivAlways
-      OnClick = InformationMessagesButtonClick
-    end
-    object MessagesClearVerificationResults: TdxBarButton
-      Caption = 'Clear &Verification Results'
-      Category = 10
-      Hint = 'Clear Verification Results'
-      Visible = ivAlways
-      OnClick = InformationMessagesButtonClick
-    end
-    object MessagesSaveMessages: TdxBarButton
-      Caption = '&Save Messages...'
-      Category = 10
-      Hint = 'Save Messages'
-      Visible = ivAlways
-      OnClick = InformationMessagesButtonClick
-    end
-    object ViewToolbarsAlignment: TdxBarButton
-      Caption = '&Alignment'
-      Category = 5
-      Hint = 'Alignment'
-      Visible = ivAlways
-      ButtonStyle = bsChecked
-      OnClick = ViewCheckTypeMenuMainFormOnlyClick
     end
     object FormatAlignmentCenter: TdxBarButton
       Caption = 'Align &Center'
@@ -4497,23 +4602,6 @@ object MainForm: TMainForm
       ImageIndex = 130
       OnClick = FormatMenuClick
     end
-    object ViewZoomCombo: TdxBarCombo
-      Caption = 'Zoom'
-      Category = 5
-      Hint = 'Zoom'
-      Visible = ivAlways
-      OnChange = ViewZoomComboChange
-      Width = 100
-      Items.Strings = (
-        '50%'
-        '75%'
-        '100%'
-        '125%'
-        '150%'
-        '175%'
-        '200%')
-      ItemIndex = -1
-    end
     object FormatAlignmentSpaceEvenlyHorizontally: TdxBarButton
       Caption = 'Space Equally, &Horizontally'
       Category = 11
@@ -4522,71 +4610,6 @@ object MainForm: TMainForm
       ImageIndex = 131
       OnClick = FormatMenuClick
     end
-    object FilePageSetup: TdxBarButton
-      Caption = 'Page Set&up...'
-      Category = 2
-      Hint = 'Page Setup'
-      Visible = ivAlways
-      OnClick = FileMenuClick
-    end
-    object HelpAbout: TdxBarButton
-      Caption = '&About...'
-      Category = 7
-      Hint = 'About'
-      Visible = ivAlways
-      OnClick = HelpMenuClick
-    end
-    object ModelAddDiagramClassDiagram: TdxBarButton
-      Tag = 2
-      Caption = 'Class Diagram'
-      Category = 4
-      Hint = 'Class Diagram'
-      Visible = ivAlways
-      ImageIndex = 91
-      OnClick = ModelAddDiagramMenuClick
-    end
-    object FileRecentFiles: TdxBarSubItem
-      Caption = '&Recent Files'
-      Category = 2
-      Hint = 'Recent Files'
-      Visible = ivAlways
-      ItemLinks = <
-        item
-          Item = FileRecentFilesMRU
-          Visible = True
-        end>
-    end
-    object FileRecentFilesMRU: TdxBarMRUListItem
-      Caption = 'Recent Files'
-      Category = 2
-      Visible = ivAlways
-      OnClick = FileRecentFilesMRUClick
-    end
-    object FileExit: TdxBarButton
-      Caption = 'E&xit'
-      Category = 2
-      Hint = 'Exit'
-      Visible = ivAlways
-      OnClick = FileMenuClick
-    end
-    object ModelAddDiagramSequenceRoleDiagram: TdxBarButton
-      Caption = 'Sequence Diagram (Role)'
-      Category = 4
-      Hint = 'Sequence Diagram (Role)'
-      Visible = ivAlways
-      ImageIndex = 94
-      OnClick = ModelAddDiagramMenuClick
-    end
-    object FileCreate: TdxBarButton
-      Caption = 'New'
-      Category = 2
-      Hint = 'New'
-      Visible = ivAlways
-      ButtonStyle = bsDropDown
-      DropDownMenu = FileCreatePopupMenu
-      ImageIndex = 101
-      OnClick = FileMenuClick
-    end
     object FormatAlignmentSpaceEvenlyVertically: TdxBarButton
       Caption = 'Space Equally, &Vertically'
       Category = 11
@@ -4594,70 +4617,6 @@ object MainForm: TMainForm
       Visible = ivAlways
       ImageIndex = 132
       OnClick = FormatMenuClick
-    end
-    object FileSelectProject: TdxBarButton
-      Caption = 'New Project By Approach...'
-      Category = 2
-      Hint = 'New Project By Approach'
-      Visible = ivAlways
-      ShortCut = 16457
-      OnClick = FileMenuClick
-    end
-    object ViewModelExplorer: TdxBarButton
-      Caption = 'Model Explorer'
-      Category = 5
-      Hint = 'Model Explorer'
-      Visible = ivAlways
-      ButtonStyle = bsChecked
-      OnClick = ViewCheckTypeMenuClick
-    end
-    object ViewDiagramExplorer: TdxBarButton
-      Caption = 'Diagram Explorer'
-      Category = 5
-      Hint = 'Diagram Explorer'
-      Visible = ivAlways
-      ButtonStyle = bsChecked
-      OnClick = ViewCheckTypeMenuClick
-    end
-    object ViewPropertyEditor: TdxBarButton
-      Caption = 'Properties'
-      Category = 5
-      Hint = 'Properties'
-      Visible = ivAlways
-      ButtonStyle = bsChecked
-      OnClick = ViewCheckTypeMenuClick
-    end
-    object ViewDocumentationEditor: TdxBarButton
-      Caption = 'Documentations'
-      Category = 5
-      Hint = 'Documentations'
-      Visible = ivAlways
-      ButtonStyle = bsChecked
-      OnClick = ViewCheckTypeMenuClick
-    end
-    object ViewAttachmentEditor: TdxBarButton
-      Caption = 'Attachments'
-      Category = 5
-      Hint = 'Attachments'
-      Visible = ivAlways
-      ButtonStyle = bsChecked
-      OnClick = ViewCheckTypeMenuClick
-    end
-    object ViewOutputWindow: TdxBarButton
-      Caption = 'Output'
-      Category = 5
-      Hint = 'Output'
-      Visible = ivAlways
-      ButtonStyle = bsChecked
-      OnClick = ViewCheckTypeMenuClick
-    end
-    object ViewMessageWindow: TdxBarButton
-      Caption = 'Messages'
-      Category = 5
-      Hint = 'Messages'
-      Visible = ivAlways
-      ButtonStyle = bsChecked
-      OnClick = ViewCheckTypeMenuClick
     end
     object FormatFontNameCombo: TdxBarFontNameCombo
       Caption = 'Font Face'
@@ -4676,66 +4635,6 @@ object MainForm: TMainForm
         8888888888848888888888888888888888888888888888888888}
       Width = 160
       DropDownCount = 12
-    end
-    object ModelAddDiagramSequenceDiagram: TdxBarButton
-      Tag = 3
-      Caption = 'Sequence Diagram'
-      Category = 4
-      Hint = 'Sequence Diagram'
-      Visible = ivAlways
-      ImageIndex = 93
-      OnClick = ModelAddDiagramMenuClick
-    end
-    object EditSelectAll: TdxBarButton
-      Caption = 'Select &All'
-      Category = 3
-      Hint = 'Select All'
-      Visible = ivAlways
-      ShortCut = 16449
-      OnClick = EditMenuClick
-    end
-    object ViewToolbox: TdxBarButton
-      Caption = 'Toolbox'
-      Category = 5
-      Hint = 'Toolbox'
-      Visible = ivAlways
-      ButtonStyle = bsChecked
-      OnClick = ViewCheckTypeMenuClick
-    end
-    object ViewDiagramPages: TdxBarSubItem
-      Caption = 'Pages'
-      Category = 5
-      Hint = 'Pages'
-      Visible = ivAlways
-      ItemLinks = <
-        item
-          Item = ViewDiagramPageList
-          Visible = True
-        end>
-    end
-    object ViewDiagramPageList: TdxBarListItem
-      Caption = 'Diagram Page List'
-      Category = 5
-      Visible = ivAlways
-      OnClick = ViewMenuClick
-      ShowCheck = True
-      ShowNumbers = False
-    end
-    object EditGoTo: TdxBarSubItem
-      Caption = 'G&o To'
-      Category = 3
-      Hint = 'Go To'
-      Visible = ivNever
-      ItemLinks = <
-        item
-          Item = EditGoToItemList
-          Visible = True
-        end>
-    end
-    object EditGoToItemList: TdxBarListItem
-      Caption = 'Go To Items'
-      Category = 3
-      Visible = ivAlways
     end
     object FormatFontSizeCombo: TdxBarCombo
       Caption = 'Font Size'
@@ -4763,14 +4662,6 @@ object MainForm: TMainForm
         '48')
       ItemIndex = -1
     end
-    object ModelAddDiagramCollaborationRoleDiagram: TdxBarButton
-      Caption = 'Collaboration Diagram (Role)'
-      Category = 4
-      Hint = 'Collaboration Diagram (Role)'
-      Visible = ivAlways
-      ImageIndex = 96
-      OnClick = ModelAddDiagramMenuClick
-    end
     object FormatLayoutDiagram: TdxBarButton
       Caption = 'La&yout Diagram'
       Category = 11
@@ -4778,113 +4669,6 @@ object MainForm: TMainForm
       Visible = ivAlways
       ImageIndex = 147
       OnClick = FormatMenuClick
-    end
-    object ModelAddDiagramCollaborationDiagram: TdxBarButton
-      Tag = 4
-      Caption = 'Collaboration Diagram'
-      Category = 4
-      Hint = 'Collaboration Diagram'
-      Visible = ivAlways
-      ImageIndex = 95
-      OnClick = ModelAddDiagramMenuClick
-    end
-    object ModelAddDiagramStatechartDiagram: TdxBarButton
-      Tag = 5
-      Caption = 'Statechart Diagram'
-      Category = 4
-      Hint = 'Statechart Diagram'
-      Visible = ivAlways
-      ImageIndex = 97
-      OnClick = ModelAddDiagramMenuClick
-    end
-    object ModelAddDiagramActivityDiagram: TdxBarButton
-      Tag = 6
-      Caption = 'Activity Diagram'
-      Category = 4
-      Hint = 'Activity Diagram'
-      Visible = ivAlways
-      ImageIndex = 98
-      OnClick = ModelAddDiagramMenuClick
-    end
-    object ModelAddDiagramComponentDiagram: TdxBarButton
-      Tag = 7
-      Caption = 'Component Diagram'
-      Category = 4
-      Hint = 'Component Diagram'
-      Visible = ivAlways
-      ImageIndex = 99
-      OnClick = ModelAddDiagramMenuClick
-    end
-    object ModelAddDiagramDeploymentDiagram: TdxBarButton
-      Tag = 8
-      Caption = 'Deployment Diagram'
-      Category = 4
-      Hint = 'Deployment Diagram'
-      Visible = ivAlways
-      ImageIndex = 100
-      OnClick = ModelAddDiagramMenuClick
-    end
-    object ModelAddDiagramCompositeStructureDiagram: TdxBarButton
-      Tag = 9
-      Caption = 'Composite Structure Diagram'
-      Category = 4
-      Hint = 'Composite Structure Diagram'
-      Visible = ivAlways
-      ImageIndex = 179
-      OnClick = ModelAddDiagramMenuClick
-    end
-    object ModelCollectionEditor: TdxBarButton
-      Caption = 'C&ollection Editor...'
-      Category = 4
-      Hint = 'Collection Editor'
-      Visible = ivAlways
-      ImageIndex = 148
-      ShortCut = 16500
-      OnClick = ModelMenuClick
-    end
-    object ModelConstraints: TdxBarButton
-      Caption = '&Constraints...'
-      Category = 4
-      Hint = 'Constraints'
-      Visible = ivAlways
-      ImageIndex = 149
-      ShortCut = 16501
-      OnClick = ModelMenuClick
-    end
-    object ModelTaggedValues: TdxBarButton
-      Caption = '&Tagged Values...'
-      Category = 4
-      Hint = 'Tagged Values'
-      Visible = ivAlways
-      ImageIndex = 150
-      ShortCut = 16502
-      OnClick = ModelMenuClick
-    end
-    object ModelProfiles: TdxBarButton
-      Caption = '&Profiles...'
-      Category = 4
-      Hint = 'Profiles'
-      Visible = ivAlways
-      ImageIndex = 146
-      ShortCut = 16503
-      OnClick = ModelMenuClick
-    end
-    object ModelModelVerification: TdxBarButton
-      Caption = '&Verify Model...'
-      Category = 4
-      Hint = 'Verify Model'
-      Visible = ivAlways
-      ImageIndex = 145
-      ShortCut = 120
-      OnClick = ModelMenuClick
-    end
-    object ModelProperty: TdxBarButton
-      Caption = 'Properties'
-      Category = 4
-      Hint = 'Properties'
-      Visible = ivAlways
-      ShortCut = 121
-      OnClick = ModelMenuClick
     end
     object AllModelsGroup: TdxBarGroup
       Items = (
@@ -11201,28 +10985,28 @@ object MainForm: TMainForm
     BarManager = BarManager
     ItemLinks = <
       item
-        Item = InspectorAttachmentOpen
         Visible = True
+        ItemName = 'InspectorAttachmentOpen'
       end
       item
-        Item = InspectorAttachmentAdd
         Visible = True
+        ItemName = 'InspectorAttachmentAdd'
       end
       item
-        Item = InspectorAttachmentDelete
         Visible = True
+        ItemName = 'InspectorAttachmentDelete'
       end
       item
-        Item = InspectorAttachmentEdit
         Visible = True
+        ItemName = 'InspectorAttachmentEdit'
       end
       item
-        Item = InspectorAttachmentMoveUp
         Visible = True
+        ItemName = 'InspectorAttachmentMoveUp'
       end
       item
-        Item = InspectorAttachmentMoveDown
         Visible = True
+        ItemName = 'InspectorAttachmentMoveDown'
       end>
     UseOwnFont = False
     Left = 572
@@ -11232,21 +11016,21 @@ object MainForm: TMainForm
     BarManager = BarManager
     ItemLinks = <
       item
-        Item = MessagesClearAll
         Visible = True
+        ItemName = 'MessagesClearAll'
       end
       item
-        Item = MessagesClearFindResults
         Visible = True
+        ItemName = 'MessagesClearFindResults'
       end
       item
-        Item = MessagesClearVerificationResults
         Visible = True
+        ItemName = 'MessagesClearVerificationResults'
       end
       item
         BeginGroup = True
-        Item = MessagesSaveMessages
         Visible = True
+        ItemName = 'MessagesSaveMessages'
       end>
     UseOwnFont = False
     Left = 604
@@ -11256,51 +11040,51 @@ object MainForm: TMainForm
     BarManager = BarManager
     ItemLinks = <
       item
-        Item = ModelAdd
         Visible = True
+        ItemName = 'ModelAdd'
       end
       item
-        Item = ModelAddDiagram
         Visible = True
-      end
-      item
-        BeginGroup = True
-        Item = EditCut
-        Visible = True
-      end
-      item
-        Item = EditCopy
-        Visible = True
-      end
-      item
-        Item = EditPaste
-        Visible = True
-      end
-      item
-        Item = EditDeleteFromModel
-        Visible = True
-      end
-      item
-        Item = EditGoTo
-        Visible = True
+        ItemName = 'ModelAddDiagram'
       end
       item
         BeginGroup = True
-        Item = FileUnits
         Visible = True
+        ItemName = 'EditCut'
+      end
+      item
+        Visible = True
+        ItemName = 'EditCopy'
+      end
+      item
+        Visible = True
+        ItemName = 'EditPaste'
+      end
+      item
+        Visible = True
+        ItemName = 'EditDeleteFromModel'
+      end
+      item
+        Visible = True
+        ItemName = 'EditGoTo'
       end
       item
         BeginGroup = True
-        Item = ModelCollectionEditor
         Visible = True
+        ItemName = 'FileUnits'
       end
       item
-        Item = ModelConstraints
+        BeginGroup = True
         Visible = True
+        ItemName = 'ModelCollectionEditor'
       end
       item
-        Item = ModelTaggedValues
         Visible = True
+        ItemName = 'ModelConstraints'
+      end
+      item
+        Visible = True
+        ItemName = 'ModelTaggedValues'
       end>
     UseOwnFont = False
     Left = 476
@@ -11310,26 +11094,26 @@ object MainForm: TMainForm
     BarManager = BarManager
     ItemLinks = <
       item
-        Item = ViewDiagramPages
         Visible = True
+        ItemName = 'ViewDiagramPages'
       end
       item
         BeginGroup = True
-        Item = ViewCloseDiagram
         Visible = True
+        ItemName = 'ViewCloseDiagram'
       end
       item
-        Item = ViewCloseAllDiagrams
         Visible = True
+        ItemName = 'ViewCloseAllDiagrams'
       end
       item
-        Item = FormatLayoutDiagram
         Visible = True
+        ItemName = 'FormatLayoutDiagram'
       end
       item
         BeginGroup = True
-        Item = ViewRefresh
         Visible = True
+        ItemName = 'ViewRefresh'
       end>
     UseOwnFont = False
     Left = 540
@@ -11339,16 +11123,16 @@ object MainForm: TMainForm
     BarManager = BarManager
     ItemLinks = <
       item
-        Item = EditCut
         Visible = True
+        ItemName = 'EditCut'
       end
       item
-        Item = EditCopy
         Visible = True
+        ItemName = 'EditCopy'
       end
       item
-        Item = EditDeleteFromModel
         Visible = True
+        ItemName = 'EditDeleteFromModel'
       end>
     UseOwnFont = False
     Left = 508
@@ -11375,53 +11159,53 @@ object MainForm: TMainForm
     BarManager = BarManager
     ItemLinks = <
       item
-        Item = ModelAdd
         Visible = True
+        ItemName = 'ModelAdd'
       end
       item
-        Item = ModelAddDiagram
         Visible = True
-      end
-      item
-        BeginGroup = True
-        Item = ViewSelectInModelExplorer
-        Visible = True
-      end
-      item
-        Item = ViewCloseDiagram
-        Visible = True
+        ItemName = 'ModelAddDiagram'
       end
       item
         BeginGroup = True
-        Item = FormatMenu
         Visible = True
+        ItemName = 'ViewSelectInModelExplorer'
+      end
+      item
+        Visible = True
+        ItemName = 'ViewCloseDiagram'
       end
       item
         BeginGroup = True
-        Item = EditGoTo
         Visible = True
-      end
-      item
-        Item = EditMenu
-        Visible = True
+        ItemName = 'FormatMenu'
       end
       item
         BeginGroup = True
-        Item = ModelCollectionEditor
         Visible = True
+        ItemName = 'EditGoTo'
       end
       item
-        Item = ModelConstraints
         Visible = True
-      end
-      item
-        Item = ModelTaggedValues
-        Visible = True
+        ItemName = 'EditMenu'
       end
       item
         BeginGroup = True
-        Item = ModelProperty
         Visible = True
+        ItemName = 'ModelCollectionEditor'
+      end
+      item
+        Visible = True
+        ItemName = 'ModelConstraints'
+      end
+      item
+        Visible = True
+        ItemName = 'ModelTaggedValues'
+      end
+      item
+        BeginGroup = True
+        Visible = True
+        ItemName = 'ModelProperty'
       end>
     UseOwnFont = False
     Left = 443
@@ -11469,12 +11253,12 @@ object MainForm: TMainForm
     BarManager = BarManager
     ItemLinks = <
       item
-        Item = FileNew
         Visible = True
+        ItemName = 'FileNew'
       end
       item
-        Item = FileSelectProject
         Visible = True
+        ItemName = 'FileSelectProject'
       end>
     UseOwnFont = False
     Left = 636
@@ -11504,135 +11288,7 @@ object MainForm: TMainForm
     Top = 294
     Bitmap = {
       494C010109000E00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
-      0000000000003600000028000000400000004000000001002000000000000040
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -12018,12 +11674,8 @@ object MainForm: TMainForm
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000424D3E000000000000003E000000
-      2800000040000000400000000100010000000000000200000000000000000000
-      000000000000000000000000FFFFFF0000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000FC1C000000000000F000000000000000
+      2800000040000000300000000100010000000000800100000000000000000000
+      000000000000000000000000FFFFFF00FC1C000000000000F000000000000000
       E000000000000000C001000000000000C0010000000000008000000000000000
       8000000000000000800000000000000080000000000000008000000000000000
       C001000000000000C001000000000000E003000000000000F007000000000000
@@ -12048,71 +11700,7 @@ object MainForm: TMainForm
     Top = 256
     Bitmap = {
       494C010104000900040008001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
-      0000000000003600000028000000200000003000000001002000000000000018
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000003600000028000000200000002000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -12242,10 +11830,8 @@ object MainForm: TMainForm
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000424D3E000000000000003E000000
-      2800000020000000300000000100010000000000C00000000000000000000000
+      2800000020000000200000000100010000000000800000000000000000000000
       000000000000000000000000FFFFFF0000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FF0101CFFF010187FF010103FF010103FF010121FF01BBF1FF03BBF9FF07C7FD

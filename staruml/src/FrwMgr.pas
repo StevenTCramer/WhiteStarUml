@@ -49,12 +49,10 @@ interface
 
 uses
   UMLModels,
-  Classes, XMLDoc, XMLIntf;
-
-const
-  EXT_DIR = 'modules';
-  FRAMEWORK_EXTENSION = 'frw';
-  ICON_EXTENSION = 'ico';
+  Classes,
+  XMLDoc,
+  XMLIntf,
+  StarUMLConstantsUnit;
 
 type
   // PFramework
@@ -127,7 +125,8 @@ implementation
 
 uses
   LogMgr,
-  Windows, SysUtils, Forms, Variants, Registry, ActiveX, Dialogs, NLS_StarUML;
+  Windows, SysUtils, Forms, Variants, Registry, ActiveX, Dialogs, NLS_StarUML,
+  SettingsUnit;
 
 const
   FRAMEWORKS_REGPATH = '\Software\StarUML\Frameworks';
@@ -369,7 +368,7 @@ end;
 constructor PFrameworkManager.Create;
 begin
   inherited;
-  CoInitialize(nil);
+//  CoInitialize(nil);
   FFrameworks := TList.Create;
   FFrameworkReader := PFrameworkReader.Create;
 end;
@@ -379,7 +378,7 @@ begin
   CloseFrameworks;
   FFrameworks.Free;
   FFrameworkReader.Free;
-  CoUninitialize;
+//  CoUninitialize;
   inherited;
 end;
 
@@ -446,7 +445,7 @@ procedure PFrameworkManager.LoadFrameworks;
     end;
   end;
 begin
-  LoadFiles(ExtractFileDir(Application.ExeName) + '\' + EXT_DIR);
+  LoadFiles(Settings[cExtentionDirectoryTag]);
 end;
 
 

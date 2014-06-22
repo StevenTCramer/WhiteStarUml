@@ -793,8 +793,10 @@ destructor PNXManager.Destroy;
 var
   I: Integer;
 begin
-  for I := 0 to FGraphicList.Count-1 do
+  for I := FGraphicList.Count - 1 downto 0 do
+  begin
     FGraphicList.Objects[I].Free;
+  end;
   FGraphicList.Free;
   inherited;
 end;

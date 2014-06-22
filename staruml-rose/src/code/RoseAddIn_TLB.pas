@@ -11,11 +11,11 @@ unit RoseAddIn_TLB;
 // manual modifications will be lost.                                         
 // ************************************************************************ //
 
-// PASTLWTR : 1.2
-// File generated on 2005-10-28 ¿ÀÀü 9:55:04 from Type Library described below.
+// $Rev: 8291 $
+// File generated on 2008-06-18 7:07:20 PM from Type Library described below.
 
 // ************************************************************************  //
-// Type Lib: D:\PLASTIC_CVS\plastic\rose-extension\src\code\RoseAddIn.tlb (1)
+// Type Lib: C:\TimeWarp\staruml-src\staruml-rose\src\code\RoseAddIn.tlb (1)
 // LIBID: {5C29561F-DB66-4340-91DD-BDBC666B75D5}
 // LCID: 0
 // Helpfile: 

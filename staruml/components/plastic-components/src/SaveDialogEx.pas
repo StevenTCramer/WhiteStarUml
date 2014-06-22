@@ -27,7 +27,13 @@
 //                                                                            //
 // $Id: SaveDialogEx.pas,v 1.1 2005/11/02 07:18:01 jwnara Exp $                                                                       //
 //                                                                            //
-// $Log: SaveDialogEx.pas,v $
+// $Log:  72031: SaveDialogEx.pas 
+{
+{   Rev 1.0    8/21/2010 6:12:00 PM  Steve
+}
+{
+{   Rev 1.0    2007-04-24 2:53:52 PM  Steve
+}
 // Revision 1.1  2005/11/02 07:18:01  jwnara
 // initial checkin of source from jwnara
 //

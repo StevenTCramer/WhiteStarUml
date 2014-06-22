@@ -50,7 +50,7 @@ interface
 {$HINTS OFF}
 
 uses
-  BasicClasses, Core, StarUML_TLB,
+  BasicClasses, Core, StarUMLProject_TLB,
   Graphics, SysUtils;
 
 type

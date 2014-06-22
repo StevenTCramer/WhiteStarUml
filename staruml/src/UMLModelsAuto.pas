@@ -50,7 +50,7 @@ interface
 {$HINTS OFF}
 
 uses
-  CoreAuto, ExtCoreAuto, StarUML_TLB;
+  CoreAuto, ExtCoreAuto, StarUMLProject_TLB;
 
 type
   // Forward Declaration
@@ -998,6 +998,10 @@ type
   protected
     function GetOperationAt(Index: Integer): IUMLOperation; safecall;
     function GetOperationCount: Integer; safecall;
+    procedure AddOperation(const Value: IUMLOperation); safecall;
+    procedure RemoveOperation(const Value: IUMLOperation); safecall;
+    procedure InsertOperation(Index: Integer; const Value: IUMLOperation); safecall;
+    procedure DeleteOperation(Index: Integer); safecall;
     procedure ClearTypedFeatures; safecall;
     procedure AddTypedFeature(const Value: IUMLStructuralFeature); safecall;
     procedure RemoveTypedFeature(const Value: IUMLStructuralFeature); safecall;
@@ -7939,6 +7943,18 @@ begin
   StarUMLApplication.AddCollectionItem(TheObject as PModel, 'ObjectFlowStates', E as PModel);
 end;
 
+procedure PUMLClassifierAuto.AddOperation(const Value: IUMLOperation);
+var
+  E: PElement;
+begin
+  if Value = nil then Exit;
+  E := MetaModel.FindMetaClass('UMLOperation').FindInstanceByGuidRecurse(Value.GetGuid);
+  // ASSERTIONS
+  Assert(E <> nil, 'Unmanaged element found.');
+  // ASSERTIONS
+  StarUMLApplication.AddCollectionItem(TheObject as PModel, 'Operations', E as PModel);
+end;
+
 procedure PUMLClassifierAuto.RemoveObjectFlowState(const Value: IUMLObjectFlowState);
 var
   E: PElement;
@@ -7949,6 +7965,18 @@ begin
   Assert(E <> nil, 'Unmanaged element found.');
   // ASSERTIONS
   StarUMLApplication.RemoveCollectionItem(TheObject as PModel, 'ObjectFlowStates', E as PModel);
+end;
+
+procedure PUMLClassifierAuto.RemoveOperation(const Value: IUMLOperation);
+var
+  E: PElement;
+begin
+  if Value = nil then Exit;
+  E := MetaModel.FindMetaClass('UMLOperation').FindInstanceByGuidRecurse(Value.GetGuid);
+  // ASSERTIONS
+  Assert(E <> nil, 'Unmanaged element found.');
+  // ASSERTIONS
+  StarUMLApplication.RemoveCollectionItem(TheObject as PModel, 'Operations', E as PModel);
 end;
 
 procedure PUMLClassifierAuto.InsertObjectFlowState(Index: Integer; const Value: IUMLObjectFlowState);
@@ -7963,9 +7991,27 @@ begin
   StarUMLApplication.InsertCollectionItem(TheObject as PModel, 'ObjectFlowStates', Index, E as PModel);
 end;
 
+procedure PUMLClassifierAuto.InsertOperation(Index: Integer;
+  const Value: IUMLOperation);
+var
+  E: PElement;
+begin
+  if Value = nil then Exit;
+  E := MetaModel.FindMetaClass('UMLOperation').FindInstanceByGuidRecurse(Value.GetGuid);
+  // ASSERTIONS
+  Assert(E <> nil, 'Unmanaged element found.');
+  // ASSERTIONS
+  StarUMLApplication.InsertCollectionItem(TheObject as PModel, 'Operations', Index, E as PModel);
+end;
+
 procedure PUMLClassifierAuto.DeleteObjectFlowState(Index: Integer);
 begin
   StarUMLApplication.DeleteCollectionItem(TheObject as PModel, 'ObjectFlowStates', Index);
+end;
+
+procedure PUMLClassifierAuto.DeleteOperation(Index: Integer);
+begin
+  StarUMLApplication.DeleteCollectionItem(TheObject as PModel, 'Operations', Index);
 end;
 
 function PUMLClassifierAuto.IndexOfObjectFlowState(const Value: IUMLObjectFlowState): Integer;

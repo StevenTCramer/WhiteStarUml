@@ -48,7 +48,11 @@ unit LayoutDgm;
 interface
 
 uses
-  GraphicClasses, Core, ViewCore, UMLViews, WINGRAPHVIZLib_TLB,
+  GraphicClasses,
+  Core,
+  ViewCore,
+  UMLViews,
+  WINGRAPHVIZLib_TLB,
   Classes;
 
 const
@@ -147,7 +151,7 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    procedure LayoutDiagram(ADiagramView: PDiagramView; IsDigraph: Boolean = True; RankDir:PRankDirKind = rkTopBottom; Reversed: Boolean = False);
+    procedure LayoutDiagram(ADiagramView: PDiagramView; IsDigraph: Boolean = True; RankDir: PRankDirKind = rkTopBottom; Reversed: Boolean = False);
   end;
 
 var
@@ -156,12 +160,12 @@ var
 implementation
 
 uses
-  Types, SysUtils, Forms;
-
+  Types,
+  SysUtils,
+  Forms;
 
 ////////////////////////////////////////////////////////////////////////////////
 // PGraphvizNode
-
 
 // PGraphvizNode
 ////////////////////////////////////////////////////////////////////////////////
@@ -260,10 +264,10 @@ begin
   repeat
     P := Pos(SEPARATOR, Line);
     if P <> 0 then
-      Output.Add(Copy(Line, 1, P-1))
+      Output.Add(Copy(Line, 1, P - 1))
     else
       Output.Add(Trim(Line));
-    Line := Trim(Copy(Line, P+1, Length(Line)-P))
+    Line := Trim(Copy(Line, P + 1, Length(Line) - P))
   until P = 0;
 end;
 
@@ -306,19 +310,20 @@ begin
   Edge.FHead := TempStrings[2];
   C := StrToInt(TempStrings[3]);
   Edge.FPoints.Clear;
-  for I := 0 to C - 1 do begin
-    X := InchStrToPixel(TempStrings[4+(I*2)]);
-    Y := InchStrToPixel(TempStrings[4+((I*2)+1)]);
+  for I := 0 to C - 1 do
+  begin
+    X := InchStrToPixel(TempStrings[4 + (I * 2)]);
+    Y := InchStrToPixel(TempStrings[4 + ((I * 2) + 1)]);
     Edge.FPoints.Add(Point(X, Y));
   end;
-  Edge.FName := TempStrings[4+(C*2)];
+  Edge.FName := TempStrings[4 + (C * 2)];
   Result := Edge;
 end;
 
 function PGraphvizPlainOutputParser.Parse(PlainOutputText: WideString): PGraphvizGraph;
 const
-  TOKEN4_NODE  = 'node';
-  TOKEN4_EDGE  = 'edge';
+  TOKEN4_NODE = 'node';
+  TOKEN4_EDGE = 'edge';
 var
   PlainOutput: TStringList;
   Graph: PGraphvizGraph;
@@ -331,7 +336,8 @@ begin
   PlainOutput.Text := PlainOutputText;
   // Graph 구성.
   Graph := ParseGraphLine(PlainOutput.Strings[0]);
-  for I := 1 to PlainOutput.Count - 1 do begin
+  for I := 1 to PlainOutput.Count - 1 do
+  begin
     Token4 := LowerCase(Copy(PlainOutput.Strings[I], 1, 4));
     if Token4 = TOKEN4_NODE then
       Graph.FNodes.Add(ParseNodeLine(PlainOutput.Strings[I]))
@@ -339,13 +345,15 @@ begin
       Graph.FEdges.Add(ParseEdgeLine(PlainOutput.Strings[I]));
   end;
   // 좌표계 변환.
-  for I := 0 to Graph.NodeCount - 1 do begin
+  for I := 0 to Graph.NodeCount - 1 do
+  begin
     Node := Graph.Nodes[I];
     Node.FLeft := Node.FLeft - (Node.FWidth div 2);
     Node.FTop := Node.FTop - (Node.FHeight div 2);
 //    Node.FTop := Graph.FHeight - Node.FTop;
   end;
-  for I := 0 to Graph.EdgeCount - 1 do begin
+  for I := 0 to Graph.EdgeCount - 1 do
+  begin
     Edge := Graph.Edges[I];
 //    for J := 0 to Edge.Points.Count - 1 do
 //      Edge.Points.Points[J] := Point(Edge.Points.Points[J].X, Graph.FHeight - Edge.Points.Points[J].Y);
@@ -363,15 +371,17 @@ end;
 constructor PDiagramLayout.Create;
 begin
   inherited;
-  DOT := TDOT.Create(Application);
-  NEATO := TNEATO.Create(Application);
+//  DOT := TDOT.Create(Application);
+//  NEATO := TNEATO.Create(Application);
+  DOT := TDOT.Create(nil);
+  NEATO := TNEATO.Create(nil);
   GraphvizPlainOutputParser := PGraphvizPlainOutputParser.Create;
 end;
 
 destructor PDiagramLayout.Destroy;
 begin
-  DOT := nil;
-  NEATO := nil;
+  FreeAndNil(DOT);
+  FreeAndNil(NEATO);
   GraphvizPlainOutputParser.Free;
   inherited;
 end;
@@ -441,9 +451,10 @@ begin
         if Rate < Epsilon then
           APoints.Remove(Idx)
         else
-         Inc(Idx);
+          Inc(Idx);
       end
-      else begin
+      else
+      begin
         APoints.Remove(Idx);
       end;
     until Idx = (APoints.Count - 1);
@@ -473,6 +484,7 @@ begin
 end;
 
 //function PDiagramLayout.GetEdgeString(AEdge: PEdgeView; Directed: Boolean = True): string;
+
 function PDiagramLayout.GetEdgeString(AEdge: PEdgeView; Directed: Boolean = True; Reversed: Boolean = False): string;
 var
   S: string;
@@ -504,7 +516,8 @@ var
 begin
   // Generates Header
   OutputGraph.Clear;
-  if IsDigraph then begin
+  if IsDigraph then
+  begin
     OutputGraph.Add('digraph G {');
     OutputGraph.Add('  ordering=out;');
     if RankDir = rkTopBottom then
@@ -512,23 +525,26 @@ begin
     else
       OutputGraph.Add(' rankdir=LR;');
   end
-  else begin
+  else
+  begin
     OutputGraph.Add('graph G {');
   end;
   // Generates Nodes
-  for I := 0 to ADiagramView.OwnedViewCount - 1 do begin
+  for I := 0 to ADiagramView.OwnedViewCount - 1 do
+  begin
     V := ADiagramView.OwnedViews[I];
     if V is PNodeView then
       OutputGraph.Add(GetNodeString(V as PNodeView));
   end;
   // Generates Edges
-  for I := 0 to ADiagramView.OwnedViewCount - 1 do begin
+  for I := 0 to ADiagramView.OwnedViewCount - 1 do
+  begin
     V := ADiagramView.OwnedViews[I];
     if V is PEdgeView then
     begin
       with V as PEdgeView do
         if ((Tail is PNodeView) and (Tail.OwnerDiagramView <> nil)) and
-           ((Head is PNodeView) and (Head.OwnerDiagramView <> nil)) then
+          ((Head is PNodeView) and (Head.OwnerDiagramView <> nil)) then
           OutputGraph.Add(GetEdgeString(V as PEdgeView, IsDigraph, Reversed));
     end;
   end;
@@ -550,14 +566,16 @@ var
   end;
 
 begin
-  for I := 0 to AGraphvizGraph.NodeCount - 1 do begin
+  for I := 0 to AGraphvizGraph.NodeCount - 1 do
+  begin
     Node := AGraphvizGraph.Nodes[I];
     NodeView := ADiagramView.OwnedViews[ExtractIndex(Node.Name)] as PNodeView;
     NodeView.Left := Node.Left + LAYOUT_LEFT_MARGIN;
     NodeView.Top := Node.Top + LAYOUT_TOP_MARGIN;
   end;
-  for I := 0 to AGraphvizGraph.EdgeCount - 1 do begin
-    Edge:= AGraphvizGraph.Edges[I];
+  for I := 0 to AGraphvizGraph.EdgeCount - 1 do
+  begin
+    Edge := AGraphvizGraph.Edges[I];
     EdgeView := ADiagramView.OwnedViews[ExtractIndex(Edge.Name)] as PEdgeView;
     if EdgeView.Head <> EdgeView.Tail then
     begin
@@ -566,12 +584,13 @@ begin
       for J := 0 to Edge.Points.Count - 1 do
         EdgeView.Points.Add(
           Point(Edge.Points.Points[J].X + LAYOUT_LEFT_MARGIN,
-                Edge.Points.Points[J].Y + LAYOUT_TOP_MARGIN));
+          Edge.Points.Points[J].Y + LAYOUT_TOP_MARGIN));
       SmoothPoints(EdgeView.Points, 10);
       RoughPoints(EdgeView.Points, 1.015);
       EdgeView.RecalcPoints(ADiagramView.Canvas);
     end
-    else begin
+    else
+    begin
       EdgeView.Points.Clear;
       EdgeView.Initialize(ADiagramView.Canvas, 0, 0, 0, 0);
       EdgeView.RecalcPoints(ADiagramView.Canvas);
@@ -604,3 +623,4 @@ initialization
 finalization
   DiagramLayout.Free;
 end.
+

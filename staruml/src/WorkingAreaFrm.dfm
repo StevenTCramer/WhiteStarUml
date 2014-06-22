@@ -40,24 +40,17 @@ object WorkingAreaFrame: TWorkingAreaFrame
         00FF0000FF0000FF0000FF000000}
       Transparent = True
     end
-    object DiagramPageControl: TdxPageControl
+    object DiagramPageControl: TcxPageControl
       Left = 1
       Top = 1
       Width = 535
       Height = 386
       Align = alClient
-      OnContextPopup = DiagramPageControlContextPopup
-      HideButtons = False
-      HotTrack = False
-      MultiLine = False
-      OwnerDraw = False
-      RaggedRight = False
-      ScrollOpposite = False
-      TabHeight = 0
       TabOrder = 0
-      TabPosition = dxtpTop
-      TabWidth = 0
-      OnChanging = DiagramPageControlChanging
+      OnPageChanging = DiagramPageControlPageChanging
+      ClientRectBottom = 386
+      ClientRectRight = 535
+      ClientRectTop = 0
     end
   end
 end

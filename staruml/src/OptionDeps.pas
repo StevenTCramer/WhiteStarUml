@@ -309,8 +309,8 @@ constructor POptionDepository.Create;
 begin
   inherited;
   SetDefaultOptionProperties;
-  // OptionManager
   CoInitialize(nil);
+  // OptionManager
   OptionManager := CoOptionManager.Create;
   OptionManager.InitOptionManager(OPT_SCHEMATA_REG_PATH, OPT_REG_PATH, OPT_SCHEMA_ENVIRONMENT);
 end;

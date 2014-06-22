@@ -50,8 +50,13 @@ interface
 {$HINTS OFF}
 
 uses
-  BasicClasses, Core, CoreAuto, StarUML_TLB,
-  Classes, Forms, ComObj;
+  BasicClasses,
+  Core,
+  CoreAuto,
+  StarUMLProject_TLB,
+  Classes,
+  Forms,
+  ComObj;
 
 const
   NumOfEventKind = 21;
@@ -59,6 +64,8 @@ const
 type
   // PStarUMLApplicationAuto
   PStarUMLApplicationAuto = class(TAutoObject, IStarUMLApplication)
+  private
+    FROTCookie: Longint;
   protected
     function Get_Visible: WordBool; safecall;
     procedure Set_Visible(Value: WordBool); safecall;
@@ -106,9 +113,12 @@ type
     procedure ClearAllMessages; safecall;
     procedure ClearMessages(Kind: InformationMessageKind); safecall;
     procedure AddMessageItem(Kind: InformationMessageKind; const Text: WideString;
-                             const ElementLink: IElement); safecall;
+      const ElementLink: IElement); safecall;
     procedure NavigateWeb(const URL: WideString); safecall;
     procedure Exit; safecall;
+  public
+    procedure Initialize; override;
+    destructor Destroy; override;
   end;
 
   // PUMLFactoryAuto
@@ -334,9 +344,25 @@ type
 implementation
 
 uses
-  ExtCore, UMLModels, UMLAux, StarUMLApp, LogMgr, UMLFacto, FrwMgr, ApprMgr,
-  MainFrm, InspectorFrm, ElemSelFrm, ElemLstFrm, ModelExplorerFrame, MessageFrame,
-  OptionDeps, ComServ, Main, EventPub;
+  ExtCore,
+  UMLModels,
+  UMLAux,
+  StarUMLApp,
+  LogMgr,
+  UMLFacto,
+  FrwMgr,
+  ApprMgr,
+  MainFrm,
+  InspectorFrm,
+  ElemSelFrm,
+  ElemLstFrm,
+  ModelExplorerFrame,
+  MessageFrame,
+  OptionDeps,
+  ComServ,
+  Main,
+  EventPub,
+  ActiveX;
 
 var
   UMLFactoryAuto: PUMLFactoryAuto;
@@ -352,6 +378,13 @@ var
 function PStarUMLApplicationAuto.Get_Visible: WordBool;
 begin
   Result := MainForm.Visible;
+end;
+
+procedure PStarUMLApplicationAuto.Initialize;
+begin
+  inherited;
+  //Register object in ROT
+  OleCheck(RegisterActiveObject(Self, CLASS_StarUMLApplication, ActiveObject_Weak, FROTCookie))
 end;
 
 procedure PStarUMLApplicationAuto.Set_Visible(Value: WordBool);
@@ -406,7 +439,8 @@ end;
 
 function PStarUMLApplicationAuto.Get_ElementSelector: IElementSelector;
 begin
-  if ElementSelectorAuto = nil then begin
+  if ElementSelectorAuto = nil then
+  begin
     ElementSelectorAuto := PElementSelectorAuto.Create(ComServer.TypeLib, IID_IElementSelector);
     ElementSelectorAuto._AddRef;
   end;
@@ -415,7 +449,8 @@ end;
 
 function PStarUMLApplicationAuto.Get_ElementListSelector: IElementListSelector;
 begin
-  if ElementListSelectorAuto = nil then begin
+  if ElementListSelectorAuto = nil then
+  begin
     ElementListSelectorAuto := PElementListSelectorAuto.Create(ComServer.TypeLib, IID_IElementListSelector);
     ElementListSelectorAuto._AddRef;
   end;
@@ -424,7 +459,8 @@ end;
 
 function PStarUMLApplicationAuto.Get_EventPublisher: IEventPublisher;
 begin
-  if EventPublisherAuto = nil then begin
+  if EventPublisherAuto = nil then
+  begin
     EventPublisherAuto := PEventPublisherAuto.Create(ComServer.TypeLib, IID_IEventPublisher);
     EventPublisherAuto._AddRef;
   end;
@@ -512,6 +548,13 @@ begin
   Assert(E <> nil, 'Unmanaged element found.');
   // ASSERTIONS
   StarUMLApplication.DeleteView(E as PView);
+end;
+
+destructor PStarUMLApplicationAuto.Destroy;
+begin
+  //Remove object from ROT
+  OleCheck(RevokeActiveObject(FROTCookie, nil));
+  inherited;
 end;
 
 procedure PStarUMLApplicationAuto.DeleteSelectedModels;
@@ -681,14 +724,16 @@ begin
   E1 := nil;
   E2 := nil;
   E3 := nil;
-  if E <> nil then begin
+  if E <> nil then
+  begin
     if End1 <> nil then E1 := MetaModel.FindMetaClass('Model').FindInstanceByGuidRecurse(End1.GetGuid);
     if End2 <> nil then E2 := MetaModel.FindMetaClass('Model').FindInstanceByGuidRecurse(End2.GetGuid);
     if AuxArg <> nil then E3 := MetaModel.FindMetaClass('Model').FindInstanceByGuidRecurse(AuxArg.GetGuid);
     M := StarUMLApplication.NewModel(E as PModel, ModelKind, Argument, E1 as PModel, E2 as PModel, -1, E3 as PModel);
     Result := M.GetAutomationObject as IModel;
   end
-  else begin
+  else
+  begin
     Result := nil;
   end;
 end;
@@ -699,11 +744,13 @@ var
   D: PDiagram;
 begin
   E := MetaModel.FindMetaClass('Model').FindInstanceByGuidRecurse(Owner.GetGuid);
-  if E <> nil then begin
+  if E <> nil then
+  begin
     D := StarUMLApplication.NewDiagram(E as PModel, DiagramKind, False);
     Result := D.GetAutomationObject as IDiagram;
   end
-  else begin
+  else
+  begin
     Result := nil;
   end;
 end;
@@ -717,14 +764,16 @@ begin
   M := nil;
   E1 := nil;
   E2 := nil;
-  if E <> nil then begin
+  if E <> nil then
+  begin
     if Model <> nil then M := MetaModel.FindMetaClass('Model').FindInstanceByGuidRecurse(Model.GetGuid);
     if End1 <> nil then E1 := MetaModel.FindMetaClass('View').FindInstanceByGuidRecurse(End1.GetGuid);
     if End2 <> nil then E2 := MetaModel.FindMetaClass('View').FindInstanceByGuidRecurse(End2.GetGuid);
     V := StarUMLApplication.NewView(E as PDiagramView, M as PModel, ViewKind, E1 as PView, E2 as PView);
     Result := V.GetAutomationObject as IView;
   end
-  else begin
+  else
+  begin
     Result := nil;
   end;
 end;
@@ -1350,7 +1399,8 @@ var
 begin
   V := StarUMLApplication.ActiveDiagram;
   if V = nil then Result := nil
-  else begin
+  else
+  begin
     M := V.Diagram;
     if M = nil then Result := nil
     else Result := M.GetAutomationObject as PDiagramAuto;
@@ -1833,30 +1883,37 @@ initialization
   ElementSelectorAuto := nil;
   ElementListSelectorAuto := nil;
   EventPublisherAuto := nil;
+
   TAutoObjectFactory.Create(ComServer, PStarUMLApplicationAuto, CLASS_StarUMLApplication,
     ciMultiInstance, tmApartment);
 finalization
-  if UMLFactoryAuto <> nil then begin
+  if UMLFactoryAuto <> nil then
+  begin
     UMLFactoryAuto._Release;
     UMLFactoryAuto := nil;
-  end;
-  if ProjectManagerAuto <> nil then begin
+  end;                      
+  if ProjectManagerAuto <> nil then
+  begin
     ProjectManagerAuto._Release;
     ProjectManagerAuto := nil;
   end;
-  if SelectionManagerAuto <> nil then begin
+  if SelectionManagerAuto <> nil then
+  begin
     SelectionManagerAuto._Release;
     SelectionManagerAuto := nil;
   end;
-  if ElementSelectorAuto <> nil then begin
+  if ElementSelectorAuto <> nil then
+  begin
     ElementSelectorAuto._Release;
     ElementSelectorAuto := nil;
   end;
-  if ElementListSelectorAuto <> nil then begin
+  if ElementListSelectorAuto <> nil then
+  begin
     ElementListSelectorAuto._Release;
     ElementListSelectorAuto := nil;
   end;
-  if EventPublisherAuto <> nil then begin
+  if EventPublisherAuto <> nil then
+  begin
     EventPublisherAuto._Release;
     EventPublisherAuto := nil;
   end;

@@ -58,13 +58,36 @@ unit PropEdt;
 //
 // =============================================================================
 
-
 interface
 
 uses
-  BasicClasses, Core,
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  dxExEdtr, dxCntner, dxInspct, ImgList, ExtCtrls, FlatPanel;
+  BasicClasses,
+  Core,
+  Windows,
+  Messages,
+  SysUtils,
+  Classes,
+  Graphics,
+  Controls,
+  Forms,
+  Dialogs,
+  ImgList,
+  ExtCtrls,
+  FlatPanel,
+  cxStyles,
+  cxGraphics,
+  cxControls,
+  cxEdit,
+  cxInplaceContainer,
+  cxVGrid,
+  cxCheckComboBox,
+  cxTextEdit,
+  cxButtonEdit,
+  cxDBLookupComboBox,
+  cxImage,
+  cxImageComboBox,
+  cxCheckBox,
+  cxDropDownEdit;
 
 type
   // Forward Declarations;
@@ -128,13 +151,14 @@ type
   end;
 
   TPropertyEditor = class(TFrame)
-    Inspector: TdxInspector;
     RowImageList: TImageList;
     AggregationImageList: TImageList;
     VisibilityImageList: TImageList;
     ClientPanel: TFlatPanel;
     PsedostatsImageList: TImageList;
     ActionKindImageList: TImageList;
+    Inspector: TcxVerticalGrid;
+
   private
     PropertyList: TList;
     RowList: TList;
@@ -152,14 +176,10 @@ type
     procedure ClearRows;
     procedure CollectProperties;
     procedure SetupRows;
-    procedure InspectorCustomDraw(Sender: TdxInspectorRow; ACanvas: TCanvas; ARect: TRect; var AText: string; AFont: TFont;
-      var AColor: TColor; var ADone: Boolean);
-    procedure InspectorChangeNode(Sender: TObject; OldNode, Node: TdxInspectorNode);
-    procedure InspectorEdited(Sender: TObject; Node: TdxInspectorNode; Row: TdxInspectorRow);
-    procedure ImageRowCloseUp(Sender: TObject; var Value: string; var Accept: Boolean);
-    procedure PickRowCloseUp(Sender: TObject; var Value: Variant; var Accept: Boolean);
-    procedure CheckRowToggleClick(Sender: TObject; const Text: string; State: TdxCheckBoxState);
-    procedure PropertyModified(Sender: TObject; Node: TdxInspectorNode; Row: TdxInspectorRow);
+    procedure InspectorDrawValue(Sender: TObject; ACanvas: TcxCanvas; APainter: TcxvgPainter; AValueInfo: TcxRowValueInfo; var Done: Boolean);
+    procedure InspectorItemChanged(Sender: TObject; AOldRow: TcxCustomRow; AOldCellIndex: Integer);
+    procedure InspectorEdited(Sender: TObject; ARowProperties: TcxCustomEditorRowProperties);
+    procedure PropertyModified(Sender: TObject; ARowProperties: TcxCustomEditorRowProperties);
     procedure RowButtonClick(Sender: TObject; AbsoluteIndex: Integer);
     procedure EnterHandler(Sender: TObject);
   protected
@@ -185,7 +205,7 @@ implementation
 {$R *.dfm}
 
 uses
-  dxInspRw;
+  Variants;
 
 ////////////////////////////////////////////////////////////////////////////////
 // PProperty
@@ -228,6 +248,7 @@ end;
 destructor PPropertySpecifier.Destroy;
 begin
   EmptyProperties;
+  FProperties.Free;
   inherited;
 end;
 
@@ -251,7 +272,8 @@ var
   I: Integer;
   P: PProperty;
 begin
-  for I := FProperties.Count - 1 downto 0 do begin
+  for I := FProperties.Count - 1 downto 0 do
+  begin
     P := FProperties.Items[I];
     P.Free;
   end;
@@ -263,9 +285,11 @@ var
   I: Integer;
   P: PProperty;
 begin
-  for I := 0 to FProperties.Count - 1 do begin
+  for I := 0 to FProperties.Count - 1 do
+  begin
     P := FProperties.Items[I];
-    if P.Key = AKey then begin
+    if P.Key = AKey then
+    begin
       Result := True;
       Exit;
     end;
@@ -331,7 +355,8 @@ end;
 
 procedure TPropertyEditor.SetPropertyAdaptor(Value: PAbstractPropertyAdaptor);
 begin
-  if FPropertyAdaptor <> Value then begin
+  if FPropertyAdaptor <> Value then
+  begin
     if FPropertyAdaptor <> nil then FPropertyAdaptor.FPropertyEditor := nil;
     FPropertyAdaptor := Value;
     if FPropertyAdaptor <> nil then FPropertyAdaptor.FPropertyEditor := Self;
@@ -343,7 +368,8 @@ var
   I: Integer;
   P: PProperty;
 begin
-  for I := PropertyList.Count - 1 downto 0 do begin
+  for I := PropertyList.Count - 1 downto 0 do
+  begin
     P := PropertyList.Items[I];
     P.Free;
   end;
@@ -354,8 +380,8 @@ procedure TPropertyEditor.InitializeGUI;
 begin
   Inspector.OnEdited := InspectorEdited;
   Inspector.OnEnter := EnterHandler;
-  Inspector.OnChangeNode := InspectorChangeNode;
-  Inspector.OnDrawValue := InspectorCustomDraw;
+  Inspector.OnDrawValue := InspectorDrawValue;
+  Inspector.OnItemChanged := InspectorItemChanged;
 end;
 
 procedure TPropertyEditor.ClearRows;
@@ -379,7 +405,8 @@ var
     begin
       P := APropertyList.Items[J];
       if (not APropertySpecifier.ContainsProperty(P.Key)) or P.IsUnique
-        or (IsDiffKind and P.OnlyTheSameKind) then begin
+        or (IsDiffKind and P.OnlyTheSameKind) then
+      begin
         APropertyList.Remove(P);
         P.Free;
       end;
@@ -389,14 +416,16 @@ var
 begin
   EmptyPropertyList;
   // Inspecting single element
-  if FInspectingElements.Count = 1 then begin
+  if FInspectingElements.Count = 1 then
+  begin
     PropertySpecifier.EmptyProperties;
     PropertyAdaptor.SpecifyProperties(FInspectingElements.Items[0] as PElement, PropertySpecifier);
     PropertyList.Assign(PropertySpecifier.FProperties);
     PropertySpecifier.ClearProperties;
   end
   // Inspecting multiple elements
-  else if InspectingElementCount > 1 then begin
+  else if InspectingElementCount > 1 then
+  begin
     // Setting First element
     FirstElement := FInspectingElements.Items[0] as PElement;
     PropertySpecifier.EmptyProperties;
@@ -405,7 +434,8 @@ begin
     PropertySpecifier.ClearProperties;
     // Intersect properties of first element with that of consequent elements
     IsDiffKind := False;
-    for I := 1 to FInspectingElements.Count - 1 do begin
+    for I := 1 to FInspectingElements.Count - 1 do
+    begin
       IsDiffKind := IsDiffKind or ((FInspectingElements.Items[I] as PElement).MetaClass.Name <> FirstElement.MetaClass.Name);
       PropertySpecifier.EmptyProperties;
       PropertyAdaptor.SpecifyProperties(FInspectingElements.Items[I] as PElement, PropertySpecifier);
@@ -419,22 +449,33 @@ procedure TPropertyEditor.SetupRows;
 var
   I: Integer;
   P: PProperty;
-  SuperNode, SubNode: TdxInspectorRowNode;
+  SuperNode: TcxCategoryRow;
+  SubNode: TcxCustomRow;
   CategoryRows: TStringList;
+  lcxEditorRow: TcxEditorRow;
+  lcxCustomRow: TcxCustomRow;
+  lcxTextEditProperties: TcxTextEditProperties;
+  lcxButtonEditProperties: TcxButtonEditProperties;
+  lcxImageComboBoxProperties: TcxImageComboBoxProperties;
+  lcxComboBoxProperties: TcxComboBoxProperties;
+  lcxImageProperties: TcxImageProperties;
+  lcxImageComboBoxItem: TcxImageComboBoxItem;
+  lcxCheckBoxProperties: TcxCheckBoxProperties;
+  lIndexOptions: Integer;
 
-  function GetCategoryRow(Category: string): TdxInspectorRowNode;
+  function GetCategoryRow(Category: string): TcxCategoryRow;
   var
     Index: Integer;
   begin
     Index := CategoryRows.IndexOf(Category);
-    if Index = -1 then begin
-      Result := Inspector.AddEx(TdxInspectorTextRow);
-      Result.Row.Caption := Category;
-      Result.Row.IsCategory := True;
+    if Index = -1 then
+    begin
+      Result := Inspector.Add(TcxCategoryRow) as TcxCategoryRow;
+      Result.Properties.Caption := Category;
       CategoryRows.AddObject(Category, Result);
-    end
-    else begin
-      Result := TdxInspectorRowNode(CategoryRows.Objects[Index]);
+    end else
+    begin
+      Result := TcxCategoryRow(CategoryRows.Objects[Index]);
     end;
   end;
 
@@ -442,150 +483,129 @@ begin
   Inspector.BeginUpdate;
   ClearRows;
   CategoryRows := TStringList.Create;
-  for I := 0 to PropertyList.Count - 1 do begin
-    P := PropertyList.Items[I];
-    SuperNode := GetCategoryRow(P.Category);
+  try
+    for I := 0 to PropertyList.Count - 1 do
+    begin
+      P := PropertyList.Items[I];
+      SuperNode := GetCategoryRow(P.Category);
     // Row creation
-    case P.RowKind of
-      rkTextRow : begin
-        SubNode := SuperNode.AddChildEx(TdxInspectorTextRow);
-        SubNode.Row.Hint := P.Key; // put Property's Key in Row's Hint
-        SubNode.Row.Caption := P.Caption;
-        SubNode.Row.ReadOnly := (not P.RowEditable) or FReadOnly;
-        SubNode.Row.ImageIndex := P.ImageIndex;
-        RowList.Add(SubNode.Row);
+      case P.RowKind of
+        rkTextRow:
+          begin
+            lcxEditorRow := Inspector.AddChild(SuperNode, TcxEditorRow) as TcxEditorRow;
+            lcxEditorRow.Properties.EditPropertiesClass := TcxTextEditProperties;
+            lcxTextEditProperties := lcxEditorRow.Properties.EditProperties as TcxTextEditProperties;
+            lcxTextEditProperties.ReadOnly := (not P.RowEditable) or FReadOnly;
+          end;
+        rkTextButtonRow:
+          begin
+            lcxEditorRow := Inspector.AddChild(SuperNode, TcxEditorRow) as TcxEditorRow;
+            lcxEditorRow.Properties.EditPropertiesClass := TcxButtonEditProperties;
+            lcxButtonEditProperties := lcxEditorRow.Properties.EditProperties as TcxButtonEditProperties;
+            lcxButtonEditProperties.ReadOnly := (not P.RowEditable) or FReadOnly;
+            ;
+            lcxButtonEditProperties.OnButtonClick := RowButtonClick;
+          end;
+        rkChoiceRow:
+          begin
+            lcxEditorRow := Inspector.AddChild(SuperNode, TcxEditorRow) as TcxEditorRow;
+            lcxEditorRow.Properties.EditPropertiesClass := TcxImageComboBoxProperties;
+            lcxImageComboBoxProperties := lcxEditorRow.Properties.EditProperties as TcxImageComboBoxProperties;
+            lcxImageComboBoxProperties.ShowDescriptions := True;
+            lcxImageComboBoxProperties.Images := P.RowItemImages;
+            lcxImageComboBoxProperties.ReadOnly := FReadOnly;
+            lcxImageComboBoxProperties.DefaultImageIndex := 0;
+            lcxImageComboBoxProperties.DefaultDescription := P.RowItemValues.Strings[0];
+            for lIndexOptions := 0 to p.RowItemValues.Count - 1 do
+            begin
+              lcxImageComboBoxItem := lcxImageComboBoxProperties.Items.Add;
+              lcxImageComboBoxItem.Description := P.RowItemValues.Strings[lIndexOptions];
+              lcxImageComboBoxItem.ImageIndex := lIndexOptions;
+              lcxImageComboBoxItem.Value := P.RowItemValues.Strings[lIndexOptions];
+            end;
+          end;
+        rkCheckRow:
+          begin
+            lcxEditorRow := Inspector.AddChild(SuperNode, TcxEditorRow) as TcxEditorRow;
+            lcxEditorRow.Properties.EditPropertiesClass := TcxCheckBoxProperties;
+            lcxCheckBoxProperties := lcxEditorRow.Properties.EditProperties as TcxCheckBoxProperties;
+            lcxCheckBoxProperties.ReadOnly := (not P.RowEditable) or FReadOnly;
+          end;
+        rkTextChoiceRow:
+          begin
+            lcxEditorRow := Inspector.AddChild(SuperNode, TcxEditorRow) as TcxEditorRow;
+            lcxEditorRow.Properties.EditPropertiesClass := TcxComboBoxProperties;
+
+            lcxComboBoxProperties := lcxEditorRow.Properties.EditProperties as TcxComboBoxProperties;
+            lcxComboBoxProperties.Items.Assign(P.RowItemValues);
+          end;
       end;
-      rkTextButtonRow : begin
-        SubNode := SuperNode.AddChildEx(TdxInspectorTextButtonRow);
-        SubNode.Row.Hint := P.Key; // put Property's Key in Row's Hint
-        SubNode.Row.Caption := P.Caption;
-        SubNode.Row.ReadOnly := (not P.RowEditable) or FReadOnly;
-        SubNode.Row.ImageIndex := P.ImageIndex;
-        (SubNode.Row as TdxInspectorTextButtonRow).OnButtonClick := RowButtonClick;
-        RowList.Add(SubNode.Row);
-      end;
-      rkChoiceRow : begin
-        SubNode := SuperNode.AddChildEx(TdxInspectorTextImageRow);
-        SubNode.Row.Hint := P.Key; // put Property's Key in Row's Hint
-        SubNode.Row.Caption := P.Caption;
-        SubNode.Row.ReadOnly := FReadOnly;
-        SubNode.Row.ImageIndex := P.ImageIndex;
-        with SubNode.Row as TdxInspectorTextImageRow do begin
-          ShowDescription := True;
-          Values.Assign(P.RowItemValues);
-          Descriptions.Assign(P.RowItemValues);
-          Images := P.RowItemImages;
-          ImageIndexes.Assign(P.RowItemImageIndexes);
-          if not FReadOnly then
-            OnCloseUp := ImageRowCloseUp;
-        end;
-        RowList.Add(SubNode.Row);
-      end;
-      rkCheckRow : begin
-        SubNode := SuperNode.AddChildEx(TdxInspectorTextCheckRow);
-        SubNode.Row.Hint := P.Key; // put Property's Key in Row's Hint
-        SubNode.Row.Caption := P.Caption;
-        SubNode.Row.ReadOnly := (not P.RowEditable) or FReadOnly;
-        SubNode.Row.ImageIndex := P.ImageIndex;
-        if not FReadOnly then
-          (SubNode.Row as TdxInspectorTextCheckRow).OnToggleClick := CheckRowToggleClick;
-        RowList.Add(SubNode.Row);
-      end;
-      rkTextChoiceRow: begin
-        SubNode := SuperNode.AddChildEx(TdxInspectorTextPickRow);
-        SubNode.Row.Hint := P.Key; // put Property's Key in Row's Hint
-        SubNode.Row.Caption := P.Caption;
-        SubNode.Row.ReadOnly := (not P.RowEditable) or FReadOnly;
-        SubNode.Row.ImageIndex := P.ImageIndex;
-        with SubNode.Row as TdxInspectorTextPickRow do begin
-          Items.Assign(P.RowItemValues);
-          if not FReadOnly then
-            OnCloseUp := PickRowCloseUp;
-        end;
-        RowList.Add(SubNode.Row);
-      end;
+      lcxEditorRow.Properties.Hint := P.Key;
+      lcxEditorRow.Properties.Caption := P.Caption;
+      lcxEditorRow.Properties.ImageIndex := P.ImageIndex;
+      RowList.Add(lcxEditorRow);
     end;
+  finally
+    CategoryRows.Free;
   end;
-  CategoryRows.Free;
   Inspector.FullExpand;
   Inspector.EndUpdate;
 end;
 
-procedure TPropertyEditor.InspectorCustomDraw(Sender: TdxInspectorRow; ACanvas: TCanvas; ARect: TRect; var AText: string; AFont: TFont;
-  var AColor: TColor; var ADone: Boolean);
+procedure TPropertyEditor.InspectorDrawValue(Sender: TObject;
+  ACanvas: TcxCanvas; APainter: TcxvgPainter; AValueInfo: TcxRowValueInfo;
+  var Done: Boolean);
 begin
+  {$Message Hint 'Not sure this is needed'}
   if FReadOnly then
-    AFont.Color := clGrayText
+    Font.Color := clGrayText
   else
-    AFont.Color := clWindowText;
+    Font.Color := clWindowText;
 end;
 
-procedure TPropertyEditor.InspectorChangeNode(Sender: TObject; OldNode, Node: TdxInspectorNode);
+procedure TPropertyEditor.InspectorItemChanged(Sender: TObject;
+  AOldRow: TcxCustomRow; AOldCellIndex: Integer);
+var
+  lcxEditorRow: TcxEditorRow;
 begin
-  if not (Node as TdxInspectorRowNode).Row.IsCategory then
-    if Assigned(FOnPropertySelected) then begin
-      FOnPropertySelected(Self, (Node as TdxInspectorRowNode).Row.Caption);
+  if Inspector.FocusedRow is TcxEditorRow then
+  begin
+    lcxEditorRow := Inspector.FocusedRow as TcxEditorRow;
+    if Assigned(FOnPropertySelected) then
+    begin
+      FOnPropertySelected(Self, lcxEditorRow.Properties.Caption);
     end;
+  end;
 end;
 
-procedure TPropertyEditor.InspectorEdited(Sender: TObject; Node: TdxInspectorNode; Row: TdxInspectorRow);
+procedure TPropertyEditor.InspectorEdited(
+  Sender: TObject;
+  ARowProperties: TcxCustomEditorRowProperties);
 begin
-  if ((Row is TdxInspectorCheckRow) or (Row is TdxInspectorPickRow)) and (Row.ReadOnly) then
-    Exit;
-  PropertyModified(Sender, Node, Row);
+  PropertyModified(Sender, ARowProperties);
 end;
 
-procedure TPropertyEditor.ImageRowCloseUp(Sender: TObject; var Value: string; var Accept: Boolean);
+procedure TPropertyEditor.PropertyModified(Sender: TObject; ARowProperties: TcxCustomEditorRowProperties);
 var
-  Row: TdxInspectorRow;
+  lRowKey: string;
+  lRowValue: string;
 begin
-  Row := Sender as TdxInspectorRow;
-  (Row as TdxInspectorTextImageRow).Text := Value;
-  PropertyModified(Sender, Row.Node, Row);
-end;
-
-procedure TPropertyEditor.PickRowCloseUp(Sender: TObject; var Value: Variant; var Accept: Boolean);
-var
-  Row: TdxInspectorRow;
-begin
-  Row := Sender as TdxInspectorRow;
-  (Row as TdxInspectorTextPickRow).Text := Value;
-  PropertyModified(Sender, Row.Node, Row);
-end;
-
-procedure TPropertyEditor.CheckRowToggleClick(Sender: TObject; const Text: string; State: TdxCheckBoxState);
-var
-  Row: TdxInspectorRow;
-begin
-  Row := Sender as TdxInspectorRow;
-  (Row as TdxInspectorTextCheckRow).Text := Text;
-  PropertyModified(Sender, Row.Node, Row);
-end;
-
-procedure TPropertyEditor.PropertyModified(Sender: TObject; Node: TdxInspectorNode; Row: TdxInspectorRow);
-var
-  RowKey: string;
-  RowValue: string;
-begin
-  RowKey := Row.Hint;
-  RowValue := '';
-  if Row is TdxInspectorTextRow then
-    RowValue := (Row as TdxInspectorTextRow).Text
-  else if Row is TdxInspectorTextCheckRow then
-    RowValue := (Row as TdxInspectorTextCheckRow).Text
-  else if Row is TdxInspectorTextPickRow then
-    RowValue := (Row as TdxInspectorTextPickRow).Text
-  else if Row is TdxInspectorTextButtonRow then
-    RowValue := (Row as TdxInspectorTextButtonRow).Text
-  else if Row is TdxInspectorTextImageRow then
-    RowValue := (Row as TdxInspectorTextImageRow).Text;
-
-  PropertyAdaptor.SetPropertyValue(FInspectingElements, RowKey, RowValue);
+  lRowKey := ARowProperties.Hint;
+  if not VarIsNull(ARowProperties.Values[0]) then
+  begin
+    lRowValue := ARowProperties.Values[0];
+  end;
+  PropertyAdaptor.SetPropertyValue(FInspectingElements, lRowKey, lRowValue);
 end;
 
 procedure TPropertyEditor.RowButtonClick(Sender: TObject; AbsoluteIndex: Integer);
+var
+  lcxEditorRow: TcxEditorRow;
+  lKey: string;
 begin
-  PropertyAdaptor.PropertyButtonClicked(FInspectingElements, (Sender as TdxInspectorTextButtonRow).Hint);
+  lcxEditorRow := Inspector.FocusedRow as TcxEditorRow;
+  lKey := lcxEditorRow.Properties.Hint;
+  PropertyAdaptor.PropertyButtonClicked(FInspectingElements, lKey);
 end;
 
 procedure TPropertyEditor.EnterHandler(Sender: TObject);
@@ -596,10 +616,7 @@ end;
 procedure TPropertyEditor.SetEnabled(Value: Boolean);
 begin
   inherited;
-  if Value then
-    Inspector.Color := clWindow
-  else
-    Inspector.Color := clBtnFace;
+  Inspector.Enabled := Value;
 end;
 
 procedure TPropertyEditor.ClearInspectingElements;
@@ -627,7 +644,7 @@ end;
 procedure TPropertyEditor.UpdateProperties;
 var
   I: Integer;
-  Row: TdxInspectorRow;
+  lcxEditorRow: TcxEditorRow;
   E: PElement;
   Val: string;
 
@@ -639,9 +656,11 @@ var
   begin
     E := FInspectingElements.Items[0] as PElement;
     S := PropertyAdaptor.GetPropertyValue(E, AKey);
-    for J := 1 to FInspectingElements.Count - 1 do begin
+    for J := 1 to FInspectingElements.Count - 1 do
+    begin
       E := FInspectingElements.Items[J] as PElement;
-      if S <> PropertyAdaptor.GetPropertyValue(E, AKey) then begin
+      if S <> PropertyAdaptor.GetPropertyValue(E, AKey) then
+      begin
         Result := '';
         Exit;
       end;
@@ -652,38 +671,24 @@ var
 begin
   Inspector.BeginUpdate;
   // Update PropertyEditor according to single element
-  if FInspectingElements.Count = 1 then begin
-    for I := 0 to RowList.Count - 1 do begin
-      Row := RowList.Items[I];
+  if FInspectingElements.Count = 1 then
+  begin
+    for I := 0 to RowList.Count - 1 do
+    begin
+      lcxEditorRow := RowList.Items[I];
       E := FInspectingElements.Items[0] as PElement;
-      Val := PropertyAdaptor.GetPropertyValue(E, Row.Hint);
-      if Row is TdxInspectorTextRow then
-        (Row as TdxInspectorTextRow).Text := Val
-      else if Row is TdxInspectorTextCheckRow then
-        (Row as TdxInspectorTextCheckRow).Text := Val
-      else if Row is TdxInspectorTextPickRow then
-        (Row as TdxInspectorTextPickRow).Text := Val
-      else if Row is TdxInspectorTextButtonRow then
-        (Row as TdxInspectorTextButtonRow).Text := Val
-      else if Row is TdxInspectorTextImageRow then
-        (Row as TdxInspectorTextImageRow).Text := Val;
+      Val := PropertyAdaptor.GetPropertyValue(E, lcxEditorRow.Properties.Hint);
+      lcxEditorRow.Properties.Value := Val;
     end;
   end
   // Update PropertyEditor according to multiple elements
-  else if FInspectingElements.Count > 1 then begin
-    for I := 0 to RowList.Count - 1 do begin
-      Row := RowList.Items[I];
-      Val := MixPropertyValue(Row.Hint);
-      if Row is TdxInspectorTextRow then
-        (Row as TdxInspectorTextRow).Text := Val
-      else if Row is TdxInspectorTextCheckRow then
-        (Row as TdxInspectorTextCheckRow).Text := Val
-      else if Row is TdxInspectorTextPickRow then
-        (Row as TdxInspectorTextPickRow).Text := Val
-      else if Row is TdxInspectorTextButtonRow then
-        (Row as TdxInspectorTextButtonRow).Text := Val
-      else if Row is TdxInspectorTextImageRow then
-        (Row as TdxInspectorTextImageRow).Text := Val;
+  else if FInspectingElements.Count > 1 then
+  begin
+    for I := 0 to RowList.Count - 1 do
+    begin
+      lcxEditorRow := RowList.Items[I];
+      Val := MixPropertyValue(lcxEditorRow.Properties.Hint);
+      lcxEditorRow.Properties.Value := Val;
     end;
   end;
   Inspector.EndUpdate;
@@ -691,10 +696,12 @@ end;
 
 procedure TPropertyEditor.ApplyChanges;
 begin
-  Inspector.PostEditor;
+// Edits are posted immediatley in new vertical grid.
+//  Inspector.PostEditor;
 end;
 
 // TPropertyEditor
 ////////////////////////////////////////////////////////////////////////////////
 
 end.
+

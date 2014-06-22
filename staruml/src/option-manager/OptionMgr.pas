@@ -50,8 +50,12 @@ unit OptionMgr;
 interface
 
 uses
-  OptionNodes, OptMgr_TLB,
-  Classes, SysUtils, ComObj, ActiveX;
+  OptionNodes,
+  OptMgr_TLB,
+  Classes,
+  SysUtils,
+  ComObj,
+  ActiveX;
 
 const
   EXT_DIR = 'modules';
@@ -84,7 +88,7 @@ type
     function GetOptionSchemaAt(Index: Integer): IOptionSchema; safecall;
     function FindOptionItem(const SchemaID: WideString; const Key: WideString): IOptionItem; safecall;
     procedure InitOptionManager(const SchemataRegPath: WideString; const OptionsRegPath: WideString;
-                        const DefaultSchemaID: WideString); safecall;
+      const DefaultSchemaID: WideString); safecall;
     function GetOptionValue(const SchemaID: WideString; const Key: WideString): OleVariant; safecall;
     procedure LoadOptionValues; safecall;
     procedure SaveOptionValues; safecall;
@@ -113,8 +117,18 @@ type
 implementation
 
 uses
-  OptionDialogFrm, OptionMgrAux, NLS_OPTMGR,
-  ComServ, Dialogs, Forms, Registry, Variants, Xmldom, XMLIntf, Msxmldom, XMLDoc;
+  OptionDialogFrm,
+  OptionMgrAux,
+  NLS_OPTMGR,
+  ComServ,
+  Dialogs,
+  Forms,
+  Registry,
+  Variants,
+  Xmldom,
+  XMLIntf,
+  Msxmldom,
+  XMLDoc;
 
 ////////////////////////////////////////////////////////////////////////////////
 // POptionManager
@@ -130,6 +144,7 @@ destructor POptionManager.Destroy;
 begin
   // No need to free object in list, because TAutoIntfObject count reference
   // and object is automatically freed when the reference count drops to zero.
+  ClearOptionSchemata;
   FOptionSchemata.Free;
   inherited Destroy;
 end;
@@ -168,17 +183,20 @@ begin
     Doc.LoadFromFile(SchemaFileName);
     Doc.Active := True;
     SchemaNode := Doc.DocumentElement;
-    if SchemaNode.NodeName = XOD_ELEMENT_SCHEMA then begin
+    if SchemaNode.NodeName = XOD_ELEMENT_SCHEMA then
+    begin
       OS := POptionSchema.Create(ComServer.TypeLib, IOptionSchema);
       if OS.ReadFromXMLElement(SchemaNode) then
         Result := OS
-      else begin
+      else
+      begin
         OS.Free;
         Result := nil;
       end;
     end;
   except
-    on EDOMParseError do begin
+    on EDOMParseError do
+    begin
       POptionManagerMessages.InvalidXMLFormat(SchemaFileName);
       Result := nil;
     end;
@@ -195,15 +213,20 @@ var
   I, J, K, L: Integer;
 begin
   Result := False;
-  for I := 0 to OptionSchemaCount - 1 do begin
+  for I := 0 to OptionSchemaCount - 1 do
+  begin
     OS := OptionSchemata[I];
-    for J := 0 to OS.OptionCategoryCount - 1 do begin
+    for J := 0 to OS.OptionCategoryCount - 1 do
+    begin
       OC := OS.OptionCategories[J];
-      for K := 0 to OC.OptionClassificationCount - 1 do begin
+      for K := 0 to OC.OptionClassificationCount - 1 do
+      begin
         OL := OC.OptionClassifications[K];
-        for L := 0 to OL.OptionItemCount - 1 do begin
+        for L := 0 to OL.OptionItemCount - 1 do
+        begin
           OI := OL.OptionItems[L];
-          if OI.Changed then begin
+          if OI.Changed then
+          begin
             Result := True;
             Exit;
           end;
@@ -248,8 +271,9 @@ var
   Dialog: POptionDialog;
 begin
   Result := False;
-  if Initialized then begin
-//    LoadOptions;
+  if Initialized then
+  begin
+    LoadOptions;
     Dialog := POptionDialog.Create(Self);
     Result := Dialog.Execute;
     Dialog.Free;
@@ -314,13 +338,14 @@ procedure POptionManager.ClearOptionSchemata;
 var
   I: Integer;
 begin
-  for I := 0 to OptionSchemaCount - 1 do
+  for I := OptionSchemaCount - 1 downto 0 do
     DeleteOptionSchema(I);
 end;
 
 procedure POptionManager.AddOptionSchema(Value: POptionSchema);
 begin
-  if Value <> nil then begin
+  if Value <> nil then
+  begin
     FOptionSchemata.Add(Value);
     (Value as IOptionSchema)._AddRef;
   end;
@@ -328,7 +353,8 @@ end;
 
 procedure POptionManager.RemoveOptionSchema(Value: POptionSchema);
 begin
-  if Value <> nil then begin
+  if Value <> nil then
+  begin
     FOptionSchemata.Remove(Value);
     (Value as IOptionSchema)._Release;
   end;
@@ -336,7 +362,8 @@ end;
 
 procedure POptionManager.InsertOptionSchema(Index: Integer; Value: POptionSchema);
 begin
-  if Value <> nil then begin
+  if Value <> nil then
+  begin
     FOptionSchemata.Insert(Index, Value);
     (Value as IOptionSchema)._AddRef;
   end;
@@ -356,9 +383,11 @@ var
   I: Integer;
 begin
   Result := nil;
-  for I := 0 to OptionSchemaCount - 1 do begin
+  for I := 0 to OptionSchemaCount - 1 do
+  begin
     OS := OptionSchemata[I];
-    if OS.ID = SchemaID then begin
+    if OS.ID = SchemaID then
+    begin
       Result := OS;
       Exit;
     end;
@@ -406,16 +435,17 @@ begin
   end;
 end;
 *)
-  procedure LoadFiles(Path: String);
+  procedure LoadFiles(Path: string);
   var
     SearchRec: TSearchRec;
     OptionName, OSFileName: string;
     OS: POptionSchema;
   begin
     // files
-    if FindFirst(Path + '\*' + OPTION_EXTENSION, faArchive, SearchRec) = 0 then begin
+    if FindFirst(Path + '\*' + OPTION_EXTENSION, faArchive, SearchRec) = 0 then
+    begin
       repeat
-        OptionName := Copy(SearchRec.Name, 1, Length(SearchRec.Name)-Length('.'+OPTION_EXTENSION));
+        OptionName := Copy(SearchRec.Name, 1, Length(SearchRec.Name) - Length('.' + OPTION_EXTENSION));
         OSFileName := Path + '\' + OptionName + '.' + OPTION_EXTENSION;
 
         OS := ReadSchemaFile(OSFileName);
@@ -424,7 +454,8 @@ end;
     end;
 
     // folders
-    if FindFirst(Path + '\*', faDirectory, SearchRec) = 0 then begin
+    if FindFirst(Path + '\*', faDirectory, SearchRec) = 0 then
+    begin
       repeat
         if (SearchRec.Name <> '.') and (SearchRec.Name <> '..') then
           LoadFiles(Path + '\' + SearchRec.Name);
@@ -433,15 +464,15 @@ end;
   end;
 
 begin
-  LoadFiles(GetDllPath+'\'+EXT_DIR);
+  LoadFiles(ExtractFileDir(Application.ExeName) + '\' + EXT_DIR);
 end;
 
 procedure POptionManager.LoadOptions;
 var
   Reg: TRegistry;
   RootPath: string;
-  KeyNames: TStringList;  // is optionschema
-  ValueNames: TStringList;  // is optionitem
+  KeyNames: TStringList; // is optionschema
+  ValueNames: TStringList; // is optionitem
   OS: POptionSchema;
   OI: POptionItem;
   I, J: Integer;
@@ -453,20 +484,26 @@ begin
   ValueNames := TStringList.Create;
   try
     Reg.RootKey := GetRootKey(FOptionsRegPath);
-    if Reg.RootKey <> HKEY_UNKNOWN then begin
+    if Reg.RootKey <> HKEY_UNKNOWN then
+    begin
       RootPath := GetRegistryKey(FOptionsRegPath);
-      if Reg.OpenKey(RootPath, True) then begin
+      if Reg.OpenKey(RootPath, True) then
+      begin
         if Reg.HasSubKeys then
           Reg.GetKeyNames(KeyNames);
         Reg.CloseKey;
-        for I := 0 to KeyNames.Count - 1 do begin
+        for I := 0 to KeyNames.Count - 1 do
+        begin
           OS := FindOptionSchema(KeyNames[I]);
           if OS <> nil then
-            if Reg.OpenKey(RootPath + REG_DELIMITER + KeyNames[I], False) then begin
+            if Reg.OpenKey(RootPath + REG_DELIMITER + KeyNames[I], False) then
+            begin
               Reg.GetValueNames(ValueNames);
-              for J := 0 to ValueNames.Count - 1 do begin
+              for J := 0 to ValueNames.Count - 1 do
+              begin
                 OI := OS.FindOptionItem(ValueNames[J]);
-                if OI <> nil then begin
+                if OI <> nil then
+                begin
                   OI.SetInitalValue(Reg.ReadString(ValueNames[J]));
                 end;
               end;
@@ -498,21 +535,28 @@ begin
   Reg := TRegistry.Create;
   try
     Reg.RootKey := GetRootKey(FOptionsRegPath);
-    if Reg.RootKey <> HKEY_UNKNOWN then begin
+    if Reg.RootKey <> HKEY_UNKNOWN then
+    begin
       RootPath := GetRegistryKey(FOptionsRegPath);
-      for I := 0 to OptionSchemaCount - 1 do begin
+      for I := 0 to OptionSchemaCount - 1 do
+      begin
         OS := OptionSchemata[I];
         SchemaPath := RootPath + REG_DELIMITER + OS.ID;
-        if Reg.OpenKey(SchemaPath, True) then begin
-          for J := 0 to OS.OptionCategoryCount - 1 do begin
+        if Reg.OpenKey(SchemaPath, True) then
+        begin
+          for J := 0 to OS.OptionCategoryCount - 1 do
+          begin
             OC := OS.OptionCategories[J];
-            for K := 0 to OC.OptionClassificationCount - 1 do begin
+            for K := 0 to OC.OptionClassificationCount - 1 do
+            begin
               OL := OC.OptionClassifications[K];
-             for L := 0 to OL.OptionItemCount - 1 do begin
+              for L := 0 to OL.OptionItemCount - 1 do
+              begin
                 OI := OL.OptionItems[L];
                 if not Reg.ValueExists(OI.Key) then
                   Reg.WriteString(OI.Key, OI.Value)
-                else if OI.Changed then begin
+                else if OI.Changed then
+                begin
                   Reg.WriteString(OI.Key, OI.Value);
                   OI.SetInitalValue(OI.Value);
                 end;
@@ -536,13 +580,17 @@ var
   OI: POptionItem;
   I, J, K, L: Integer;
 begin
-  for I := 0 to OptionSchemaCount - 1 do begin
+  for I := 0 to OptionSchemaCount - 1 do
+  begin
     OS := OptionSchemata[I];
-    for J := 0 to OS.OptionCategoryCount - 1 do begin
+    for J := 0 to OS.OptionCategoryCount - 1 do
+    begin
       OC := OS.OptionCategories[J];
-      for K := 0 to OC.OptionClassificationCount - 1 do begin
+      for K := 0 to OC.OptionClassificationCount - 1 do
+      begin
         OL := OC.OptionClassifications[K];
-        for L := 0 to OL.OptionItemCount - 1 do begin
+        for L := 0 to OL.OptionItemCount - 1 do
+        begin
           OI := OL.OptionItems[L];
           OI.Value := OI.DefaultValue;
         end;
@@ -559,13 +607,17 @@ var
   OI: POptionItem;
   I, J, K, L: Integer;
 begin
-  for I := 0 to OptionSchemaCount - 1 do begin
+  for I := 0 to OptionSchemaCount - 1 do
+  begin
     OS := OptionSchemata[I];
-    for J := 0 to OS.OptionCategoryCount - 1 do begin
+    for J := 0 to OS.OptionCategoryCount - 1 do
+    begin
       OC := OS.OptionCategories[J];
-      for K := 0 to OC.OptionClassificationCount - 1 do begin
+      for K := 0 to OC.OptionClassificationCount - 1 do
+      begin
         OL := OC.OptionClassifications[K];
-        for L := 0 to OL.OptionItemCount - 1 do begin
+        for L := 0 to OL.OptionItemCount - 1 do
+        begin
           OI := OL.OptionItems[L];
           OI.RestoreValue;
         end;
@@ -582,3 +634,4 @@ initialization
     ciSingleInstance, tmApartment);
 
 end.
+

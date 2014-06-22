@@ -48,7 +48,7 @@ unit EventPub;
 interface
 
 uses
-  Classes, Core, UMLAux, StarUML_TLB;
+  Classes, Core, UMLAux, StarUMLProject_TLB;
 
 const
   NumOfEventKind = 21;

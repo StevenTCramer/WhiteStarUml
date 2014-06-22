@@ -49,7 +49,8 @@ interface
 
 uses
   PetalElements,
-  Classes, PGMR101Lib_TLB;
+  Classes,
+  PGMR101Lib_TLB;
 
 type
   // RTimeChecker - for check delay
